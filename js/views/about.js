@@ -187,6 +187,19 @@ export async function renderAbout(root) {
         </p>
       </div>
 
+      <!-- FEEDBACK -->
+      <div class="col-span-12 card p-6" style="border:1px dashed rgba(26,22,17,0.30); background:transparent;">
+        <div class="section-kicker">Feedback</div>
+        <p class="text-ink-700 text-[13.5px] leading-[1.65] mt-2 mb-3">
+          Spotted a data quirk, broken chart, or a fiscal year that looks off? Tell us — the easiest way to fix it is to hear about it.
+        </p>
+        <a href="mailto:feedback@publikoph.org?subject=Halaga%20feedback"
+           class="inline-block font-mono text-[12px] font-semibold uppercase tracking-[0.18em]"
+           style="color:var(--scarlet); border-bottom:1.5px solid var(--scarlet); padding-bottom:1px;">
+          feedback@publikoph.org &rarr;
+        </a>
+      </div>
+
       <!-- SOURCES + CAVEATS -->
       <div class="col-span-12 lg:col-span-5 card p-7">
         <div class="section-kicker">Sources</div>
