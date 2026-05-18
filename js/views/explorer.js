@@ -2,6 +2,7 @@ import {
   loadSummary, sql, fmtPHP, fmtInt, fmtPct, PHL_PALETTE,
   mountChartActions, mountGloss, observeChartResize, emptyState, createChart,
 } from '../data.js';
+import MultiSelect from '../multiselect.js';
 
 // Whitelisted columns — never trust user input straight into SQL.
 const GROUP_BY_COLS = {
@@ -159,56 +160,36 @@ export async function renderExplorer(root, arg) {
 
           <div class="col-span-12 md:col-span-7 grid grid-cols-2 lg:grid-cols-4 gap-3 ex-filters">
             <div class="ex-filter-cell">
-              <div class="flex items-center justify-between mb-1.5">
-                <label for="ex-f-department" class="kpi-label">Allocator</label>
-                <span class="text-[10px] text-ink-400">
-                  <button type="button" class="ex-select-all" data-target="ex-f-department">Select all</button>
-                  <span class="mx-1 text-ink-400">·</span>
-                  <button type="button" class="ex-clear-all" data-target="ex-f-department">Clear</button>
-                </span>
+              <label for="ex-f-department" class="kpi-label mb-1.5 block">Allocator</label>
+              <div class="ms-wrapper" data-target="ex-f-department">
+                <select id="ex-f-department" multiple data-empty="all">
+                  ${departments.map(d => `<option value="${escapeAttr(d)}">${escapeHtml(d)}</option>`).join('')}
+                </select>
               </div>
-              <select id="ex-f-department" class="select" multiple size="1" data-empty="all">
-                ${departments.map(d => `<option value="${escapeAttr(d)}">${escapeHtml(d)}</option>`).join('')}
-              </select>
             </div>
             <div class="ex-filter-cell">
-              <div class="flex items-center justify-between mb-1.5">
-                <label for="ex-f-region_code" class="kpi-label">Region</label>
-                <span class="text-[10px] text-ink-400">
-                  <button type="button" class="ex-select-all" data-target="ex-f-region_code">Select all</button>
-                  <span class="mx-1 text-ink-400">·</span>
-                  <button type="button" class="ex-clear-all" data-target="ex-f-region_code">Clear</button>
-                </span>
+              <label for="ex-f-region_code" class="kpi-label mb-1.5 block">Region</label>
+              <div class="ms-wrapper" data-target="ex-f-region_code">
+                <select id="ex-f-region_code" multiple data-empty="all">
+                  ${regions.map(r => `<option value="${escapeAttr(r.code)}">${escapeHtml(r.name)}</option>`).join('')}
+                </select>
               </div>
-              <select id="ex-f-region_code" class="select" multiple size="1" data-empty="all">
-                ${regions.map(r => `<option value="${escapeAttr(r.code)}">${escapeHtml(r.name)}</option>`).join('')}
-              </select>
             </div>
             <div class="ex-filter-cell">
-              <div class="flex items-center justify-between mb-1.5">
-                <label for="ex-f-exp_class" class="kpi-label">Expense class</label>
-                <span class="text-[10px] text-ink-400">
-                  <button type="button" class="ex-select-all" data-target="ex-f-exp_class">Select all</button>
-                  <span class="mx-1 text-ink-400">·</span>
-                  <button type="button" class="ex-clear-all" data-target="ex-f-exp_class">Clear</button>
-                </span>
+              <label for="ex-f-exp_class" class="kpi-label mb-1.5 block">Expense class</label>
+              <div class="ms-wrapper" data-target="ex-f-exp_class">
+                <select id="ex-f-exp_class" multiple data-empty="all">
+                  ${expClasses.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
+                </select>
               </div>
-              <select id="ex-f-exp_class" class="select" multiple size="1" data-empty="all">
-                ${expClasses.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
-              </select>
             </div>
             <div class="ex-filter-cell">
-              <div class="flex items-center justify-between mb-1.5">
-                <label for="ex-f-fund_subcat" class="kpi-label">Fund category</label>
-                <span class="text-[10px] text-ink-400">
-                  <button type="button" class="ex-select-all" data-target="ex-f-fund_subcat">Select all</button>
-                  <span class="mx-1 text-ink-400">·</span>
-                  <button type="button" class="ex-clear-all" data-target="ex-f-fund_subcat">Clear</button>
-                </span>
+              <label for="ex-f-fund_subcat" class="kpi-label mb-1.5 block">Fund category</label>
+              <div class="ms-wrapper" data-target="ex-f-fund_subcat">
+                <select id="ex-f-fund_subcat" multiple data-empty="all">
+                  ${fundSubcats.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
+                </select>
               </div>
-              <select id="ex-f-fund_subcat" class="select" multiple size="1" data-empty="all">
-                ${fundSubcats.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
-              </select>
             </div>
           </div>
         </div>
@@ -302,23 +283,12 @@ export async function renderExplorer(root, arg) {
   // Job 1: Apply click — run query and update URL.
   _applyBtn.addEventListener('click', () => runQuery({ updateUrl: true }));
 
-  // Wire Select all / Clear buttons for each multi-select filter.
-  root.querySelectorAll('.ex-select-all').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sel = document.getElementById(btn.dataset.target);
-      if (!sel) return;
-      for (const opt of sel.options) opt.selected = true;
-      sel.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  });
-  root.querySelectorAll('.ex-clear-all').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sel = document.getElementById(btn.dataset.target);
-      if (!sel) return;
-      for (const opt of sel.options) opt.selected = false;
-      sel.dispatchEvent(new Event('change', { bubbles: true }));
-    });
-  });
+  // Mount the custom multi-select dropdowns. They wrap the hidden <select multiple>
+  // elements and provide a usable open/close panel with checkboxes + search +
+  // per-panel Select-all / Clear actions. Selecting items still drives
+  // option.selected on the underlying select and dispatches a 'change' event,
+  // so markStale and currentQueryState() continue to work unchanged.
+  MultiSelect.mountAll(root);
 
   // Initial auto-run (not user-triggered — don't push a URL state here to
   // avoid conflicting with app.js's own replaceState that fires after render).

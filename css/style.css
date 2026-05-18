@@ -998,17 +998,143 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
 }
 
 
-/* Explorer filter cells — flex column with the select pushed to the bottom.
-   Helper-text rows have been removed; each cell now has label row + select.
-   margin-top:auto on the select aligns all four bottoms regardless of label
-   wrapping. */
+/* Explorer filter cells — flex column with the multi-select wrapper pinned
+   to the bottom so all four trigger buttons line up cleanly regardless of
+   label wrapping. Each cell now has: label + .ms-wrapper. */
 .ex-filters > .ex-filter-cell {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  gap: 6px;
+  gap: 0;
 }
-.ex-filters > .ex-filter-cell > .select { margin-top: auto; }
+.ex-filters > .ex-filter-cell > .ms-wrapper { margin-top: auto; }
+
+/* ── Multi-select dropdown component ───────────────────────────────────────
+   Replaces native <select multiple> with a real dropdown panel containing
+   a search input, Select-all / Clear actions, and a checkbox list. */
+.ms-wrapper {
+  position: relative;
+  width: 100%;
+}
+.ms-wrapper > select { display: none !important; }
+.ms-trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  width: 100%;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 9px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow .15s, border-color .15s;
+}
+.ms-trigger:hover { border-color: var(--scarlet); }
+.ms-trigger:focus-visible {
+  outline: none;
+  border-color: var(--scarlet);
+  box-shadow: 0 0 0 2px rgba(226, 80, 52, 0.20);
+}
+.ms-wrapper.ms-open > .ms-trigger { border-color: var(--scarlet); box-shadow: 0 0 0 2px rgba(226, 80, 52, 0.20); }
+.ms-trigger-label {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted);
+}
+.ms-trigger-label.ms-has-selection { color: var(--ink); font-weight: 600; }
+.ms-trigger-caret {
+  flex: 0 0 auto;
+  color: var(--muted);
+  display: inline-flex; align-items: center;
+  transition: transform .15s ease;
+}
+.ms-wrapper.ms-open .ms-trigger-caret { transform: rotate(180deg); }
+.ms-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 80;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 0 4px 12px rgba(26,22,17,0.10);
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  min-width: 220px;
+}
+.ms-panel[hidden] { display: none; }
+.ms-panel-header {
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid rgba(26,22,17,0.18);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.ms-search {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(26,22,17,0.30);
+  border-radius: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  outline: none;
+}
+.ms-search:focus { border-color: var(--scarlet); }
+.ms-actions {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+.ms-action {
+  background: none; border: 0; padding: 2px 4px;
+  font: inherit; color: var(--scarlet);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+}
+.ms-action:hover { text-decoration: underline; }
+.ms-action-sep { color: var(--muted); }
+.ms-list {
+  overflow-y: auto;
+  flex: 1 1 auto;
+  padding: 4px 0;
+}
+.ms-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.25;
+}
+.ms-item:hover { background: rgba(26,22,17,0.06); }
+.ms-item > input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 14px; height: 14px;
+  accent-color: var(--scarlet);
+  cursor: pointer;
+}
+.ms-item-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ms-empty {
+  padding: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
 
 
 /* ── Riso View dropdown — replaces Time/Allocations/Region/Expense ─────── */
