@@ -1,0 +1,1928 @@
+{
+  "year": 2014,
+  "total_thousands": 2263647559,
+  "n_departments": 47,
+  "n_agencies": 111,
+  "n_programs": 0,
+  "n_fund_subcats": 0,
+  "by_department": [
+    {
+      "name": "Automatic Appropriations",
+      "amount_thousands": 796029175
+    },
+    {
+      "name": "Department of Education",
+      "amount_thousands": 281774247,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 280724220
+        },
+        {
+          "name": "National Museum-",
+          "amount_thousands": 9483719
+        },
+        {
+          "name": "Philippine High School for the Arts",
+          "amount_thousands": 63188
+        },
+        {
+          "name": "National Book Developnent Board",
+          "amount_thousands": 24179
+        },
+        {
+          "name": "0_ National Council for Children' s Television",
+          "amount_thousands": 13941
+        },
+        {
+          "name": "Early Childhood Care and Development Council",
+          "amount_thousands": 8
+        }
+      ]
+    },
+    {
+      "name": "Department of Public Works and Highways",
+      "amount_thousands": 206634047,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 206634047
+        }
+      ]
+    },
+    {
+      "name": "Unprogrammed Fund",
+      "amount_thousands": 139903759,
+      "by_agency": [
+        {
+          "name": "AUTOMATIC APPROPRIATIONS",
+          "amount_thousands": 796029175
+        },
+        {
+          "name": "II_ DEBT SERVICE PRINCIPAL AMORTIZATION",
+          "amount_thousands": 440931000
+        }
+      ]
+    },
+    {
+      "name": "Pension and Gratuity Fund",
+      "amount_thousands": 120495952
+    },
+    {
+      "name": "Department of the Interior and Local Government",
+      "amount_thousands": 100295430,
+      "by_agency": [
+        {
+          "name": "Philippine National Police",
+          "amount_thousands": 72053060
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 10132472
+        },
+        {
+          "name": "Bureau of Fire Protection",
+          "amount_thousands": 8725325
+        },
+        {
+          "name": "Bureau of Jail Management and Penology",
+          "amount_thousands": 6270665
+        },
+        {
+          "name": "Philippine Public Safety College",
+          "amount_thousands": 1541434
+        },
+        {
+          "name": "National Police Commission",
+          "amount_thousands": 1422618
+        },
+        {
+          "name": "1 Local Government Academy",
+          "amount_thousands": 149856
+        }
+      ]
+    },
+    {
+      "name": "Department of Health",
+      "amount_thousands": 84356933,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 83720921
+        },
+        {
+          "name": "1 Local Water Utilities Administration",
+          "amount_thousands": 565000
+        },
+        {
+          "name": "OEPARTMENT OF TOURISM",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "1 Tourism Promotions Board",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "0.4 Philippine Heart Center",
+          "amount_thousands": 402000
+        },
+        {
+          "name": "0.3 Philippine Children's Medical Center",
+          "amount_thousands": 365000
+        },
+        {
+          "name": "National Nutrition Council",
+          "amount_thousands": 336198
+        },
+        {
+          "name": "8- Commission on Population",
+          "amount_thousands": 299814
+        },
+        {
+          "name": "0.2 National Kidney and Transplant Institute",
+          "amount_thousands": 229000
+        },
+        {
+          "name": "0.1 Lung Center of the Philippines,",
+          "amount_thousands": 203400
+        },
+        {
+          "name": "2 Center for International Trade Expositions and Missions",
+          "amount_thousands": 190443
+        },
+        {
+          "name": "4 Small Business Corporation",
+          "amount_thousands": 100000
+        },
+        {
+          "name": "Alternative Health Care",
+          "amount_thousands": 49800
+        },
+        {
+          "name": "1 Aurora Pacific Economic Zone and Freeport Authority",
+          "amount_thousands": 48500
+        },
+        {
+          "name": "6.3 Cottage Industry Technology Center",
+          "amount_thousands": 9000
+        }
+      ]
+    },
+    {
+      "name": "Department of Social Welfare and Development",
+      "amount_thousands": 83304463,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary-",
+          "amount_thousands": 83114075
+        },
+        {
+          "name": "National Youth Commission",
+          "amount_thousands": 78250
+        },
+        {
+          "name": "Council for the Welfare of Children",
+          "amount_thousands": 38690
+        },
+        {
+          "name": "National Council on Disability Affairs",
+          "amount_thousands": 37882
+        },
+        {
+          "name": "; Inter-Country Adoption Board",
+          "amount_thousands": 35566
+        }
+      ]
+    },
+    {
+      "name": "Department of National Defense",
+      "amount_thousands": 82265071,
+      "by_agency": [
+        {
+          "name": "Armed Forces of the Philippines",
+          "amount_thousands": 78516765
+        },
+        {
+          "name": "Philippine Army (Land Forces",
+          "amount_thousands": 40869600
+        },
+        {
+          "name": "Philippine Navy (Naval Forces)",
+          "amount_thousands": 13874987
+        },
+        {
+          "name": "Philippine Air Force (Air Force",
+          "amount_thousands": 12455977
+        },
+        {
+          "name": "Support Units (AFPWSSUs )",
+          "amount_thousands": 11316201
+        },
+        {
+          "name": "Veterans Memorial Medical Center",
+          "amount_thousands": 979095
+        },
+        {
+          "name": "Government Arsenal",
+          "amount_thousands": 925031
+        },
+        {
+          "name": "DNO Proper (Office of the Secretary",
+          "amount_thousands": 716990
+        },
+        {
+          "name": "1 Office of Civil Defense",
+          "amount_thousands": 670603
+        },
+        {
+          "name": "Philippine Veterans Affairs Office (Proper",
+          "amount_thousands": 394983
+        },
+        {
+          "name": "National Defense College of the Philippines",
+          "amount_thousands": 61604
+        },
+        {
+          "name": "General Headquarters 3 AFP and AFP Wide Service",
+          "amount_thousands": 3
+        }
+      ]
+    },
+    {
+      "name": "Department of Agriculture",
+      "amount_thousands": 68596751,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 62155559
+        },
+        {
+          "name": "8; Bureau of Fisheries and Aquatic Resources",
+          "amount_thousands": 4877724
+        },
+        {
+          "name": "National Agricultural and Fishery Council",
+          "amount_thousands": 1553797
+        },
+        {
+          "name": "Philippine Carabao Center",
+          "amount_thousands": 474494
+        },
+        {
+          "name": "National Meat Inspection Service",
+          "amount_thousands": 300226
+        },
+        {
+          "name": "Fiber Industry Development Authority",
+          "amount_thousands": 228464
+        },
+        {
+          "name": "Mechanization",
+          "amount_thousands": 195553
+        },
+        {
+          "name": "Cotton Development Administration",
+          "amount_thousands": 57336
+        },
+        {
+          "name": "Fertilizer and Pesticide Authority",
+          "amount_thousands": 54815
+        },
+        {
+          "name": "Agricultural Credit Policy Council",
+          "amount_thousands": 53869
+        },
+        {
+          "name": "Livestock Development Council",
+          "amount_thousands": 42914
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous Personnel Benefits Fund",
+      "amount_thousands": 53535086
+    },
+    {
+      "name": "Department of Transportation and Communications",
+      "amount_thousands": 45461306,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 40394590
+        },
+        {
+          "name": "Philippine Coast Guard",
+          "amount_thousands": 4382259
+        },
+        {
+          "name": "Maritime Industry Authority",
+          "amount_thousands": 536498
+        },
+        {
+          "name": "1 Philippine National Railways",
+          "amount_thousands": 344000
+        },
+        {
+          "name": "civil Aeronautics Board",
+          "amount_thousands": 55502
+        },
+        {
+          "name": "Office for Transportation Security",
+          "amount_thousands": 52523
+        },
+        {
+          "name": "Toll Regulatory Board",
+          "amount_thousands": 23215
+        },
+        {
+          "name": "Office of Transportation Cooperatives",
+          "amount_thousands": 16719
+        }
+      ]
+    },
+    {
+      "name": "State Universities and Colleges",
+      "amount_thousands": 35934625,
+      "by_agency": [
+        {
+          "name": "National Capital Region",
+          "amount_thousands": 11760370
+        },
+        {
+          "name": "8 University of the Philippines System",
+          "amount_thousands": 9373382
+        },
+        {
+          "name": "Region Iv SOUTHERN TAGALOG AND PALAWAN",
+          "amount_thousands": 2290610
+        },
+        {
+          "name": "Region III CENTRAL LUZON",
+          "amount_thousands": 2219992
+        },
+        {
+          "name": "Region V BICOL",
+          "amount_thousands": 1721334
+        },
+        {
+          "name": "Region I ILOCOS",
+          "amount_thousands": 1719069
+        },
+        {
+          "name": "Region IV-A (CALABARZON)",
+          "amount_thousands": 1377008
+        },
+        {
+          "name": "0 Region II Cagayan VALLEY",
+          "amount_thousands": 1253476
+        },
+        {
+          "name": "5 Polytechnic University of the Philippines",
+          "amount_thousands": 948497
+        },
+        {
+          "name": "Region Iv-B (MIMAROPA)",
+          "amount_thousands": 913602
+        },
+        {
+          "name": "CORDILLERA ADMINISTRATIVE REGION",
+          "amount_thousands": 819453
+        },
+        {
+          "name": "1 Bicol University",
+          "amount_thousands": 569596
+        },
+        {
+          "name": "1 Don Mariano Marcos Memorial State University",
+          "amount_thousands": 552511
+        },
+        {
+          "name": "0.3 Isabela State University",
+          "amount_thousands": 512172
+        },
+        {
+          "name": "7 Technological University of the Philippines",
+          "amount_thousands": 461771
+        },
+        {
+          "name": "5 Central Luzon State University",
+          "amount_thousands": 439072
+        },
+        {
+          "name": "3 Philippine Normal University",
+          "amount_thousands": 428351
+        },
+        {
+          "name": "3 Mariano Marcos State University",
+          "amount_thousands": 417412
+        },
+        {
+          "name": "0.2 Cagayan State University",
+          "amount_thousands": 383659
+        },
+        {
+          "name": "3 Benguet State University",
+          "amount_thousands": 344039
+        },
+        {
+          "name": "4 Bulacan State University",
+          "amount_thousands": 322976
+        },
+        {
+          "name": "2 Cavite State University",
+          "amount_thousands": 305804
+        },
+        {
+          "name": "Institute of Technology",
+          "amount_thousands": 303266
+        },
+        {
+          "name": "5 Pangasinan State University",
+          "amount_thousands": 297399
+        },
+        {
+          "name": "Rizal State College)",
+          "amount_thousands": 293187
+        },
+        {
+          "name": "6 University of Northern Philippines",
+          "amount_thousands": 287180
+        },
+        {
+          "name": "State Agricultural College)",
+          "amount_thousands": 255622
+        },
+        {
+          "name": "of Technology and Nueva Vizcaya State Polytechnic College)",
+          "amount_thousands": 251009
+        },
+        {
+          "name": "Laguna State Polytechnic College",
+          "amount_thousands": 249766
+        },
+        {
+          "name": "7 Nueva Ecija University of Science and Technology",
+          "amount_thousands": 237776
+        },
+        {
+          "name": "6 Rizal Technological University",
+          "amount_thousands": 229080
+        },
+        {
+          "name": "Southern Luzon Polytechnic College",
+          "amount_thousands": 224985
+        },
+        {
+          "name": "4 Palawan State University",
+          "amount_thousands": 218825
+        },
+        {
+          "name": "College and Bataan State College)",
+          "amount_thousands": 211321
+        },
+        {
+          "name": "12 Tarlac State University",
+          "amount_thousands": 201347
+        },
+        {
+          "name": "4 Catanduanes State University (Catanduanes State College",
+          "amount_thousands": 193335
+        },
+        {
+          "name": "College of Palawan)",
+          "amount_thousands": 178421
+        },
+        {
+          "name": "1 Eulogio Amang\" Rodriguez Institute of Science and Technology",
+          "amount_thousands": 172935
+        },
+        {
+          "name": "8 Sorsogon State College",
+          "amount_thousands": 166473
+        },
+        {
+          "name": "3 Camarines Sur Polytechnic Colleges",
+          "amount_thousands": 162895
+        },
+        {
+          "name": "5 Romblon State University (Romblon State College",
+          "amount_thousands": 156806
+        },
+        {
+          "name": "7 Partido State University (Partido State College",
+          "amount_thousands": 156364
+        },
+        {
+          "name": "2 Camarines Norte State College",
+          "amount_thousands": 150877
+        },
+        {
+          "name": "Agriculture and Forestry)",
+          "amount_thousands": 147557
+        },
+        {
+          "name": "National College)",
+          "amount_thousands": 139291
+        },
+        {
+          "name": "11 Tarlac College of Agriculture",
+          "amount_thousands": 139099
+        },
+        {
+          "name": "College)",
+          "amount_thousands": 138880
+        },
+        {
+          "name": "9 Philippine Merchant Marine Academy",
+          "amount_thousands": 136241
+        },
+        {
+          "name": "2 Ilocos Sur Polytechnic State College",
+          "amount_thousands": 134476
+        },
+        {
+          "name": "Don Honorio Ventura College of Arts and Trades )",
+          "amount_thousands": 133472
+        },
+        {
+          "name": "10 Ramon Magsaysay Technological University",
+          "amount_thousands": 127881
+        },
+        {
+          "name": "Agriculture and Technology",
+          "amount_thousands": 122532
+        },
+        {
+          "name": "1 Abra State Institute of Science and Technology",
+          "amount_thousands": 101203
+        },
+        {
+          "name": "1 Marinduque State College",
+          "amount_thousands": 97727
+        },
+        {
+          "name": "6 Mountain Province State Polytechnic College",
+          "amount_thousands": 86700
+        },
+        {
+          "name": "5 Kalinga-Apayao State College",
+          "amount_thousands": 84822
+        },
+        {
+          "name": "0-5 Quirino State University (Quirino State College)",
+          "amount_thousands": 83630
+        },
+        {
+          "name": "Marikina Institute of Science and Technology",
+          "amount_thousands": 74044
+        },
+        {
+          "name": "3 Bulacan Agricultural State College",
+          "amount_thousands": 72641
+        },
+        {
+          "name": "4 Philippine State College of Aeronautics",
+          "amount_thousands": 72310
+        },
+        {
+          "name": "1 Aurora State College of Technology",
+          "amount_thousands": 59286
+        },
+        {
+          "name": "2 Apayao State College",
+          "amount_thousands": 55132
+        },
+        {
+          "name": "4 North Luzon Philippines State College",
+          "amount_thousands": 30091
+        },
+        {
+          "name": "0.1 Batanes State College (Batanes Polytechnic College",
+          "amount_thousands": 23006
+        },
+        {
+          "name": "6 Dr . Emilio B Espinosa, Sr _ Memorial State College of",
+          "amount_thousands": 8
+        },
+        {
+          "name": "0.4 Nueva Vizcaya State University (Nueva Vizcaya State Institute",
+          "amount_thousands": 4
+        }
+      ]
+    },
+    {
+      "name": "Department of Environment and Natural Resources",
+      "amount_thousands": 23345621,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 19769662
+        },
+        {
+          "name": "Environmental Managenent Bureau",
+          "amount_thousands": 1304315
+        },
+        {
+          "name": "mines and Geo-Sciences Bureau",
+          "amount_thousands": 1126184
+        },
+        {
+          "name": "2 National Mapping and Resource Information Authority",
+          "amount_thousands": 1011001
+        },
+        {
+          "name": "Palawan Council for sustainable Development Staff",
+          "amount_thousands": 69712
+        },
+        {
+          "name": "National Water Resources Board",
+          "amount_thousands": 64747
+        }
+      ]
+    },
+    {
+      "name": "Department of Agrarian Reform",
+      "amount_thousands": 20002768,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 20002768
+        }
+      ]
+    },
+    {
+      "name": "Rehabilitation and Reconstruction Program",
+      "amount_thousands": 20000000
+    },
+    {
+      "name": "Other Executive Offices",
+      "amount_thousands": 19879937,
+      "by_agency": [
+        {
+          "name": "8 National Housing Authority",
+          "amount_thousands": 11251770
+        },
+        {
+          "name": "12 Social Housing Finance Corporation",
+          "amount_thousands": 3665008
+        },
+        {
+          "name": "9 People' $ Credit Finance Corporation",
+          "amount_thousands": 1563572
+        },
+        {
+          "name": "7 National Home Mortgage Finance Corporation",
+          "amount_thousands": 1000000
+        },
+        {
+          "name": "2 Cagayan Economic Zone Authority",
+          "amount_thousands": 890886
+        },
+        {
+          "name": "National Commission on Indigenous Peoples",
+          "amount_thousands": 877663
+        },
+        {
+          "name": "2 - Philippine Drug Enforcement Agency",
+          "amount_thousands": 869096
+        },
+        {
+          "name": "National Commission for Culture and the Arts",
+          "amount_thousands": 678409
+        },
+        {
+          "name": "National Intelligence Coordinating Agency",
+          "amount_thousands": 590956
+        },
+        {
+          "name": "6 Home Guaranty Corporation-",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "Pasig River Rehabilitation Commission",
+          "amount_thousands": 468278
+        },
+        {
+          "name": "Office on Muslim Affairs)",
+          "amount_thousands": 415451
+        },
+        {
+          "name": "National Historical Institute)",
+          "amount_thousands": 352705
+        },
+        {
+          "name": "1 Office of the Presidential Adviser on the Peace Process",
+          "amount_thousands": 351547
+        },
+        {
+          "name": "AF _ Presidential Management Staff",
+          "amount_thousands": 301407
+        },
+        {
+          "name": "4 Cultural Center of the Philippines",
+          "amount_thousands": 244700
+        },
+        {
+          "name": "National Telecommunications Cmmission",
+          "amount_thousands": 229438
+        },
+        {
+          "name": "Energy Regulatory Commission-",
+          "amount_thousands": 210689
+        },
+        {
+          "name": "The National Library)",
+          "amount_thousands": 194279
+        },
+        {
+          "name": "Housing and Land Use Regulatory Board",
+          "amount_thousands": 189428
+        },
+        {
+          "name": "AB _ Philippine Sports Commission-",
+          "amount_thousands": 182313
+        },
+        {
+          "name": "National Anti-Poverty Commission",
+          "amount_thousands": 148948
+        },
+        {
+          "name": "5 Development Academy of the Philippines",
+          "amount_thousands": 136000
+        },
+        {
+          "name": "Housing and Urban Development Coordinating Council",
+          "amount_thousands": 119675
+        },
+        {
+          "name": "Aa_ Philippine Racing Commission",
+          "amount_thousands": 111783
+        },
+        {
+          "name": "AC _ Presidential Commission for the Urban Poor",
+          "amount_thousands": 106291
+        },
+        {
+          "name": "6. Dangerous Drugs Board",
+          "amount_thousands": 102435
+        },
+        {
+          "name": "Records Management and Archives Office",
+          "amount_thousands": 102145
+        },
+        {
+          "name": "1 Authority of the Freeport Area of Bataan",
+          "amount_thousands": 100000
+        },
+        {
+          "name": "1 mindanao Development Authority",
+          "amount_thousands": 98807
+        },
+        {
+          "name": "National Security Council",
+          "amount_thousands": 88584
+        },
+        {
+          "name": "8 Commission on Filipinos Overseas",
+          "amount_thousands": 83586
+        },
+        {
+          "name": "14 Zamboanga City Special Economic Zone Authority",
+          "amount_thousands": 82000
+        },
+        {
+          "name": "Climate Change Commission",
+          "amount_thousands": 81827
+        },
+        {
+          "name": "3 Credit Information Corporation",
+          "amount_thousands": 71961
+        },
+        {
+          "name": "strategic Planning Office",
+          "amount_thousands": 69650
+        },
+        {
+          "name": "Games and Amusements Board -",
+          "amount_thousands": 61273
+        },
+        {
+          "name": "13 Southern Philippines Development Authority",
+          "amount_thousands": 52040
+        },
+        {
+          "name": "National Commission on the Role of Filipino Women)",
+          "amount_thousands": 50264
+        },
+        {
+          "name": "Commission on the Filipino Language",
+          "amount_thousands": 49744
+        },
+        {
+          "name": "Film Development Council of the Philippines",
+          "amount_thousands": 46931
+        },
+        {
+          "name": "Optical Media Board",
+          "amount_thousands": 44291
+        },
+        {
+          "name": "Anti-Money Laundering Council",
+          "amount_thousands": 38805
+        },
+        {
+          "name": "AE_ Presidential Legislative Liaison Office",
+          "amount_thousands": 35858
+        },
+        {
+          "name": "1 National Commission for Culture and the Arts (Proper)",
+          "amount_thousands": 29280
+        },
+        {
+          "name": "Movie and Television Review and Classification Board",
+          "amount_thousands": 23286
+        },
+        {
+          "name": "10 Philippine Center for Economic Development",
+          "amount_thousands": 21000
+        },
+        {
+          "name": "11 Philippine Postal Corporation_ 301",
+          "amount_thousands": 3000
+        },
+        {
+          "name": "Controlled Corporations 88 , -",
+          "amount_thousands": 241
+        },
+        {
+          "name": "4 National Archives of the Philippines",
+          "amount_thousands": 4
+        },
+        {
+          "name": "3 National Library of the Philippines",
+          "amount_thousands": 3
+        },
+        {
+          "name": "2 National Historical Commission of the Philippines",
+          "amount_thousands": 2
+        }
+      ]
+    },
+    {
+      "name": "Autonomous Region in Muslim Mindanao",
+      "amount_thousands": 19615029,
+      "by_agency": [
+        {
+          "name": "4 Autonomous Regional Government in Muslim Mindanao",
+          "amount_thousands": 19615029
+        }
+      ]
+    },
+    {
+      "name": "Allocations to Local Government Units",
+      "amount_thousands": 19588843,
+      "by_agency": [
+        {
+          "name": "Proceeds of National Taxes",
+          "amount_thousands": 16602482
+        },
+        {
+          "name": "Metropolitan Manila Development Authority",
+          "amount_thousands": 2331361
+        },
+        {
+          "name": "to Local Government Units)",
+          "amount_thousands": 405000
+        },
+        {
+          "name": "Special Shares of LGUs in the Proceeds of Fire Code Fees",
+          "amount_thousands": 200000
+        },
+        {
+          "name": "6: Barangay Officials Death Benefits Fund",
+          "amount_thousands": 50000
+        }
+      ]
+    },
+    {
+      "name": "The Judiciary",
+      "amount_thousands": 18559816,
+      "by_agency": [
+        {
+          "name": "Supreme Court of the Philippines and the Lower Courts",
+          "amount_thousands": 16407654
+        },
+        {
+          "name": "Court of Appeals",
+          "amount_thousands": 1426129
+        },
+        {
+          "name": "Sandiganbayan",
+          "amount_thousands": 393410
+        },
+        {
+          "name": "Court of Tax Appeals",
+          "amount_thousands": 244600
+        },
+        {
+          "name": "Presidential Electoral Tribunal",
+          "amount_thousands": 88023
+        }
+      ]
+    },
+    {
+      "name": "National Disaster Risk Reduction and Management Fund",
+      "amount_thousands": 13000000
+    },
+    {
+      "name": "Department of Labor and Employment",
+      "amount_thousands": 12177273,
+      "by_agency": [
+        {
+          "name": "Technical Education and Skills Development Authority",
+          "amount_thousands": 5117192
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 4553819
+        },
+        {
+          "name": "2 Professional Regulation Commission",
+          "amount_thousands": 1058879
+        },
+        {
+          "name": "2 National Labor Relations Commission",
+          "amount_thousands": 665524
+        },
+        {
+          "name": "Philippine Overseas Employment Administration",
+          "amount_thousands": 334555
+        },
+        {
+          "name": "National Conciliation and Mediation Board",
+          "amount_thousands": 180880
+        },
+        {
+          "name": "National Wages and Productivity Commission",
+          "amount_thousands": 165203
+        },
+        {
+          "name": "National Maritime Polytechnic",
+          "amount_thousands": 74284
+        },
+        {
+          "name": "Institute for Labor Studies",
+          "amount_thousands": 26937
+        }
+      ]
+    },
+    {
+      "name": "Department of Foreign Affairs",
+      "amount_thousands": 12130738,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 12066500
+        },
+        {
+          "name": "Foreign Service Institute",
+          "amount_thousands": 43944
+        },
+        {
+          "name": "UNESCO National Commission of the Philippines",
+          "amount_thousands": 15956
+        },
+        {
+          "name": "6 Technical Cooperation Council of the Philippines",
+          "amount_thousands": 4338
+        }
+      ]
+    },
+    {
+      "name": "Department of Science and Technology",
+      "amount_thousands": 11928821,
+      "by_agency": [
+        {
+          "name": "Science Education Institute",
+          "amount_thousands": 1743547
+        },
+        {
+          "name": "Services Administration-",
+          "amount_thousands": 1229217
+        },
+        {
+          "name": "Resources Research and Development",
+          "amount_thousands": 1040593
+        },
+        {
+          "name": "Philippine Science High School",
+          "amount_thousands": 939052
+        },
+        {
+          "name": "Information and Communications Technology Office",
+          "amount_thousands": 615069
+        },
+        {
+          "name": "Emerging Technology Research and Development",
+          "amount_thousands": 533670
+        },
+        {
+          "name": "Metals Industry Research and Development Center",
+          "amount_thousands": 495039
+        },
+        {
+          "name": "6\" Philippine Council for Health Research and Development",
+          "amount_thousands": 434207
+        },
+        {
+          "name": "Philippine Institute of Volcanology and Seismology",
+          "amount_thousands": 280667
+        },
+        {
+          "name": "Food and Nutrition Research Institute",
+          "amount_thousands": 273500
+        },
+        {
+          "name": "Philippine Nuclear Research Institute",
+          "amount_thousands": 221791
+        },
+        {
+          "name": "Industrial Technology Development Institute",
+          "amount_thousands": 215131
+        },
+        {
+          "name": "Forest Products Research and Development Institute",
+          "amount_thousands": 119614
+        },
+        {
+          "name": "Technology Application and Promotion Institute",
+          "amount_thousands": 81085
+        },
+        {
+          "name": "Advanced Science and Technology Institute",
+          "amount_thousands": 80076
+        },
+        {
+          "name": ": National Research Council of the Philippines",
+          "amount_thousands": 70415
+        },
+        {
+          "name": "National Academy of Science and Technology",
+          "amount_thousands": 67785
+        },
+        {
+          "name": "Philippine Textile Research Institute",
+          "amount_thousands": 56686
+        },
+        {
+          "name": "Science and Technology Information Institute",
+          "amount_thousands": 49926
+        },
+        {
+          "name": "Office of the Secretary_ 3,381",
+          "amount_thousands": 5751
+        },
+        {
+          "name": "Philippine Council for Industry 3 Energy and",
+          "amount_thousands": 3
+        },
+        {
+          "name": "Philippine Atmospheric Geophysical and Astronomical",
+          "amount_thousands": 0
+        }
+      ]
+    },
+    {
+      "name": "Department of Finance",
+      "amount_thousands": 11524941,
+      "by_agency": [
+        {
+          "name": "8; Bureau of Internal Revenue",
+          "amount_thousands": 6952251
+        },
+        {
+          "name": "1 Philippine Deposit Insurance Corporation",
+          "amount_thousands": 2792340
+        },
+        {
+          "name": "Bureau of Customs,",
+          "amount_thousands": 1939435
+        },
+        {
+          "name": "Bureau of the Treasury",
+          "amount_thousands": 1049002
+        },
+        {
+          "name": "Securities and Exchange Commission",
+          "amount_thousands": 540680
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 438758
+        },
+        {
+          "name": "Cooperative Development Authority_ >",
+          "amount_thousands": 320006
+        },
+        {
+          "name": "Bureau of Local Government Finance",
+          "amount_thousands": 188829
+        },
+        {
+          "name": "National Tax Research Center",
+          "amount_thousands": 43776
+        },
+        {
+          "name": "Privatization and Management Office",
+          "amount_thousands": 42442
+        },
+        {
+          "name": "Central Board of Assessment Appeals",
+          "amount_thousands": 9755
+        },
+        {
+          "name": "Insurance Commission-",
+          "amount_thousands": 7
+        }
+      ]
+    },
+    {
+      "name": "Department of Justice",
+      "amount_thousands": 10903778,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 3467476
+        },
+        {
+          "name": "Bureau of Corrections",
+          "amount_thousands": 1885351
+        },
+        {
+          "name": "Public Attorney S Office",
+          "amount_thousands": 1825873
+        },
+        {
+          "name": "National Bureau of Investigation",
+          "amount_thousands": 978277
+        },
+        {
+          "name": "Office of the Government Corporate Counsel",
+          "amount_thousands": 899559
+        },
+        {
+          "name": "Land Registration Authority",
+          "amount_thousands": 888452
+        },
+        {
+          "name": "1 Bureau of Immigration",
+          "amount_thousands": 650677
+        },
+        {
+          "name": "1 Parole and Probation Administration-",
+          "amount_thousands": 516599
+        },
+        {
+          "name": "Office of the Solicitor General",
+          "amount_thousands": 499403
+        },
+        {
+          "name": "Presidential Commission on Good Government",
+          "amount_thousands": 102111
+        }
+      ]
+    },
+    {
+      "name": "Congress of the Philippines",
+      "amount_thousands": 10742423,
+      "by_agency": [
+        {
+          "name": "House of Representatives",
+          "amount_thousands": 6624579
+        },
+        {
+          "name": "Senate",
+          "amount_thousands": 3344359
+        },
+        {
+          "name": "STATE UNI VERSITIES AND COLLEGES",
+          "amount_thousands": 2500000
+        },
+        {
+          "name": "3 Mindanao State University",
+          "amount_thousands": 1940327
+        },
+        {
+          "name": "k_ Region VIII EASTERN VISAYAS,",
+          "amount_thousands": 1894523
+        },
+        {
+          "name": "Region X NORTHERN MINDANAO",
+          "amount_thousands": 1400066
+        },
+        {
+          "name": "Region VII CENTRAL VISAYAS",
+          "amount_thousands": 1064431
+        },
+        {
+          "name": "Region Ix ZAMBOANGA PENINSULA",
+          "amount_thousands": 894550
+        },
+        {
+          "name": "0 . Region XII SOCCSKSARGEN",
+          "amount_thousands": 681205
+        },
+        {
+          "name": "5 MSU Iligan Institute of Technology",
+          "amount_thousands": 587146
+        },
+        {
+          "name": "11 West Visayas State University",
+          "amount_thousands": 556095
+        },
+        {
+          "name": "Region XI davao REGION",
+          "amount_thousands": 543458
+        },
+        {
+          "name": "1 Commission on Appointments",
+          "amount_thousands": 538449
+        },
+        {
+          "name": "REGION XIII CaraGa",
+          "amount_thousands": 506495
+        },
+        {
+          "name": "Science and Technology)",
+          "amount_thousands": 414646
+        },
+        {
+          "name": "10 Visayas State University (Leyte State University",
+          "amount_thousands": 394940
+        },
+        {
+          "name": "3 Western Mindanao State University",
+          "amount_thousands": 381279
+        },
+        {
+          "name": "0-4 University of Southern Mindanao",
+          "amount_thousands": 371111
+        },
+        {
+          "name": "3 Central Mindanao University",
+          "amount_thousands": 368598
+        },
+        {
+          "name": "2 Capiz State University (Panay State Polytechnic College)",
+          "amount_thousands": 349463
+        },
+        {
+          "name": "4 MSU-Tawi-Tawi College of Technology and Oceanography",
+          "amount_thousands": 343682
+        },
+        {
+          "name": "4 University of Southeastern Philippines",
+          "amount_thousands": 305093
+        },
+        {
+          "name": "9 University of Eastern Philippines",
+          "amount_thousands": 278552
+        },
+        {
+          "name": "College of Science and Technology",
+          "amount_thousands": 257519
+        },
+        {
+          "name": "Technology)",
+          "amount_thousands": 241509
+        },
+        {
+          "name": "1 Eastern Samar State University (Eastern Sanar State College)",
+          "amount_thousands": 235756
+        },
+        {
+          "name": "State College)",
+          "amount_thousands": 226640
+        },
+        {
+          "name": "1 Aklan State University (aklan State College of Agriculture)",
+          "amount_thousands": 214798
+        },
+        {
+          "name": "College of Agriculture, Forestry and Technology",
+          "amount_thousands": 212897
+        },
+        {
+          "name": "Polytechnic State College)",
+          "amount_thousands": 206830
+        },
+        {
+          "name": "Polytechnic College)",
+          "amount_thousands": 202911
+        },
+        {
+          "name": "2 Cebu Normal University",
+          "amount_thousands": 178880
+        },
+        {
+          "name": "surigao del Sur Polytechnic State College)",
+          "amount_thousands": 173522
+        },
+        {
+          "name": "of Science and Technology and Tomas Oppus Normal College)",
+          "amount_thousands": 170495
+        },
+        {
+          "name": "4 Mindanao University of Science and Technology",
+          "amount_thousands": 167062
+        },
+        {
+          "name": "3 Carlos c. Hilado Memorial State College",
+          "amount_thousands": 160424
+        },
+        {
+          "name": "1 Bukidnon State University",
+          "amount_thousands": 148983
+        },
+        {
+          "name": "House Electoral Tribunal",
+          "amount_thousands": 147984
+        },
+        {
+          "name": "4 Surigao State College of Technology",
+          "amount_thousands": 144333
+        },
+        {
+          "name": "7 Samar State University (Samar State Polytechnic College)",
+          "amount_thousands": 139467
+        },
+        {
+          "name": "State College of Fisheries)",
+          "amount_thousands": 137029
+        },
+        {
+          "name": "3 Leyte Normal University",
+          "amount_thousands": 135890
+        },
+        {
+          "name": "Sultan Kudarat Polytechnic State College)",
+          "amount_thousands": 133900
+        },
+        {
+          "name": "9 University of Antique (Polytechnic State College of Antique",
+          "amount_thousands": 120185
+        },
+        {
+          "name": "Institute of Science and Technology)",
+          "amount_thousands": 119759
+        },
+        {
+          "name": "5 Iloilo State University of Science and Technology (Iloilo",
+          "amount_thousands": 110110
+        },
+        {
+          "name": "1-7 Northern Iloilo State University (Northern",
+          "amount_thousands": 110110
+        },
+        {
+          "name": "10 Iloilo Science and Technology University (Western Visayas",
+          "amount_thousands": 110110
+        },
+        {
+          "name": "4 Naval State University (Naval Institute of Technology",
+          "amount_thousands": 108247
+        },
+        {
+          "name": "5 Zamboanga State College of Marine Sciences and Technology",
+          "amount_thousands": 106597
+        },
+        {
+          "name": "College of Agriculture and Forestry)",
+          "amount_thousands": 97513
+        },
+        {
+          "name": "2 Davao Oriental State College of Science and Technology",
+          "amount_thousands": 96344
+        },
+        {
+          "name": "of Technology",
+          "amount_thousands": 92154
+        },
+        {
+          "name": "0.1 Cotabato City State Polytechnic College",
+          "amount_thousands": 90669
+        },
+        {
+          "name": "Senate Electoral Tribunal",
+          "amount_thousands": 87052
+        },
+        {
+          "name": "4 Zamboanga City State Polytechnic College",
+          "amount_thousands": 86818
+        },
+        {
+          "name": "0.2 Cotabato Foundation College of Science and Technology",
+          "amount_thousands": 85525
+        },
+        {
+          "name": "1 Davao del Norte State College",
+          "amount_thousands": 77242
+        },
+        {
+          "name": "0.5 Sulu State College",
+          "amount_thousands": 76403
+        },
+        {
+          "name": "1 Agusan del Sur State College of Agriculture and Technology",
+          "amount_thousands": 68881
+        },
+        {
+          "name": "School of Technology",
+          "amount_thousands": 64779
+        },
+        {
+          "name": "Agriculture)",
+          "amount_thousands": 64094
+        },
+        {
+          "name": "0.2 Basilan State College",
+          "amount_thousands": 60106
+        },
+        {
+          "name": "6 Tawi-Tawi Regional Agricultural College",
+          "amount_thousands": 59102
+        },
+        {
+          "name": "6 Misamis Oriental State College of Agriculture and Technology",
+          "amount_thousands": 55918
+        },
+        {
+          "name": "5 Siquijor State College",
+          "amount_thousands": 55097
+        },
+        {
+          "name": "8 Northern Negros State College of Science and Technology",
+          "amount_thousands": 52040
+        },
+        {
+          "name": "2 Camiguin Polytechnic State College",
+          "amount_thousands": 44573
+        },
+        {
+          "name": "4 Guimaras State College",
+          "amount_thousands": 42974
+        },
+        {
+          "name": "7 Northwestern Mindanao State College of Science and Technology",
+          "amount_thousands": 27786
+        },
+        {
+          "name": "1 Adie ong Memorial Polytechnic State College",
+          "amount_thousands": 24522
+        },
+        {
+          "name": "1 J_H. Cerilles State College 93 , -",
+          "amount_thousands": 216
+        },
+        {
+          "name": "2 Jose Rizal Memorial State University (Jose Rizal Memorial",
+          "amount_thousands": 12
+        },
+        {
+          "name": "4 Negros Oriental State University (Central Visayas",
+          "amount_thousands": 4
+        },
+        {
+          "name": "0.3 Sultan Kudarat State University",
+          "amount_thousands": 3
+        },
+        {
+          "name": "3 Surigao del Sur State University",
+          "amount_thousands": 3
+        },
+        {
+          "name": "2 Caraga State University (Northern Mindanao state",
+          "amount_thousands": 2
+        }
+      ]
+    },
+    {
+      "name": "Commission on Audit",
+      "amount_thousands": 7969497
+    },
+    {
+      "name": "International Commitments Fund",
+      "amount_thousands": 4815644
+    },
+    {
+      "name": "Department of Trade and Industry",
+      "amount_thousands": 4406338,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 3928050
+        },
+        {
+          "name": "Board of Investments",
+          "amount_thousands": 276572
+        },
+        {
+          "name": "Design Center of the Philippines",
+          "amount_thousands": 74504
+        },
+        {
+          "name": "0 Construction Industry Authority of the Philippines",
+          "amount_thousands": 65372
+        },
+        {
+          "name": "Philippine Trade Training Center",
+          "amount_thousands": 36345
+        },
+        {
+          "name": "Construction Manpower Development Foundation",
+          "amount_thousands": 25495
+        }
+      ]
+    },
+    {
+      "name": "National Economic and Development Authority",
+      "amount_thousands": 3904430,
+      "by_agency": [
+        {
+          "name": "2 National Statistics Office",
+          "amount_thousands": 2490610
+        },
+        {
+          "name": "Office of the Director-General",
+          "amount_thousands": 1111229
+        },
+        {
+          "name": "PRESIOENTIAL COtmUNICATIONS OPERATIONS OFFICE",
+          "amount_thousands": 859190
+        },
+        {
+          "name": "1 People' s Television Network, Inc,",
+          "amount_thousands": 859190
+        },
+        {
+          "name": "1 Philippine Institute for Development Studies",
+          "amount_thousands": 346806
+        },
+        {
+          "name": "National Statistical Coordination Board",
+          "amount_thousands": 119625
+        },
+        {
+          "name": "Public-Private Partnership Center of the Philippines",
+          "amount_thousands": 85558
+        },
+        {
+          "name": "Tariff Commission",
+          "amount_thousands": 57133
+        },
+        {
+          "name": "Statistical Research and Training Center",
+          "amount_thousands": 20211
+        },
+        {
+          "name": "Philippine National Volunteer Service Coordinating Agency",
+          "amount_thousands": 20064
+        }
+      ]
+    },
+    {
+      "name": "Department of Energy",
+      "amount_thousands": 3299376,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 3299376
+        }
+      ]
+    },
+    {
+      "name": "Office of the President",
+      "amount_thousands": 2790665,
+      "by_agency": [
+        {
+          "name": "The President' s Offices,",
+          "amount_thousands": 2790665
+        }
+      ]
+    },
+    {
+      "name": "Commission on Elections",
+      "amount_thousands": 2735321
+    },
+    {
+      "name": "E-Government Fund",
+      "amount_thousands": 2478900
+    },
+    {
+      "name": "Department of Tourism",
+      "amount_thousands": 1994061,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 1713150
+        },
+        {
+          "name": "National Parks Development Committee",
+          "amount_thousands": 248217
+        },
+        {
+          "name": "Intramuros Administration",
+          "amount_thousands": 32694
+        }
+      ]
+    },
+    {
+      "name": "Office of the Ombudsman",
+      "amount_thousands": 1732334
+    },
+    {
+      "name": "Civil Service Commission",
+      "amount_thousands": 1213353,
+      "by_agency": [
+        {
+          "name": "Civil Service Commission",
+          "amount_thousands": 1137290
+        },
+        {
+          "name": "Career Executive Service Board",
+          "amount_thousands": 76063
+        }
+      ]
+    },
+    {
+      "name": "Presidential Communications Operations Office",
+      "amount_thousands": 1128359,
+      "by_agency": [
+        {
+          "name": "Bureau of Broadcast Services",
+          "amount_thousands": 268175
+        },
+        {
+          "name": "Philippine Information Agency",
+          "amount_thousands": 251822
+        },
+        {
+          "name": "Presidential Communications Operations Office (Proper",
+          "amount_thousands": 201926
+        },
+        {
+          "name": "Presidential Broadcast Staff (RTVM",
+          "amount_thousands": 191755
+        },
+        {
+          "name": "Nehs and Information Bureau",
+          "amount_thousands": 103133
+        },
+        {
+          "name": "1 National Printing Office",
+          "amount_thousands": 78358
+        },
+        {
+          "name": "Bureau of Communications Services",
+          "amount_thousands": 33190
+        }
+      ]
+    },
+    {
+      "name": "Contingent Fund",
+      "amount_thousands": 1000000
+    },
+    {
+      "name": "Department of Education School Building Program",
+      "amount_thousands": 1000000
+    },
+    {
+      "name": "Department of Budget and Management",
+      "amount_thousands": 997494,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 963760
+        },
+        {
+          "name": "Government Procurement Policy Board Technical Support Office",
+          "amount_thousands": 33734
+        }
+      ]
+    },
+    {
+      "name": "Feasibility Studies Fund",
+      "amount_thousands": 400000
+    },
+    {
+      "name": "Commission on Human Rights",
+      "amount_thousands": 326923
+    },
+    {
+      "name": "Budgetary Support to Government Corporations",
+      "amount_thousands": 255210,
+      "by_agency": [
+        {
+          "name": "DEPARTMENT OF AGRICUL TURE",
+          "amount_thousands": 9681388
+        },
+        {
+          "name": "1 National Electrification Administration",
+          "amount_thousands": 7675800
+        },
+        {
+          "name": "2 National Food Authority",
+          "amount_thousands": 4250000
+        },
+        {
+          "name": "4 Philippine Coconut Authority",
+          "amount_thousands": 2373750
+        },
+        {
+          "name": "2 National Power Corporation",
+          "amount_thousands": 2000000
+        },
+        {
+          "name": "5 Philippine Crop Insurance Corporation",
+          "amount_thousands": 1183771
+        },
+        {
+          "name": "3 National Irrigation Administration",
+          "amount_thousands": 1065683
+        },
+        {
+          "name": "6 Philippine Rice Research Institute",
+          "amount_thousands": 546440
+        },
+        {
+          "name": "1 National Dairy Authority",
+          "amount_thousands": 261744
+        }
+      ]
+    },
+    {
+      "name": "Office of the Vice-President",
+      "amount_thousands": 217296
+    },
+    {
+      "name": "Joint Legislative-Executive Councils",
+      "amount_thousands": 4167,
+      "by_agency": [
+        {
+          "name": "Legislative-Executive Development Advisory Council",
+          "amount_thousands": 4167
+        }
+      ]
+    }
+  ],
+  "by_exp_class": [
+    {
+      "name": "Personnel Services",
+      "amount_thousands": 394978524
+    },
+    {
+      "name": "Maintenance and Other Operating Expenses",
+      "amount_thousands": 313235602
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 189073984
+    },
+    {
+      "name": "Financial Expenses",
+      "amount_thousands": 12195544
+    }
+  ],
+  "by_region": [],
+  "by_fund_subcat": [],
+  "headlines": {
+    "wages": 689417065,
+    "operations": 388712947,
+    "capital": 418347378,
+    "debt_service": 352652000,
+    "transfers_lgu": 341544726
+  },
+  "by_function": [
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 361133569,
+      "color": "#7B6CF6",
+      "top_departments": []
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 352652000,
+      "color": "#1F2937",
+      "top_departments": []
+    },
+    {
+      "name": "Education",
+      "amount_thousands": 318708872,
+      "color": "#0038A8",
+      "top_departments": []
+    },
+    {
+      "name": "Social Protection",
+      "amount_thousands": 265659752,
+      "color": "#9FD3C7",
+      "top_departments": []
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "amount_thousands": 252095353,
+      "color": "#FCD116",
+      "top_departments": []
+    },
+    {
+      "name": "General Public Services",
+      "amount_thousands": 185818286,
+      "color": "#94A3B8",
+      "top_departments": []
+    },
+    {
+      "name": "Multi-sector / Other",
+      "amount_thousands": 159518788,
+      "color": "#CBD5E1",
+      "top_departments": []
+    },
+    {
+      "name": "Public Order & Safety",
+      "amount_thousands": 131491358,
+      "color": "#475569",
+      "top_departments": []
+    },
+    {
+      "name": "Agriculture & Environment",
+      "amount_thousands": 111945140,
+      "color": "#5BC58F",
+      "top_departments": []
+    },
+    {
+      "name": "Health",
+      "amount_thousands": 84356933,
+      "color": "#CE1126",
+      "top_departments": []
+    },
+    {
+      "name": "Defense",
+      "amount_thousands": 82265071,
+      "color": "#0A2A66",
+      "top_departments": []
+    },
+    {
+      "name": "Other Economic Affairs",
+      "amount_thousands": 59011079,
+      "color": "#FFB454",
+      "top_departments": []
+    }
+  ],
+  "by_economic": [
+    {
+      "name": "Wages & Personnel",
+      "amount_thousands": 689417065,
+      "color": "#0038A8"
+    },
+    {
+      "name": "Operations (MOOE)",
+      "amount_thousands": 388712947,
+      "color": "#CE1126"
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 418347378,
+      "color": "#FCD116"
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 352652000,
+      "color": "#475569"
+    },
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 341544726,
+      "color": "#9FD3C7"
+    },
+    {
+      "name": "Other Automatic Appropriations",
+      "amount_thousands": 72973443,
+      "color": "#94A3B8"
+    }
+  ],
+  "aa_breakdown": {
+    "purpose_totals_php_thousand": {
+      "Debt Service - Interest Payment": 352652000,
+      "Internal Revenue Allotment": 341544726,
+      "Pension under R.A. Nos. 2087 and 5059": 331,
+      "Grant Proceeds": 6450,
+      "Customs Duties and Taxes (Tax Expenditures)": 26900000,
+      "Net Lending": 24950000,
+      "Retirement and Life Insurance Premiums": 28859006,
+      "Special Account": 21116662
+    },
+    "total_php_thousand": 796029175,
+    "debt_service_principal_amortization_php_thousand": 440931000,
+    "source": "FY2014 GAA Vol I-B (Official Gazette December 27, 2013) AA.pdf"
+  },
+  "coverage_note": "FY2014 reconstructed from scan via etl/ocr pipeline. headlines / by_economic / total from BESF B.1 + AA Annex (etl/patch_fy2014_aa.py). by_department / by_function / per-department by_agency from SummaryFY OCR (etl/patch_fy2014_departments.py). Sub-program / line-item drill-downs inside individual line agencies still require OCR of per-department PDFs (GAA2014/{DEPT}.pdf inside the GAA2014.zip archive).",
+  "patched_at": "2026-05-10T04:50:16.180907+00:00"
+}

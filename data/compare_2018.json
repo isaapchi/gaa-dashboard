@@ -1,0 +1,835 @@
+{
+  "year": 2018,
+  "generated": "2026-05-12",
+  "top_line": {
+    "nep_thousands": 3765702550,
+    "gaa_thousands": 3767000000,
+    "diff_thousands": 1297450,
+    "diff_pct": 0.034454394174069855,
+    "reshuffle_pct": {
+      "dept_pct": 16.7922336563731,
+      "program_pct": 16.903694531051052,
+      "leaf_pct": 100.00002347503522
+    }
+  },
+  "row_counts": {
+    "nep_leaf_rows": 26561,
+    "gaa_leaf_rows": 518332
+  },
+  "department": [
+    {
+      "name": "Automatic Appropriations",
+      "nep": 980812450.0,
+      "gaa": 390310000.0,
+      "diff": -590502450.0,
+      "pct": -60.2054398881254
+    },
+    {
+      "name": "Allocations to Local Government Units (ALGU)",
+      "nep": 78236839.0,
+      "gaa": 577595626.0,
+      "diff": 499358787.0,
+      "pct": 638.2655452120196
+    },
+    {
+      "name": "Other Executive Offices (OEOs)",
+      "nep": 36877581.0,
+      "gaa": 81103960.0,
+      "diff": 44226379.0,
+      "pct": 119.9275489354901
+    },
+    {
+      "name": "Pension and Gratuity Fund",
+      "nep": 145754815.0,
+      "gaa": 122254815.0,
+      "diff": -23500000.0,
+      "pct": -16.122966503713787
+    },
+    {
+      "name": "Department of Public Works and Highways (DPWH)",
+      "nep": 630243311.0,
+      "gaa": 650873878.0,
+      "diff": 20630567.0,
+      "pct": 3.27342895036295
+    },
+    {
+      "name": "Miscellaneous Personnel Benefits Fund",
+      "nep": 84446295.0,
+      "gaa": 99446295.0,
+      "diff": 15000000.0,
+      "pct": 17.762768633011074
+    },
+    {
+      "name": "Budgetary Support to Government Corporations (BSGC)",
+      "nep": 170101848.0,
+      "gaa": 180829188.0,
+      "diff": 10727340.0,
+      "pct": 6.306421785611642
+    },
+    {
+      "name": "Calamity Fund",
+      "nep": 25500000.0,
+      "gaa": 19600000.0,
+      "diff": -5900000.0,
+      "pct": -23.137254901960784
+    },
+    {
+      "name": "Department of National Defense (DND)",
+      "nep": 144678872.0,
+      "gaa": 149983157.0,
+      "diff": 5304285.0,
+      "pct": 3.666247135241696
+    },
+    {
+      "name": "Department of Education (DepEd)",
+      "nep": 585735332.0,
+      "gaa": 580632131.0,
+      "diff": -5103201.0,
+      "pct": -0.8712469132731095
+    },
+    {
+      "name": "Department of Health (DOH)",
+      "nep": 104719742.0,
+      "gaa": 109806873.0,
+      "diff": 5087131.0,
+      "pct": 4.857852877445019
+    },
+    {
+      "name": "Congress of the Philippines (CONGRESS)",
+      "nep": 14670147.0,
+      "gaa": 18743730.0,
+      "diff": 4073583.0,
+      "pct": 27.767840363153823
+    },
+    {
+      "name": "Department of Social Welfare and Development (DSWD)",
+      "nep": 137865349.0,
+      "gaa": 141937375.0,
+      "diff": 4072026.0,
+      "pct": 2.953625424761374
+    },
+    {
+      "name": "Department of Transportation (DOTr)",
+      "nep": 72048130.0,
+      "gaa": 68134807.0,
+      "diff": -3913323.0,
+      "pct": -5.431539999719632
+    },
+    {
+      "name": "Department of Agriculture (DA)",
+      "nep": 51833306.0,
+      "gaa": 55671450.0,
+      "diff": 3838144.0,
+      "pct": 7.404783325995065
+    },
+    {
+      "name": "State Universities and Colleges (SUCs)",
+      "nep": 61431672.0,
+      "gaa": 65244684.0,
+      "diff": 3813012.0,
+      "pct": 6.206915546755751
+    },
+    {
+      "name": "Department of Finance (DOF)",
+      "nep": 17973287.0,
+      "gaa": 21072349.0,
+      "diff": 3099062.0,
+      "pct": 17.242600087563282
+    },
+    {
+      "name": "Department of Justice (DOJ)",
+      "nep": 17275532.0,
+      "gaa": 19663468.0,
+      "diff": 2387936.0,
+      "pct": 13.822648124526642
+    },
+    {
+      "name": "Autonomous Region in Muslim Mindanao (ARMM)",
+      "nep": 32348785.0,
+      "gaa": 34178118.0,
+      "diff": 1829333.0,
+      "pct": 5.655028465520421
+    },
+    {
+      "name": "Department of the Interior and Local Government (DILG)",
+      "nep": 170733651.0,
+      "gaa": 172357585.0,
+      "diff": 1623934.0,
+      "pct": 0.9511505145520494
+    },
+    {
+      "name": "The Judiciary (JUD)",
+      "nep": 33783393.0,
+      "gaa": 35354561.0,
+      "diff": 1571168.0,
+      "pct": 4.650711075705155
+    },
+    {
+      "name": "Presidential Communications Operations Office (PCOO)",
+      "nep": 0.0,
+      "gaa": 1434549.0,
+      "diff": 1434549.0,
+      "pct": null
+    },
+    {
+      "name": "Department of Information and Communications Technology (DICT)",
+      "nep": 6870343.0,
+      "gaa": 5436341.0,
+      "diff": -1434002.0,
+      "pct": -20.872349459117252
+    },
+    {
+      "name": "Department of Energy (DOE)",
+      "nep": 1263227.0,
+      "gaa": 2659253.0,
+      "diff": 1396026.0,
+      "pct": 110.51267903551776
+    },
+    {
+      "name": "Department of Environment and Natural Resources (DENR)",
+      "nep": 27116460.0,
+      "gaa": 25726315.0,
+      "diff": -1390145.0,
+      "pct": -5.126572568838263
+    }
+  ],
+  "agency": [
+    {
+      "department": "Automatic Appropriations",
+      "agency": "Debt Interest Payments",
+      "nep": 889593952.0,
+      "gaa": 354010000.0,
+      "diff": -535583952.0,
+      "pct": -60.205439885904255
+    },
+    {
+      "department": "Allocations to Local Government Units (ALGU)",
+      "agency": "Internal Revenue Allotment",
+      "nep": 70807607.0,
+      "gaa": 522748165.0,
+      "diff": 451940558.0,
+      "pct": 638.2655439831485
+    },
+    {
+      "department": "Automatic Appropriations",
+      "agency": "Customs duties and taxes, including tax expenditures",
+      "nep": 49001672.0,
+      "gaa": 19500000.0,
+      "diff": -29501672.0,
+      "pct": -60.205439520512684
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Commission on Higher Education",
+      "nep": 22977538.0,
+      "gaa": 50533944.0,
+      "diff": 27556406.0,
+      "pct": 119.92758319015728
+    },
+    {
+      "department": "Allocations to Local Government Units (ALGU)",
+      "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+      "nep": 4257984.0,
+      "gaa": 31435232.0,
+      "diff": 27177248.0,
+      "pct": 638.2656205377943
+    },
+    {
+      "department": "Automatic Appropriations",
+      "agency": "Net Lending",
+      "nep": 42216826.0,
+      "gaa": 16800000.0,
+      "diff": -25416826.0,
+      "pct": -60.20544036162264
+    },
+    {
+      "department": "Pension and Gratuity Fund",
+      "agency": "Pension and Gratuity Fund",
+      "nep": 145754815.0,
+      "gaa": 122254815.0,
+      "diff": -23500000.0,
+      "pct": -16.122966503713787
+    },
+    {
+      "department": "Department of Public Works and Highways (DPWH)",
+      "agency": "Office of the Secretary",
+      "nep": 630243311.0,
+      "gaa": 650873878.0,
+      "diff": 20630567.0,
+      "pct": 3.27342895036295
+    },
+    {
+      "department": "Allocations to Local Government Units (ALGU)",
+      "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+      "nep": 3130612.0,
+      "gaa": 23112229.0,
+      "diff": 19981617.0,
+      "pct": 638.2655212463251
+    },
+    {
+      "department": "Miscellaneous Personnel Benefits Fund",
+      "agency": "Miscellaneous Personnel Benefits Fund",
+      "nep": 84446295.0,
+      "gaa": 99446295.0,
+      "diff": 15000000.0,
+      "pct": 17.762768633011074
+    },
+    {
+      "department": "Calamity Fund",
+      "agency": "National Disaster Risk Reduction and Management Fund ( Calamity Fund )",
+      "nep": 25500000.0,
+      "gaa": 19600000.0,
+      "diff": -5900000.0,
+      "pct": -23.137254901960784
+    },
+    {
+      "department": "Department of Education (DepEd)",
+      "agency": "Office of the Secretary",
+      "nep": 585220189.0,
+      "gaa": 579419110.0,
+      "diff": -5801079.0,
+      "pct": -0.991264332475037
+    },
+    {
+      "department": "Department of Health (DOH)",
+      "agency": "Office of the Secretary",
+      "nep": 103540657.0,
+      "gaa": 108570508.0,
+      "diff": 5029851.0,
+      "pct": 4.857851153098246
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Technical Education and Skills Development Authority",
+      "nep": 3509050.0,
+      "gaa": 7717368.0,
+      "diff": 4208318.0,
+      "pct": 119.92755874096979
+    },
+    {
+      "department": "Department of Social Welfare and Development (DSWD)",
+      "agency": "Office of the Secretary",
+      "nep": 137556963.0,
+      "gaa": 141510833.0,
+      "diff": 3953870.0,
+      "pct": 2.8743510424841237
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Health Insurance Corporation",
+      "nep": 57030930.0,
+      "gaa": 60627542.0,
+      "diff": 3596612.0,
+      "pct": 6.30642354946693
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+      "nep": 35543870.0,
+      "gaa": 39023262.0,
+      "diff": 3479392.0,
+      "pct": 9.789007218403624
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Office of the Presidential Adviser on the Peace Process",
+      "nep": 2675351.0,
+      "gaa": 5883823.0,
+      "diff": 3208472.0,
+      "pct": 119.92714227030396
+    },
+    {
+      "department": "Department of Agriculture (DA)",
+      "agency": "Office of the Secretary",
+      "nep": 42907252.0,
+      "gaa": 46084635.0,
+      "diff": 3177383.0,
+      "pct": 7.405235366739403
+    },
+    {
+      "department": "Department of Transportation (DOTr)",
+      "agency": "Office of the Secretary",
+      "nep": 55499046.0,
+      "gaa": 52484578.0,
+      "diff": -3014468.0,
+      "pct": -5.431567238110723
+    },
+    {
+      "department": "Congress of the Philippines (CONGRESS)",
+      "agency": "House of Representatives",
+      "nep": 9008095.0,
+      "gaa": 11509448.0,
+      "diff": 2501353.0,
+      "pct": 27.76783548574921
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "National Irrigation Administration",
+      "nep": 39197224.0,
+      "gaa": 41669162.0,
+      "diff": 2471938.0,
+      "pct": 6.306410882566582
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Metropolitan Manila Development Authority",
+      "nep": 1617807.0,
+      "gaa": 3558073.0,
+      "diff": 1940266.0,
+      "pct": 119.93185837371207
+    },
+    {
+      "department": "Autonomous Region in Muslim Mindanao (ARMM)",
+      "agency": "Autonomous Regional Government in Muslim Mindanao",
+      "nep": 32348785.0,
+      "gaa": 34178118.0,
+      "diff": 1829333.0,
+      "pct": 5.655028465520421
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Land Bank of the Philippines",
+      "nep": 24101749.0,
+      "gaa": 25621707.0,
+      "diff": 1519958.0,
+      "pct": 6.306421994519982
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Philippine Drug Enforcement Agency",
+      "nep": 1210518.0,
+      "gaa": 2662266.0,
+      "diff": 1451748.0,
+      "pct": 119.92783254771923
+    },
+    {
+      "department": "The Judiciary (JUD)",
+      "agency": "Supreme Court of the Philippines and the Lower Courts",
+      "nep": 30148131.0,
+      "gaa": 31550234.0,
+      "diff": 1402103.0,
+      "pct": 4.650712841867378
+    },
+    {
+      "department": "Department of Energy (DOE)",
+      "agency": "Office of the Secretary",
+      "nep": 1263227.0,
+      "gaa": 2659253.0,
+      "diff": 1396026.0,
+      "pct": 110.51267903551776
+    },
+    {
+      "department": "Department of the Interior and Local Government (DILG)",
+      "agency": "Philippine National Police",
+      "nep": 131261334.0,
+      "gaa": 132580787.0,
+      "diff": 1319453.0,
+      "pct": 1.0052107195558442
+    },
+    {
+      "department": "Department of Finance (DOF)",
+      "agency": "Bureau of Internal Revenue",
+      "nep": 7542255.0,
+      "gaa": 8842735.0,
+      "diff": 1300480.0,
+      "pct": 17.242588589221658
+    }
+  ],
+  "program": {
+    "killed": [],
+    "added": [
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Internal Revenue Allotment",
+        "program": "Allocations to Local Government Units - Internal Revenue Allotment",
+        "nep": 70807607.0,
+        "gaa": 522748165.0,
+        "diff": 451940558.0,
+        "pct": 638.2655439831485
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Commission on Higher Education",
+        "program": "Universal Access to Quality Tertiary Education",
+        "nep": 18188226.0,
+        "gaa": 40000919.0,
+        "diff": 21812693.0,
+        "pct": 119.92754543516229
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Tobacco Excise Tax Pursuant to R.A. No. 7171 (Virginia Tobacco)",
+        "nep": 1745630.0,
+        "gaa": 12887388.0,
+        "diff": 11141758.0,
+        "pct": 638.2657264139594
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Assistance to Municipalities",
+        "nep": 1586710.0,
+        "gaa": 11714133.0,
+        "diff": 10127423.0,
+        "pct": 638.2655305632409
+      },
+      {
+        "department": "Miscellaneous Personnel Benefits Fund",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "For Payment of Compensation Adjustment",
+        "nep": 53334554.0,
+        "gaa": 62808248.0,
+        "diff": 9473694.0,
+        "pct": 17.762769704608385
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Conditional Matching Grant to Provinces for Road Repair, Rehabilitation and Improvement",
+        "nep": 1113914.0,
+        "gaa": 8223645.0,
+        "diff": 7109731.0,
+        "pct": 638.2657009428017
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Financial Assistance to Local Government Units",
+        "nep": 952270.0,
+        "gaa": 7030282.0,
+        "diff": 6078012.0,
+        "pct": 638.2656179444905
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in the Utilization and Development of National Wealth under R.A. No. 7160 and R.A. No. 9513",
+        "nep": 539628.0,
+        "gaa": 3983885.0,
+        "diff": 3444257.0,
+        "pct": 638.2650640811819
+      },
+      {
+        "department": "Budgetary Support to Government Corporations (BSGC)",
+        "agency": "Philippine Health Insurance Corporation",
+        "program": "Health insurance coverage under the Sin Tax Law",
+        "nep": 53636465.0,
+        "gaa": 57019007.0,
+        "diff": 3382542.0,
+        "pct": 6.306422319218838
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Incremental Collections from Value Added Tax pursuant to R.A. Nos. 7643 and 8424",
+        "nep": 445394.0,
+        "gaa": 3288188.0,
+        "diff": 2842794.0,
+        "pct": 638.2649968342636
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Commission on Higher Education",
+        "program": "Provision of  assistance and incentives, scholarships and grants through Student Financial Assistance Programs",
+        "nep": 2247735.0,
+        "gaa": 4943389.0,
+        "diff": 2695654.0,
+        "pct": 119.92757153312112
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Tobacco Excise Tax Pursuant to R.A. No. 8240, as amended by R.A. No. 10351 (Burley and Native Tobacco)",
+        "nep": 396387.0,
+        "gaa": 2926385.0,
+        "diff": 2529998.0,
+        "pct": 638.2646252273662
+      },
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Pantawid Pamilyang Pilipino Program (Implementation of Conditional Cash Transfer)",
+        "nep": 86910199.0,
+        "gaa": 89408303.0,
+        "diff": 2498104.0,
+        "pct": 2.8743507997260482
+      },
+      {
+        "department": "Allocations to Local Government Units (ALGU)",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Assistance to Cities",
+        "nep": 350795.0,
+        "gaa": 2589800.0,
+        "diff": 2239005.0,
+        "pct": 638.265938796163
+      },
+      {
+        "department": "Department of National Defense (DND)",
+        "agency": "General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+        "program": "Revised AFP Modernization Program",
+        "nep": 22770950.0,
+        "gaa": 25000000.0,
+        "diff": 2229050.0,
+        "pct": 9.78900748541453
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "General Management and Supervision",
+        "nep": 13383211.0,
+        "gaa": 15434215.0,
+        "diff": 2051004.0,
+        "pct": 15.325201104577967
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Technical Education and Skills Development Authority",
+        "program": "Promotion, Development and Implementation of Quality Technical Education and Skills Development Programs",
+        "nep": 1599623.0,
+        "gaa": 3518011.0,
+        "diff": 1918388.0,
+        "pct": 119.92750791905343
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Technical Education and Skills Development Authority",
+        "program": "Promotion, Development, Implementation, Monitoring, and Evaluation of Technical Education and Skills Development Scholarship and Student Assistance Programs",
+        "nep": 1577080.0,
+        "gaa": 3468434.0,
+        "diff": 1891354.0,
+        "pct": 119.92758769371244
+      },
+      {
+        "department": "Miscellaneous Personnel Benefits Fund",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Funding Requirements for Staffing Modifications and Upgrading of Salaries",
+        "nep": 10496498.0,
+        "gaa": 12360967.0,
+        "diff": 1864469.0,
+        "pct": 17.762771926408217
+      },
+      {
+        "department": "Miscellaneous Personnel Benefits Fund",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Performance-Based Bonus",
+        "nep": 9871770.0,
+        "gaa": 11625270.0,
+        "diff": 1753500.0,
+        "pct": 17.762772025685365
+      },
+      {
+        "department": "Miscellaneous Personnel Benefits Fund",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Funding Requirements for the Filling up of Unfilled Positions",
+        "nep": 8442521.0,
+        "gaa": 9942146.0,
+        "diff": 1499625.0,
+        "pct": 17.762763041987103
+      },
+      {
+        "department": "Congress of the Philippines (CONGRESS)",
+        "agency": "House of Representatives",
+        "program": "Legislation of laws and other related activities (Lower House)",
+        "nep": 5250954.0,
+        "gaa": 6709030.0,
+        "diff": 1458076.0,
+        "pct": 27.76783037901303
+      },
+      {
+        "department": "Budgetary Support to Government Corporations (BSGC)",
+        "agency": "Land Bank of the Philippines",
+        "program": "Tax Reform Cash Transfer Project",
+        "nep": 23035172.0,
+        "gaa": 24487867.0,
+        "diff": 1452695.0,
+        "pct": 6.306421328219298
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Health Facilities Enhancement  Program (HFEP)",
+        "nep": 28864510.0,
+        "gaa": 30266705.0,
+        "diff": 1402195.0,
+        "pct": 4.857851389128033
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Commission on Higher Education",
+        "program": "Provision of scholarship to faculty HEI and administrators",
+        "nep": 1087839.0,
+        "gaa": 2392458.0,
+        "diff": 1304619.0,
+        "pct": 119.92758119537909
+      }
+    ]
+  },
+  "function": [
+    {
+      "name": "Education",
+      "nep": 680144993.0,
+      "gaa": 712228426.0,
+      "diff": 32083433.0,
+      "pct": 4.717146098287898,
+      "nep_share_pct": 18.061569759406517,
+      "gaa_share_pct": 18.90704608441731
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "nep": 712853103.0,
+      "gaa": 730243957.0,
+      "diff": 17390854.0,
+      "pct": 2.439612583127102,
+      "nep_share_pct": 18.930148983753377,
+      "gaa_share_pct": 19.38529219538094
+    },
+    {
+      "name": "Health",
+      "nep": 164696024.0,
+      "gaa": 173519323.0,
+      "diff": 8823299.0,
+      "pct": 5.357323623064513,
+      "nep_share_pct": 4.37358027654096,
+      "gaa_share_pct": 4.606300053092647
+    },
+    {
+      "name": "Social Protection",
+      "nep": 284384205.0,
+      "gaa": 265872525.0,
+      "diff": -18511680.0,
+      "pct": -6.509391054260556,
+      "nep_share_pct": 7.55195614162356,
+      "gaa_share_pct": 7.057938014335015
+    },
+    {
+      "name": "Public Order & Safety",
+      "nep": 223776078.0,
+      "gaa": 231851172.0,
+      "diff": 8075094.0,
+      "pct": 3.6085599820012937,
+      "nep_share_pct": 5.942478860949865,
+      "gaa_share_pct": 6.15479617732944
+    },
+    {
+      "name": "Defense",
+      "nep": 145215779.0,
+      "gaa": 151163960.0,
+      "diff": 5948181.0,
+      "pct": 4.096098262159238,
+      "nep_share_pct": 3.8562732205176427,
+      "gaa_share_pct": 4.012847358640828
+    },
+    {
+      "name": "Agriculture & Environment",
+      "nep": 144802410.0,
+      "gaa": 150592749.0,
+      "diff": 5790339.0,
+      "pct": 3.998786346166476,
+      "nep_share_pct": 3.8452960125594626,
+      "gaa_share_pct": 3.9976838067427662
+    },
+    {
+      "name": "Other Economic Affairs",
+      "nep": 84873554.0,
+      "gaa": 88664674.0,
+      "diff": 3791120.0,
+      "pct": 4.4667859672755075,
+      "nep_share_pct": 2.253857092350536,
+      "gaa_share_pct": 2.3537211043270507
+    },
+    {
+      "name": "Housing & Community",
+      "nep": 3816729.0,
+      "gaa": 4057426.0,
+      "diff": 240697.0,
+      "pct": 6.306368620879292,
+      "nep_share_pct": 0.10135503134733784,
+      "gaa_share_pct": 0.10770974250066366
+    },
+    {
+      "name": "Debt Service",
+      "nep": 931810778.0,
+      "gaa": 370810000.0,
+      "diff": -561000778.0,
+      "pct": -60.20543990745726,
+      "nep_share_pct": 24.74467288979051,
+      "gaa_share_pct": 9.843642155561454
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 84195996.0,
+      "gaa": 583183682.0,
+      "diff": 498987686.0,
+      "pct": 592.6501374245872,
+      "nep_share_pct": 2.235864221405379,
+      "gaa_share_pct": 15.481382585611891
+    },
+    {
+      "name": "General Public Services",
+      "nep": 264013813.0,
+      "gaa": 260270546.0,
+      "diff": -3743267.0,
+      "pct": -1.4178299830092602,
+      "nep_share_pct": 7.011010813905097,
+      "gaa_share_pct": 6.909226068489514
+    },
+    {
+      "name": "Multi-sector / Other",
+      "nep": 41119088.0,
+      "gaa": 44541560.0,
+      "diff": 3422472.0,
+      "pct": 8.323316898468176,
+      "nep_share_pct": 1.0919366958497558,
+      "gaa_share_pct": 1.1824146535704805
+    }
+  ],
+  "economic": [
+    {
+      "name": "Wages & Personnel",
+      "nep": 0.0,
+      "gaa": 1060542647.0,
+      "diff": 1060542647.0,
+      "pct": null,
+      "nep_share_pct": 0.0,
+      "gaa_share_pct": 28.153508016989647
+    },
+    {
+      "name": "Operations (MOOE)",
+      "nep": 2759450250.0,
+      "gaa": 792793960.0,
+      "diff": -1966656290.0,
+      "pct": -71.26985855244175,
+      "nep_share_pct": 73.2784975276393,
+      "gaa_share_pct": 21.04576479957526
+    },
+    {
+      "name": "Capital Outlays",
+      "nep": 0.0,
+      "gaa": 991633554.0,
+      "diff": 991633554.0,
+      "pct": null,
+      "nep_share_pct": 0.0,
+      "gaa_share_pct": 26.324224953543933
+    },
+    {
+      "name": "Debt Service",
+      "nep": 931810778.0,
+      "gaa": 372453734.0,
+      "diff": -559357044.0,
+      "pct": -60.029037783892214,
+      "nep_share_pct": 24.74467288979051,
+      "gaa_share_pct": 9.887277249800903
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 74441522.0,
+      "gaa": 549576105.0,
+      "diff": 475134583.0,
+      "pct": 638.2655408362016,
+      "nep_share_pct": 1.97682958257019,
+      "gaa_share_pct": 14.589224980090258
+    }
+  ],
+  "note": "FY2018 NEP was never published as Excel \u2014 only as scanned PDFs. NEP totals were OCR-extracted from NEP-2018 Volume I pp.21-22 (dept-level summary) and from per-dept PDFs at /NEP2018/{DEPT}/{DEPT}.pdf GENERAL SUMMARY pages (last page of each) for the top-5 depts: DEPED, DPWH, DILG, DND, DSWD. NEP-side parquet emits program-level rows: where direct OCR of NEP body pages yielded valid program-table rows (DEPED OSEC p6; DILG OSEC p4-7) and the parsed UACS code matched a GAA-2018 program_id, those amounts are taken as-is; the remaining agency/dept budget is then apportioned across GAA-2018 program structure (proportional to GAA shares). DPWH OSEC apportioning falls back fully to GAA structure because DPWH GAA-2018 has 20,597 project-level UACS ids while NEP summarises at PREXC program-group level only \u2014 direct UACS matching produced spurious reshuffle. Result: program_pct reflects inter-program reshuffle visible at this granularity (dominated by Automatic Appropriations / ALGU / IRA umbrella vs distributed GAA categories). leaf_pct is 100% because NEP-2018 rows have null operunit/region/fund/object \u2014 those line-item dimensions are not available in the source scans. Parser changes: pdf_to_rows.merge_uacs_wrap_rows() handles forward-wrap row association on NEP-2018 body pages (UACS code on visual line 1 + amounts on visual line 2). Backup of prior v2 parquet: etl/nep_2018.parquet.bak-prexc-attempt."
+}

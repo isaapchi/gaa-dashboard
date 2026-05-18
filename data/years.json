@@ -1,0 +1,43 @@
+{
+  "years": [
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "default": 2026,
+  "coverage": {
+    "2009": "PRE_UACS_MELT",
+    "2010": "PRE_UACS_MELT",
+    "2011": "PRE_UACS_MELT",
+    "2012": "PRE_UACS_MELT",
+    "2013": "PRE_UACS_MELT",
+    "2014": "OCR_RECONSTRUCTED",
+    "2015": "UACS_NATIVE",
+    "2016": "UACS_REMAPPED_NGA_ONLY",
+    "2017": "UACS_REMAPPED_NGA_ONLY",
+    "2018": "UACS_NATIVE",
+    "2019": "OCR_ESTIMATE",
+    "2020": "UACS_NATIVE",
+    "2021": "UACS_NATIVE",
+    "2022": "UACS_NATIVE",
+    "2023": "UACS_NATIVE",
+    "2024": "UACS_NATIVE",
+    "2025": "UACS_NATIVE",
+    "2026": "UACS_NATIVE"
+  }
+}

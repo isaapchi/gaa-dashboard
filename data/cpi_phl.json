@@ -1,0 +1,108 @@
+{
+  "indicator": "FP.CPI.TOTL",
+  "indicator_name": "Consumer price index, rebased to 2018=100",
+  "country": "Philippines",
+  "country_iso3": "PHL",
+  "source": "World Bank Open Data API v2 (FP.CPI.TOTL, originally 2010=100)",
+  "rebased_to": 2018,
+  "fetched_at": "2026-05-08T12:52:17.287193+00:00",
+  "years": {
+    "2008": {
+      "cpi_2018": 73.0274,
+      "deflator_to_2018": 1.369349,
+      "is_estimate": false
+    },
+    "2009": {
+      "cpi_2018": 76.1084,
+      "deflator_to_2018": 1.313915,
+      "is_estimate": false
+    },
+    "2010": {
+      "cpi_2018": 78.9928,
+      "deflator_to_2018": 1.265938,
+      "is_estimate": false
+    },
+    "2011": {
+      "cpi_2018": 82.72,
+      "deflator_to_2018": 1.208897,
+      "is_estimate": false
+    },
+    "2012": {
+      "cpi_2018": 85.2239,
+      "deflator_to_2018": 1.173379,
+      "is_estimate": false
+    },
+    "2013": {
+      "cpi_2018": 87.425,
+      "deflator_to_2018": 1.143838,
+      "is_estimate": false
+    },
+    "2014": {
+      "cpi_2018": 90.5704,
+      "deflator_to_2018": 1.104114,
+      "is_estimate": false
+    },
+    "2015": {
+      "cpi_2018": 91.181,
+      "deflator_to_2018": 1.09672,
+      "is_estimate": false
+    },
+    "2016": {
+      "cpi_2018": 92.3242,
+      "deflator_to_2018": 1.08314,
+      "is_estimate": false
+    },
+    "2017": {
+      "cpi_2018": 94.9583,
+      "deflator_to_2018": 1.053093,
+      "is_estimate": false
+    },
+    "2018": {
+      "cpi_2018": 100.0,
+      "deflator_to_2018": 1.0,
+      "is_estimate": false
+    },
+    "2019": {
+      "cpi_2018": 102.3921,
+      "deflator_to_2018": 0.976638,
+      "is_estimate": false
+    },
+    "2020": {
+      "cpi_2018": 104.8425,
+      "deflator_to_2018": 0.953812,
+      "is_estimate": false
+    },
+    "2021": {
+      "cpi_2018": 108.9598,
+      "deflator_to_2018": 0.917769,
+      "is_estimate": false
+    },
+    "2022": {
+      "cpi_2018": 115.3026,
+      "deflator_to_2018": 0.867284,
+      "is_estimate": false
+    },
+    "2023": {
+      "cpi_2018": 122.1954,
+      "deflator_to_2018": 0.818362,
+      "is_estimate": false
+    },
+    "2024": {
+      "cpi_2018": 126.121,
+      "deflator_to_2018": 0.792889,
+      "is_estimate": false
+    },
+    "2025": {
+      "cpi_2018": null,
+      "deflator_to_2018": null,
+      "is_estimate": true,
+      "note": "WB API has no value yet"
+    },
+    "2026": {
+      "cpi_2018": null,
+      "deflator_to_2018": null,
+      "is_estimate": true,
+      "note": "WB API has no value yet"
+    }
+  }
+}

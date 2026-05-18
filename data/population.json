@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "source": "Philippine Statistics Authority (PSA), Projected Population by Single Calendar Year, Medium Assumption.",
+    "anchor": "Census-based projections: pre-2020 figures use the 2015 POPCEN-anchored series; 2020+ use the 2020 POPCEN-anchored series (PSA 2023 release).",
+    "unit": "persons (mid-year estimate)",
+    "note": "Values for census years (2010, 2015, 2020) are calibrated to the published census count where possible; intercensal and projected years are PSA medium-scenario estimates. Refresh from psa.gov.ph when new projections are released.",
+    "verified": false,
+    "todo": "Pull the official CSV from PSA and replace these placeholder values; cross-check with World Bank SP.POP.TOTL."
+  },
+  "population": {
+    "2009":  91600000,
+    "2010":  92337852,
+    "2011":  94000000,
+    "2012":  95400000,
+    "2013":  96800000,
+    "2014":  98300000,
+    "2015": 100981437,
+    "2016": 102500000,
+    "2017": 104000000,
+    "2018": 105500000,
+    "2019": 107100000,
+    "2020": 109035343,
+    "2021": 110200000,
+    "2022": 111300000,
+    "2023": 112700000,
+    "2024": 114100000,
+    "2025": 115400000,
+    "2026": 116600000,
+    "2027": 117700000,
+    "2028": 118800000
+  }
+}

@@ -1,0 +1,1060 @@
+{
+  "year": 2015,
+  "generated": "2026-05-10",
+  "top_line": {
+    "nep_thousands": 2606000000,
+    "gaa_thousands": 2606000000,
+    "diff_thousands": 0,
+    "diff_pct": 0.0,
+    "reshuffle_pct": {
+      "dept_pct": 0.5276188411358403,
+      "program_pct": null,
+      "leaf_pct": null
+    }
+  },
+  "row_counts": {
+    "nep_leaf_rows": 370990,
+    "gaa_leaf_rows": 376505
+  },
+  "department": [
+    {
+      "name": "New General Appropriations",
+      "nep": 315324513.0,
+      "gaa": 304085846.0,
+      "diff": -11238667.0,
+      "pct": -3.56415899705203
+    },
+    {
+      "name": "Department of Public Works and Highways (DPWH)",
+      "nep": 300519120.0,
+      "gaa": 303164052.0,
+      "diff": 2644932.0,
+      "pct": 0.8801210385548847
+    },
+    {
+      "name": "Department of Education (DepEd)",
+      "nep": 339288006.0,
+      "gaa": 341451180.0,
+      "diff": 2163174.0,
+      "pct": 0.6375627672497212
+    },
+    {
+      "name": "Congress of the Philippines (CONGRESS)",
+      "nep": 11090677.0,
+      "gaa": 12983202.0,
+      "diff": 1892525.0,
+      "pct": 17.064107087421263
+    },
+    {
+      "name": "Department of Science and Technology (DOST)",
+      "nep": 19351916.0,
+      "gaa": 17756916.0,
+      "diff": -1595000.0,
+      "pct": -8.24207794204977
+    },
+    {
+      "name": "Budgetary Support to Government Corporations (BSGC)",
+      "nep": 62635338.0,
+      "gaa": 63799626.0,
+      "diff": 1164288.0,
+      "pct": 1.8588356623859843
+    },
+    {
+      "name": "State Universities and Colleges (SUCs)",
+      "nep": 43342336.0,
+      "gaa": 44397334.0,
+      "diff": 1054998.0,
+      "pct": 2.434105074539591
+    },
+    {
+      "name": "Department of Finance (DOF)",
+      "nep": 14346441.0,
+      "gaa": 15330907.0,
+      "diff": 984466.0,
+      "pct": 6.862092138391675
+    },
+    {
+      "name": "Department of Social Welfare and Development (DSWD)",
+      "nep": 108969695.0,
+      "gaa": 108166531.0,
+      "diff": -803164.0,
+      "pct": -0.7370526273382705
+    },
+    {
+      "name": "The Judiciary (JUD)",
+      "nep": 20284909.0,
+      "gaa": 21046269.0,
+      "diff": 761360.0,
+      "pct": 3.7533320953029663
+    },
+    {
+      "name": "Department of National Defense (DND)",
+      "nep": 99639336.0,
+      "gaa": 100094808.0,
+      "diff": 455472.0,
+      "pct": 0.4571206696921385
+    },
+    {
+      "name": "Department of Health (DOH)",
+      "nep": 88020862.0,
+      "gaa": 88408310.0,
+      "diff": 387448.0,
+      "pct": 0.44017746611025005
+    },
+    {
+      "name": "Commission on Audit (COA)",
+      "nep": 8162753.0,
+      "gaa": 8510959.0,
+      "diff": 348206.0,
+      "pct": 4.265791210391886
+    },
+    {
+      "name": "Department of Tourism (DOT)",
+      "nep": 2181924.0,
+      "gaa": 2505916.0,
+      "diff": 323992.0,
+      "pct": 14.848913161045022
+    },
+    {
+      "name": "Department of Justice (DOJ)",
+      "nep": 11818194.0,
+      "gaa": 12089694.0,
+      "diff": 271500.0,
+      "pct": 2.29730532431605
+    },
+    {
+      "name": "Department of Agriculture (DA)",
+      "nep": 49061490.0,
+      "gaa": 49323327.0,
+      "diff": 261837.0,
+      "pct": 0.5336914961204806
+    },
+    {
+      "name": "Allocations to Local Government Units (ALGU)",
+      "nep": 1990362.0,
+      "gaa": 2190362.0,
+      "diff": 200000.0,
+      "pct": 10.048423352133934
+    },
+    {
+      "name": "Department of Environment and Natural Resources (DENR)",
+      "nep": 21274446.0,
+      "gaa": 21442993.0,
+      "diff": 168547.0,
+      "pct": 0.7922509474512287
+    },
+    {
+      "name": "Office of the Ombudsman (OMB)",
+      "nep": 1731504.0,
+      "gaa": 1882004.0,
+      "diff": 150500.0,
+      "pct": 8.691865568892707
+    },
+    {
+      "name": "Department of Energy (DOE)",
+      "nep": 4462932.0,
+      "gaa": 4612932.0,
+      "diff": 150000.0,
+      "pct": 3.361019168564522
+    },
+    {
+      "name": "Presidential Communications Office (PCO)",
+      "nep": 1021972.0,
+      "gaa": 1155795.0,
+      "diff": 133823.0,
+      "pct": 13.094585761645133
+    },
+    {
+      "name": "Department of Trade and Industry (DTI)",
+      "nep": 3750260.0,
+      "gaa": 3842939.0,
+      "diff": 92679.0,
+      "pct": 2.4712686587063297
+    },
+    {
+      "name": "Department of Foreign Affairs (DFA)",
+      "nep": 12969177.0,
+      "gaa": 13054177.0,
+      "diff": 85000.0,
+      "pct": 0.6554001075010388
+    },
+    {
+      "name": "Other Executive Offices (OEOs)",
+      "nep": 12722911.0,
+      "gaa": 12659637.0,
+      "diff": -63274.0,
+      "pct": -0.49732329338781034
+    },
+    {
+      "name": "Department of Labor and Employment (DOLE)",
+      "nep": 12093761.0,
+      "gaa": 12048235.0,
+      "diff": -45526.0,
+      "pct": -0.37644203486409233
+    }
+  ],
+  "agency": [
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Philippine Army ( Land Forces )",
+      "nep": 0.0,
+      "gaa": 41480483.0,
+      "diff": 41480483.0,
+      "pct": null
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Armed Forces of the Philippines - Philippine Army ( Land Forces )",
+      "nep": 41285483.0,
+      "gaa": 0.0,
+      "diff": -41285483.0,
+      "pct": -100.0
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+      "nep": 0.0,
+      "gaa": 26277889.0,
+      "diff": 26277889.0,
+      "pct": null
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Armed Forces of the Philippines - General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+      "nep": 26253889.0,
+      "gaa": 0.0,
+      "diff": -26253889.0,
+      "pct": -100.0
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Philippine Air Force ( Air Forces )  ",
+      "nep": 0.0,
+      "gaa": 14710323.0,
+      "diff": 14710323.0,
+      "pct": null
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Armed Forces of the Philippines - Philippine Air Force ( Air Forces )",
+      "nep": 14638323.0,
+      "gaa": 0.0,
+      "diff": -14638323.0,
+      "pct": -100.0
+    },
+    {
+      "department": "New General Appropriations",
+      "agency": "Pension and Gratuity Fund",
+      "nep": 140566386.0,
+      "gaa": 126668501.0,
+      "diff": -13897885.0,
+      "pct": -9.887061477130102
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Philippine Navy ( Naval Forces )  ",
+      "nep": 0.0,
+      "gaa": 13462595.0,
+      "diff": 13462595.0,
+      "pct": null
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Armed Forces of the Philippines - Philippine Navy ( Naval Forces )",
+      "nep": 13386595.0,
+      "gaa": 0.0,
+      "diff": -13386595.0,
+      "pct": -100.0
+    },
+    {
+      "department": "New General Appropriations",
+      "agency": "International Commitments Fund",
+      "nep": 7443963.0,
+      "gaa": 10724648.0,
+      "diff": 3280685.0,
+      "pct": 44.07175317770924
+    },
+    {
+      "department": "Department of Public Works and Highways (DPWH)",
+      "agency": "Office of the Secretary",
+      "nep": 300519120.0,
+      "gaa": 303164052.0,
+      "diff": 2644932.0,
+      "pct": 0.8801210385548847
+    },
+    {
+      "department": "Department of Education (DepEd)",
+      "agency": "Office of the Secretary",
+      "nep": 336842930.0,
+      "gaa": 338980104.0,
+      "diff": 2137174.0,
+      "pct": 0.634471977785017
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Children\u00c6s Medical Center",
+      "nep": 0.0,
+      "gaa": 1616257.0,
+      "diff": 1616257.0,
+      "pct": null
+    },
+    {
+      "department": "Department of Science and Technology (DOST)",
+      "agency": "Information and Communications Technology Office",
+      "nep": 4808279.0,
+      "gaa": 3208279.0,
+      "diff": -1600000.0,
+      "pct": -33.27593927057893
+    },
+    {
+      "department": "Congress of the Philippines (CONGRESS)",
+      "agency": "House of Representatives",
+      "nep": 7048613.0,
+      "gaa": 8548613.0,
+      "diff": 1500000.0,
+      "pct": 21.280782474509525
+    },
+    {
+      "department": "Department of Finance (DOF)",
+      "agency": "Bureau of Customs",
+      "nep": 2506075.0,
+      "gaa": 3490541.0,
+      "diff": 984466.0,
+      "pct": 39.28318186806061
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "Veterans Memorial Medical Center",
+      "nep": 0.0,
+      "gaa": 915840.0,
+      "diff": 915840.0,
+      "pct": null
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "PVAO - Veterans Memorial Medical Center",
+      "nep": 915840.0,
+      "gaa": 0.0,
+      "diff": -915840.0,
+      "pct": -100.0
+    },
+    {
+      "department": "Department of Social Welfare and Development (DSWD)",
+      "agency": "Office of the Secretary",
+      "nep": 108741003.0,
+      "gaa": 107937839.0,
+      "diff": -803164.0,
+      "pct": -0.7386027145620498
+    },
+    {
+      "department": "New General Appropriations",
+      "agency": "Miscellaneous Personnel Benefits Fund",
+      "nep": 118142443.0,
+      "gaa": 117381083.0,
+      "diff": -761360.0,
+      "pct": -0.6444424041578352
+    },
+    {
+      "department": "The Judiciary (JUD)",
+      "agency": "Supreme Court of the Philippines and the Lower Courts",
+      "nep": 18063421.0,
+      "gaa": 18790781.0,
+      "diff": 727360.0,
+      "pct": 4.026701254430154
+    },
+    {
+      "department": "Department of Transportation (DOTr)",
+      "agency": "Office of the Secretary",
+      "nep": 47568514.0,
+      "gaa": 46927396.0,
+      "diff": -641118.0,
+      "pct": -1.347778070174738
+    },
+    {
+      "department": "State Universities and Colleges (SUCs)",
+      "agency": "University of the Philippines System",
+      "nep": 13170247.0,
+      "gaa": 13701154.0,
+      "diff": 530907.0,
+      "pct": 4.03110890782838
+    },
+    {
+      "department": "Department of Transportation (DOTr)",
+      "agency": "Maritime Industry Authority",
+      "nep": 764267.0,
+      "gaa": 1197373.0,
+      "diff": 433106.0,
+      "pct": 56.66946237375158
+    },
+    {
+      "department": "Department of Health (DOH)",
+      "agency": "Office of the Secretary",
+      "nep": 87379531.0,
+      "gaa": 87766979.0,
+      "diff": 387448.0,
+      "pct": 0.44340819361916695
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Children\u2019s Medical Center",
+      "nep": 386817.0,
+      "gaa": 0.0,
+      "diff": -386817.0,
+      "pct": -100.0
+    },
+    {
+      "department": "Congress of the Philippines (CONGRESS)",
+      "agency": "Senate",
+      "nep": 3252868.0,
+      "gaa": 3612230.0,
+      "diff": 359362.0,
+      "pct": 11.047543275657052
+    },
+    {
+      "department": "Commission on Audit (COA)",
+      "agency": "Commission on Audit (COA)",
+      "nep": 8162753.0,
+      "gaa": 8510959.0,
+      "diff": 348206.0,
+      "pct": 4.265791210391886
+    },
+    {
+      "department": "Department of Agriculture (DA)",
+      "agency": "Bureau of Fisheries and Aquatic Resources",
+      "nep": 6023324.0,
+      "gaa": 6352522.0,
+      "diff": 329198.0,
+      "pct": 5.465387550130128
+    },
+    {
+      "department": "Department of Tourism (DOT)",
+      "agency": "Office of the Secretary",
+      "nep": 1988201.0,
+      "gaa": 2307193.0,
+      "diff": 318992.0,
+      "pct": 16.04425307099232
+    }
+  ],
+  "program": {
+    "killed": [
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Internal Revenue Allotment",
+        "program": "Internal Revenue Allotment",
+        "nep": 389860429.0,
+        "gaa": 0.0,
+        "diff": -389860429.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Debt Interest Payments",
+        "program": "For the Payment of Interest of Foreign and Domestic Indebtedness",
+        "nep": 372863000.0,
+        "gaa": 0.0,
+        "diff": -372863000.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Elementary",
+        "nep": 151724887.0,
+        "gaa": 0.0,
+        "diff": -151724887.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Secondary",
+        "nep": 76903438.0,
+        "gaa": 0.0,
+        "diff": -76903438.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Pension and Gratuity Fund",
+        "program": "For payment of retirement and terminal leave benefits",
+        "nep": 69557005.0,
+        "gaa": 0.0,
+        "diff": -69557005.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Pension and Gratuity Fund",
+        "program": "For payment of pension",
+        "nep": 68872864.0,
+        "gaa": 0.0,
+        "diff": -68872864.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Pantawid Pamilya (Implementation of Conditional Cash Transfer)",
+        "nep": 64737890.0,
+        "gaa": 0.0,
+        "diff": -64737890.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of the Interior and Local Government (DILG)",
+        "agency": "Philippine National Police",
+        "program": "Conduct of operations and other related confidential activities against dissidents, subversives, lawless elements and organized crime syndicates and campaign against kidnapping, trafficking of women and minors, smuggling, carnapping, gunrunning, illegal fishing and trafficking of illegal drugs",
+        "nep": 61035081.0,
+        "gaa": 0.0,
+        "diff": -61035081.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "For Payment of Other Personnel Benefits including funds for newly filled positions in other agencies",
+        "nep": 56004921.0,
+        "gaa": 0.0,
+        "diff": -56004921.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Provision and maintenance of Basic Education Facilities",
+        "nep": 52874350.0,
+        "gaa": 0.0,
+        "diff": -52874350.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Subsidy for Health Insurance Premium Payment of Indigent Families to the National Health Insurance Program",
+        "nep": 37060440.0,
+        "gaa": 0.0,
+        "diff": -37060440.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of National Defense (DND)",
+        "agency": "Armed Forces of the Philippines - Philippine Army ( Land Forces )",
+        "program": "Force Sustainment",
+        "nep": 35201015.0,
+        "gaa": 0.0,
+        "diff": -35201015.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Net Lending",
+        "program": "For net lending to Government Owned and/or Controlled Corporations",
+        "nep": 26500000.0,
+        "gaa": 0.0,
+        "diff": -26500000.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Customs duties and taxes, including tax expenditures",
+        "program": "Tax Expenditure Fund",
+        "nep": 25475000.0,
+        "gaa": 0.0,
+        "diff": -25475000.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of National Defense (DND)",
+        "agency": "Armed Forces of the Philippines - General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+        "program": "Revised AFP Modernization Program",
+        "nep": 20000000.0,
+        "gaa": 0.0,
+        "diff": -20000000.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Kapit-Bisig Laban sa Kahirapan-Comprehensive and Integrated Delivery of Social Services:  National Community Driven Development Project",
+        "nep": 17512753.0,
+        "gaa": 0.0,
+        "diff": -17512753.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Performance-Based Bonus",
+        "nep": 14641486.0,
+        "gaa": 0.0,
+        "diff": -14641486.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Department of Education",
+        "nep": 14329186.0,
+        "gaa": 0.0,
+        "diff": -14329186.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Operation of Regional Medical Centers, Sanitaria and other Hospitals",
+        "nep": 13523216.0,
+        "gaa": 0.0,
+        "diff": -13523216.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Commission on Elections (COMELEC)",
+        "agency": "Commission on Elections (COMELEC)",
+        "program": "Preparatory of National and Local Elections",
+        "nep": 12642880.0,
+        "gaa": 0.0,
+        "diff": -12642880.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Department of Education",
+        "nep": 11341230.0,
+        "gaa": 0.0,
+        "diff": -11341230.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Public-Private Partnership Strategic Support Fund (including ROW) for Laguna Lakeshore Expressway Dike (LLED), CALA Expressway, Daang Hari-SLEX Link Road, NLEX-SLEX Connector Road, Tarlac-Pangasinan-La Union Toll Expressway (TPLEX), and NAIA Expressway",
+        "nep": 10853600.0,
+        "gaa": 0.0,
+        "diff": -10853600.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Value Added Tax pursuant to R.A. 7643",
+        "nep": 10530216.0,
+        "gaa": 0.0,
+        "diff": -10530216.0,
+        "pct": -100.0
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Tobacco Excise Tax Pursuant to R.A. 7171 (Virginia Tobacco)",
+        "nep": 10190974.0,
+        "gaa": 0.0,
+        "diff": -10190974.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Foreign Affairs (DFA)",
+        "agency": "Office of the Secretary",
+        "program": "Implementation of foreign policies and the protection of national interests of Filipinos abroad, including the processing and issuance of passports, visas and other legal documents",
+        "nep": 9593438.0,
+        "gaa": 0.0,
+        "diff": -9593438.0,
+        "pct": -100.0
+      }
+    ],
+    "added": [
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Internal Revenue Allotment",
+        "program": "Allocations to Local Government Units - Internal Revenue Allotment",
+        "nep": 0.0,
+        "gaa": 389860429.0,
+        "diff": 389860429.0,
+        "pct": null
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Debt Interest Payments",
+        "program": "For the Payment of Interest of Foreign and Domestic Indebtedness",
+        "nep": 0.0,
+        "gaa": 372863000.0,
+        "diff": 372863000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Elementary",
+        "nep": 0.0,
+        "gaa": 151732073.0,
+        "diff": 151732073.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Secondary",
+        "nep": 0.0,
+        "gaa": 76922561.0,
+        "diff": 76922561.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Pension and Gratuity Fund",
+        "program": "For payment of pension",
+        "nep": 0.0,
+        "gaa": 68872864.0,
+        "diff": 68872864.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Pantawid Pamilya (Implementation of Conditional Cash Transfer)",
+        "nep": 0.0,
+        "gaa": 62322890.0,
+        "diff": 62322890.0,
+        "pct": null
+      },
+      {
+        "department": "Department of the Interior and Local Government (DILG)",
+        "agency": "Philippine National Police",
+        "program": "###############################################################################################################################################################################################################################################################",
+        "nep": 0.0,
+        "gaa": 61035081.0,
+        "diff": 61035081.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Provision and maintenance of Basic Education Facilities",
+        "nep": 0.0,
+        "gaa": 53875250.0,
+        "diff": 53875250.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Pension and Gratuity Fund",
+        "program": "For payment of retirement and terminal leave benefits",
+        "nep": 0.0,
+        "gaa": 48795637.0,
+        "diff": 48795637.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "For Payment of Other Personnel Benefits including funds for newly filled positions in other agencies",
+        "nep": 0.0,
+        "gaa": 48412044.0,
+        "diff": 48412044.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Subsidy for Health Insurance Premium Payment of Indigent Families to the National Health Insurance Program",
+        "nep": 0.0,
+        "gaa": 37060440.0,
+        "diff": 37060440.0,
+        "pct": null
+      },
+      {
+        "department": "Department of National Defense (DND)",
+        "agency": "Philippine Army ( Land Forces )",
+        "program": "Force Sustainment including P150,000,000 for the enhancement of the Philippine Army's Engineering Brigades",
+        "nep": 0.0,
+        "gaa": 35371015.0,
+        "diff": 35371015.0,
+        "pct": null
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Net Lending",
+        "program": "BSGC - Net Lending",
+        "nep": 0.0,
+        "gaa": 26500000.0,
+        "diff": 26500000.0,
+        "pct": null
+      },
+      {
+        "department": "Automatic Appropriations",
+        "agency": "Customs duties and taxes, including tax expenditures",
+        "program": "Tax Expenditure Fund",
+        "nep": 0.0,
+        "gaa": 25475000.0,
+        "diff": 25475000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of National Defense (DND)",
+        "agency": "General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUS)",
+        "program": "Revised AFP Modernization Program",
+        "nep": 0.0,
+        "gaa": 20000000.0,
+        "diff": 20000000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Kapit-Bisig Laban sa Kahirapan-Comprehensive and Integrated Delivery of Social Services:  National Community Driven Development Project ",
+        "nep": 0.0,
+        "gaa": 17012753.0,
+        "diff": 17012753.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Performance-Based Bonus",
+        "nep": 0.0,
+        "gaa": 14641486.0,
+        "diff": 14641486.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Department of Education",
+        "nep": 0.0,
+        "gaa": 14329186.0,
+        "diff": 14329186.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Operation of Regional Medical Centers, Sanitaria and other Hospitals",
+        "nep": 0.0,
+        "gaa": 14039336.0,
+        "diff": 14039336.0,
+        "pct": null
+      },
+      {
+        "department": "Commission on Elections (COMELEC)",
+        "agency": "Commission on Elections (COMELEC)",
+        "program": "Preparatory of National and Local Elections",
+        "nep": 0.0,
+        "gaa": 12642880.0,
+        "diff": 12642880.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Miscellaneous Personnel Benefits Fund",
+        "program": "Department of Education",
+        "nep": 0.0,
+        "gaa": 11341230.0,
+        "diff": 11341230.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Value Added Tax pursuant to R.A. 7643",
+        "nep": 0.0,
+        "gaa": 10530216.0,
+        "diff": 10530216.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Special Shares of LGUs in the Proceeds of National Taxes",
+        "program": "Share in Tobacco Excise Tax Pursuant to R.A. 7171 (Virginia Tobacco)",
+        "nep": 0.0,
+        "gaa": 10190974.0,
+        "diff": 10190974.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Foreign Affairs (DFA)",
+        "agency": "Office of the Secretary",
+        "program": "Implementation of foreign policies and the protection of national interests of Filipinos abroad, including the processing and issuance of passports, visas and other legal documents",
+        "nep": 0.0,
+        "gaa": 9593438.0,
+        "diff": 9593438.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "General Management and Supervision",
+        "nep": 0.0,
+        "gaa": 9498185.0,
+        "diff": 9498185.0,
+        "pct": null
+      }
+    ]
+  },
+  "function": [
+    {
+      "name": "Education",
+      "nep": 398316221.0,
+      "gaa": 401477856.0,
+      "diff": 3161635.0,
+      "pct": 0.7937499989486997,
+      "nep_share_pct": 15.284582540291636,
+      "gaa_share_pct": 15.405903914044513
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "nep": 356889553.0,
+      "gaa": 359431135.0,
+      "diff": 2541582.0,
+      "pct": 0.712148052145421,
+      "nep_share_pct": 13.694917613200309,
+      "gaa_share_pct": 13.792445702225633
+    },
+    {
+      "name": "Health",
+      "nep": 90158830.0,
+      "gaa": 90221311.0,
+      "diff": 62481.0,
+      "pct": 0.06930103241135671,
+      "nep_share_pct": 3.459663468917882,
+      "gaa_share_pct": 3.4620610514198007
+    },
+    {
+      "name": "Social Protection",
+      "nep": 247763779.0,
+      "gaa": 226198944.0,
+      "diff": -21564835.0,
+      "pct": -8.703788377396359,
+      "nep_share_pct": 9.507435878741365,
+      "gaa_share_pct": 8.679928779739065
+    },
+    {
+      "name": "Public Order & Safety",
+      "nep": 139534931.0,
+      "gaa": 140754562.0,
+      "diff": 1219631.0,
+      "pct": 0.8740685871697604,
+      "nep_share_pct": 5.354371872601688,
+      "gaa_share_pct": 5.401172755180353
+    },
+    {
+      "name": "Defense",
+      "nep": 100297093.0,
+      "gaa": 100752565.0,
+      "diff": 455472.0,
+      "pct": 0.45412283285219446,
+      "nep_share_pct": 3.848698887183423,
+      "gaa_share_pct": 3.866176707597851
+    },
+    {
+      "name": "Agriculture & Environment",
+      "nep": 120705704.0,
+      "gaa": 121132923.0,
+      "diff": 427219.0,
+      "pct": 0.35393439236309826,
+      "nep_share_pct": 4.631838219493477,
+      "gaa_share_pct": 4.648231887950883
+    },
+    {
+      "name": "Other Economic Affairs",
+      "nep": 38631419.0,
+      "gaa": 39098132.0,
+      "diff": 466713.0,
+      "pct": 1.2081176723019158,
+      "nep_share_pct": 1.4824028779739065,
+      "gaa_share_pct": 1.5003120491174213
+    },
+    {
+      "name": "Housing & Community",
+      "nep": 8742865.0,
+      "gaa": 8792865.0,
+      "diff": 50000.0,
+      "pct": 0.5718949108787565,
+      "nep_share_pct": 0.33548983115886416,
+      "gaa_share_pct": 0.33740848042977745
+    },
+    {
+      "name": "Debt Service",
+      "nep": 399363000.0,
+      "gaa": 372863000.0,
+      "diff": -26500000.0,
+      "pct": -6.63556714067152,
+      "nep_share_pct": 15.32475057559478,
+      "gaa_share_pct": 14.307866462010743
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 25146260.0,
+      "gaa": 418186885.0,
+      "diff": 393040625.0,
+      "pct": 1563.0182182161482,
+      "nep_share_pct": 0.964937068303914,
+      "gaa_share_pct": 16.04707924021489
+    },
+    {
+      "name": "General Public Services",
+      "nep": 496193157.0,
+      "gaa": 133449826.0,
+      "diff": -362743331.0,
+      "pct": -73.1052667459499,
+      "nep_share_pct": 19.040412778204143,
+      "gaa_share_pct": 5.120868227168074
+    },
+    {
+      "name": "Multi-sector / Other",
+      "nep": 184257188.0,
+      "gaa": 193639996.0,
+      "diff": 9382808.0,
+      "pct": 5.092234447863168,
+      "nep_share_pct": 7.070498388334611,
+      "gaa_share_pct": 7.430544742900998
+    }
+  ],
+  "economic": [
+    {
+      "name": "Wages & Personnel",
+      "nep": 761745344.0,
+      "gaa": 745964785.0,
+      "diff": -15780559.0,
+      "pct": -2.071631828707311,
+      "nep_share_pct": 29.23044297774367,
+      "gaa_share_pct": 28.624895817344587
+    },
+    {
+      "name": "Operations (MOOE)",
+      "nep": 531889759.0,
+      "gaa": 540277114.0,
+      "diff": 8387355.0,
+      "pct": 1.5768972532520595,
+      "nep_share_pct": 20.41019796623177,
+      "gaa_share_pct": 20.732045817344588
+    },
+    {
+      "name": "Capital Outlays",
+      "nep": 507722701.0,
+      "gaa": 541615905.0,
+      "diff": 33893204.0,
+      "pct": 6.675534486294321,
+      "nep_share_pct": 19.482835801995396,
+      "gaa_share_pct": 20.783419224865696
+    },
+    {
+      "name": "Debt Service",
+      "nep": 401043380.0,
+      "gaa": 374543380.0,
+      "diff": -26500000.0,
+      "pct": -6.6077639780514525,
+      "nep_share_pct": 15.389231772831927,
+      "gaa_share_pct": 14.37234765924789
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 403598816.0,
+      "gaa": 403598816.0,
+      "diff": 0.0,
+      "pct": 0.0,
+      "nep_share_pct": 15.487291481197238,
+      "gaa_share_pct": 15.487291481197238
+    }
+  ]
+}

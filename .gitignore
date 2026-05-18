@@ -1,0 +1,18 @@
+# Backups
+*.bak-*
+*.parquet.bak-*
+
+# Python (serve.py runtime)
+__pycache__/
+*.pyc
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Netlify CLI artifacts (if you ever install)
+.netlify/

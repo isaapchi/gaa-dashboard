@@ -1,0 +1,88 @@
+{
+  "indicator": "NY.GDP.MKTP.CN",
+  "indicator_name": "GDP (current LCU, PHP)",
+  "country": "Philippines",
+  "country_iso3": "PHL",
+  "source": "World Bank Open Data API v2",
+  "fetched_at": "2026-05-08T12:51:41.472945+00:00",
+  "years": {
+    "2008": {
+      "gdp_php": 8050200620600.0,
+      "is_estimate": false
+    },
+    "2009": {
+      "gdp_php": 8390421456300.0,
+      "is_estimate": false
+    },
+    "2010": {
+      "gdp_php": 9399450758100.0,
+      "is_estimate": false
+    },
+    "2011": {
+      "gdp_php": 10144661326800.0,
+      "is_estimate": false
+    },
+    "2012": {
+      "gdp_php": 11060588830600.0,
+      "is_estimate": false
+    },
+    "2013": {
+      "gdp_php": 12050591984300.0,
+      "is_estimate": false
+    },
+    "2014": {
+      "gdp_php": 13206828251700.0,
+      "is_estimate": false
+    },
+    "2015": {
+      "gdp_php": 13944157447800.0,
+      "is_estimate": false
+    },
+    "2016": {
+      "gdp_php": 15132381470200.0,
+      "is_estimate": false
+    },
+    "2017": {
+      "gdp_php": 16556651083200.0,
+      "is_estimate": false
+    },
+    "2018": {
+      "gdp_php": 18265190258200.0,
+      "is_estimate": false
+    },
+    "2019": {
+      "gdp_php": 19517863171700.0,
+      "is_estimate": false
+    },
+    "2020": {
+      "gdp_php": 17951573570000.0,
+      "is_estimate": false
+    },
+    "2021": {
+      "gdp_php": 19410614486200.0,
+      "is_estimate": false
+    },
+    "2022": {
+      "gdp_php": 22028276337700.0,
+      "is_estimate": false
+    },
+    "2023": {
+      "gdp_php": 24313563194800.0,
+      "is_estimate": false
+    },
+    "2024": {
+      "gdp_php": 26446369494900.0,
+      "is_estimate": false
+    },
+    "2025": {
+      "gdp_php": 28502000000000.0,
+      "is_estimate": true,
+      "source": "IMF WEO April 2026 (nominal LCU); consistent with WB PEU Dec 2025 real growth path of 5.1% and PSA Q4 2025 actuals (full-year real growth 4.4%)"
+    },
+    "2026": {
+      "gdp_php": 30220000000000.0,
+      "is_estimate": true,
+      "source": "IMF WEO April 2026 (nominal LCU); WB PEU Dec 2025 forecasts 5.3% real growth and 2.7% CPI; WB EAP April 2026 update revised real growth down to 3.7% post Middle East shock"
+    }
+  }
+}

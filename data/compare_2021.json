@@ -1,0 +1,1060 @@
+{
+  "year": 2021,
+  "generated": "2026-05-10",
+  "top_line": {
+    "nep_thousands": 4506000000,
+    "gaa_thousands": 4505999998,
+    "diff_thousands": -2,
+    "diff_pct": -4.438526409232135e-08,
+    "reshuffle_pct": {
+      "dept_pct": 1.9214893919218818,
+      "program_pct": 17.584431202840655,
+      "leaf_pct": 53.581830159786946
+    }
+  },
+  "row_counts": {
+    "nep_leaf_rows": 467177,
+    "gaa_leaf_rows": 495136
+  },
+  "department": [
+    {
+      "name": "Department of Transportation (DOTr)",
+      "nep": 143561720.0,
+      "gaa": 87897530.0,
+      "diff": -55664190.0,
+      "pct": -38.77369956280825
+    },
+    {
+      "name": "Department of Public Works and Highways (DPWH)",
+      "nep": 667324243.0,
+      "gaa": 695672670.0,
+      "diff": 28348427.0,
+      "pct": 4.2480739007109625
+    },
+    {
+      "name": "New General Appropriations",
+      "nep": 301423794.0,
+      "gaa": 287812994.0,
+      "diff": -13610800.0,
+      "pct": -4.515502847130906
+    },
+    {
+      "name": "Department of Education (DepEd)",
+      "nep": 606474623.0,
+      "gaa": 595069421.0,
+      "diff": -11405202.0,
+      "pct": -1.8805736575724783
+    },
+    {
+      "name": "Department of Labor and Employment (DOLE)",
+      "nep": 27531446.0,
+      "gaa": 37127753.0,
+      "diff": 9596307.0,
+      "pct": 34.855804522581195
+    },
+    {
+      "name": "Department of Health (DOH)",
+      "nep": 131721390.0,
+      "gaa": 138887917.0,
+      "diff": 7166527.0,
+      "pct": 5.440670645822975
+    },
+    {
+      "name": "State Universities and Colleges (SUCs)",
+      "nep": 83313279.0,
+      "gaa": 90107578.0,
+      "diff": 6794299.0,
+      "pct": 8.15512134626222
+    },
+    {
+      "name": "Other Executive Offices (OEOs)",
+      "nep": 60816415.0,
+      "gaa": 67130828.0,
+      "diff": 6314413.0,
+      "pct": 10.382744527114925
+    },
+    {
+      "name": "Department of Social Welfare and Development (DSWD)",
+      "nep": 171221255.0,
+      "gaa": 176890261.0,
+      "diff": 5669006.0,
+      "pct": 3.310924219075488
+    },
+    {
+      "name": "Department of Agriculture (DA)",
+      "nep": 66381875.0,
+      "gaa": 71039875.0,
+      "diff": 4658000.0,
+      "pct": 7.01697564282419
+    },
+    {
+      "name": "Congress of the Philippines (CONGRESS)",
+      "nep": 24942756.0,
+      "gaa": 29057756.0,
+      "diff": 4115000.0,
+      "pct": 16.49777594745344
+    },
+    {
+      "name": "Department of National Defense (DND)",
+      "nep": 209051681.0,
+      "gaa": 205817505.0,
+      "diff": -3234176.0,
+      "pct": -1.5470700759397387
+    },
+    {
+      "name": "Department of the Interior and Local Government (DILG)",
+      "nep": 246109992.0,
+      "gaa": 249306994.0,
+      "diff": 3197002.0,
+      "pct": 1.2990134914961113
+    },
+    {
+      "name": "Department of Environment and Natural Resources (DENR)",
+      "nep": 26542047.0,
+      "gaa": 24584025.0,
+      "diff": -1958022.0,
+      "pct": -7.37705724053612
+    },
+    {
+      "name": "The Judiciary (JUD)",
+      "nep": 43545160.0,
+      "gaa": 45310160.0,
+      "diff": 1765000.0,
+      "pct": 4.053263324787417
+    },
+    {
+      "name": "Department of Science and Technology (DOST)",
+      "nep": 23890979.0,
+      "gaa": 25187979.0,
+      "diff": 1297000.0,
+      "pct": 5.428827341064592
+    },
+    {
+      "name": "Department of Trade and Industry (DTI)",
+      "nep": 20593817.0,
+      "gaa": 21859317.0,
+      "diff": 1265500.0,
+      "pct": 6.14504829289296
+    },
+    {
+      "name": "Office of the Ombudsman (OMB)",
+      "nep": 3363323.0,
+      "gaa": 4621564.0,
+      "diff": 1258241.0,
+      "pct": 37.41065012191812
+    },
+    {
+      "name": "Department of Information and Communications Technology (DICT)",
+      "nep": 10928725.0,
+      "gaa": 12139062.0,
+      "diff": 1210337.0,
+      "pct": 11.074823458363166
+    },
+    {
+      "name": "Budgetary Support to Government Corporations (BSGC)",
+      "nep": 157511733.0,
+      "gaa": 158335597.0,
+      "diff": 823864.0,
+      "pct": 0.523049289286913
+    },
+    {
+      "name": "Department of Tourism (DOT)",
+      "nep": 3841209.0,
+      "gaa": 3131285.0,
+      "diff": -709924.0,
+      "pct": -18.481785292078616
+    },
+    {
+      "name": "Department of Foreign Affairs (DFA)",
+      "nep": 22092670.0,
+      "gaa": 22618559.0,
+      "diff": 525889.0,
+      "pct": 2.3803777451978414
+    },
+    {
+      "name": "Department of Justice (DOJ)",
+      "nep": 24081461.0,
+      "gaa": 24606851.0,
+      "diff": 525390.0,
+      "pct": 2.181719788512831
+    },
+    {
+      "name": "Commission on Audit (COA)",
+      "nep": 13567536.0,
+      "gaa": 14067536.0,
+      "diff": 500000.0,
+      "pct": 3.6852675386304483
+    },
+    {
+      "name": "Allocations to Local Government Units (ALGU)",
+      "nep": 4403161.0,
+      "gaa": 4838161.0,
+      "diff": 435000.0,
+      "pct": 9.879266281655385
+    }
+  ],
+  "agency": [
+    {
+      "department": "Department of Transportation (DOTr)",
+      "agency": "Office of the Secretary",
+      "nep": 129027399.0,
+      "gaa": 73117399.0,
+      "diff": -55910000.0,
+      "pct": -43.33188178117114
+    },
+    {
+      "department": "Department of Public Works and Highways (DPWH)",
+      "agency": "Office of the Secretary",
+      "nep": 667324243.0,
+      "gaa": 695672670.0,
+      "diff": 28348427.0,
+      "pct": 4.2480739007109625
+    },
+    {
+      "department": "New General Appropriations",
+      "agency": "Pension and Gratuity Fund",
+      "nep": 172893651.0,
+      "gaa": 152893651.0,
+      "diff": -20000000.0,
+      "pct": -11.567804765716932
+    },
+    {
+      "department": "Department of Education (DepEd)",
+      "agency": "Office of the Secretary",
+      "nep": 605742036.0,
+      "gaa": 594110152.0,
+      "diff": -11631884.0,
+      "pct": -1.9202702319969092
+    },
+    {
+      "department": "Department of Labor and Employment (DOLE)",
+      "agency": "Office of the Secretary",
+      "nep": 15900212.0,
+      "gaa": 25271519.0,
+      "diff": 9371307.0,
+      "pct": 58.93825189249049
+    },
+    {
+      "department": "Department of Health (DOH)",
+      "agency": "Office of the Secretary",
+      "nep": 131227940.0,
+      "gaa": 138394467.0,
+      "diff": 7166527.0,
+      "pct": 5.461128933365867
+    },
+    {
+      "department": "New General Appropriations",
+      "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+      "nep": 28836019.0,
+      "gaa": 35225219.0,
+      "diff": 6389200.0,
+      "pct": 22.157011340573746
+    },
+    {
+      "department": "Department of Social Welfare and Development (DSWD)",
+      "agency": "Office of the Secretary",
+      "nep": 169292105.0,
+      "gaa": 174857111.0,
+      "diff": 5565006.0,
+      "pct": 3.287221220387094
+    },
+    {
+      "department": "Department of National Defense (DND)",
+      "agency": "General Headquarters, AFP and AFP-Wide Service Support Units (AFPWSSUs)",
+      "nep": 45578728.0,
+      "gaa": 40130437.0,
+      "diff": -5448291.0,
+      "pct": -11.95358282047713
+    },
+    {
+      "department": "Department of Agriculture (DA)",
+      "agency": "Office of the Secretary",
+      "nep": 56835498.0,
+      "gaa": 60873498.0,
+      "diff": 4038000.0,
+      "pct": 7.104714733035329
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Bases Conversion and Development Authority",
+      "nep": 5794584.0,
+      "gaa": 2609831.0,
+      "diff": -3184753.0,
+      "pct": -54.96085655156608
+    },
+    {
+      "department": "Congress of the Philippines (CONGRESS)",
+      "agency": "House of Representatives",
+      "nep": 15625162.0,
+      "gaa": 18625162.0,
+      "diff": 3000000.0,
+      "pct": 19.19980093646389
+    },
+    {
+      "department": "State Universities and Colleges (SUCs)",
+      "agency": "Mindanao State University",
+      "nep": 3542452.0,
+      "gaa": 6244938.0,
+      "diff": 2702486.0,
+      "pct": 76.28857074139607
+    },
+    {
+      "department": "Department of Environment and Natural Resources (DENR)",
+      "agency": "Office of the Secretary",
+      "nep": 20632007.0,
+      "gaa": 18624657.0,
+      "diff": -2007350.0,
+      "pct": -9.729300692850677
+    },
+    {
+      "department": "Department of the Interior and Local Government (DILG)",
+      "agency": "Bureau of Fire Protection",
+      "nep": 24618372.0,
+      "gaa": 26552393.0,
+      "diff": 1934021.0,
+      "pct": 7.856006887864071
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Children\u00c6s Medical Center",
+      "nep": 0.0,
+      "gaa": 1933685.0,
+      "diff": 1933685.0,
+      "pct": null
+    },
+    {
+      "department": "State Universities and Colleges (SUCs)",
+      "agency": "University of the Philippines System",
+      "nep": 20824209.0,
+      "gaa": 22650582.0,
+      "diff": 1826373.0,
+      "pct": 8.770431568373137
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Civil Aviation Authority of the Philippines",
+      "nep": 0.0,
+      "gaa": 1533190.0,
+      "diff": 1533190.0,
+      "pct": null
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "National Housing Authority",
+      "nep": 2000000.0,
+      "gaa": 3456000.0,
+      "diff": 1456000.0,
+      "pct": 72.8
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Office of the Presidential Adviser on the Peace Process",
+      "nep": 700946.0,
+      "gaa": 2100946.0,
+      "diff": 1400000.0,
+      "pct": 199.73007906457843
+    },
+    {
+      "department": "Office of the Ombudsman (OMB)",
+      "agency": "Office of the Ombudsman",
+      "nep": 3363323.0,
+      "gaa": 4621564.0,
+      "diff": 1258241.0,
+      "pct": 37.41065012191812
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Philippine Sports Commission",
+      "nep": 207994.0,
+      "gaa": 1339703.0,
+      "diff": 1131709.0,
+      "pct": 544.1065607661759
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Children\u0092s Medical Center",
+      "nep": 1042375.0,
+      "gaa": 0.0,
+      "diff": -1042375.0,
+      "pct": -100.0
+    },
+    {
+      "department": "Congress of the Philippines (CONGRESS)",
+      "agency": "Senate",
+      "nep": 7960485.0,
+      "gaa": 9000485.0,
+      "diff": 1040000.0,
+      "pct": 13.064530615910966
+    },
+    {
+      "department": "The Judiciary (JUD)",
+      "agency": "Supreme Court of the Philippines and the Lower Courts",
+      "nep": 38767864.0,
+      "gaa": 39768621.0,
+      "diff": 1000757.0,
+      "pct": 2.581408663629237
+    },
+    {
+      "department": "Budgetary Support to Government Corporations (BSGC)",
+      "agency": "Philippine Crop Insurance Corporation",
+      "nep": 4500000.0,
+      "gaa": 3500000.0,
+      "diff": -1000000.0,
+      "pct": -22.22222222222222
+    },
+    {
+      "department": "Department of Information and Communications Technology (DICT)",
+      "agency": "Office of the Secretary",
+      "nep": 10252382.0,
+      "gaa": 11216882.0,
+      "diff": 964500.0,
+      "pct": 9.407569870104334
+    },
+    {
+      "department": "Department of Trade and Industry (DTI)",
+      "agency": "Technical Education and Skills Development Authority",
+      "nep": 13705721.0,
+      "gaa": 14661221.0,
+      "diff": 955500.0,
+      "pct": 6.9715413001621735
+    },
+    {
+      "department": "Other Executive Offices (OEOs)",
+      "agency": "Commission on Higher Education",
+      "nep": 50928073.0,
+      "gaa": 51837350.0,
+      "diff": 909277.0,
+      "pct": 1.7854141074609284
+    },
+    {
+      "department": "Department of the Interior and Local Government (DILG)",
+      "agency": "Office of the Secretary",
+      "nep": 7005912.0,
+      "gaa": 7841348.0,
+      "diff": 835436.0,
+      "pct": 11.924728714833986
+    }
+  ],
+  "program": {
+    "killed": [
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/ Maintenance of Flood Mitigation Structures and Drainage Systems",
+        "nep": 68080521.0,
+        "gaa": 0.0,
+        "diff": -68080521.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction of By-pass and Diversion Roads",
+        "nep": 47996415.0,
+        "gaa": 0.0,
+        "diff": -47996415.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of Local Roads",
+        "nep": 42555733.0,
+        "gaa": 0.0,
+        "diff": -42555733.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction / Rehabilitation of Multipurpose Building/Facilities",
+        "nep": 28170413.0,
+        "gaa": 0.0,
+        "diff": -28170413.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction of Missing Links/New Roads",
+        "nep": 26811979.0,
+        "gaa": 0.0,
+        "diff": -26811979.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/ Rehabilitation of Flood Mitigation Facilities within Major River Basins and Principal Rivers",
+        "nep": 20843672.0,
+        "gaa": 0.0,
+        "diff": -20843672.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of National Roads",
+        "nep": 20144461.0,
+        "gaa": 0.0,
+        "diff": -20144461.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of Flood Control Structures",
+        "nep": 17021001.0,
+        "gaa": 0.0,
+        "diff": -17021001.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Widening of Permanent Bridges",
+        "nep": 16758369.0,
+        "gaa": 0.0,
+        "diff": -16758369.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Road Widening of Primary Roads",
+        "nep": 16684012.0,
+        "gaa": 0.0,
+        "diff": -16684012.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of Local Roads",
+        "nep": 16634252.0,
+        "gaa": 0.0,
+        "diff": -16634252.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of Multipurpose Building/Facilities",
+        "nep": 15185000.0,
+        "gaa": 0.0,
+        "diff": -15185000.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Road Widening of Secondary Roads",
+        "nep": 15053103.0,
+        "gaa": 0.0,
+        "diff": -15053103.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Payments of Right-of-Way (ROW)",
+        "nep": 12600849.0,
+        "gaa": 0.0,
+        "diff": -12600849.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Feasibility Study/ Pre-Feasibility Study/ Preliminary and Detailed Engineering",
+        "nep": 11851432.0,
+        "gaa": 0.0,
+        "diff": -11851432.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/ Improvement of Access Roads leading to Trades, Industries and Economic Zones",
+        "nep": 11574700.0,
+        "gaa": 0.0,
+        "diff": -11574700.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Rehabilitation / Reconstruction of Roads with Slips, Slope Collapse and Landslide - Secondary Roads",
+        "nep": 8485177.0,
+        "gaa": 0.0,
+        "diff": -8485177.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction of Flyovers/ Interchanges/ Underpasses/ Long Span Bridges",
+        "nep": 8027682.0,
+        "gaa": 0.0,
+        "diff": -8027682.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Improvement of Various Infrastructures in Support of National Security",
+        "nep": 7581629.0,
+        "gaa": 0.0,
+        "diff": -7581629.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Preventive Maintenance - Secondary Roads",
+        "nep": 7539368.0,
+        "gaa": 0.0,
+        "diff": -7539368.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Construction/Rehabilitation of Flood Control Structures",
+        "nep": 7369380.0,
+        "gaa": 0.0,
+        "diff": -7369380.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Preventive Maintenance - Primary Roads",
+        "nep": 6604176.0,
+        "gaa": 0.0,
+        "diff": -6604176.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Road Widening of Tertiary Roads",
+        "nep": 6490990.0,
+        "gaa": 0.0,
+        "diff": -6490990.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Rehabilitation / Reconstruction of Roads with Slips, Slope Collapse and Landslide - Tertiary Roads",
+        "nep": 6464551.0,
+        "gaa": 0.0,
+        "diff": -6464551.0,
+        "pct": -100.0
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "National Roads and Bridges - National Roads - Local Infrastructure Program",
+        "nep": 6440232.0,
+        "gaa": 0.0,
+        "diff": -6440232.0,
+        "pct": -100.0
+      }
+    ],
+    "added": [
+      {
+        "department": "Department of Social Welfare and Development (DSWD)",
+        "agency": "Office of the Secretary",
+        "program": "Protective services for individuals and families in difficult circumstances",
+        "nep": 12028660.0,
+        "gaa": 23563860.0,
+        "diff": 11535200.0,
+        "pct": 95.89763115758531
+      },
+      {
+        "department": "Department of Labor and Employment (DOLE)",
+        "agency": "Office of the Secretary",
+        "program": "Livelihood and Emergency Employment",
+        "nep": 11139629.0,
+        "gaa": 20437375.0,
+        "diff": 9297746.0,
+        "pct": 83.46549063707597
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Disaster Rehabilitation and Reconstruction Assistance Program for Local Government Units",
+        "nep": 0.0,
+        "gaa": 4500000.0,
+        "diff": 4500000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Davao City Coastal Bypass Rd. (Bago Aplaya - Times Beach - Roxas Avenue), Davao City",
+        "nep": 0.0,
+        "gaa": 4449447.0,
+        "diff": 4449447.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Payments of Right-Of-Way (ROW) - BBB Projects under TRB: C-5 Northern Link Road Project Phase 2,  Segments 8.1, 8.2, 9 and 10; Southeast Metro Manila Expressway Project (C6); Manila-Cavite Expressway, C-5 South Link Project; Southern Luzon Expressway Toll Road 4 (TR4); South Luzon Toll Expressway Project (SLTEP); Manila-Cavite Toll Expressway (MCTEP, now CAVITEX)",
+        "nep": 0.0,
+        "gaa": 3058153.0,
+        "diff": 3058153.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Health Facilities Enhancement  Program",
+        "nep": 4783828.0,
+        "gaa": 7839298.0,
+        "diff": 3055470.0,
+        "pct": 63.87081642567417
+      },
+      {
+        "department": "Department of Transportation (DOTr)",
+        "agency": "Office of the Secretary",
+        "program": "Service Contracting  of Public Utility Vehicle Program",
+        "nep": 0.0,
+        "gaa": 3000000.0,
+        "diff": 3000000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Agriculture (DA)",
+        "agency": "Agricultural Credit Policy Council",
+        "program": "Agro-Industry Modernization Credit and Financing Program (AMCFP) Administration including P200,000,000 for Agripreneurship Development Fund for coconut farmers",
+        "nep": 0.0,
+        "gaa": 2735265.0,
+        "diff": 2735265.0,
+        "pct": null
+      },
+      {
+        "department": "Congress of the Philippines (CONGRESS)",
+        "agency": "House of Representatives",
+        "program": "General management and supervision",
+        "nep": 5717720.0,
+        "gaa": 8379524.0,
+        "diff": 2661804.0,
+        "pct": 46.55359129163373
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Cavite-Laguna Expressway (CALAX) Project;  Tarlac-Pangasinan-La Union Expressway (TPLEX) Projects;  NAIA Expressway (NAIAX) Project;  NLEX-SLEX Connector Road Project;  Daang Hari-South Luzon Expressway Link Road  (Manila-Cavite Expressway);  Central Luzon Link Expressway (CLLEX), Phase II;  Laguna Lakeshore Expressway Dike;  Plaridel Bypass Toll Road Project;  Quirino Highway Project;  Davao-Digos Expressway Project;  Pacific Eastern Seaboard Expressway;  Mindoro-Batangas Super Bridge;  North Luzon East Expressway (NLEE) Phase I and II;  Davao City Bypass Road;  Metro Cebu Expressway; DPWH Building",
+        "nep": 0.0,
+        "gaa": 2440657.0,
+        "diff": 2440657.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Health (DOH)",
+        "agency": "Office of the Secretary",
+        "program": "Prevention and Control of Communicable Diseases",
+        "nep": 5987253.0,
+        "gaa": 8220953.0,
+        "diff": 2233700.0,
+        "pct": 37.30759331533176
+      },
+      {
+        "department": "Department of Agriculture (DA)",
+        "agency": "Office of the Secretary",
+        "program": "Financial Subsidy to Rice Farmers",
+        "nep": 0.0,
+        "gaa": 2135299.0,
+        "diff": 2135299.0,
+        "pct": null
+      },
+      {
+        "department": "Department of the Interior and Local Government (DILG)",
+        "agency": "Bureau of Fire Protection",
+        "program": "Firefighting and Rescue Equipment",
+        "nep": 0.0,
+        "gaa": 2032521.0,
+        "diff": 2032521.0,
+        "pct": null
+      },
+      {
+        "department": "State Universities and Colleges (SUCs)",
+        "agency": "Mindanao State University",
+        "program": "Smart Campuses Program",
+        "nep": 0.0,
+        "gaa": 2000000.0,
+        "diff": 2000000.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Talomo-Matina Bridge along Davao City Coastal Bypass Road, Davao City",
+        "nep": 0.0,
+        "gaa": 1811120.0,
+        "diff": 1811120.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Davao City Coastal Bypass Road (Bago-Aplya-Times Beach-Roxas Avenue), Davao City",
+        "nep": 0.0,
+        "gaa": 1709980.0,
+        "diff": 1709980.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Transportation (DOTr)",
+        "agency": "Office of the Secretary",
+        "program": "Mindanao Railway Project",
+        "nep": 0.0,
+        "gaa": 1648970.0,
+        "diff": 1648970.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Flyover along Davao-Cotabato Road-Junction Maa Road, Davao City",
+        "nep": 0.0,
+        "gaa": 1647610.0,
+        "diff": 1647610.0,
+        "pct": null
+      },
+      {
+        "department": "Budgetary Support to Government Corporations (BSGC)",
+        "agency": "Civil Aviation Authority of the Philippines",
+        "program": "General Management and Supervision",
+        "nep": 0.0,
+        "gaa": 1533190.0,
+        "diff": 1533190.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Public Works and Highways (DPWH)",
+        "agency": "Office of the Secretary",
+        "program": "Flood Risk Management Project (FRIMP) in Cagayan, Tagoloan and Imus Rivers, JICA, PH - P253",
+        "nep": 0.0,
+        "gaa": 1520807.0,
+        "diff": 1520807.0,
+        "pct": null
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Flexible Learning Options (ADM/ALS/EiE)",
+        "nep": 15215694.0,
+        "gaa": 16615694.0,
+        "diff": 1400000.0,
+        "pct": 9.201026256179968
+      },
+      {
+        "department": "Department of Education (DepEd)",
+        "agency": "Office of the Secretary",
+        "program": "Implementation of the Grant of Cash allowance, Hardship Pay, Equivalent Record Form (ERF), Conversion to Master Teacher (MT) and Reclassification of Positions",
+        "nep": 6216891.0,
+        "gaa": 7581891.0,
+        "diff": 1365000.0,
+        "pct": 21.956312246748418
+      },
+      {
+        "department": "Department of Transportation (DOTr)",
+        "agency": "Office of the Secretary",
+        "program": "DOTr - LTO IT Infrastructure Project",
+        "nep": 0.0,
+        "gaa": 1200000.0,
+        "diff": 1200000.0,
+        "pct": null
+      },
+      {
+        "department": "New General Appropriations",
+        "agency": "Local Government Support Fund (formerly Financial Subsidy to LGUs)",
+        "program": "Financial Assistance to Local Government Units",
+        "nep": 12396019.0,
+        "gaa": 13585219.0,
+        "diff": 1189200.0,
+        "pct": 9.593402527053243
+      },
+      {
+        "department": "Other Executive Offices (OEOs)",
+        "agency": "Office of the Presidential Adviser on the Peace Process",
+        "program": "Normalization Program in the Bangsamoro",
+        "nep": 89580.0,
+        "gaa": 1229580.0,
+        "diff": 1140000.0,
+        "pct": 1272.6054922973879
+      }
+    ]
+  },
+  "function": [
+    {
+      "name": "Education",
+      "nep": 765232990.0,
+      "gaa": 763622572.0,
+      "diff": -1610418.0,
+      "pct": -0.21044806236071972,
+      "nep_share_pct": 16.982534176653353,
+      "gaa_share_pct": 16.946794770060716
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "nep": 817473699.0,
+      "gaa": 787447664.0,
+      "diff": -30026035.0,
+      "pct": -3.6730276505201664,
+      "nep_share_pct": 18.141893009320906,
+      "gaa_share_pct": 17.475536270517324
+    },
+    {
+      "name": "Health",
+      "nep": 208349724.0,
+      "gaa": 215864251.0,
+      "diff": 7514527.0,
+      "pct": 3.6066892030056157,
+      "nep_share_pct": 4.623828761651132,
+      "gaa_share_pct": 4.79059589648939
+    },
+    {
+      "name": "Social Protection",
+      "nep": 343416695.0,
+      "gaa": 329200654.0,
+      "diff": -14216041.0,
+      "pct": -4.139589369701435,
+      "nep_share_pct": 7.621320350643586,
+      "gaa_share_pct": 7.305828986820163
+    },
+    {
+      "name": "Public Order & Safety",
+      "nep": 319778828.0,
+      "gaa": 327273416.0,
+      "diff": 7494588.0,
+      "pct": 2.3436786127691978,
+      "nep_share_pct": 7.096733865956502,
+      "gaa_share_pct": 7.263058503001801
+    },
+    {
+      "name": "Defense",
+      "nep": 210157750.0,
+      "gaa": 207718574.0,
+      "diff": -2439176.0,
+      "pct": -1.1606405188483413,
+      "nep_share_pct": 4.663953617399024,
+      "gaa_share_pct": 4.6098218839812795
+    },
+    {
+      "name": "Agriculture & Environment",
+      "nep": 155355494.0,
+      "gaa": 157595165.0,
+      "diff": 2239671.0,
+      "pct": 1.4416426109784055,
+      "nep_share_pct": 3.4477473146915223,
+      "gaa_share_pct": 3.497451510651332
+    },
+    {
+      "name": "Other Economic Affairs",
+      "nep": 86370092.0,
+      "gaa": 101362053.0,
+      "diff": 14991961.0,
+      "pct": 17.357815249287913,
+      "nep_share_pct": 1.9167796715490455,
+      "gaa_share_pct": 2.249490746670879
+    },
+    {
+      "name": "Housing & Community",
+      "nep": 3001804.0,
+      "gaa": 4507804.0,
+      "diff": 1506000.0,
+      "pct": 50.169831208166826,
+      "nep_share_pct": 0.0666179316466933,
+      "gaa_share_pct": 0.1000400355526143
+    },
+    {
+      "name": "Debt Service",
+      "nep": 560244000.0,
+      "gaa": 560244000.0,
+      "diff": 0.0,
+      "pct": 0.0,
+      "nep_share_pct": 12.43328894806924,
+      "gaa_share_pct": 12.43328895358779
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 816204810.0,
+      "gaa": 822329010.0,
+      "diff": 6124200.0,
+      "pct": 0.7503263794782097,
+      "nep_share_pct": 18.113733022636485,
+      "gaa_share_pct": 18.249645147913736
+    },
+    {
+      "name": "General Public Services",
+      "nep": 118763123.0,
+      "gaa": 126140484.0,
+      "diff": 7377361.0,
+      "pct": 6.21182806046621,
+      "nep_share_pct": 2.635666289391922,
+      "gaa_share_pct": 2.799389348779134
+    },
+    {
+      "name": "Multi-sector / Other",
+      "nep": 101650991.0,
+      "gaa": 102694351.0,
+      "diff": 1043360.0,
+      "pct": 1.0264139972821318,
+      "nep_share_pct": 2.2559030403905904,
+      "gaa_share_pct": 2.2790579459738383
+    }
+  ],
+  "economic": [
+    {
+      "name": "Wages & Personnel",
+      "nep": 1316301098.0,
+      "gaa": 1299590519.0,
+      "diff": -16710579.0,
+      "pct": -1.2695103745936402,
+      "nep_share_pct": 29.212185929871282,
+      "gaa_share_pct": 28.841334211647286
+    },
+    {
+      "name": "Operations (MOOE)",
+      "nep": 897598472.0,
+      "gaa": 936656778.0,
+      "diff": 39058306.0,
+      "pct": 4.351422960087214,
+      "nep_share_pct": 19.920072614292057,
+      "gaa_share_pct": 20.78687923692272
+    },
+    {
+      "name": "Capital Outlays",
+      "nep": 923631450.0,
+      "gaa": 900093567.0,
+      "diff": -23537883.0,
+      "pct": -2.5484064017092534,
+      "nep_share_pct": 20.49781291611185,
+      "gaa_share_pct": 19.975445348413423
+    },
+    {
+      "name": "Debt Service",
+      "nep": 561374267.0,
+      "gaa": 561375221.0,
+      "diff": 954.0,
+      "pct": 0.00016994010165414296,
+      "nep_share_pct": 12.45837254771416,
+      "gaa_share_pct": 12.45839372501482
+    },
+    {
+      "name": "Transfers to LGUs",
+      "nep": 807094713.0,
+      "gaa": 808283913.0,
+      "diff": 1189200.0,
+      "pct": 0.1473433019502384,
+      "nep_share_pct": 17.91155599201065,
+      "gaa_share_pct": 17.937947478001753
+    }
+  ]
+}

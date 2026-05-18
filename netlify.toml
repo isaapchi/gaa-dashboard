@@ -1,0 +1,31 @@
+# Netlify configuration for the Philippines GAA Dashboard
+# Static site — no build step; just serve the repo root.
+
+[build]
+  publish = "."
+  command = ""
+
+# Cache parquets aggressively — they change only when a new fiscal year
+# parquet is committed, and Netlify invalidates the CDN on deploy anyway.
+[[headers]]
+  for = "/data/*.parquet"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, must-revalidate"
+    Content-Type = "application/octet-stream"
+
+# Cache static assets for a day too
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Don't cache HTML — small file, and we want UI changes to ship immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

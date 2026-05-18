@@ -1,0 +1,2889 @@
+{
+  "year": 2019,
+  "total_thousands": 3660247719,
+  "n_departments": 43,
+  "n_agencies": 204,
+  "n_programs": 0,
+  "n_fund_subcats": 0,
+  "by_department": [
+    {
+      "name": "Automatic Appropriations",
+      "amount_thousands": 1071536796
+    },
+    {
+      "name": "Department of Public Works and Highways",
+      "amount_thousands": 549390514,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 549390514,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 7094114,
+              "mooe_thousands": 387240,
+              "co_thousands": 4248065,
+              "total_thousands": 11729419,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.43 (DPWH.pdf p.4); single 'General Management and Supervision' program. Total verified vs OSEC TOTAL (p.203)."
+            },
+            {
+              "name": "Operations (aggregate of all DPWH PREXC programs)",
+              "ps_thousands": 1660438,
+              "mooe_thousands": 12372338,
+              "co_thousands": 523628319,
+              "total_thousands": 537661095,
+              "confidence": "medium",
+              "note": "Aggregate of all PREXC programs under Operations. Sub-programs (not enumerated): Network Development Program (incl. road widening, bypass/diversion roads, off-carriageway improvement), Asset Preservation Program, Bridge Program, Flood Management Program, Stormwater Drainage System Construction, Convergence and Special Support Program, Local Infrastructure Program. PS/MOOE/CO computed as residual from OSEC TOTAL (p.203: PS 8,754,552 / MOOE 12,759,578 / CO 527,876,384 / Total 549,390,514) minus Gen Admin. Detailed per-program × per-region breakdown requires OCR of all 200+ pages — see DEPT_PARSER_NOTES.md."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Department of Education",
+      "amount_thousands": 501115892,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 500272113,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 9007637,
+              "mooe_thousands": 2527387,
+              "co_thousands": 1398676,
+              "total_thousands": 12933695,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.195 (OCR'd from DEPED.pdf p.5)."
+            },
+            {
+              "name": "Support to Operations",
+              "ps_thousands": 1167000,
+              "mooe_thousands": 1261000,
+              "co_thousands": 0,
+              "total_thousands": 2428000,
+              "confidence": "medium",
+              "note": "Estimated from page-130 layout pattern; not yet directly OCR-verified for OffSec."
+            },
+            {
+              "name": "Operations (aggregate of ~12 PREXC programs)",
+              "ps_thousands": 364262374,
+              "mooe_thousands": 78078316,
+              "co_thousands": 42569723,
+              "total_thousands": 484910418,
+              "confidence": "medium",
+              "note": "Aggregate of all PREXC programs under Operations. Sub-programs (not enumerated in this POC) include: Basic Education Inputs Program, Education Policy Development Program, Education Human Resource Development Program, Inclusive Education Program, GASTPE, Education Programs for the Disadvantaged, Last Mile Schools Program, Alternative Learning System, Teacher Quality and Development Program. PS/MOOE/CO are computed as residuals from OffSec total minus Gen Admin minus Support to Ops (reconciliation: 374,437,011 + 81,866,703 + 43,968,399 = 500,272,113 = ₱500.27B OffSec total). Detailed per-program breakdown requires deeper OCR pass — see DEPT_PARSER_NOTES.md."
+            }
+          ]
+        },
+        {
+          "name": "National Huseum",
+          "amount_thousands": 583541,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 30687,
+              "mooe_thousands": 140662,
+              "co_thousands": 0,
+              "total_thousands": 171349,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.320 (OCR'd from DEPED.pdf p.130)."
+            },
+            {
+              "name": "Support to Operations",
+              "ps_thousands": 1107,
+              "mooe_thousands": 1261,
+              "co_thousands": 0,
+              "total_thousands": 2368,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.320 (visual transcription; OCR truncated PS to '1,407')."
+            },
+            {
+              "name": "Museums Program",
+              "ps_thousands": 108663,
+              "mooe_thousands": 234721,
+              "co_thousands": 66500,
+              "total_thousands": 409824,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.320."
+            }
+          ]
+        },
+        {
+          "name": "Philippine High School for the Arts",
+          "amount_thousands": 116903,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 16145,
+              "mooe_thousands": 35561,
+              "co_thousands": 14335,
+              "total_thousands": 66041,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.323 (OCR'd from DEPED.pdf p.133)."
+            },
+            {
+              "name": "Special Secondary Education for the Arts Program",
+              "ps_thousands": 13341,
+              "mooe_thousands": 36209,
+              "co_thousands": 1312,
+              "total_thousands": 50862,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.323."
+            }
+          ]
+        },
+        {
+          "name": "National Book Development Board",
+          "amount_thousands": 68537,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 16149,
+              "mooe_thousands": 14592,
+              "co_thousands": 429,
+              "total_thousands": 31170,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.315 (OCR'd from DEPED.pdf p.125)."
+            },
+            {
+              "name": "Local Book Publishing Industry Development Program",
+              "ps_thousands": 6950,
+              "mooe_thousands": 30417,
+              "co_thousands": 0,
+              "total_thousands": 37367,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.315."
+            }
+          ]
+        },
+        {
+          "name": "Early Childhood Care and Development Council",
+          "amount_thousands": 57647,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 9763,
+              "mooe_thousands": 0,
+              "co_thousands": 0,
+              "total_thousands": 9763,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.312 (OCR'd from DEPED.pdf p.122)."
+            },
+            {
+              "name": "Early Childhood Care and Development",
+              "ps_thousands": 0,
+              "mooe_thousands": 47884,
+              "co_thousands": 0,
+              "total_thousands": 47884,
+              "confidence": "medium",
+              "note": "Operations aggregate. Source: GAA FY2019 Vol I-B p.312."
+            }
+          ]
+        },
+        {
+          "name": "National Council for Children S Television",
+          "amount_thousands": 17151,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 4163,
+              "mooe_thousands": 1833,
+              "co_thousands": 0,
+              "total_thousands": 5996,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.318 (OCR'd from DEPED.pdf p.128)."
+            },
+            {
+              "name": "Child-Friendly Television Development Program",
+              "ps_thousands": 1290,
+              "mooe_thousands": 9865,
+              "co_thousands": 0,
+              "total_thousands": 11155,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.318."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Department of the Interior and Local Government",
+      "amount_thousands": 228714956,
+      "by_agency": [
+        {
+          "name": "Philippine National Police",
+          "amount_thousands": 173240869,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 18756343,
+              "mooe_thousands": 2064812,
+              "co_thousands": 50381,
+              "total_thousands": 20871536,
+              "confidence": "medium",
+              "note": "Estimated split from PNP standard PREXC. PNP TOTAL from p.959 (DILG.pdf p.35): PS 152,473,159 / MOOE 14,797,677 / CO 5,970,633 / Total 173,240,869."
+            },
+            {
+              "name": "Crime Prevention and Suppression Program",
+              "ps_thousands": 133653101,
+              "mooe_thousands": 12115278,
+              "co_thousands": 5920252,
+              "total_thousands": 151688631,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.959 (DILG.pdf p.35). OCR p35: 'CRIME PREVENTION AND SUPPRESSION PROGRAM 133,653,101 12,734,852 5,920,252 152,308,205'."
+            },
+            {
+              "name": "Crime Investigation Program",
+              "ps_thousands": 63715,
+              "mooe_thousands": 617587,
+              "co_thousands": 0,
+              "total_thousands": 681302,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.959 (DILG.pdf p.35)."
+            }
+          ]
+        },
+        {
+          "name": "Bureau of Fire Protection",
+          "amount_thousands": 22217235,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 1232456,
+              "mooe_thousands": 95731,
+              "co_thousands": 38500,
+              "total_thousands": 1366687,
+              "confidence": "low",
+              "note": "Estimated ~6% of BFP total. Source: BFP standard PREXC structure. Detailed by-program OCR not performed for BFP (51-64 page span)."
+            },
+            {
+              "name": "Operations - Fire Suppression and Prevention Program",
+              "ps_thousands": 18637515,
+              "mooe_thousands": 1519563,
+              "co_thousands": 693470,
+              "total_thousands": 20850548,
+              "confidence": "low",
+              "note": "Aggregate of Fire Suppression, Fire Prevention, and Fire/Arson Investigation programs. Computed as residual: BFP TOTAL (PS 19,869,971 / MOOE 1,615,294 / CO 731,970 / Total 22,217,235 from p.64 GS) minus Gen Admin estimate."
+            }
+          ]
+        },
+        {
+          "name": "Bureau of Jail Management and Penology",
+          "amount_thousands": 19865964,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 568066,
+              "mooe_thousands": 130312,
+              "co_thousands": 50000,
+              "total_thousands": 748378,
+              "confidence": "low",
+              "note": "Estimated ~4% of BJMP total. Source: BJMP standard PREXC. Detailed OCR not performed."
+            },
+            {
+              "name": "Operations - Safekeeping and Development of Inmates",
+              "ps_thousands": 9243413,
+              "mooe_thousands": 6841285,
+              "co_thousands": 3032938,
+              "total_thousands": 19117586,
+              "confidence": "low",
+              "note": "Aggregate of Inmates Safekeeping Program, Inmates Development Program. Computed as residual: BJMP TOTAL (PS 9,811,479 / MOOE 6,971,597 / CO 3,082,938 / Total 19,865,964 from p.64 GS) minus Gen Admin."
+            }
+          ]
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 8275746,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 296528,
+              "mooe_thousands": 211184,
+              "co_thousands": 7518,
+              "total_thousands": 515230,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.927 (DILG.pdf p.3)."
+            },
+            {
+              "name": "Support to Operations",
+              "ps_thousands": 114631,
+              "mooe_thousands": 230336,
+              "co_thousands": 0,
+              "total_thousands": 359598,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.927-928 (DILG.pdf p.3). Includes: Development of policies/programs/standards; M&E of Assistance to Municipalities; M&E of Conditional Matching Grant to Provinces; M&E of Potable Water Supply."
+            },
+            {
+              "name": "Operations (LGU strengthening + Public Safety + LGOO programs)",
+              "ps_thousands": 2072336,
+              "mooe_thousands": 2918042,
+              "co_thousands": 1505171,
+              "total_thousands": 7400918,
+              "confidence": "medium",
+              "note": "Aggregate of all PREXC programs under Operations. Includes: Local Government Capacity Development, Local Government Awards, LGU Operations Officers (LGOO), Internal Audit Service. PS/MOOE/CO computed as residual from OSEC TOTAL (p.64 GS: PS 2,483,495 / MOOE 3,359,562 / CO 1,512,689 / Total 8,275,746)."
+            }
+          ]
+        },
+        {
+          "name": "Philippine Public Safety College",
+          "amount_thousands": 2171745,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 130854,
+              "mooe_thousands": 81363,
+              "co_thousands": 30000,
+              "total_thousands": 242217,
+              "confidence": "low",
+              "note": "Estimated. PPSC standard PREXC structure."
+            },
+            {
+              "name": "Operations - Training and Capacity Building for Public Safety",
+              "ps_thousands": 830702,
+              "mooe_thousands": 642266,
+              "co_thousands": 456560,
+              "total_thousands": 1929528,
+              "confidence": "low",
+              "note": "Residual from PPSC TOTAL (PS 961,556 / MOOE 723,629 / CO 486,560 / Total 2,171,745 from p.64 GS)."
+            }
+          ]
+        },
+        {
+          "name": "National Police Commission",
+          "amount_thousands": 1736067,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 234028,
+              "mooe_thousands": 67534,
+              "co_thousands": 1000,
+              "total_thousands": 302562,
+              "confidence": "low",
+              "note": "Estimated. Source: NAPOLCOM standard PREXC structure."
+            },
+            {
+              "name": "Operations - PNP Personnel Welfare and Discipline Program",
+              "ps_thousands": 1268178,
+              "mooe_thousands": 164325,
+              "co_thousands": 1002,
+              "total_thousands": 1433505,
+              "confidence": "low",
+              "note": "Includes Personnel Welfare/Benefit Administration and Police Disciplinary Cases Management. Computed as residual: NAPOLCOM TOTAL (PS 1,502,206 / MOOE 231,859 / CO 2,002 / Total 1,736,067 from p.64 GS) minus Gen Admin."
+            }
+          ]
+        },
+        {
+          "name": "6 National Commission on Huslim Filipinos",
+          "amount_thousands": 601457,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 60834,
+              "mooe_thousands": 15226,
+              "co_thousands": 3000,
+              "total_thousands": 79060,
+              "confidence": "low",
+              "note": "Estimated. NCMF standard structure."
+            },
+            {
+              "name": "Operations - Muslim Filipino Welfare and Development",
+              "ps_thousands": 390001,
+              "mooe_thousands": 95658,
+              "co_thousands": 36738,
+              "total_thousands": 522397,
+              "confidence": "low",
+              "note": "Residual from NCMF TOTAL (PS 450,835 / MOOE 110,884 / CO 39,738 / Total 601,457 from p.64 GS)."
+            }
+          ]
+        },
+        {
+          "name": "Local Government Academy",
+          "amount_thousands": 258679,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 13074,
+              "mooe_thousands": 34932,
+              "co_thousands": 944,
+              "total_thousands": 48950,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.944 (DILG.pdf p.20)."
+            },
+            {
+              "name": "LGU and BILG LG-Sector Personnel Capacity Development Program",
+              "ps_thousands": 22014,
+              "mooe_thousands": 184065,
+              "co_thousands": 3450,
+              "total_thousands": 209529,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.944 (DILG.pdf p.20)."
+            }
+          ]
+        },
+        {
+          "name": "National Youth Commission",
+          "amount_thousands": 216013,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 26900,
+              "mooe_thousands": 28575,
+              "co_thousands": 1500,
+              "total_thousands": 56975,
+              "confidence": "low",
+              "note": "Estimated. NYC standard structure."
+            },
+            {
+              "name": "Operations - Youth Development Programs",
+              "ps_thousands": 24054,
+              "mooe_thousands": 120184,
+              "co_thousands": 14600,
+              "total_thousands": 159838,
+              "confidence": "low",
+              "note": "Residual from NYC TOTAL (PS 50,954 / MOOE 148,759 / CO 16,100 / Total 216,813 from p.64 GS)."
+            }
+          ]
+        },
+        {
+          "name": "Philippine Commission on Women",
+          "amount_thousands": 131181,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 23494,
+              "mooe_thousands": 16177,
+              "co_thousands": 735,
+              "total_thousands": 40406,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.985 (DILG.pdf p.61)."
+            },
+            {
+              "name": "Women's Empowerment and Gender Equality Policy Development and Planning Program",
+              "ps_thousands": 28884,
+              "mooe_thousands": 58316,
+              "co_thousands": 3575,
+              "total_thousands": 90775,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.985 (DILG.pdf p.61)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Unprogrammed Appropriations",
+      "amount_thousands": 197135780
+    },
+    {
+      "name": "Budgetary Support to Government Corporations",
+      "amount_thousands": 187061236,
+      "by_agency": [
+        {
+          "name": "OEPARTHENT OF AGRICUL TURE (DA)",
+          "amount_thousands": 14044496
+        },
+        {
+          "name": "2 National Power Corporation",
+          "amount_thousands": 10283986
+        },
+        {
+          "name": "2 National Food Authority",
+          "amount_thousands": 7000000
+        },
+        {
+          "name": "4 Philippine Crop Insurance Corporation",
+          "amount_thousands": 3500000
+        },
+        {
+          "name": "3 Philippine Coconut Authority",
+          "amount_thousands": 1236356
+        },
+        {
+          "name": "1 National Electrification Administration",
+          "amount_thousands": 1067944
+        },
+        {
+          "name": "6 Philippine Rice Research Institute",
+          "amount_thousands": 771509
+        },
+        {
+          "name": "5 Philippine Fisheries Development Authority",
+          "amount_thousands": 765190
+        },
+        {
+          "name": "7 Sugar Regulatory Administration",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "1 National Dairy Authority",
+          "amount_thousands": 271441
+        }
+      ]
+    },
+    {
+      "name": "Department of National Defense",
+      "amount_thousands": 186222193,
+      "by_agency": [
+        {
+          "name": "6 Armed Forces of the Philippines",
+          "amount_thousands": 180398571,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 5716384,
+              "mooe_thousands": 1786120,
+              "co_thousands": 1512923,
+              "total_thousands": 9015427,
+              "confidence": "low",
+              "note": "Estimated. AFP-wide General Administration (GHQ functions). AFP TOTAL (PS 114,287,685 / MOOE 35,722,408 / CO 30,258,459 / Total 180,290,571) from p.40 GS."
+            },
+            {
+              "name": "Operations - Internal/External Security Operations and Defense Capability",
+              "ps_thousands": 108571301,
+              "mooe_thousands": 33936288,
+              "co_thousands": 28745536,
+              "total_thousands": 171275144,
+              "confidence": "medium",
+              "note": "Aggregate of all AFP service-branch operations: Internal Security Operations, External Security/Territorial Defense, Force Development, Force Sustainment. Detailed breakdown by service branch (Army G.1, AFP-HSSU, Navy G.3, Air Force G.2) is carried separately in summary_2019.json."
+            }
+          ]
+        },
+        {
+          "name": "1 Philippine Army (Land Forces",
+          "amount_thousands": 91407366,
+          "by_program": [
+            {
+              "name": "Land Forces Defense Program",
+              "ps_thousands": 76408956,
+              "mooe_thousands": 12402928,
+              "co_thousands": 2515482,
+              "total_thousands": 91402366,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.40 of DND.pdf (GS row for G.1 Philippine Army)."
+            }
+          ]
+        },
+        {
+          "name": "support Units (AFPHSSUs )",
+          "amount_thousands": 36564690,
+          "by_program": [
+            {
+              "name": "AFP Headquarters and Service Support Operations",
+              "ps_thousands": 30223697,
+              "mooe_thousands": 4796169,
+              "co_thousands": 1540000,
+              "total_thousands": 36559866,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.40 of DND.pdf (G.4 GENERAL HEADQUARTERS, AFP AND AFP WIDE SERVICE SUPPORT UNITS)."
+            }
+          ]
+        },
+        {
+          "name": "6.3 Philippine Navy (Naval Forces )",
+          "amount_thousands": 27842155,
+          "by_program": [
+            {
+              "name": "Naval Forces Defense Program",
+              "ps_thousands": 17236098,
+              "mooe_thousands": 7582125,
+              "co_thousands": 3017741,
+              "total_thousands": 27835964,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.40 of DND.pdf (G.3 Philippine Navy)."
+            }
+          ]
+        },
+        {
+          "name": "2 Philippine Air Force (Air Forces",
+          "amount_thousands": 24584360,
+          "by_program": [
+            {
+              "name": "Air Forces General Administration and Personnel Benefits",
+              "ps_thousands": 1560241,
+              "mooe_thousands": 528391,
+              "co_thousands": 0,
+              "total_thousands": 2088632,
+              "confidence": "medium",
+              "note": "From p.25: 'General Administration and Support' sub-total + 'Administration of Personnel Benefits' row. Includes PS 628,640 + 932,201 / MOOE 526,459 + fee residuals. Computed as residual from Air Force TOTAL (PS 14,743,936 / MOOE 9,488,128 / CO 352,296 / Total 24,584,360 from p.40 GS) minus 3 sub-programs."
+            },
+            {
+              "name": "Air Forces Defense Program - Force-Level Support Services",
+              "ps_thousands": 2731985,
+              "mooe_thousands": 387249,
+              "co_thousands": 18500,
+              "total_thousands": 3137734,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.25 of DND.pdf."
+            },
+            {
+              "name": "Air Forces Defense Program - Force Development",
+              "ps_thousands": 5552798,
+              "mooe_thousands": 4646466,
+              "co_thousands": 180013,
+              "total_thousands": 9779712,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.25 of DND.pdf."
+            },
+            {
+              "name": "Air Forces Defense Program - Force Sustainment",
+              "ps_thousands": 4899012,
+              "mooe_thousands": 4608022,
+              "co_thousands": 153783,
+              "total_thousands": 9660818,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.25 of DND.pdf."
+            }
+          ]
+        },
+        {
+          "name": "Veterans Memorial Medical Center",
+          "amount_thousands": 1866436,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 109563,
+              "mooe_thousands": 113492,
+              "co_thousands": 30000,
+              "total_thousands": 253055,
+              "confidence": "low",
+              "note": "Estimated. VMMC TOTAL (PS 725,817 / MOOE 986,690 / CO 152,929 / Total 1,866,436 from p.40 GS)."
+            },
+            {
+              "name": "Veterans Tertiary Health Care Program",
+              "ps_thousands": 616254,
+              "mooe_thousands": 873198,
+              "co_thousands": 122929,
+              "total_thousands": 1613381,
+              "confidence": "medium",
+              "note": "Residual from VMMC TOTAL. VMMC is the tertiary referral hospital for AFP and DND personnel."
+            }
+          ]
+        },
+        {
+          "name": "Office of Civil Defense",
+          "amount_thousands": 1376775,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 47834,
+              "mooe_thousands": 138523,
+              "co_thousands": 30000,
+              "total_thousands": 216357,
+              "confidence": "low",
+              "note": "Estimated. OCD TOTAL (PS 229,828 / MOOE 641,754 / CO 505,193 / Total 1,376,775) from p.40 GS."
+            },
+            {
+              "name": "Disaster Risk Reduction and Management Program",
+              "ps_thousands": 181994,
+              "mooe_thousands": 503231,
+              "co_thousands": 475193,
+              "total_thousands": 1160418,
+              "confidence": "medium",
+              "note": "Residual from OCD TOTAL. OCD is the secretariat of the National Disaster Risk Reduction and Management Council (NDRRMC)."
+            }
+          ]
+        },
+        {
+          "name": "Government Arsenal",
+          "amount_thousands": 1258628,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 79443,
+              "mooe_thousands": 64257,
+              "co_thousands": 8000,
+              "total_thousands": 151700,
+              "confidence": "low",
+              "note": "Estimated. Govt Arsenal TOTAL (PS 253,367 / MOOE 987,361 / CO 18,000 / Total 1,258,628) from p.40 GS."
+            },
+            {
+              "name": "Arsenal Production Program (small arms ammunition manufacturing)",
+              "ps_thousands": 173924,
+              "mooe_thousands": 923104,
+              "co_thousands": 10000,
+              "total_thousands": 1106928,
+              "confidence": "low",
+              "note": "Residual from Govt Arsenal TOTAL."
+            }
+          ]
+        },
+        {
+          "name": "Philippine Veterans Affairs Office (Proper",
+          "amount_thousands": 606308,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 41042,
+              "mooe_thousands": 44932,
+              "co_thousands": 0,
+              "total_thousands": 85974,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.13 of DND.pdf."
+            },
+            {
+              "name": "Veterans' Welfare and Benefits Administration Program",
+              "ps_thousands": 81415,
+              "mooe_thousands": 275396,
+              "co_thousands": 900,
+              "total_thousands": 357711,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.13 of DND.pdf."
+            },
+            {
+              "name": "Veterans Affairs Management Program",
+              "ps_thousands": 4068,
+              "mooe_thousands": 11748,
+              "co_thousands": 0,
+              "total_thousands": 15796,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.13 of DND.pdf."
+            },
+            {
+              "name": "Veterans Memorial and Historical Preservation Program",
+              "ps_thousands": 12120,
+              "mooe_thousands": 34707,
+              "co_thousands": 0,
+              "total_thousands": 46827,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.13 of DND.pdf."
+            },
+            {
+              "name": "Support to Operations + Other PVAO Programs (residual)",
+              "ps_thousands": 0,
+              "mooe_thousands": 100000,
+              "co_thousands": 0,
+              "total_thousands": 100000,
+              "confidence": "low",
+              "note": "Residual reconciliation entry. PVAO TOTAL (PS 138,625 / MOOE 466,783 / CO 900 / Total 606,308 from p.40 GS) minus sum of 4 enumerated programs = ₱100M unaccounted. Likely Support to Operations or additional small program not fully captured in OCR. See DEPT_PARSER_NOTES.md."
+            }
+          ]
+        },
+        {
+          "name": "Office of the Secretary Proper",
+          "amount_thousands": 526501,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 35580,
+              "mooe_thousands": 41375,
+              "co_thousands": 8000,
+              "total_thousands": 84955,
+              "confidence": "medium",
+              "note": "Estimated split. OSEC Proper TOTAL (PS 172,469 / MOOE 329,873 / CO 24,139 / Total 526,581) from p.40 GS."
+            },
+            {
+              "name": "Operations - National Defense Policy Development and Coordination",
+              "ps_thousands": 136889,
+              "mooe_thousands": 288498,
+              "co_thousands": 16139,
+              "total_thousands": 441526,
+              "confidence": "medium",
+              "note": "Aggregate of OSEC Proper operations programs. Computed as residual."
+            }
+          ]
+        },
+        {
+          "name": "National Defense College of the Philippines",
+          "amount_thousands": 188974,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 18456,
+              "mooe_thousands": 22137,
+              "co_thousands": 5500,
+              "total_thousands": 46093,
+              "confidence": "low",
+              "note": "Estimated. NDCP TOTAL (PS 51,243 / MOOE 105,852 / CO 31,879 / Total 188,974) from p.40 GS."
+            },
+            {
+              "name": "Defense Policy Studies and Strategic Studies Program",
+              "ps_thousands": 32787,
+              "mooe_thousands": 83715,
+              "co_thousands": 26379,
+              "total_thousands": 142881,
+              "confidence": "low",
+              "note": "Residual from NDCP TOTAL."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Department of Social Welfare and Development",
+      "amount_thousands": 141164046,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary-",
+          "amount_thousands": 138492625,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 181232,
+              "mooe_thousands": 511926,
+              "co_thousands": 0,
+              "total_thousands": 693158,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.319 (DSWD.pdf p.3); OCR'd General Management and Supervision row + Personnel Benefits subtotal."
+            },
+            {
+              "name": "Pantawid Pamilyang Pilipino Program (4Ps)",
+              "ps_thousands": 1152843,
+              "mooe_thousands": 88400000,
+              "co_thousands": 0,
+              "total_thousands": 89552843,
+              "confidence": "medium",
+              "note": "Conditional cash transfer (CCT) — flagship DSWD social protection program. Approximate ~₱89.6B per FY2019 GAA p.321-340 (DSWD.pdf p.4-19 contains the per-region and per-objective breakdown). Exact PS/MOOE split from OCR is noisy due to multi-page span."
+            },
+            {
+              "name": "Sustainable Livelihood Program (SLP)",
+              "ps_thousands": 386148,
+              "mooe_thousands": 4563852,
+              "co_thousands": 0,
+              "total_thousands": 4950000,
+              "confidence": "low",
+              "note": "Estimated ~₱4.95B. Source: DSWD standard PREXC (SLP supports CCT graduates with livelihood seeds)."
+            },
+            {
+              "name": "Social Pension for Indigent Senior Citizens",
+              "ps_thousands": 50000,
+              "mooe_thousands": 22800000,
+              "co_thousands": 0,
+              "total_thousands": 22850000,
+              "confidence": "low",
+              "note": "Estimated ~₱22.85B. ₱500/month × ~3.7M indigent senior citizens for 12 months."
+            },
+            {
+              "name": "Supplementary Feeding Program",
+              "ps_thousands": 20000,
+              "mooe_thousands": 3900000,
+              "co_thousands": 0,
+              "total_thousands": 3920000,
+              "confidence": "low",
+              "note": "Estimated ~₱3.92B. 120 days of feeding for ~1.9M day-care children."
+            },
+            {
+              "name": "Protective Services Program (incl. KALAHI-CIDSS)",
+              "ps_thousands": 4576607,
+              "mooe_thousands": 5700000,
+              "co_thousands": 30000,
+              "total_thousands": 10306607,
+              "confidence": "low",
+              "note": "Aggregate of KALAHI-CIDSS, Center-Based Services, Adoption Resource and Referral. Residual from OSEC TOTAL ₱138.49B minus the 4 enumerated programs above minus Gen Admin minus Disaster Response Operations."
+            },
+            {
+              "name": "Disaster Response Operations and Management Program",
+              "ps_thousands": 170000,
+              "mooe_thousands": 5532981,
+              "co_thousands": 7445,
+              "total_thousands": 5710426,
+              "confidence": "low",
+              "note": "Estimated ~₱5.71B. DSWD's Quick Response Fund + Family and Community Disaster Preparedness."
+            },
+            {
+              "name": "Financial Expenses (Bank charges, etc.)",
+              "ps_thousands": 0,
+              "mooe_thousands": 0,
+              "co_thousands": 509561,
+              "total_thousands": 509561,
+              "confidence": "high",
+              "note": "Source: p.51 GS — DSWD OSEC has a dedicated Financial Expenses column of ₱509,561 thousand."
+            }
+          ]
+        },
+        {
+          "name": "1 Juvenile Justice and Welfare Council",
+          "amount_thousands": 1090566,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 16292,
+              "mooe_thousands": 6455,
+              "co_thousands": 0,
+              "total_thousands": 22747,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.341 (DSWD.pdf p.25)."
+            },
+            {
+              "name": "Juvenile Justice and Welfare Program",
+              "ps_thousands": 20535,
+              "mooe_thousands": 244529,
+              "co_thousands": 802755,
+              "total_thousands": 1067819,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.341 (DSWD.pdf p.25). Note: large CO line is for construction of regional Bahay Pag-asa youth rehabilitation centers."
+            }
+          ]
+        },
+        {
+          "name": "National Commission on Indigenous Peoples",
+          "amount_thousands": 985097,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 183285,
+              "mooe_thousands": 78017,
+              "co_thousands": 9500,
+              "total_thousands": 270802,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.346 (DSWD.pdf p.30)."
+            },
+            {
+              "name": "Support to Operations",
+              "ps_thousands": 208868,
+              "mooe_thousands": 11410,
+              "co_thousands": 0,
+              "total_thousands": 219478,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.346 (DSWD.pdf p.30)."
+            },
+            {
+              "name": "Ancestral Domain/Land Security and Development Program",
+              "ps_thousands": 65027,
+              "mooe_thousands": 17665,
+              "co_thousands": 0,
+              "total_thousands": 83292,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.346 (DSWD.pdf p.30)."
+            },
+            {
+              "name": "Human, Socio-Economic and Ecology Development and IPO Protection Program",
+              "ps_thousands": 131515,
+              "mooe_thousands": 170720,
+              "co_thousands": 0,
+              "total_thousands": 302235,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.346 (DSWD.pdf p.30)."
+            },
+            {
+              "name": "Indigenous Peoples Rights Protection Program",
+              "ps_thousands": 97380,
+              "mooe_thousands": 11912,
+              "co_thousands": 0,
+              "total_thousands": 109292,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.346 (DSWD.pdf p.30)."
+            }
+          ]
+        },
+        {
+          "name": "National Anti-Poverty Commission",
+          "amount_thousands": 241384,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 28452,
+              "mooe_thousands": 35873,
+              "co_thousands": 4251,
+              "total_thousands": 68576,
+              "confidence": "low",
+              "note": "Estimated. NAPC TOTAL (PS 66,205 / MOOE 170,928 / CO 4,251 / Total 241,384 from p.51 GS)."
+            },
+            {
+              "name": "Anti-Poverty Convergence Program",
+              "ps_thousands": 37753,
+              "mooe_thousands": 135055,
+              "co_thousands": 0,
+              "total_thousands": 172808,
+              "confidence": "low",
+              "note": "Residual from NAPC TOTAL."
+            }
+          ]
+        },
+        {
+          "name": "Presidential Commmission for the Urban Poor",
+          "amount_thousands": 178095,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 25321,
+              "mooe_thousands": 23580,
+              "co_thousands": 1805,
+              "total_thousands": 50706,
+              "confidence": "low",
+              "note": "Estimated. PCUP TOTAL (PS 85,808 / MOOE 87,482 / CO 4,805 / Total 178,095 from p.51 GS)."
+            },
+            {
+              "name": "Urban Poor Welfare and Empowerment Program",
+              "ps_thousands": 60487,
+              "mooe_thousands": 63902,
+              "co_thousands": 3000,
+              "total_thousands": 127389,
+              "confidence": "low",
+              "note": "Residual from PCUP TOTAL."
+            }
+          ]
+        },
+        {
+          "name": "Council for the Welfare of Children",
+          "amount_thousands": 68446,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 11642,
+              "mooe_thousands": 11928,
+              "co_thousands": 8600,
+              "total_thousands": 32170,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.335 (DSWD.pdf p.19)."
+            },
+            {
+              "name": "Operations - Child Welfare Policy Development and Inter-agency Coordination Program",
+              "ps_thousands": 6023,
+              "mooe_thousands": 30253,
+              "co_thousands": 0,
+              "total_thousands": 36276,
+              "confidence": "medium",
+              "note": "Residual from CWC TOTAL (PS 17,665 / MOOE 42,181 / CO 8,600 / Total 68,446 from p.51 GS)."
+            }
+          ]
+        },
+        {
+          "name": "Inter-Country Adoption Board",
+          "amount_thousands": 53345,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 4759,
+              "mooe_thousands": 8578,
+              "co_thousands": 0,
+              "total_thousands": 13337,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.338 (DSWD.pdf p.22)."
+            },
+            {
+              "name": "Inter-Country Adoption Regulatory Program",
+              "ps_thousands": 4353,
+              "mooe_thousands": 4771,
+              "co_thousands": 0,
+              "total_thousands": 9124,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.338 (DSWD.pdf p.22)."
+            },
+            {
+              "name": "Inter-Country Adoption Program",
+              "ps_thousands": 9173,
+              "mooe_thousands": 21641,
+              "co_thousands": 70,
+              "total_thousands": 30884,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.338 (DSWD.pdf p.22)."
+            }
+          ]
+        },
+        {
+          "name": "National Council on Disability Affairs 54",
+          "amount_thousands": 488,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 8834,
+              "mooe_thousands": 5786,
+              "co_thousands": 1500,
+              "total_thousands": 16120,
+              "confidence": "low",
+              "note": "Estimated. NCDA TOTAL (PS 29,735 / MOOE 19,172 / CO 5,581 / Total 54,488 from p.51 GS)."
+            },
+            {
+              "name": "Disability Rights Promotion and Policy Development Program",
+              "ps_thousands": 20901,
+              "mooe_thousands": 13386,
+              "co_thousands": 4081,
+              "total_thousands": 38368,
+              "confidence": "low",
+              "note": "Residual from NCDA TOTAL."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pension and Gratuity Fund",
+      "amount_thousands": 117001503
+    },
+    {
+      "name": "Department of Health",
+      "amount_thousands": 98565797,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 97653633,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 670344,
+              "mooe_thousands": 387540,
+              "co_thousands": 35500,
+              "total_thousands": 1093384,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.877 (DOH.pdf p.3) Gen Admin section header + p.23 sub-total."
+            },
+            {
+              "name": "Support to Operations",
+              "ps_thousands": 4091080,
+              "mooe_thousands": 5385221,
+              "co_thousands": 567311,
+              "total_thousands": 10043612,
+              "confidence": "low",
+              "note": "Aggregate of Support to Operations programs incl. Health Information Technology, Operations of Regional Offices. Computed as: OSEC TOTAL - Gen Admin - Operations sub-total."
+            },
+            {
+              "name": "Health Systems Strengthening Program (Operations)",
+              "ps_thousands": 16876840,
+              "mooe_thousands": 14500086,
+              "co_thousands": 8900000,
+              "total_thousands": 40276926,
+              "confidence": "low",
+              "note": "Aggregate per DOH PREXC: Service Delivery sub-program, Health Facility Policy/Plan Development, etc. From p.6 Health Systems Strengthening row sub-totals are noisy."
+            },
+            {
+              "name": "Health Sector Policy and Plan Development (Operations)",
+              "ps_thousands": 24560,
+              "mooe_thousands": 24938,
+              "co_thousands": 0,
+              "total_thousands": 49498,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.880 (DOH.pdf p.6) HEALTH SECTOR POLICY AND PLAN DEVELOPMENT row."
+            },
+            {
+              "name": "Health Sector Research Development (Operations)",
+              "ps_thousands": 51572,
+              "mooe_thousands": 78026,
+              "co_thousands": 0,
+              "total_thousands": 129598,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.880 (DOH.pdf p.6) HEALTH SECTOR RESEARCH DEVELOPMENT row."
+            },
+            {
+              "name": "Health Facility Policy and Plan Development",
+              "ps_thousands": 33965,
+              "mooe_thousands": 157089,
+              "co_thousands": 0,
+              "total_thousands": 191054,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.880 (DOH.pdf p.6) HEALTH FACILITY POLICY AND PLAN DEVELOPMENT row."
+            },
+            {
+              "name": "Health Regulatory Program (Consumer Health Welfare + Drug + Food)",
+              "ps_thousands": 319045,
+              "mooe_thousands": 0,
+              "co_thousands": 0,
+              "total_thousands": 319045,
+              "confidence": "medium",
+              "note": "Source: GAA FY2019 Vol I-B p.896 (DOH.pdf p.22) CONSUMER HEALTH AND WELFARE SUB-PROGRAM. Includes Food and Drug Administration regulatory functions."
+            },
+            {
+              "name": "Routine Quarantine Services (Sub-program)",
+              "ps_thousands": 152581,
+              "mooe_thousands": 0,
+              "co_thousands": 0,
+              "total_thousands": 152581,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.897 (DOH.pdf p.23) ROUTINE QUARANTINE SERVICES SUB-PROGRAM."
+            },
+            {
+              "name": "Social Health Protection Program (PhilHealth premium subsidy)",
+              "ps_thousands": 0,
+              "mooe_thousands": 9381810,
+              "co_thousands": 0,
+              "total_thousands": 9381810,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.897 (DOH.pdf p.23) SOCIAL HEALTH PROTECTION PROGRAM. PhilHealth indigent + senior citizen premium subsidies."
+            },
+            {
+              "name": "Operations - All Other Health Programs (regional hospitals + capital outlays)",
+              "ps_thousands": 20615973,
+              "mooe_thousands": 8082137,
+              "co_thousands": 7318015,
+              "total_thousands": 36016125,
+              "confidence": "low",
+              "note": "Aggregate of regional health office operations, tertiary specialty hospitals, and capital outlays for hospital construction/upgrading. Residual from OSEC TOTAL ₱97.65B minus enumerated programs above."
+            }
+          ]
+        },
+        {
+          "name": "4 Philippine Health Insurance Corporation",
+          "amount_thousands": 67353360
+        },
+        {
+          "name": "DEPARTMENT OF TRAOE AND INDUSTRY (OTI )",
+          "amount_thousands": 1837949
+        },
+        {
+          "name": "6.3 Small Business Corporation",
+          "amount_thousands": 1500000
+        },
+        {
+          "name": "0.5 Philippine Heart Center",
+          "amount_thousands": 1183893
+        },
+        {
+          "name": "0.3 Philippine Children S Medical Center",
+          "amount_thousands": 1083063
+        },
+        {
+          "name": "2 National Kidney and Transplant Institute",
+          "amount_thousands": 884864
+        },
+        {
+          "name": "Commission on Population",
+          "amount_thousands": 471812,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 94792,
+              "mooe_thousands": 61890,
+              "co_thousands": 0,
+              "total_thousands": 156682,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.899 (DOH.pdf p.25)."
+            },
+            {
+              "name": "Philippine Population Management Program",
+              "ps_thousands": 106886,
+              "mooe_thousands": 208244,
+              "co_thousands": 0,
+              "total_thousands": 315130,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.899 (DOH.pdf p.25)."
+            }
+          ]
+        },
+        {
+          "name": "National Nutrition Council",
+          "amount_thousands": 440352,
+          "by_program": [
+            {
+              "name": "General Administration and Support",
+              "ps_thousands": 41299,
+              "mooe_thousands": 11312,
+              "co_thousands": 0,
+              "total_thousands": 52611,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.906 (DOH.pdf p.32). Includes Gen Mgmt and Supervision + Human Resource Development + Administration of Personnel Benefits."
+            },
+            {
+              "name": "National Nutrition Management Program",
+              "ps_thousands": 52243,
+              "mooe_thousands": 335498,
+              "co_thousands": 0,
+              "total_thousands": 387741,
+              "confidence": "high",
+              "note": "Source: GAA FY2019 Vol I-B p.906-907 (DOH.pdf p.32-33). Includes: Nutrition policy/standards/coordination; Philippine food and nutrition surveillance; Promotion of good nutrition; Assistance to national/local nutrition and related programs."
+            }
+          ]
+        },
+        {
+          "name": "DEPARTMENT OF TOURISH (DoT )",
+          "amount_thousands": 410000
+        },
+        {
+          "name": "1 Tourism Infrastructure and Enterprise Zone Authority",
+          "amount_thousands": 410000
+        },
+        {
+          "name": "DEPARTHENT OF PUBLIC HORKS AND HIGHwAYS (OPWH)",
+          "amount_thousands": 325317
+        },
+        {
+          "name": "1 Local Hater Utilities Administration",
+          "amount_thousands": 325317
+        },
+        {
+          "name": "2 Center for International Trade Expositions and Missions",
+          "amount_thousands": 279228
+        },
+        {
+          "name": "0.1 Lung Center of the Philippines",
+          "amount_thousands": 232870
+        },
+        {
+          "name": "Alternative Health Care",
+          "amount_thousands": 142619
+        },
+        {
+          "name": "1 aurora Pacific Economic Zone and Freeport Authority",
+          "amount_thousands": 58721
+        }
+      ]
+    },
+    {
+      "name": "Department of Transportation",
+      "amount_thousands": 67669297,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 54240442
+        },
+        {
+          "name": "Philippine Coast Guard",
+          "amount_thousands": 11924830
+        },
+        {
+          "name": "2 Philippine National Railways",
+          "amount_thousands": 1630000
+        },
+        {
+          "name": "1 Light Rail Transit Authority",
+          "amount_thousands": 1473987
+        },
+        {
+          "name": "2 Maritime Industry Authority",
+          "amount_thousands": 930043
+        },
+        {
+          "name": "Civi] Aeronautics Board",
+          "amount_thousands": 152226
+        },
+        {
+          "name": "Toll Regulatory Board",
+          "amount_thousands": 35152
+        }
+      ]
+    },
+    {
+      "name": "Other Executive Offices",
+      "amount_thousands": 66509258,
+      "by_agency": [
+        {
+          "name": "Commission on Higher Education",
+          "amount_thousands": 51491252
+        },
+        {
+          "name": "1 Philippine Sports Commission",
+          "amount_thousands": 5357315
+        },
+        {
+          "name": "Philippine Drug Enforcement Agency",
+          "amount_thousands": 2056892
+        },
+        {
+          "name": "0 National Commission for Culture and the Arts",
+          "amount_thousands": 1343628
+        },
+        {
+          "name": "National Intelligence Coordinating Agency",
+          "amount_thousands": 918146
+        },
+        {
+          "name": "Energy Regulatory Commission",
+          "amount_thousands": 678032
+        },
+        {
+          "name": "Presidential Management Staff",
+          "amount_thousands": 637177
+        },
+        {
+          "name": "Philippine Competition Commission",
+          "amount_thousands": 429849
+        },
+        {
+          "name": "0.2 National Kistorical Commission of the Philippines",
+          "amount_thousands": 418299
+        },
+        {
+          "name": "0 - 4 National Archives of the Philippines",
+          "amount_thousands": 365625
+        },
+        {
+          "name": "0.1 National Commission for Culture and the Arts (Proper)",
+          "amount_thousands": 360938
+        },
+        {
+          "name": "National Security Council",
+          "amount_thousands": 334935
+        },
+        {
+          "name": "Pasig River Rehabilitation Commission",
+          "amount_thousands": 326549
+        },
+        {
+          "name": "Dangerous Drugs Board",
+          "amount_thousands": 301741
+        },
+        {
+          "name": "Housing and Land Use Regulatory Board",
+          "amount_thousands": 259992
+        },
+        {
+          "name": "Controlled Corporations",
+          "amount_thousands": 251114
+        },
+        {
+          "name": "0.3 National Library of the Philippines",
+          "amount_thousands": 198766
+        },
+        {
+          "name": "Philippine Racing Commission",
+          "amount_thousands": 187017
+        },
+        {
+          "name": "Housing and Urban Development Coordinating Council",
+          "amount_thousands": 174745
+        },
+        {
+          "name": "Mindanao Development Authority",
+          "amount_thousands": 159250
+        },
+        {
+          "name": "Commission on the Filipino Language",
+          "amount_thousands": 140868
+        },
+        {
+          "name": "Games and Amusements Board",
+          "amount_thousands": 138585
+        },
+        {
+          "name": "Film Development Council of the Philippines",
+          "amount_thousands": 134078
+        },
+        {
+          "name": "Commission on Filipinos Overseas",
+          "amount_thousands": 124369
+        },
+        {
+          "name": "Climate Change Commission",
+          "amount_thousands": 113834
+        },
+        {
+          "name": "Presidential Legislative Liaison Office",
+          "amount_thousands": 96749
+        },
+        {
+          "name": "Anti-Money Laundering Council",
+          "amount_thousands": 63475
+        },
+        {
+          "name": "Optical Media Board",
+          "amount_thousands": 62058
+        },
+        {
+          "name": "Movie and Television Review and Classification Board",
+          "amount_thousands": 38949
+        }
+      ]
+    },
+    {
+      "name": "State Universities and Colleges",
+      "amount_thousands": 64711239,
+      "by_agency": [
+        {
+          "name": "University of the Philippines System The National University)",
+          "amount_thousands": 17005362
+        },
+        {
+          "name": "Region III CENTRAL LUZON",
+          "amount_thousands": 5191179
+        },
+        {
+          "name": "Region VI WESTERN VISAYAS",
+          "amount_thousands": 4821354
+        },
+        {
+          "name": "Region V BICOL",
+          "amount_thousands": 4012431
+        },
+        {
+          "name": "AUTONOTOUS REGION IN MUSLIM MINDANAO (ARMM)",
+          "amount_thousands": 3994246
+        },
+        {
+          "name": "National Capital Region-",
+          "amount_thousands": 3874400
+        },
+        {
+          "name": "Region I ILOCOS",
+          "amount_thousands": 3473187
+        },
+        {
+          "name": "3 Mindanao State University",
+          "amount_thousands": 3052829
+        },
+        {
+          "name": "Region X NORTHERN MINDANAO",
+          "amount_thousands": 2756664
+        },
+        {
+          "name": "Region II CAGAYAN VALLEY",
+          "amount_thousands": 2527777
+        },
+        {
+          "name": "Region IV-A (CALABARZON",
+          "amount_thousands": 2450722
+        },
+        {
+          "name": "Region VII CENTRAL VISAYAS",
+          "amount_thousands": 2065069
+        },
+        {
+          "name": "REGION XIII CaRAGA",
+          "amount_thousands": 1547104
+        },
+        {
+          "name": "5 Polytechnic University of the Philippines",
+          "amount_thousands": 1499023
+        },
+        {
+          "name": "11 Hest Visayas State University",
+          "amount_thousands": 1243003
+        },
+        {
+          "name": "3 Isabela State University",
+          "amount_thousands": 1054683
+        },
+        {
+          "name": "2 Bicol University",
+          "amount_thousands": 1027536
+        },
+        {
+          "name": "3 Mariano Marcos State University-",
+          "amount_thousands": 1019539
+        },
+        {
+          "name": "4 MSU Iligan Institute of Technology",
+          "amount_thousands": 999955
+        },
+        {
+          "name": "1 Don Mariano Marcos Memorial State University",
+          "amount_thousands": 950260
+        },
+        {
+          "name": "3 Cebu Technological University",
+          "amount_thousands": 873828
+        },
+        {
+          "name": "5 Central Luzon State University",
+          "amount_thousands": 817022
+        },
+        {
+          "name": "4 Bulacan State University",
+          "amount_thousands": 783591
+        },
+        {
+          "name": "Cagayan State University",
+          "amount_thousands": 753884
+        },
+        {
+          "name": "10 Visayas State University",
+          "amount_thousands": 742982
+        },
+        {
+          "name": "7 Technological University of the Philippines",
+          "amount_thousands": 708896
+        },
+        {
+          "name": "3 Philippine Normal University",
+          "amount_thousands": 704161
+        },
+        {
+          "name": "0-5 University of Southeastern Philippines",
+          "amount_thousands": 692698
+        },
+        {
+          "name": "2 Capiz State University",
+          "amount_thousands": 676984
+        },
+        {
+          "name": "3 Central Mindanao University",
+          "amount_thousands": 613218
+        },
+        {
+          "name": "3 Western Mindanao State University",
+          "amount_thousands": 612141
+        },
+        {
+          "name": "5 Pangasinan State University",
+          "amount_thousands": 609056
+        },
+        {
+          "name": "9 University of Eastern Philippines",
+          "amount_thousands": 592916
+        },
+        {
+          "name": "0.3 Benguet State University",
+          "amount_thousands": 590282
+        },
+        {
+          "name": "6 University of Northern Philippines",
+          "amount_thousands": 584802
+        },
+        {
+          "name": "5 Catanduanes State University",
+          "amount_thousands": 560813
+        },
+        {
+          "name": "1 Bukidnon State University",
+          "amount_thousands": 560152
+        },
+        {
+          "name": "6 Iloilo Science and Technology University",
+          "amount_thousands": 559788
+        },
+        {
+          "name": "3 Surigao del Sur State University",
+          "amount_thousands": 557114
+        },
+        {
+          "name": "2 Cavite State University",
+          "amount_thousands": 548764
+        },
+        {
+          "name": "Fxz Bataan Peninsula State University",
+          "amount_thousands": 540283
+        },
+        {
+          "name": "4 MSU-Tawi-Tawi College of Technology and Oceanography",
+          "amount_thousands": 534461
+        },
+        {
+          "name": "4 University of Southern Mindanao",
+          "amount_thousands": 514772
+        },
+        {
+          "name": "1 Batangas State University",
+          "amount_thousands": 508546
+        },
+        {
+          "name": "4 Nueva Vizcaya State University",
+          "amount_thousands": 497201
+        },
+        {
+          "name": "6 Don Honorio Ventura Technological State University",
+          "amount_thousands": 491877
+        },
+        {
+          "name": "4 Negros Oriental State University",
+          "amount_thousands": 487101
+        },
+        {
+          "name": "6.5 University of Rizal System",
+          "amount_thousands": 482041
+        },
+        {
+          "name": "12 Tarlac State University",
+          "amount_thousands": 476324
+        },
+        {
+          "name": "3 Camarines Norte State College",
+          "amount_thousands": 476016
+        },
+        {
+          "name": "4 Southern Luzon State University",
+          "amount_thousands": 471844
+        },
+        {
+          "name": "4 Palawan State University",
+          "amount_thousands": 471207
+        },
+        {
+          "name": "6 Central Bicol State University of Agriculture",
+          "amount_thousands": 468390
+        },
+        {
+          "name": "6.3 Laguna State Polytechnic University",
+          "amount_thousands": 439527
+        },
+        {
+          "name": "8 Partido State University",
+          "amount_thousands": 424678
+        },
+        {
+          "name": "10 President Ramon Hagsaysay State University",
+          "amount_thousands": 416289
+        },
+        {
+          "name": "1 Aklan State University",
+          "amount_thousands": 415475
+        },
+        {
+          "name": "7 Nueva Ecija University of Science and Technology",
+          "amount_thousands": 414106
+        },
+        {
+          "name": "6 Rizal Technological University",
+          "amount_thousands": 412051
+        },
+        {
+          "name": "0.4 Surigao State College of Technology",
+          "amount_thousands": 403807
+        },
+        {
+          "name": "10 University of Antique-",
+          "amount_thousands": 400460
+        },
+        {
+          "name": "2 Eastern Visayas State University",
+          "amount_thousands": 390226
+        },
+        {
+          "name": "1 Eastern Samar state University",
+          "amount_thousands": 389444
+        },
+        {
+          "name": "of Agriculture and Technology )",
+          "amount_thousands": 376971
+        },
+        {
+          "name": "0-2 Caraga State University",
+          "amount_thousands": 374158
+        },
+        {
+          "name": "2 Jose Rizal Memorial State University",
+          "amount_thousands": 366639
+        },
+        {
+          "name": "Northern Iloilo Polytechnic State College",
+          "amount_thousands": 363620
+        },
+        {
+          "name": "9 Sorsogon State College",
+          "amount_thousands": 353544
+        },
+        {
+          "name": "3 Carlos c Hilado Memorial State College",
+          "amount_thousands": 351006
+        },
+        {
+          "name": "0_4 Ifugao State University",
+          "amount_thousands": 349655
+        },
+        {
+          "name": "Iloilo State College of Fisheries)",
+          "amount_thousands": 344272
+        },
+        {
+          "name": "8 Pampanga State Agricultural University",
+          "amount_thousands": 339174
+        },
+        {
+          "name": "1 Bohol Island State University",
+          "amount_thousands": 321317
+        },
+        {
+          "name": "3 Sultan Kudarat State University",
+          "amount_thousands": 308392
+        },
+        {
+          "name": "Philippines Cagayan de Oro Campus",
+          "amount_thousands": 302969
+        },
+        {
+          "name": "11 Tarlac Agricultural University",
+          "amount_thousands": 298917
+        },
+        {
+          "name": "2 Cebu Normal University",
+          "amount_thousands": 294177
+        },
+        {
+          "name": "8 Southern Leyte State University",
+          "amount_thousands": 291202
+        },
+        {
+          "name": "0.5 Kalinga State University",
+          "amount_thousands": 281104
+        },
+        {
+          "name": "State Polytechnic College)",
+          "amount_thousands": 272146
+        },
+        {
+          "name": "5 Romblon State University",
+          "amount_thousands": 269406
+        },
+        {
+          "name": "4 Camarines Sur Polytechnic Colleges",
+          "amount_thousands": 268534
+        },
+        {
+          "name": "Agriculture and Technology",
+          "amount_thousands": 254726
+        },
+        {
+          "name": "9 Philippine Merchant Marine Academy",
+          "amount_thousands": 249676
+        },
+        {
+          "name": "3 Occidental Mindoro State College",
+          "amount_thousands": 247136
+        },
+        {
+          "name": "7 Samar State University",
+          "amount_thousands": 239282
+        },
+        {
+          "name": "6 Western Philippines University",
+          "amount_thousands": 233109
+        },
+        {
+          "name": "8-1 Eulogio 'Amang Rodriguez Institute of Science and Technology",
+          "amount_thousands": 230326
+        },
+        {
+          "name": "2 Ilocos Sur Polytechnic State College",
+          "amount_thousands": 225771
+        },
+        {
+          "name": "College of Science and Technology",
+          "amount_thousands": 217994
+        },
+        {
+          "name": "1 Agusan del Sur State College of Agriculture and Technology",
+          "amount_thousands": 212025
+        },
+        {
+          "name": "3 Bulacan Agricultural State College",
+          "amount_thousands": 207947
+        },
+        {
+          "name": "1 J_k; Cerilles State College",
+          "amount_thousands": 205273
+        },
+        {
+          "name": "3 Leyte Normal University",
+          "amount_thousands": 204606
+        },
+        {
+          "name": "Palompon Institute of Technology)",
+          "amount_thousands": 203129
+        },
+        {
+          "name": "0.1 Abra State Institute of Science and Technology",
+          "amount_thousands": 200554
+        },
+        {
+          "name": "4 Philippine State College of Aeronautics",
+          "amount_thousands": 184640
+        },
+        {
+          "name": "1 Marinduque State College",
+          "amount_thousands": 182637
+        },
+        {
+          "name": "4 Central Philippines State University",
+          "amount_thousands": 181361
+        },
+        {
+          "name": "9 Northern Negros State College of Science and Technology",
+          "amount_thousands": 179399
+        },
+        {
+          "name": "4 Zamboanga City State Polytechnic College",
+          "amount_thousands": 178226
+        },
+        {
+          "name": "1 Bicol State College of Applied Sciences and Technology",
+          "amount_thousands": 178194
+        },
+        {
+          "name": "4 Naval State University",
+          "amount_thousands": 176634
+        },
+        {
+          "name": "School of Technology",
+          "amount_thousands": 172075
+        },
+        {
+          "name": "5 Quirino State University",
+          "amount_thousands": 171734
+        },
+        {
+          "name": "2 Cotabato Foundation College of Science and Technology",
+          "amount_thousands": 169245
+        },
+        {
+          "name": "5 Northwest Samar State University",
+          "amount_thousands": 165172
+        },
+        {
+          "name": "aurora State College of Technology",
+          "amount_thousands": 155973
+        },
+        {
+          "name": "5 Zamboanga State College of Marine Sciences and Technology",
+          "amount_thousands": 153775
+        },
+        {
+          "name": "0-2 Oavao del Norte State College",
+          "amount_thousands": 148587
+        },
+        {
+          "name": "Polytechnic College)",
+          "amount_thousands": 139097
+        },
+        {
+          "name": "2 Marikina Polytechnic College",
+          "amount_thousands": 135303
+        },
+        {
+          "name": "5 Sulu State College",
+          "amount_thousands": 128263
+        },
+        {
+          "name": "0.1 Compostela Valley State College",
+          "amount_thousands": 124757
+        },
+        {
+          "name": "0.2 Apayao State College",
+          "amount_thousands": 118273
+        },
+        {
+          "name": "6 Tawi-Tawi Regional Agricultural College",
+          "amount_thousands": 115781
+        },
+        {
+          "name": "Philippines Claveria Campus",
+          "amount_thousands": 106093
+        },
+        {
+          "name": "5 Guimaras State College",
+          "amount_thousands": 105986
+        },
+        {
+          "name": "2 Basilan State College",
+          "amount_thousands": 105603
+        },
+        {
+          "name": "5 Northwestern Mindanao State College of Science and Technology",
+          "amount_thousands": 88922
+        },
+        {
+          "name": "5 Siquijor State College",
+          "amount_thousands": 88646
+        },
+        {
+          "name": "2 Camiguin Polytechnic State College",
+          "amount_thousands": 85355
+        },
+        {
+          "name": "4 North Luzon Philippines State College",
+          "amount_thousands": 83759
+        },
+        {
+          "name": "1 Adiong Memorial Polytechnic State College",
+          "amount_thousands": 57309
+        },
+        {
+          "name": "1 Batanes State College",
+          "amount_thousands": 50275
+        },
+        {
+          "name": "0_ Region XI Davao 1,356",
+          "amount_thousands": 111
+        },
+        {
+          "name": "0.6 Mountain Province state University (Mountain Province",
+          "amount_thousands": 6
+        },
+        {
+          "name": "0 . 4 Southern Philippines Agri-Business and Marine and Aquatic",
+          "amount_thousands": 4
+        },
+        {
+          "name": "1 Cotabato State University (Cotabato City State",
+          "amount_thousands": 1
+        }
+      ]
+    },
+    {
+      "name": "Allocations to Local Government Units",
+      "amount_thousands": 63721086,
+      "by_agency": [
+        {
+          "name": "0 . Local Government Support Fund",
+          "amount_thousands": 32730124
+        },
+        {
+          "name": "Proceeds of National Taxes",
+          "amount_thousands": 27324009
+        },
+        {
+          "name": "Metropolitan Manila Development Authority",
+          "amount_thousands": 3366953
+        },
+        {
+          "name": "Special Shares of LGUs in the Proceeds of Fire Code Fees",
+          "amount_thousands": 250000
+        },
+        {
+          "name": "Barangay Officials Death Benefits",
+          "amount_thousands": 50000
+        }
+      ]
+    },
+    {
+      "name": "Department of Agriculture",
+      "amount_thousands": 47293174,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 36730568
+        },
+        {
+          "name": "Bureau of Fisheries and Aquatic Resources",
+          "amount_thousands": 5758003
+        },
+        {
+          "name": "Agricultural Credit Policy Council",
+          "amount_thousands": 2543230
+        },
+        {
+          "name": "Philippine Carabao Center",
+          "amount_thousands": 651981
+        },
+        {
+          "name": "National Meat Inspection Service",
+          "amount_thousands": 480577
+        },
+        {
+          "name": "Philippine Fiber Industry Development Authority",
+          "amount_thousands": 410451
+        },
+        {
+          "name": "Mechanization",
+          "amount_thousands": 310126
+        },
+        {
+          "name": "1 Fertilizer and Pesticide Authority",
+          "amount_thousands": 206071
+        },
+        {
+          "name": "Philippine Council for Agriculture and Fisheries",
+          "amount_thousands": 202167
+        }
+      ]
+    },
+    {
+      "name": "The Judiciary",
+      "amount_thousands": 38459145,
+      "by_agency": [
+        {
+          "name": "Supreme Court of the Philippines and the Lower Courts",
+          "amount_thousands": 33488744
+        },
+        {
+          "name": "Court of Appeals",
+          "amount_thousands": 2938809
+        },
+        {
+          "name": "Sandiganbayan -",
+          "amount_thousands": 1495723
+        },
+        {
+          "name": "Court of Tax Appeals",
+          "amount_thousands": 405876
+        },
+        {
+          "name": "Presidential Electoral Tribuna]",
+          "amount_thousands": 129993
+        }
+      ]
+    },
+    {
+      "name": "Department of Finance",
+      "amount_thousands": 36602638,
+      "by_agency": [
+        {
+          "name": "1 Land Bank of the Philippines",
+          "amount_thousands": 36488000
+        },
+        {
+          "name": "Bureau of Internal Revenue",
+          "amount_thousands": 8321688
+        },
+        {
+          "name": "Bureau of the Treasury",
+          "amount_thousands": 6048669
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 843339
+        },
+        {
+          "name": "Securities and Exchange Commission",
+          "amount_thousands": 618427
+        },
+        {
+          "name": "6: Bureau of Local Government Finance",
+          "amount_thousands": 269030
+        },
+        {
+          "name": "2 Philippine Tax Academy",
+          "amount_thousands": 114638
+        },
+        {
+          "name": "Privatization and Management Office",
+          "amount_thousands": 83055
+        },
+        {
+          "name": "8 National Tax Research Center",
+          "amount_thousands": 66115
+        },
+        {
+          "name": "Central Board of Assessment Appeals",
+          "amount_thousands": 20660
+        },
+        {
+          "name": "8. Bureau of Customs 2,616",
+          "amount_thousands": 5772
+        },
+        {
+          "name": "Insurance Commission",
+          "amount_thousands": 6
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous Personnel Benefits Fund",
+      "amount_thousands": 35529267
+    },
+    {
+      "name": "Autonomous Region in Muslim Mindanao",
+      "amount_thousands": 31117016,
+      "by_agency": [
+        {
+          "name": "Autonomous Regional Government in Muslim Mindanao",
+          "amount_thousands": 311173016
+        }
+      ]
+    },
+    {
+      "name": "Department of Environment and Natural Resources",
+      "amount_thousands": 21959372,
+      "by_agency": [
+        {
+          "name": "10 National Irrigation Administration",
+          "amount_thousands": 36046212
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 16459115
+        },
+        {
+          "name": "2 Bases Conversion Development Authority",
+          "amount_thousands": 15178853
+        },
+        {
+          "name": "8- Environmental Management Bureau",
+          "amount_thousands": 2560820
+        },
+        {
+          "name": "National Mapping and Resource Information Authority",
+          "amount_thousands": 1381826
+        },
+        {
+          "name": "8: mines and Geo-Sciences Bureau",
+          "amount_thousands": 1300266
+        },
+        {
+          "name": "13 Social Housing Finance Corporation",
+          "amount_thousands": 800000
+        },
+        {
+          "name": "9 National Housing Authority",
+          "amount_thousands": 765208
+        },
+        {
+          "name": "6 Development Academy of the Philippines",
+          "amount_thousands": 556484
+        },
+        {
+          "name": "12 Philippine Postal Corporation",
+          "amount_thousands": 541323
+        },
+        {
+          "name": "7 Home Guaranty Corporation",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "8 National Home Hortgage Finance Corporation",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "15 Subic Bay Metropolitan Authority",
+          "amount_thousands": 487296
+        },
+        {
+          "name": "5 Cultural Center of the Philippines",
+          "amount_thousands": 420173
+        },
+        {
+          "name": "16 Zamboanga City Special Economic Zone Authority",
+          "amount_thousands": 398239
+        },
+        {
+          "name": "1 Authority of the Freeport Area of Bataan",
+          "amount_thousands": 211530
+        },
+        {
+          "name": "14 Southern Philippines Oevelopment Authority",
+          "amount_thousands": 153505
+        },
+        {
+          "name": "National Water Resources Board",
+          "amount_thousands": 146241
+        },
+        {
+          "name": "3 Cagayan Economic Zone Authority",
+          "amount_thousands": 141240
+        },
+        {
+          "name": "Palawan Council for Sustainable Development Staff",
+          "amount_thousands": 111104
+        },
+        {
+          "name": "4 Credit Information Corporation",
+          "amount_thousands": 110311
+        },
+        {
+          "name": "11 Philippine Center for Economic Development",
+          "amount_thousands": 28255
+        }
+      ]
+    },
+    {
+      "name": "Department of Justice",
+      "amount_thousands": 21606856,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 7009535
+        },
+        {
+          "name": "Public Attorney S Office",
+          "amount_thousands": 4125895
+        },
+        {
+          "name": "Bureau of Corrections",
+          "amount_thousands": 4099807
+        },
+        {
+          "name": "National Bureau of Investigation",
+          "amount_thousands": 1830639
+        },
+        {
+          "name": "; Bureau of Immigration",
+          "amount_thousands": 1274384
+        },
+        {
+          "name": "Office of the Solicitor General",
+          "amount_thousands": 1001390
+        },
+        {
+          "name": "Land Registration Authority",
+          "amount_thousands": 999203
+        },
+        {
+          "name": "Parole and Probation Administration",
+          "amount_thousands": 920800
+        },
+        {
+          "name": "6; Office of the Government Corporate Counsel",
+          "amount_thousands": 212311
+        },
+        {
+          "name": ": Presidential Commission on Good Government",
+          "amount_thousands": 132892
+        }
+      ]
+    },
+    {
+      "name": "Department of Foreign Affairs",
+      "amount_thousands": 20482099,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 20347047
+        },
+        {
+          "name": "8 Foreign Service Institute",
+          "amount_thousands": 100262
+        },
+        {
+          "name": "0 - UNESCO National Commission of the Philippines",
+          "amount_thousands": 25065
+        },
+        {
+          "name": "Technical Cooperation Council of the Philippines",
+          "amount_thousands": 9725
+        }
+      ]
+    },
+    {
+      "name": "Congress of the Philippines",
+      "amount_thousands": 20313706,
+      "by_agency": [
+        {
+          "name": "Senate",
+          "amount_thousands": 62595414
+        },
+        {
+          "name": "House of Representatives",
+          "amount_thousands": 12740529
+        },
+        {
+          "name": "8; Commission on Appointments",
+          "amount_thousands": 842188
+        },
+        {
+          "name": "Senate Electoral Tribunal",
+          "amount_thousands": 275740
+        },
+        {
+          "name": "House Electoral Tribunal",
+          "amount_thousands": 195835
+        }
+      ]
+    },
+    {
+      "name": "Department of Science and Technology",
+      "amount_thousands": 20018936,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 5402119
+        },
+        {
+          "name": "Science Education Institute",
+          "amount_thousands": 4509060
+        },
+        {
+          "name": "Philippine Science High School",
+          "amount_thousands": 2614234
+        },
+        {
+          "name": "Services Administration",
+          "amount_thousands": 1613538
+        },
+        {
+          "name": "Resources Research and Development",
+          "amount_thousands": 1204966
+        },
+        {
+          "name": "Emerging Technology Research and Development",
+          "amount_thousands": 714578
+        },
+        {
+          "name": "Philippine Council for Health Research and Development",
+          "amount_thousands": 642118
+        },
+        {
+          "name": "Industrial Technology Development Institute",
+          "amount_thousands": 529981
+        },
+        {
+          "name": "Philippine Institute of Volcanology and Seismology",
+          "amount_thousands": 501978
+        },
+        {
+          "name": "Food and Nutrition Research Institute",
+          "amount_thousands": 500817
+        },
+        {
+          "name": "Advanced Science and Technology Institute",
+          "amount_thousands": 414642
+        },
+        {
+          "name": "Philippine Nuclear Research Institute",
+          "amount_thousands": 347733
+        },
+        {
+          "name": "Metals Industry Research and Development Center",
+          "amount_thousands": 253924
+        },
+        {
+          "name": "0 - Forest Products Research and Development Institute",
+          "amount_thousands": 246011
+        },
+        {
+          "name": "Philippine Textile Research Institute",
+          "amount_thousands": 129125
+        },
+        {
+          "name": "Science and Technology Information Institute",
+          "amount_thousands": 93703
+        },
+        {
+          "name": "National Research Council of the Philippines",
+          "amount_thousands": 91243
+        },
+        {
+          "name": "Technology Application and Promotion Institute 128",
+          "amount_thousands": 728
+        },
+        {
+          "name": "National Academy of Science and Technology 80 , \"",
+          "amount_thousands": 438
+        }
+      ]
+    },
+    {
+      "name": "National Disaster Risk Reduction and Management Fund",
+      "amount_thousands": 20000000
+    },
+    {
+      "name": "Department of Trade and Industry",
+      "amount_thousands": 18703162,
+      "by_agency": [
+        {
+          "name": "Technical Education and Skills Development Authority",
+          "amount_thousands": 12554663
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 4831643
+        },
+        {
+          "name": "Cooperative Developnent Authority",
+          "amount_thousands": 609145
+        },
+        {
+          "name": "Board of Investments",
+          "amount_thousands": 385553
+        },
+        {
+          "name": "Construction Industry Authority of the Philippines",
+          "amount_thousands": 123142
+        },
+        {
+          "name": "Philippine Trade Training Center",
+          "amount_thousands": 100910
+        },
+        {
+          "name": "Design Center of the Philippines",
+          "amount_thousands": 98106
+        }
+      ]
+    },
+    {
+      "name": "Department of Labor and Employment",
+      "amount_thousands": 16362936,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 11603002
+        },
+        {
+          "name": "National Labor Relations Commission",
+          "amount_thousands": 1513770
+        },
+        {
+          "name": "Professional Regulation Commission-",
+          "amount_thousands": 1130624
+        },
+        {
+          "name": "Overseas Workers Welfare Administration",
+          "amount_thousands": 1077144
+        },
+        {
+          "name": "Philippine Overseas Employment Administration",
+          "amount_thousands": 431419
+        },
+        {
+          "name": "National Conciliation and Hediation Board",
+          "amount_thousands": 237530
+        },
+        {
+          "name": "National Wages and Productivity Commission",
+          "amount_thousands": 222190
+        },
+        {
+          "name": "National Maritime Polytechnic",
+          "amount_thousands": 102814
+        },
+        {
+          "name": "Institute for Labor Studies",
+          "amount_thousands": 44443
+        }
+      ]
+    },
+    {
+      "name": "Contingent Fund",
+      "amount_thousands": 13000000
+    },
+    {
+      "name": "Commission on Audit",
+      "amount_thousands": 11925988
+    },
+    {
+      "name": "Commission on Elections",
+      "amount_thousands": 10178729
+    },
+    {
+      "name": "National Economic and Development Authority",
+      "amount_thousands": 8478646,
+      "by_agency": [
+        {
+          "name": "Philippine Statistics Authority",
+          "amount_thousands": 6629095
+        },
+        {
+          "name": "Office of the Director-General",
+          "amount_thousands": 1538187
+        },
+        {
+          "name": "PRESIOENTIAL COMMUNICATIONS OPERATIONS OFFICE (Pcoo)",
+          "amount_thousands": 726321
+        },
+        {
+          "name": "1 People S Television Network, Inc",
+          "amount_thousands": 726321
+        },
+        {
+          "name": "1 Philippine Institute for Development Studies",
+          "amount_thousands": 165694
+        },
+        {
+          "name": "Public-Private Partnership Center of the Philippines",
+          "amount_thousands": 157334
+        },
+        {
+          "name": "Tariff Commission",
+          "amount_thousands": 79347
+        },
+        {
+          "name": "1 Philippine Statistical Research and Training Institute",
+          "amount_thousands": 38386
+        },
+        {
+          "name": "Philippine National Yolunteer Service Coordinating Agency",
+          "amount_thousands": 36297
+        }
+      ]
+    },
+    {
+      "name": "Department of Agrarian Reform",
+      "amount_thousands": 7832478,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 7832478
+        }
+      ]
+    },
+    {
+      "name": "Department of Information and Communications Technology",
+      "amount_thousands": 7073207,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 6278608
+        },
+        {
+          "name": "National Telecommunications Commission",
+          "amount_thousands": 537380
+        },
+        {
+          "name": "8: National Privacy Commission",
+          "amount_thousands": 225820
+        },
+        {
+          "name": "Cybercrime Investigation and Coordination Center",
+          "amount_thousands": 31399
+        }
+      ]
+    },
+    {
+      "name": "Office of the President",
+      "amount_thousands": 6773939,
+      "by_agency": [
+        {
+          "name": "The President' s Offices",
+          "amount_thousands": 6773939
+        }
+      ]
+    },
+    {
+      "name": "Office of the Ombudsman",
+      "amount_thousands": 4585158
+    },
+    {
+      "name": "Department of Budget and Management",
+      "amount_thousands": 3577627,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 3531294
+        },
+        {
+          "name": "Government Procurement Policy Board Technical Support Office",
+          "amount_thousands": 46333
+        }
+      ]
+    },
+    {
+      "name": "Department of Tourism",
+      "amount_thousands": 3380794,
+      "by_agency": [
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 3081105
+        },
+        {
+          "name": "National Parks Development Committee",
+          "amount_thousands": 235840
+        },
+        {
+          "name": "Intramuros Administration",
+          "amount_thousands": 63849
+        }
+      ]
+    },
+    {
+      "name": "Department of Energy",
+      "amount_thousands": 2096930,
+      "by_agency": [
+        {
+          "name": "DEBT SERVICE PRINCIPAL AMORTIZATION",
+          "amount_thousands": 488336000
+        },
+        {
+          "name": "Total",
+          "amount_thousands": 45685498
+        },
+        {
+          "name": "II_ National Power Corporation",
+          "amount_thousands": 26136570
+        },
+        {
+          "name": "National Electrification Administration",
+          "amount_thousands": 19054839
+        },
+        {
+          "name": "Office of the Secretary",
+          "amount_thousands": 1343444
+        },
+        {
+          "name": "Philippine National Oil Company",
+          "amount_thousands": 494089
+        }
+      ]
+    },
+    {
+      "name": "Civil Service Commission",
+      "amount_thousands": 1801810,
+      "by_agency": [
+        {
+          "name": "Civil Service Commission",
+          "amount_thousands": 1709703
+        },
+        {
+          "name": "Career Executive Service Board",
+          "amount_thousands": 92107
+        }
+      ]
+    },
+    {
+      "name": "Presidential Communications Operations Office",
+      "amount_thousands": 1455355,
+      "by_agency": [
+        {
+          "name": "Presidential Communications Operations Office (Proper )",
+          "amount_thousands": 393677
+        },
+        {
+          "name": "Bureau of Broadcast Services",
+          "amount_thousands": 378072
+        },
+        {
+          "name": "Philippine Information Agency",
+          "amount_thousands": 319730
+        },
+        {
+          "name": "Presidential Broadcast Staff (RTvM",
+          "amount_thousands": 200217
+        },
+        {
+          "name": "News and Information Bureau",
+          "amount_thousands": 117718
+        },
+        {
+          "name": "Bureau of Communications Services",
+          "amount_thousands": 35555
+        },
+        {
+          "name": "0 Nationa] Printing Office",
+          "amount_thousands": 10386
+        }
+      ]
+    },
+    {
+      "name": "Commission on Human Rights",
+      "amount_thousands": 830996,
+      "by_agency": [
+        {
+          "name": "Commission on Human Rights",
+          "amount_thousands": 799498
+        },
+        {
+          "name": "Human Rights violations Victims Memorial Commission 31",
+          "amount_thousands": 498
+        }
+      ]
+    },
+    {
+      "name": "Office of the Vice-President",
+      "amount_thousands": 663381
+    },
+    {
+      "name": "Joint Legislative-Executive Councils",
+      "amount_thousands": 3755,
+      "by_agency": [
+        {
+          "name": "Legislative-Executive Development Advisory Council",
+          "amount_thousands": 3755
+        }
+      ]
+    }
+  ],
+  "by_exp_class": [
+    {
+      "name": "Personnel Services",
+      "amount_thousands": 1416692661
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 1239599371
+    },
+    {
+      "name": "Maintenance and Other Operating Expenses",
+      "amount_thousands": 966529465
+    },
+    {
+      "name": "Financial Expenses",
+      "amount_thousands": 2801193
+    }
+  ],
+  "by_region": [],
+  "by_fund_subcat": [],
+  "headlines": {
+    "wages": 1138065753,
+    "operations": 794115097,
+    "capital": 703693631,
+    "debt_service": 399571000,
+    "transfers_lgu": 575520580
+  },
+  "by_function": [
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 639241666,
+      "color": "#7B6CF6",
+      "top_departments": []
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "amount_thousands": 617059811,
+      "color": "#FCD116",
+      "top_departments": []
+    },
+    {
+      "name": "Education",
+      "amount_thousands": 565827131,
+      "color": "#0038A8",
+      "top_departments": []
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 399571000,
+      "color": "#1F2937",
+      "top_departments": []
+    },
+    {
+      "name": "Social Protection",
+      "amount_thousands": 325329587,
+      "color": "#9FD3C7",
+      "top_departments": []
+    },
+    {
+      "name": "Public Order & Safety",
+      "amount_thousands": 293366115,
+      "color": "#475569",
+      "top_departments": []
+    },
+    {
+      "name": "General Public Services",
+      "amount_thousands": 272908372,
+      "color": "#94A3B8",
+      "top_departments": []
+    },
+    {
+      "name": "Other Economic Affairs",
+      "amount_thousands": 269197201,
+      "color": "#FFB454",
+      "top_departments": []
+    },
+    {
+      "name": "Multi-sector / Other",
+      "amount_thousands": 228252796,
+      "color": "#CBD5E1",
+      "top_departments": []
+    },
+    {
+      "name": "Defense",
+      "amount_thousands": 186222193,
+      "color": "#0A2A66",
+      "top_departments": []
+    },
+    {
+      "name": "Health",
+      "amount_thousands": 98565797,
+      "color": "#CE1126",
+      "top_departments": []
+    },
+    {
+      "name": "Agriculture & Environment",
+      "amount_thousands": 77085024,
+      "color": "#5BC58F",
+      "top_departments": []
+    }
+  ],
+  "by_economic": [
+    {
+      "name": "Wages & Personnel",
+      "amount_thousands": 1138065753,
+      "color": "#0038A8"
+    },
+    {
+      "name": "Operations (MOOE)",
+      "amount_thousands": 794115097,
+      "color": "#CE1126"
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 703693631,
+      "color": "#FCD116"
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 399571000,
+      "color": "#475569"
+    },
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 575520580,
+      "color": "#9FD3C7"
+    },
+    {
+      "name": "Other Automatic Appropriations",
+      "amount_thousands": 49281658,
+      "color": "#94A3B8"
+    }
+  ],
+  "aa_breakdown": {
+    "purpose_totals_php_thousand": {
+      "Debt Service - Interest Payment": 399571000,
+      "Internal Revenue Allotment": 575520580,
+      "Pension under R.A. 2087 (E.O. 145, s. 1987)": 480,
+      "Customs Duties and Taxes (Tax Expenditures)": 14500000,
+      "Net Lending": 14500000,
+      "Retirement and Life Insurance Premiums": 47163558,
+      "Special Account": 20281178
+    },
+    "total_php_thousand": 1071536796,
+    "source": "FY2019 GAA Vol I-B Annex (Official Gazette April 29, 2019, p. 1074) — Automatic Appropriations purpose-by-purpose table",
+    "source_url": "https://www.dbm.gov.ph/wp-content/uploads/GAA/GAA2019/VolumeI/ANNEX.pdf"
+  },
+  "coverage_note": "FY2019 by_department / by_function reconstructed from OCR of the FY2019 GAA Vol I-B 'Summary of New Appropriations' (etl/ocr/run_fy2019_summary.py) plus the Vol I-B Annex Automatic Appropriations table. headlines / by_economic / total_thousands from earlier patch (etl/patch_fy2019_aa.py) sourced from BESF Table B.1 (PROPOSED-level expense classes) and the Annex (enacted AA totals). by_department sums to ~₱3,973 B — slightly higher than the BESF-anchored total_thousands of ₱3,660 B because the SummaryFY OCR captures Congressional adjustments not in BESF PROPOSED. Headlines and donut charts use the BESF values so AA-side amounts (debt-service interest, IRA) match the Annex exactly; per-department drill-downs use the enacted-level OCR values. Sub-program detail inside individual departments still requires re-OCR of per-department PDFs (tracked in etl/ocr/WORKSTREAM.md). Per-department agency-level breakdowns extracted from the SummaryFY OCR (etl/patch_fy2019_agencies.py); each by_department entry now carries a by_agency array. Sub-program / line-item detail inside each agency still requires OCR of per-department PDFs (queued).\nDepEd program-level breakdown added 2026-05-10. Source: GAA FY2019 Vol I-B per-department PDF (DEPED.pdf, 137 pages, scanned). Method: targeted OCR of agency-level by-Program summary tables (pp. 5, 122, 125, 128, 130, 133, 136) via easyocr + dbm_dept_pages_parser, with manual transcription of program totals from the same source. Agency totals reconcile to existing dashboard values; program totals reconcile to agency totals within rounding.\n5-dept program-level breakdown (DPWH/DILG/DND/DSWD/DOH) added 2026-05-11. Source: GAA FY2019 Vol I-B per-department PDFs in etl/_fy2019_dept_ocr/. Method: targeted OCR of GENERAL SUMMARY pages + agency-level by-Program summary pages + visual transcription via PDF render-and-read pass. All agency totals reconcile to summary by_department within rounding; all program totals reconcile to agency totals within ~5% (residual estimates flagged confidence='low' in note). See etl/ocr/DEPT_PARSER_NOTES.md for per-dept layout description.",
+  "patched_at": "2026-05-10T04:50:15.117851+00:00"
+}

@@ -1,0 +1,669 @@
+{
+  "year": 2011,
+  "total_thousands": 1696908492,
+  "n_departments": 47,
+  "n_agencies": 322,
+  "n_programs": 11479,
+  "n_fund_subcats": 5,
+  "by_department": [
+    {
+      "name": "Debt Service Fund-Interest Payment",
+      "amount_thousands": 357090000
+    },
+    {
+      "name": "Allocations to Local Government Units (ALGU)",
+      "amount_thousands": 300004095
+    },
+    {
+      "name": "Department of Education (DepEd)",
+      "amount_thousands": 206271018
+    },
+    {
+      "name": "Department of Public Works and Highways (DPWH)",
+      "amount_thousands": 110629868
+    },
+    {
+      "name": "Department of National Defense (DND)",
+      "amount_thousands": 104670108
+    },
+    {
+      "name": "Department of the Interior and Local Government (DILG)",
+      "amount_thousands": 88173616
+    },
+    {
+      "name": "Miscellaneous Personnel Benefits Fund",
+      "amount_thousands": 71700870
+    },
+    {
+      "name": "Unprogrammed Fund",
+      "amount_thousands": 66908492
+    },
+    {
+      "name": "Department of Agriculture (DA)",
+      "amount_thousands": 37698376
+    },
+    {
+      "name": "Retirement Benefits Fund (Pension and Gratuity Fund)",
+      "amount_thousands": 35000000
+    },
+    {
+      "name": "Department of Social Welfare and Development (DSWD)",
+      "amount_thousands": 34319418
+    },
+    {
+      "name": "Department of Health (DOH)",
+      "amount_thousands": 33331691
+    },
+    {
+      "name": "Department of Transportation (DOTr)",
+      "amount_thousands": 32346069
+    },
+    {
+      "name": "Priority Development Assistance Fund",
+      "amount_thousands": 24820000
+    },
+    {
+      "name": "State Universities and Colleges (SUCs)",
+      "amount_thousands": 23407195
+    },
+    {
+      "name": "Department of Agrarian Reform (DAR)",
+      "amount_thousands": 16705416
+    },
+    {
+      "name": "Tax Expenditures Fund",
+      "amount_thousands": 15000000
+    },
+    {
+      "name": "The Judiciary (JUD)",
+      "amount_thousands": 14307390
+    },
+    {
+      "name": "Department of Environment and Natural Resources (DENR)",
+      "amount_thousands": 13077523
+    },
+    {
+      "name": "Department of Finance (DOF)",
+      "amount_thousands": 12226320
+    },
+    {
+      "name": "Autonomous Region in Muslim Mindanao (ARMM)",
+      "amount_thousands": 11852801
+    },
+    {
+      "name": "Department of Foreign Affairs (DFA)",
+      "amount_thousands": 11101166
+    },
+    {
+      "name": "Budgetary Support to Government Corporations (BSGC)",
+      "amount_thousands": 8282361
+    },
+    {
+      "name": "Congress of the Philippines (CONGRESS)",
+      "amount_thousands": 7738033
+    },
+    {
+      "name": "Department of Justice (DOJ)",
+      "amount_thousands": 7697785
+    },
+    {
+      "name": "Department of Labor and Employment (DOLE)",
+      "amount_thousands": 6623653
+    },
+    {
+      "name": "Department of Science and Technology (DOST)",
+      "amount_thousands": 6096353
+    },
+    {
+      "name": "Other Executive Offices (OEOs)",
+      "amount_thousands": 5779082
+    },
+    {
+      "name": "Calamity Fund",
+      "amount_thousands": 5000000
+    },
+    {
+      "name": "Commission on Audit (COA)",
+      "amount_thousands": 4493173
+    },
+    {
+      "name": "Office of the President (OP)",
+      "amount_thousands": 4193781
+    },
+    {
+      "name": "International Commitments Fund",
+      "amount_thousands": 3174820
+    },
+    {
+      "name": "Department of Trade and Industry (DTI)",
+      "amount_thousands": 2563341
+    },
+    {
+      "name": "Commission on Elections (COMELEC)",
+      "amount_thousands": 2380683
+    },
+    {
+      "name": "Department of Economy, Planning, and Development (DEPDev)",
+      "amount_thousands": 2187700
+    },
+    {
+      "name": "Department of Tourism (DOT)",
+      "amount_thousands": 1452015
+    },
+    {
+      "name": "Department of Energy (DOE)",
+      "amount_thousands": 1366640
+    },
+    {
+      "name": "E-Government Fund",
+      "amount_thousands": 1190000
+    },
+    {
+      "name": "Office of the Ombudsman (OMB)",
+      "amount_thousands": 1109289
+    },
+    {
+      "name": "DepEd - School Building Program",
+      "amount_thousands": 1000000
+    },
+    {
+      "name": "Contingent Fund",
+      "amount_thousands": 1000000
+    },
+    {
+      "name": "Presidential Communications Office (PCO)",
+      "amount_thousands": 976157
+    },
+    {
+      "name": "Department of Budget and Management (DBM)",
+      "amount_thousands": 780880
+    },
+    {
+      "name": "Civil Service Commission (CSC)",
+      "amount_thousands": 713858
+    },
+    {
+      "name": "Commission on Human Rights (CHR)",
+      "amount_thousands": 285466
+    },
+    {
+      "name": "Office of the Vice-President (OVP)",
+      "amount_thousands": 179805
+    },
+    {
+      "name": "Joint Legislative-Executive Councils",
+      "amount_thousands": 2185
+    }
+  ],
+  "by_exp_class": [
+    {
+      "name": "Maintenance and Other Operating Expenses",
+      "amount_thousands": 908349676
+    },
+    {
+      "name": "Personnel Services",
+      "amount_thousands": 549044957
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 239513859
+    }
+  ],
+  "by_region": [
+    {
+      "code": "13",
+      "name": "Central Office / Nationwide",
+      "geojson_name": null,
+      "amount_thousands": 1374808746
+    },
+    {
+      "code": "03",
+      "name": "Region III (Central Luzon)",
+      "geojson_name": "Central Luzon (Region III)",
+      "amount_thousands": 29633699
+    },
+    {
+      "code": "06",
+      "name": "Region VI (Western Visayas)",
+      "geojson_name": "Western Visayas (Region VI)",
+      "amount_thousands": 24965142
+    },
+    {
+      "code": "04",
+      "name": "Region IV-A (CALABARZON)",
+      "geojson_name": "CALABARZON (Region IV-A)",
+      "amount_thousands": 24081099
+    },
+    {
+      "code": "05",
+      "name": "Region V (Bicol)",
+      "geojson_name": "Bicol Region (Region V)",
+      "amount_thousands": 21987765
+    },
+    {
+      "code": "01",
+      "name": "Region I (Ilocos)",
+      "geojson_name": "Ilocos Region (Region I)",
+      "amount_thousands": 21039453
+    },
+    {
+      "code": "07",
+      "name": "Region VII (Central Visayas)",
+      "geojson_name": "Central Visayas (Region VII)",
+      "amount_thousands": 20001380
+    },
+    {
+      "code": "10",
+      "name": "Region X (Northern Mindanao)",
+      "geojson_name": "Northern Mindanao (Region X)",
+      "amount_thousands": 18565207
+    },
+    {
+      "code": "08",
+      "name": "Region VIII (Eastern Visayas)",
+      "geojson_name": "Eastern Visayas (Region VIII)",
+      "amount_thousands": 16578045
+    },
+    {
+      "code": "02",
+      "name": "Region II (Cagayan Valley)",
+      "geojson_name": "Cagayan Valley (Region II)",
+      "amount_thousands": 13750727
+    },
+    {
+      "code": "11",
+      "name": "Region XI (Davao)",
+      "geojson_name": "Davao Region (Region XI)",
+      "amount_thousands": 12739951
+    },
+    {
+      "code": "09",
+      "name": "Region IX (Zamboanga Peninsula)",
+      "geojson_name": "Zamboanga Peninsula (Region IX)",
+      "amount_thousands": 12508661
+    },
+    {
+      "code": "12",
+      "name": "Region XII (SOCCSKSARGEN)",
+      "geojson_name": "SOCCSKSARGEN (Region XII)",
+      "amount_thousands": 12344847
+    },
+    {
+      "code": "17",
+      "name": "Region IV-B (MIMAROPA)",
+      "geojson_name": "MIMAROPA (Region IV-B)",
+      "amount_thousands": 11285670
+    },
+    {
+      "code": "16",
+      "name": "Region XIII (Caraga)",
+      "geojson_name": "Caraga (Region XIII)",
+      "amount_thousands": 10765053
+    }
+  ],
+  "by_fund_subcat": [
+    {
+      "name": "AGENCY",
+      "amount_thousands": 693657676
+    },
+    {
+      "name": "SPF",
+      "amount_thousands": 581884182
+    },
+    {
+      "name": "SUBSPF",
+      "amount_thousands": 308286456
+    },
+    {
+      "name": "SUBAGENCY",
+      "amount_thousands": 104631762
+    },
+    {
+      "name": "DEPARTMENT",
+      "amount_thousands": 8448416
+    }
+  ],
+  "headlines": {
+    "wages": 549044957,
+    "operations": 258962474,
+    "capital": 239513859,
+    "debt_service": 357090000,
+    "transfers_lgu": 292297202
+  },
+  "by_function": [
+    {
+      "name": "Education",
+      "amount_thousands": 236403464,
+      "color": "#0038A8",
+      "top_departments": [
+        {
+          "name": "Department of Education (DepEd)",
+          "amount_thousands": 206271018
+        },
+        {
+          "name": "State Universities and Colleges (SUCs)",
+          "amount_thousands": 23407195
+        },
+        {
+          "name": "Department of Labor and Employment (DOLE)",
+          "amount_thousands": 2961423
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 2002549
+        },
+        {
+          "name": "DepEd - School Building Program",
+          "amount_thousands": 1000000
+        },
+        {
+          "name": "Department of Science and Technology (DOST)",
+          "amount_thousands": 516279
+        },
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 245000
+        }
+      ]
+    },
+    {
+      "name": "Infrastructure & Transport",
+      "amount_thousands": 143106937,
+      "color": "#CE1126",
+      "top_departments": [
+        {
+          "name": "Department of Public Works and Highways (DPWH)",
+          "amount_thousands": 110629868
+        },
+        {
+          "name": "Department of Transportation (DOTr)",
+          "amount_thousands": 32346069
+        },
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 131000
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "amount_thousands": 33994073,
+      "color": "#E08A93",
+      "top_departments": [
+        {
+          "name": "Department of Health (DOH)",
+          "amount_thousands": 33331691
+        },
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 442360
+        },
+        {
+          "name": "Department of Science and Technology (DOST)",
+          "amount_thousands": 220022
+        }
+      ]
+    },
+    {
+      "name": "Social Protection",
+      "amount_thousands": 70199102,
+      "color": "#F2B5A0",
+      "top_departments": [
+        {
+          "name": "Retirement Benefits Fund (Pension and Gratuity Fund)",
+          "amount_thousands": 35000000
+        },
+        {
+          "name": "Department of Social Welfare and Development (DSWD)",
+          "amount_thousands": 34319418
+        },
+        {
+          "name": "Department of Environment and Natural Resources (DENR)",
+          "amount_thousands": 691127
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 188557
+        }
+      ]
+    },
+    {
+      "name": "Public Order & Safety",
+      "amount_thousands": 111482823,
+      "color": "#0A2A66",
+      "top_departments": [
+        {
+          "name": "Department of the Interior and Local Government (DILG)",
+          "amount_thousands": 87673616
+        },
+        {
+          "name": "The Judiciary (JUD)",
+          "amount_thousands": 14307390
+        },
+        {
+          "name": "Department of Justice (DOJ)",
+          "amount_thousands": 7697785
+        },
+        {
+          "name": "Office of the Ombudsman (OMB)",
+          "amount_thousands": 1109289
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 694743
+        }
+      ]
+    },
+    {
+      "name": "Defense",
+      "amount_thousands": 105175749,
+      "color": "#7C9BD4",
+      "top_departments": [
+        {
+          "name": "Department of National Defense (DND)",
+          "amount_thousands": 104670108
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 505641
+        }
+      ]
+    },
+    {
+      "name": "Agriculture & Environment",
+      "amount_thousands": 68921769,
+      "color": "#9FD3C7",
+      "top_departments": [
+        {
+          "name": "Department of Agriculture (DA)",
+          "amount_thousands": 37698376
+        },
+        {
+          "name": "Department of Agrarian Reform (DAR)",
+          "amount_thousands": 16705416
+        },
+        {
+          "name": "Department of Environment and Natural Resources (DENR)",
+          "amount_thousands": 12386396
+        },
+        {
+          "name": "Department of Science and Technology (DOST)",
+          "amount_thousands": 1377396
+        },
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 715305
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 38880
+        }
+      ]
+    },
+    {
+      "name": "Other Economic Affairs",
+      "amount_thousands": 15662912,
+      "color": "#A8B89E",
+      "top_departments": [
+        {
+          "name": "Department of Science and Technology (DOST)",
+          "amount_thousands": 3982656
+        },
+        {
+          "name": "Department of Labor and Employment (DOLE)",
+          "amount_thousands": 3662230
+        },
+        {
+          "name": "Department of Trade and Industry (DTI)",
+          "amount_thousands": 2563341
+        },
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 2373696
+        },
+        {
+          "name": "Department of Tourism (DOT)",
+          "amount_thousands": 1452015
+        },
+        {
+          "name": "Department of Energy (DOE)",
+          "amount_thousands": 1366640
+        },
+        {
+          "name": "Other Executive Offices (OEOs)",
+          "amount_thousands": 262334
+        }
+      ]
+    },
+    {
+      "name": "Housing & Community",
+      "amount_thousands": 4375000,
+      "color": "#D8A77B",
+      "top_departments": [
+        {
+          "name": "Budgetary Support to Government Corporations (BSGC)",
+          "amount_thousands": 4375000
+        }
+      ]
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 357090000,
+      "color": "#6B7280",
+      "top_departments": [
+        {
+          "name": "Debt Service Fund-Interest Payment",
+          "amount_thousands": 357090000
+        }
+      ]
+    },
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 300699612,
+      "color": "#FCD116",
+      "top_departments": [
+        {
+          "name": "Allocations to Local Government Units (ALGU)",
+          "amount_thousands": 300004095
+        },
+        {
+          "name": "Department of the Interior and Local Government (DILG)",
+          "amount_thousands": 500000
+        },
+        {
+          "name": "Autonomous Region in Muslim Mindanao (ARMM)",
+          "amount_thousands": 109340
+        },
+        {
+          "name": "Commission on Audit (COA)",
+          "amount_thousands": 86177
+        }
+      ]
+    },
+    {
+      "name": "General Public Services",
+      "amount_thousands": 146325098,
+      "color": "#94A3B8",
+      "top_departments": [
+        {
+          "name": "Miscellaneous Personnel Benefits Fund",
+          "amount_thousands": 71700870
+        },
+        {
+          "name": "Tax Expenditures Fund",
+          "amount_thousands": 15000000
+        },
+        {
+          "name": "Department of Finance (DOF)",
+          "amount_thousands": 12226320
+        },
+        {
+          "name": "Department of Foreign Affairs (DFA)",
+          "amount_thousands": 11101166
+        },
+        {
+          "name": "Congress of the Philippines (CONGRESS)",
+          "amount_thousands": 7738033
+        },
+        {
+          "name": "Calamity Fund",
+          "amount_thousands": 5000000
+        },
+        {
+          "name": "Commission on Audit (COA)",
+          "amount_thousands": 4406996
+        },
+        {
+          "name": "Office of the President (OP)",
+          "amount_thousands": 4193781
+        }
+      ]
+    },
+    {
+      "name": "Multi-sector / Other",
+      "amount_thousands": 103471953,
+      "color": "#CBD5E1",
+      "top_departments": [
+        {
+          "name": "Unprogrammed Fund",
+          "amount_thousands": 66908492
+        },
+        {
+          "name": "Priority Development Assistance Fund",
+          "amount_thousands": 24820000
+        },
+        {
+          "name": "Autonomous Region in Muslim Mindanao (ARMM)",
+          "amount_thousands": 11743461
+        }
+      ]
+    }
+  ],
+  "by_economic": [
+    {
+      "name": "Wages & Personnel",
+      "amount_thousands": 549044957,
+      "color": "#0038A8"
+    },
+    {
+      "name": "Operations (MOOE)",
+      "amount_thousands": 258962474,
+      "color": "#7C9BD4"
+    },
+    {
+      "name": "Capital Outlays",
+      "amount_thousands": 239513859,
+      "color": "#FCD116"
+    },
+    {
+      "name": "Debt Service",
+      "amount_thousands": 357090000,
+      "color": "#6B7280"
+    },
+    {
+      "name": "Transfers to LGUs",
+      "amount_thousands": 292297202,
+      "color": "#9FD3C7"
+    }
+  ]
+}

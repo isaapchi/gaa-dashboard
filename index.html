@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halaga &middot; Philippine Budget &middot; The Riso Almanac</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            iris: { DEFAULT: '#e25034', violet: '#e25034', deep: '#c33d22', soft: '#f5d3c9' },
+            cream: { canvas: '#f1e8d2', 50: '#f1e8d2' },
+            peach: { wash: '#ece1c3', deep: '#d8c8a0', blush: '#f5d3c9' },
+            linen: { edge: '#c8b988', mist: '#e6d8b3' },
+            success: { mint: '#3a5a3a', soft: '#cdd7c8' },
+            alert:   { coral: '#e25034', soft: '#f5d3c9' },
+            warning: { amber: '#e8b94a', soft: '#f6e3b3' },
+            ink:   { 900: '#1a1611', 700: '#2a221a', 500: '#7a6a4c', 400: '#7a6a4c' },
+            paper: { 50: '#f1e8d2', 100: '#e6d8b3', 200: '#d8c8a0' },
+            ph: {
+              red: '#e25034', redSoft: '#f5d3c9',
+              blue: '#1d3da8', blueSoft: '#cfd6ef',
+              gold: '#e8b94a', goldSoft: '#f6e3b3',
+              white: '#f1e8d2', navy: '#1d3da8',
+              mint: '#3a5a3a', coral: '#e25034',
+            },
+            status: {
+              loading: '#e8b94a', ok: '#3a5a3a', error: '#e25034', info: '#1d3da8',
+              loadingSoft: '#f6e3b3', okSoft: '#cdd7c8', errorSoft: '#f5d3c9',
+            },
+          },
+          fontFamily: {
+            sans:    ['Space Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['DM Serif Text', 'DM Serif Display', 'Georgia', 'serif'],
+            serif:   ['DM Serif Text', 'Georgia', 'serif'],
+            mono:    ['Space Mono', 'IBM Plex Mono', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: { soft: 'none' },
+        },
+      },
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="text-ink-900 antialiased min-h-screen riso">
+
+  <div class="min-h-screen flex flex-col">
+
+    <header class="masthead">
+      <div class="riso-grain" aria-hidden="true"></div>
+      <div class="max-w-screen-2xl mx-auto px-8 pt-5 pb-3 relative">
+
+        <div class="masthead-title-row">
+          <div class="masthead-brand">
+            <div class="riso-logo" aria-label="Halaga logo">
+              <svg width="44" height="44" viewBox="0 0 32 32" aria-hidden="true">
+                <circle cx="16" cy="16" r="6" fill="#e8b94a" stroke="#1a1611" stroke-width="1"/>
+                <g stroke="#1a1611" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="16" y1="1.5" x2="16" y2="5.5"/>
+                  <line x1="16" y1="26.5" x2="16" y2="30.5"/>
+                  <line x1="1.5" y1="16" x2="5.5" y2="16"/>
+                  <line x1="26.5" y1="16" x2="30.5" y2="16"/>
+                </g>
+                <g stroke="#e25034" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="5.5" y1="5.5" x2="8.3" y2="8.3"/>
+                  <line x1="23.7" y1="23.7" x2="26.5" y2="26.5"/>
+                  <line x1="26.5" y1="5.5" x2="23.7" y2="8.3"/>
+                  <line x1="5.5" y1="26.5" x2="8.3" y2="23.7"/>
+                </g>
+              </svg>
+            </div>
+            <div>
+              <div class="masthead-title">Halaga<span class="riso-period">.</span></div>
+              <div class="masthead-sub smallcaps mono">The People&rsquo;s Budget Almanac</div>
+            </div>
+          </div>
+
+          <div class="masthead-right">
+            <nav id="nav" role="navigation" aria-label="Dashboard sections" class="masthead-subnav">
+              <a data-view="overview"    href="#overview"    class="nav-item nav-active" aria-label="Overview">Overview</a>
+              <div class="nav-item nav-dropdown" tabindex="0" role="button" aria-haspopup="menu" aria-expanded="false" aria-label="View — open submenu">
+                <span class="nav-dropdown-label">View</span>
+                <span class="nav-dropdown-caret" aria-hidden="true">&#9662;</span>
+                <div class="nav-dropdown-menu" role="menu">
+                  <a data-view="timeline"    href="#timeline"    role="menuitem" aria-label="Across Time">Across Time</a>
+                  <a data-view="departments" href="#departments" role="menuitem" aria-label="Allocations">Allocations</a>
+                  <a data-view="regions"     href="#regions"     role="menuitem" aria-label="By Region">By Region</a>
+                  <a data-view="expense"     href="#expense"     role="menuitem" aria-label="Expense Class">Expense Class</a>
+                </div>
+              </div>
+              <a data-view="compare"     href="#compare"     class="nav-item"           aria-label="Compare NEP versus enacted GAA">Compare</a>
+              <a data-view="explorer"    href="#explorer"    class="nav-item"           aria-label="Explorer">Explorer</a>
+              <a data-view="about"       href="#about"       class="nav-item"           aria-label="About this dashboard">About</a>
+            </nav>
+            <div class="flex items-center gap-2 shrink-0" id="year-controls">
+              <select id="year-select" class="select" style="max-width:108px" aria-label="Select fiscal year"></select>
+              <div class="data-status-pill" id="data-status" role="status" aria-live="polite">
+                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #e8b94a;"></span>
+                <span>Loading data&hellip;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="flex-1 min-w-0">
+      <div class="max-w-screen-2xl mx-auto">
+
+        <header class="px-8 pt-8 pb-2">
+          <div>
+            <div class="page-kicker" id="page-kicker"></div>
+            <h1 class="page-title" id="page-title">Overview</h1>
+          </div>
+        </header>
+
+        <section class="px-8 py-6" id="view-root">
+          <!-- views render here -->
+        </section>
+
+        <footer class="riso-colophon px-8 pt-8 pb-10 relative">
+          <div class="flex justify-end items-center mono smallcaps text-[11px]" style="color:#7a6a4c">
+            <div>Source &middot; DBM GAA</div>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const _v = Date.now();
+    const _s = document.createElement('script');
+    _s.type = 'module';
+    _s.src = `js/app.js?v=${_v}`;
+    document.body.appendChild(_s);
+  </script>
+</body>
+</html>

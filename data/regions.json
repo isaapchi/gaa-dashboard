@@ -1,0 +1,43 @@
+{
+  "uacs_to_name": {
+    "00": "NCR",
+    "01": "Region I (Ilocos)",
+    "02": "Region II (Cagayan Valley)",
+    "03": "Region III (Central Luzon)",
+    "04": "Region IV-A (CALABARZON)",
+    "05": "Region V (Bicol)",
+    "06": "Region VI (Western Visayas)",
+    "07": "Region VII (Central Visayas)",
+    "08": "Region VIII (Eastern Visayas)",
+    "09": "Region IX (Zamboanga Peninsula)",
+    "10": "Region X (Northern Mindanao)",
+    "11": "Region XI (Davao)",
+    "12": "Region XII (SOCCSKSARGEN)",
+    "13": "Central Office / Nationwide",
+    "14": "CAR (Cordillera)",
+    "15": "ARMM (legacy)",
+    "16": "Region XIII (Caraga)",
+    "17": "Region IV-B (MIMAROPA)",
+    "18": "BARMM",
+    "19": "Negros Island Region"
+  },
+  "uacs_to_geojson_name": {
+    "00": "Metropolitan Manila",
+    "01": "Ilocos Region (Region I)",
+    "02": "Cagayan Valley (Region II)",
+    "03": "Central Luzon (Region III)",
+    "04": "CALABARZON (Region IV-A)",
+    "05": "Bicol Region (Region V)",
+    "06": "Western Visayas (Region VI)",
+    "07": "Central Visayas (Region VII)",
+    "08": "Eastern Visayas (Region VIII)",
+    "09": "Zamboanga Peninsula (Region IX)",
+    "10": "Northern Mindanao (Region X)",
+    "11": "Davao Region (Region XI)",
+    "12": "SOCCSKSARGEN (Region XII)",
+    "14": "Cordillera Administrative Region (CAR)",
+    "16": "Caraga (Region XIII)",
+    "17": "MIMAROPA (Region IV-B)",
+    "18": "Autonomous Region of Muslim Mindanao (ARMM)"
+  }
+}

@@ -1,0 +1,1115 @@
+/* Riso Almanac — risograph-zine redesign of the GAA dashboard.
+   Adopted from "Halaga Overview Redesigns - 03 - Riso Almanac" canvas.
+   Warm off-white paper, two-ink overprint (scarlet + cobalt) with
+   mix-blend-mode: multiply, grainy SVG-noise overlay, chunky serif
+   (DM Serif Text) display + Space Grotesk body + Space Mono labels.
+   Chapter numbering replaces newspaper section rules. */
+
+:root {
+  --status-loading: #e8b94a;
+  --status-ok:      #3a5a3a;
+  --status-error:   #e25034;
+  --status-info:    #1d3da8;
+
+  /* Riso palette */
+  --paper:         #f1e8d2;   /* warm off-white paper */
+  --paper-soft:    #ece1c3;   /* slightly darker tint */
+  --paper-edge:    #d8c8a0;
+  --ink:           #1a1611;
+  --ink-soft:      #2a221a;
+  --muted:         #7a6a4c;
+  --scarlet:       #e25034;   /* first ink */
+  --cobalt:        #1d3da8;   /* second ink */
+  --ochre:         #e8b94a;   /* third (rare) */
+  --forest:        #3a5a3a;
+  --rule:          #1a1611;
+
+  /* Aliases preserved so legacy class names resolve sensibly */
+  --news-red:      #e25034;
+  --news-blue:     #1d3da8;
+  --news-saffron:  #e8b94a;
+  --news-palm:     #3a5a3a;
+  --iris-primary:  #e25034;
+  --iris-deep:     #c33d22;
+  --iris-soft:     #f5d3c9;
+  --cream-canvas:  #f1e8d2;
+  --linen-edge:    #c8b988;
+  --linen-mist:    #e6d8b3;
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  font-feature-settings: 'ss01';
+  position: relative;
+}
+
+/* Tailwind helpers re-aimed at Riso paper */
+.bg-cream-canvas { background: var(--paper) !important; }
+.bg-white { background: var(--paper-soft) !important; }
+
+/* ── Riso grain overlay — fixed full-viewport SVG noise.
+   Applied via a body-level pseudo-element so every section inherits the
+   risograph texture. Pointer-events:none keeps it non-interactive. */
+body.riso::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22240%22%20height%3D%22240%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.4%22%20numOctaves%3D%222%22%20seed%3D%223%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200.08%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+.riso-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22240%22%20height%3D%22240%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.6%22%20numOctaves%3D%222%22%20seed%3D%225%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200.10%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+/* ── Riso typography helpers ───────────────────────────────────── */
+.riso .display,
+.display {
+  font-family: 'DM Serif Text', 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+.riso .body-serif,
+.body-serif {
+  font-family: 'DM Serif Text', Georgia, serif;
+}
+.riso .mono,
+.mono {
+  font-family: 'Space Mono', 'IBM Plex Mono', ui-monospace, monospace;
+}
+.smallcaps {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Riso overprint — text/bg using multiply for that print feel */
+.overprint-r { color: var(--scarlet); mix-blend-mode: multiply; }
+.overprint-b { color: var(--cobalt);  mix-blend-mode: multiply; }
+
+/* Riso stamp — boxed mono-smallcaps label */
+.riso-stamp {
+  display: inline-flex; padding: 4px 8px;
+  border: 1.5px solid currentColor;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+/* Decorative dropcap kept for legacy components (Cover Story is replaced) */
+.dropcap::first-letter {
+  font-family: 'DM Serif Text', serif;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 0.85;
+  float: left;
+  padding: 6px 8px 0 0;
+  color: var(--scarlet);
+}
+
+/* Newspaper rules kept (used as borders in many places) */
+.rule-thick { height: 1.5px; background: var(--rule); }
+.rule-thin  { height: 1px; background: var(--rule); opacity: 0.55; }
+.rule-hair  { height: 1px; background: var(--rule); opacity: 0.20; }
+.col-divider { border-left: 1.5px solid rgba(26,22,17,0.30); }
+
+/* ── Masthead ─────────────────────────────────────────────────── */
+.masthead { background: var(--paper); position: relative; }
+.masthead-meta {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+}
+.masthead-title-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 0 10px;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+.masthead-brand {
+  display: flex; align-items: center; gap: 14px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.masthead-right {
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 1;
+  flex-wrap: nowrap;        /* keep menu + year/status on one line */
+  justify-content: flex-end;
+  min-width: 0;
+}
+.masthead-title {
+  font-family: 'DM Serif Text', serif;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+/* Scarlet period — bumped up, bolder, slight offset so it reads as a stamp */
+.masthead-title .riso-period {
+  color: var(--scarlet);
+  font-weight: 700;
+  font-size: 1.15em;
+  margin-left: 0.04em;
+  display: inline-block;
+}
+
+/* Compact subnav so it doesn't push the year/status pill below the logo */
+@media (max-width: 1280px) {
+  .masthead-subnav .nav-item { padding: 7px 10px; font-size: 9.5px; }
+}
+@media (max-width: 1024px) {
+  .masthead-title { font-size: 34px; }
+  .masthead-subnav .nav-item { padding: 6px 8px; font-size: 9px; letter-spacing: 0.12em; }
+}
+.masthead-sub {
+  margin-top: 6px;
+  color: var(--muted);
+}
+.masthead-controls-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 0 12px;
+  gap: 18px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(26,22,17,0.18);
+  margin-top: 4px;
+}
+.masthead-byline {
+  color: var(--muted);
+}
+
+/* Two-ink overprint logo discs */
+.riso-logo {
+  width: 44px; height: 44px;
+  position: relative;
+  flex-shrink: 0;
+}
+.riso-logo-disc {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+}
+.riso-logo-disc--scarlet { background: var(--scarlet); }
+.riso-logo-disc--cobalt  {
+  background: var(--cobalt);
+  transform: translate(6px, 4px);
+  opacity: 0.85;
+}
+
+/* Subnav — stamp-box style nav, scarlet-on-paper with one ink-filled active item */
+.masthead-subnav {
+  display: inline-flex;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  flex-wrap: wrap;
+}
+
+/* Page header — kicker + DM Serif title */
+.page-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--scarlet);
+  margin-bottom: 6px;
+}
+.page-title {
+  font-family: 'DM Serif Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Data status pill — Riso boxed stamp */
+.data-status-pill {
+  padding: 6px 10px;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Riso boxed-stamp subnav: ink-bordered items, active item ink-filled */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 1;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 0;
+  border-right: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+}
+.masthead-subnav .nav-item:last-child { border-right: 0; }
+.nav-item:hover { color: var(--scarlet); opacity: 1; background: transparent; }
+.nav-active {
+  background-color: var(--ink);
+  color: var(--paper) !important;
+  opacity: 1;
+  font-weight: 700;
+  border-bottom: 0;
+}
+.nav-active:hover { background-color: var(--ink); color: var(--paper); }
+
+/* Focus rings — keyboard a11y, ink underline */
+.nav-item:focus-visible {
+  outline: none;
+  box-shadow: 0 1px 0 0 var(--scarlet);
+}
+.btn:focus-visible,
+.btn-ghost:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(226, 80, 52, 0.30);
+}
+
+/* Cards — broadsheet "section": no box border, just sit on the paper.
+   Sections are separated by typography (kicker + serif title) and
+   generous whitespace, not by enclosing borders. The page stays smooth
+   and connected like a real newspaper page. */
+.card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Hero card — same paper canvas, no border, no gradient */
+.card-hero {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 24px;
+}
+
+/* Optional broadsheet helpers if a view wants a section rule */
+.card.rule-top    { border-top: 1px solid var(--ink); padding-top: 18px; }
+.card.rule-bottom { border-bottom: 1px solid var(--ink); padding-bottom: 18px; }
+
+/* KPI card */
+.kpi {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-dot {
+  width: 10px; height: 10px; border-radius: 999px;
+  display: inline-block;
+}
+/* Status dot in top-right of a card — used to signal current state. */
+.kpi-status-dot {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+.kpi-status-ok    { background: var(--forest); }
+.kpi-status-warn  { background: var(--ochre); }
+.kpi-status-alert { background: var(--scarlet); }
+.kpi-label {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 10px; color: var(--muted); font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  text-transform: uppercase; letter-spacing: 0.18em;
+}
+.kpi-value {
+  font-family: 'DM Serif Text', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(32px, 4.6vw, 50px);
+  line-height: 1.0;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Section title — newspaper headline-style */
+.section-title {
+  font-family: 'DM Serif Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.05;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Section kicker — editorial mono smallcaps, news red */
+.section-kicker {
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--scarlet);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+/* Chart container */
+.chart {
+  width: 100%;
+  height: 320px;
+}
+.chart-sm { height: 240px; }
+.chart-lg { height: 460px; }
+
+/* Tables — newspaper agate */
+.table {
+  width: 100%;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13.5px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+}
+.table th {
+  text-align: left;
+  font-family: 'Space Mono', monospace;
+  font-weight: 600;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding: 8px 12px;
+  border-bottom: 1.5px solid var(--ink);
+  background: transparent;
+}
+.table td {
+  padding: 10px 12px;
+  border-bottom: 1px dotted rgba(26,22,17,0.30);
+  color: var(--ink);
+}
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background-color: rgba(226,80,52,0.06); }
+.table .num { text-align: right; font-variant-numeric: tabular-nums; font-family: 'Space Mono', monospace; font-size: 12.5px; }
+
+/* Pills — newspaper boxed labels */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 9px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 0;
+  background: transparent;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+}
+.pill-red    { background: transparent; color: var(--scarlet);   border-color: var(--scarlet); }
+.pill-blue   { background: transparent; color: var(--cobalt);    border-color: var(--cobalt); }
+.pill-gold   { background: transparent; color: #6E5400;          border-color: #6E5400; }
+.pill-mint   { background: transparent; color: var(--forest);    border-color: var(--forest); }
+.pill-coral  { background: transparent; color: var(--scarlet);   border-color: var(--scarlet); }
+.pill-iris   { background: transparent; color: var(--cobalt);    border-color: var(--cobalt); }
+
+/* Trend chip — newspaper bordered box */
+.trend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: 1.5px solid currentColor;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+.trend-chip-mint  { background: transparent; color: var(--forest); }
+.trend-chip-coral { background: transparent; color: var(--scarlet); }
+.trend-chip-amber { background: transparent; color: #6E5400; }
+.trend-chip-iris  { background: transparent; color: var(--cobalt); }
+
+/* Form controls — newspaper inputs (square, ink border) */
+.input, .select {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 9px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  transition: box-shadow .15s;
+  width: 100%;
+}
+.input:focus, .select:focus {
+  border-color: var(--scarlet);
+  box-shadow: 0 0 0 2px rgba(226, 80, 52, 0.20);
+}
+.btn {
+  background: var(--ink); color: var(--paper);
+  padding: 9px 18px; border-radius: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1.5px solid var(--ink);
+  transition: background-color .15s ease;
+}
+.btn:hover { background: var(--scarlet); border-color: var(--scarlet); color: var(--paper); }
+.btn-ghost {
+  background: transparent; color: var(--ink); border: 1.5px solid var(--ink);
+}
+.btn-ghost:hover { background: rgba(26,22,17,0.08); }
+
+/* Inline select-all / clear toggles above multi-select filters */
+.ex-select-all, .ex-clear-all {
+  background: none; border: 0; padding: 0;
+  font: inherit; color: var(--scarlet);
+  cursor: pointer; text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ex-select-all:hover, .ex-clear-all:hover { color: var(--cobalt); }
+
+/* Spinner */
+.spinner {
+  width: 16px; height: 16px;
+  border-radius: 999px;
+  border: 2px solid #E9E9DF;
+  border-top-color: #0F172A;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Drilldown breadcrumb — newspaper folio style */
+.crumb {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--muted);
+  display: inline-flex; align-items: center; gap: 6px;
+  text-transform: uppercase; letter-spacing: 0.14em;
+}
+.crumb a { cursor: pointer; color: var(--scarlet); }
+.crumb a:hover { color: var(--cobalt); text-decoration: underline; }
+
+/* Subtle scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #e3d6b3; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #c8b988; }
+
+/* Status dots — used in data-status pill and elsewhere. */
+.status-loading { background: var(--ochre); }
+.status-ok      { background: var(--forest); }
+.status-error   { background: var(--scarlet); }
+.status-info    { background: var(--cobalt); }
+
+/* Soft tint background versions for callout pills. */
+.status-loading-soft { background: #fceec9; color: #6E5400; }
+.status-ok-soft      { background: #e2e5d3; color: #1F584C; }
+.status-error-soft   { background: #f5e2e4; color: #8A0F1E; }
+.status-info-soft    { background: #f5e2e4; color: #8a1923; }
+
+/* Inline glossary terms — wrapped by mountGloss() in data.js. */
+.gloss {
+  border-bottom: 1px dotted currentColor;
+  text-decoration: none;
+  cursor: help;
+  outline: none;
+  padding-bottom: 1px;
+  transition: color 0.12s ease, background-color 0.12s ease, border-bottom-color 0.12s ease;
+}
+.gloss:hover, .gloss:focus-visible {
+  color: var(--scarlet);
+  border-bottom: 1px solid var(--scarlet);
+  background-color: rgba(226, 80, 52, 0.08);
+  border-radius: 0;
+}
+
+/* Chart action buttons (Copy / CSV / PNG) injected by mountChartActions(). */
+.chart-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.chart-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color .12s ease, color .12s ease, border-color .12s ease;
+}
+.chart-action-btn:hover {
+  background: rgba(20,17,13,0.06);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.chart-action-btn:focus-visible {
+  outline: none;
+  border-color: var(--news-red);
+  box-shadow: 0 0 0 2px rgba(179, 35, 48, 0.15);
+}
+.chart-action-flash {
+  background: rgba(226, 80, 52, 0.18) !important;
+  color: var(--scarlet) !important;
+  border-color: var(--scarlet) !important;
+}
+
+/* Inline kbd hint — used in footer and keyboard-shortcut overlay. */
+.kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-bottom-width: 2.5px;
+  border-radius: 0;
+  line-height: 1;
+}
+
+/* Card entrance — subtle staggered fade for views as they render. */
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#view-root .card {
+  animation: cardFadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+#view-root .card:nth-child(1)  { animation-delay: 0ms; }
+#view-root .card:nth-child(2)  { animation-delay: 40ms; }
+#view-root .card:nth-child(3)  { animation-delay: 80ms; }
+#view-root .card:nth-child(4)  { animation-delay: 120ms; }
+#view-root .card:nth-child(5)  { animation-delay: 160ms; }
+#view-root .card:nth-child(6)  { animation-delay: 200ms; }
+#view-root .card:nth-child(n+7){ animation-delay: 240ms; }
+
+/* Also stagger cards inside the top-level grid wrapper. */
+#view-root > div > .card,
+#view-root > div > div > .card {
+  animation: cardFadeIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Respect reduced-motion preference — disable staggers and animations. */
+@media (prefers-reduced-motion: reduce) {
+  #view-root .card {
+    animation: none;
+  }
+  .gloss {
+    transition: none;
+  }
+  .chart-action-btn {
+    transition: none;
+  }
+  /* btn-pulse animation respects reduced-motion via JS removal in explorer.js;
+     but as a defense, kill the keyframe here too. */
+  .btn-pulse {
+    animation: none !important;
+  }
+}
+
+/* Empty state — used for "No matching rows" or other null-result moments.
+   Warmer than a bare "No data" line; gives the surface a small visual island. */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  color: #6b5e48;
+  text-align: center;
+  gap: 8px;
+}
+.empty-state-icon {
+  width: 32px; height: 32px;
+  border-radius: 999px;
+  background: var(--paper-soft);
+  display: flex; align-items: center; justify-content: center;
+  color: #94A3B8;
+  margin-bottom: 4px;
+}
+.empty-state-title {
+  font-family: Manrope, Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #0F172A;
+}
+.empty-state-body {
+  font-size: 12.5px;
+  color: #6b5e48;
+  max-width: 360px;
+  line-height: 1.5;
+}
+
+/* Filter-active chip — newspaper bordered indicator */
+.filter-active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--scarlet);
+  background: transparent;
+  border: 1.5px solid var(--scarlet);
+  border-radius: 0;
+  line-height: 1.4;
+}
+.filter-active-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--scarlet);
+  display: inline-block;
+}
+
+/* (Removed) horizontal scroll mask + scrollbar styling on #nav — the Riso
+   nav fits on one row and the mask-image was clipping the View dropdown
+   menu. The nav now uses .masthead-subnav for layout and lets dropdowns
+   render outside its bounding box. */
+#nav { overflow: visible; }
+
+/* Dual-range year slider on the Across Time view — two <input type="range">
+   stacked on top of each other share a single visual track. The CSS hides the
+   default tracks (we draw our own .range-slider-fill underneath) and styles
+   only the thumbs. pointer-events:none on the input itself + auto on the
+   thumb is the standard trick to keep both thumbs draggable. */
+input[type="range"]#range-from,
+input[type="range"]#range-to {
+  pointer-events: none;
+  background: transparent;
+  outline: none;
+}
+input[type="range"]#range-from::-webkit-slider-runnable-track,
+input[type="range"]#range-to::-webkit-slider-runnable-track {
+  background: transparent;
+  border: none;
+  height: 22px;
+}
+input[type="range"]#range-from::-moz-range-track,
+input[type="range"]#range-to::-moz-range-track {
+  background: transparent;
+  border: none;
+  height: 22px;
+}
+input[type="range"]#range-from::-webkit-slider-thumb,
+input[type="range"]#range-to::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 2px solid var(--scarlet);
+  box-shadow: 0 1px 3px rgba(20,17,13,0.18);
+  cursor: grab;
+  margin-top: -8px;
+  position: relative;
+  z-index: 2;
+}
+input[type="range"]#range-from::-moz-range-thumb,
+input[type="range"]#range-to::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 2px solid var(--scarlet);
+  box-shadow: 0 1px 3px rgba(20,17,13,0.18);
+  cursor: grab;
+}
+input[type="range"]#range-from:active::-webkit-slider-thumb,
+input[type="range"]#range-to:active::-webkit-slider-thumb { cursor: grabbing; background: rgba(226, 80, 52, 0.18); }
+input[type="range"]#range-from:focus-visible::-webkit-slider-thumb,
+input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(226, 80, 52, 0.30);
+}
+
+/* Year-tick row under the slider track. */
+[data-year].tick-on  { color: var(--scarlet); font-weight: 700; }
+[data-year].tick-off { color: var(--muted); }
+[data-year]:hover    { color: var(--cobalt); text-decoration: underline; text-decoration-style: dotted; }
+
+
+/* Broadsheet section flow — give every top-level card a thin top rule
+   and breathing room, so the page reads as connected sections without
+   relying on enclosing borders. */
+#view-root > div > .card,
+#view-root > div > div > .card {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+#view-root > div > .col-span-12.card,
+#view-root > div > .card.p-6,
+#view-root > div > .card.p-8 {
+  border-top: 1.5px solid var(--ink);
+}
+/* First card in a grid: no top rule (the page-title already provides a heading) */
+#view-root > div > .card:first-child,
+#view-root > div > div:first-child > .card {
+  border-top: 0;
+}
+.broadsheet-cover + .grid > .col-span-12:first-child > .card,
+.broadsheet-cover + .grid .col-span-12:first-child .card {
+  border-top: 0;
+}
+
+/* Dotted dividers inside the KPI strip — keeps the strip readable without
+   boxing each KPI. Applies only inside grid containers that hold .kpi cards. */
+.grid > .kpi + .kpi {
+  border-left: 1.5px solid var(--ink);
+}
+@media (max-width: 768px) {
+  .grid > .kpi + .kpi { border-left: 0; border-top: 1px dotted rgba(20,17,13,0.30); }
+}
+
+
+/* ── Riso almanac entries — 4-column grid with ink dividers ─────── */
+.riso-entries {
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.riso-entries .entry { padding: 14px 18px; border-right: 1.5px solid var(--ink); }
+.riso-entries .entry:last-child { border-right: 0; }
+.riso-entries .entry-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.riso-entries .entry-kpi {
+  font-family: 'DM Serif Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1;
+  margin-top: 4px;
+}
+.riso-entries .entry-caption {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.78;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.riso-entries .entry-kpi.k-scarlet { color: var(--scarlet); mix-blend-mode: multiply; }
+.riso-entries .entry-kpi.k-cobalt  { color: var(--cobalt);  mix-blend-mode: multiply; }
+
+/* Riso bar rows — used in lists with two-ink offset shadow */
+.riso-bar-track {
+  height: 14px;
+  background: rgba(26,22,17,0.06);
+  border: 1px solid rgba(26,22,17,0.35);
+  position: relative;
+}
+.riso-bar-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  mix-blend-mode: multiply;
+}
+.riso-bar-shadow {
+  position: absolute; top: 2px; left: 2px; height: 100%;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 768px) {
+  .riso-entries { grid-template-columns: repeat(2, 1fr); }
+  .riso-entries .entry { border-bottom: 1.5px solid var(--ink); }
+  .riso-entries .entry:nth-child(2) { border-right: 0; }
+}
+
+
+/* Defensive: hide any legacy broadsheet masthead pieces that may survive */
+.masthead-meta,
+.masthead-tag,
+.masthead-subnav-row,
+.masthead-controls-row { display: none !important; }
+
+/* sr-only — visually hide the page-title <h1> while keeping it for AT/views */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* The colophon should NOT visually resemble the masthead. No thick rule
+   above it; just a quiet pair of mono smallcaps lines. */
+.riso-colophon { border-top: 1px dotted rgba(26,22,17,0.18); }
+
+/* Make sure the scarlet period actually shows on top of the noise. */
+.masthead-title { position: relative; z-index: 2; }
+.masthead-title .riso-period { color: var(--scarlet); position: relative; z-index: 2; }
+
+/* Wordmark fits cleanly with the boxed nav on the right */
+.masthead-subnav { flex-wrap: nowrap; max-width: 100%; }
+@media (max-width: 1100px) {
+  .masthead-title { font-size: 36px; }
+  .nav-item { padding: 5px 8px; font-size: 9px; letter-spacing: 0.12em; }
+}
+@media (max-width: 900px) {
+  .masthead-title-row { flex-wrap: wrap; }
+}
+
+/* ── Riso KPI strip — share the look of .riso-entries (boxed, ink-divided).
+   Applied to the .kpi-strip wrapper used by the Overview KPI row so the
+   strip immediately below the Almanac entries reads as the same component. */
+.kpi-strip.riso-strip {
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  gap: 0;
+  background: transparent;
+}
+.kpi-strip.riso-strip > .kpi,
+.kpi-strip.riso-strip > .card.kpi {
+  background: transparent;
+  border: 0;
+  border-right: 1.5px solid var(--ink);
+  border-radius: 0;
+  padding: 14px 18px;
+  box-shadow: none;
+  margin: 0;
+}
+.kpi-strip.riso-strip > .kpi:last-child,
+.kpi-strip.riso-strip > .card.kpi:last-child { border-right: 0; }
+.kpi-strip.riso-strip .kpi-status-dot { display: none; }
+.kpi-strip.riso-strip .kpi-label { color: var(--muted); }
+.kpi-strip.riso-strip .kpi-value {
+  font-family: 'DM Serif Text', Georgia, serif;
+  font-size: 34px;
+  letter-spacing: -0.01em;
+  margin-top: 2px;
+  mix-blend-mode: multiply;
+}
+.kpi-strip.riso-strip .kpi-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--ink);
+  opacity: 0.78;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+/* Wrap on narrow viewports: stack 2 columns, ink dividers turn 90° */
+@media (max-width: 768px) {
+  .kpi-strip.riso-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpi-strip.riso-strip > .kpi,
+  .kpi-strip.riso-strip > .card.kpi {
+    border-right: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .kpi-strip.riso-strip > .kpi:nth-child(2n),
+  .kpi-strip.riso-strip > .card.kpi:nth-child(2n) { border-right: 0; }
+}
+
+/* ── Compact Riso colophon — small muted folio so it never reads like a
+   second header. Removes the thick rule, drops the issue-number text. */
+.riso-colophon {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.85;
+}
+.riso-colophon::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.20;
+  margin-bottom: 14px;
+}
+
+
+/* Explorer filter alignment — every cell uses an identical 3-row grid
+   (label row, sub-text row, select). Rows have explicit min-heights so
+   the four selects line up horizontally regardless of how much text the
+   label or sub-line contains. The select cells without a sub-line fall
+   back to an empty :empty row that still reserves the space. */
+.ex-filters > .ex-filter-cell {
+  display: grid;
+  grid-template-rows: 26px 22px 1fr;
+  row-gap: 6px;
+  min-width: 0;
+}
+.ex-filters > .ex-filter-cell > .text-xs { line-height: 1.1; }
+.ex-filters > .ex-filter-cell > .kpi-label,
+.ex-filters > .ex-filter-cell > .flex {
+  align-self: center;
+}
+/* Ensure the select sits at the bottom row even if cells lack a sub-line. */
+.ex-filters > .ex-filter-cell > .select { grid-row: 3; align-self: stretch; }
+/* Reserve the sub-row even when a cell has no description text — the
+   :where() trick avoids specificity bumps. */
+.ex-filters > .ex-filter-cell::before {
+  content: "";
+  grid-row: 2;
+  display: block;
+}
+.ex-filters > .ex-filter-cell > .text-xs { grid-row: 2; }
+
+
+/* ── Riso View dropdown — replaces Time/Allocations/Region/Expense ─────── */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.nav-dropdown-label { display: inline-block; }
+.nav-dropdown-caret {
+  font-size: 9px;
+  line-height: 1;
+  margin-left: 2px;
+  transition: transform 0.12s ease;
+}
+.nav-dropdown:hover .nav-dropdown-caret,
+.nav-dropdown:focus-within .nav-dropdown-caret {
+  transform: translateY(1px);
+}
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: -1.5px;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  min-width: 180px;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+.nav-dropdown:hover > .nav-dropdown-menu,
+.nav-dropdown:focus-within > .nav-dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.nav-dropdown-menu > a {
+  display: block;
+  padding: 9px 14px;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--ink);
+  white-space: nowrap;
+  background: var(--paper);
+}
+.nav-dropdown-menu > a:last-child { border-bottom: 0; }
+.nav-dropdown-menu > a:hover,
+.nav-dropdown-menu > a:focus-visible {
+  background: var(--scarlet);
+  color: var(--paper);
+  outline: none;
+}
+.nav-dropdown-menu > a.nav-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+/* When the dropdown trigger itself is active (one of its children is the
+   current view), give it the same ink-filled stamp look as other active items. */
+.nav-dropdown.nav-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.nav-dropdown.nav-active .nav-dropdown-caret { color: var(--paper); }
+
+
+/* Reserve the Explorer sub-line row even when a cell has no description,
+   so the <select> aligns with siblings that do have one. */
+.ex-filters > .ex-filter-cell:not(:has(> .text-xs))::before {
+  content: '';
+  display: block;
+  grid-row: 2;
+}
+/* Explorer subline filler — fallback for browsers without :has() */
+
+
+/* Explorer filter alignment hardening — labels never wrap. */
+.ex-filters > .ex-filter-cell > .flex .kpi-label {
+  white-space: nowrap;
+  letter-spacing: 0.12em;
+  font-size: 9.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ex-filters > .ex-filter-cell > .flex {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+.ex-filters > .ex-filter-cell > .text-xs {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
