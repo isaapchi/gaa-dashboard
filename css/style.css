@@ -1230,3 +1230,75 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ── Mobile responsive optimization ──────────────────────────────────────── */
+
+/* Tablet portrait and below: looser page padding, larger touch targets */
+@media (max-width: 768px) {
+  /* Main column padding — give breathing room without losing horizontal space */
+  main > div > section { padding-left: 16px; padding-right: 16px; }
+  header.px-8 { padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 8px; }
+  footer.px-8 { padding-left: 16px; padding-right: 16px; }
+  .max-w-screen-2xl.mx-auto.px-8 { padding-left: 16px; padding-right: 16px; }
+
+  /* Masthead: allow brand and nav to stack */
+  .masthead-title-row { gap: 12px; flex-wrap: wrap; }
+  .masthead-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+  .masthead-subnav { width: 100%; flex-wrap: wrap; gap: 0; }
+
+  /* Page header: stack the title and year-controls vertically */
+  header.px-8 > .flex.items-start.justify-between { flex-direction: column; align-items: stretch; gap: 12px; }
+  #year-controls { justify-content: flex-start; flex-wrap: wrap; }
+
+  /* Page title smaller on phones */
+  .page-title { font-size: 28px !important; }
+
+  /* Charts: ensure they don't push the page wider than viewport */
+  .chart, .chart-lg, .chart-md, .chart-sm { max-width: 100%; }
+
+  /* Tables in cards: horizontal scroll instead of overflow */
+  .card table, .card .table { display: block; max-width: 100%; overflow-x: auto; }
+
+  /* Multi-select panel: take more vertical room and fit the narrower screen */
+  .ms-panel { max-height: 60vh; }
+
+  /* Touch-friendly tap targets: min 40px for interactive controls */
+  .btn, .btn-ghost, .ms-trigger, .input, .select { min-height: 40px; }
+  .nav-item { padding: 10px 12px; font-size: 10.5px; }
+  .nav-dropdown-menu > a { padding: 12px 16px; font-size: 11px; }
+
+  /* Riso entries: already collapses to 2 cols at 768px; cap large numbers */
+  .riso-entries .entry-kpi { font-size: 30px; }
+
+  /* Body text bump for readability on small screens */
+  body { font-size: 15px; }
+}
+
+/* Phones (narrow): single-column for most grid layouts */
+@media (max-width: 480px) {
+  .page-title { font-size: 24px !important; }
+  .masthead-title { font-size: 30px !important; }
+  .riso-entries { grid-template-columns: 1fr !important; }
+  .riso-entries .entry { border-right: 0 !important; border-bottom: 1.5px solid var(--ink); }
+  .riso-entries .entry:last-child { border-bottom: 0; }
+
+  /* Explorer filters: stack 1-col on small phones */
+  .ex-filters { grid-template-columns: 1fr !important; }
+  .ex-filter-cell { width: 100%; }
+
+  /* Reduce vertical density of cards */
+  .card.p-6, .card.p-5 { padding: 16px; }
+
+  /* Year controls on phones: stack below page title cleanly */
+  #year-controls .select { max-width: 100% !important; }
+  .data-status-pill { font-size: 10px; padding: 4px 8px; }
+}
+
+/* Disable hover effects on touch-only devices to avoid sticky-hover states */
+@media (hover: none) and (pointer: coarse) {
+  .nav-item:hover, .btn:hover, .ms-item:hover, .ms-trigger:hover {
+    background: inherit;
+    color: inherit;
+    border-color: inherit;
+  }
+}
