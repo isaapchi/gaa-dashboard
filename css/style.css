@@ -157,7 +157,7 @@ body.riso::before {
 .masthead-brand:hover .masthead-title,
 .masthead-brand:focus-visible .masthead-title { color: var(--scarlet); }
 .masthead-brand:focus-visible { outline: 2px solid var(--scarlet); outline-offset: 4px; border-radius: 2px; }
-.masthead-brand .riso-logo { margin-top: -2px; }
+.masthead-brand .riso-logo { margin-top: 6px; }
 .masthead-right {
   display: flex; align-items: center; gap: 10px;
   flex-shrink: 1;
@@ -1058,20 +1058,24 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  z-index: 80;
-  background: var(--paper);
+  z-index: 9999;                  /* above the riso grain overlay + any card */
+  isolation: isolate;             /* own stacking context so blend-modes don't bleed */
+  background: #f1e8d2;            /* literal paper hex (avoids any var-resolution edge case) */
   border: 1.5px solid var(--ink);
-  box-shadow: 0 4px 12px rgba(26,22,17,0.10);
+  box-shadow: 0 6px 20px rgba(26,22,17,0.18);
   display: flex;
   flex-direction: column;
-  max-height: 320px;
-  min-width: 220px;
+  max-height: 360px;
+  min-height: 0;                  /* enable inner flex child to scroll */
+  min-width: 240px;
 }
 .ms-panel[hidden] { display: none; }
 .ms-panel-header {
+  flex-shrink: 0;                 /* don't squeeze the search/actions row */
   padding: 8px 8px 6px;
   border-bottom: 1px solid rgba(26,22,17,0.18);
   display: flex; flex-direction: column; gap: 6px;
+  background: #f1e8d2;
 }
 .ms-search {
   width: 100%;
@@ -1102,9 +1106,13 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
 .ms-action:hover { text-decoration: underline; }
 .ms-action-sep { color: var(--muted); }
 .ms-list {
-  overflow-y: auto;
   flex: 1 1 auto;
+  min-height: 0;                  /* required so overflow-auto kicks in inside a flex column */
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 4px 0;
+  background: #f1e8d2;
+  -webkit-overflow-scrolling: touch;
 }
 .ms-item {
   display: flex; align-items: center; gap: 8px;

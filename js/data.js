@@ -598,18 +598,35 @@ function chartHasData(chart) {
 }
 
 // Export a chart as a PNG with a 'publikoph.org' watermark in the bottom-right.
-// Forces a render-wait before capture so we don't grab a blank canvas, and
-// composites the watermark via a temporary canvas (so the original chart is
-// untouched).
+// Uses ECharts' 'finished' event so we capture only after the chart's last
+// render completes — fixes blank captures and missing labels on Overview's
+// donut/bar charts where labels paint after the data series.
 async function exportChartPng(chart, filename) {
   // 1. Make sure the chart has data; if not, give it a moment and re-check.
   if (!chartHasData(chart)) {
     await new Promise(r => setTimeout(r, 250));
     if (!chartHasData(chart)) throw new Error('Chart has no series data yet');
   }
-  // 2. Force a redraw and wait two frames so the latest render finishes.
-  if (typeof chart.resize === 'function') chart.resize();
-  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  // 2. Wait for ECharts to signal a finished render. We force a resize to
+  //    trigger a fresh render, then resolve on the next 'finished' event.
+  //    Fallback timeout so we never hang if no render is scheduled.
+  await new Promise(resolve => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      try { chart.off && chart.off('finished', finish); } catch (_) {}
+      resolve();
+    };
+    try {
+      if (chart.on) chart.on('finished', finish);
+    } catch (_) {}
+    if (typeof chart.resize === 'function') chart.resize();
+    // Belt-and-braces: also wait two animation frames + a 700ms cap
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      setTimeout(finish, 700);
+    }));
+  });
 
   // 3. Capture the chart at 2x pixel ratio against the paper background.
   const baseUrl = chart.getDataURL({ pixelRatio: 2, backgroundColor: '#ece1c3' });
