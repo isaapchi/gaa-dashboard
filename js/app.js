@@ -44,12 +44,12 @@ const VIEWS = {
 const KBD_VIEW_ORDER = ['overview', 'timeline', 'departments', 'regions', 'expense', 'compare', 'explorer', 'about'];
 
 // Update the kicker that sits above the (visually hidden) page title.
-//   - Across Time spans years, so the kicker is suppressed there.
+//   - Across Time spans years; About is year-agnostic. Kicker suppressed on both.
 //   - Every other view shows 'FY <year> General Appropriations Act'.
 function updatePageKicker(view, year) {
   const el = document.getElementById('page-kicker');
   if (!el) return;
-  if (view === 'timeline') { el.textContent = ''; el.style.display = 'none'; return; }
+  if (view === 'timeline' || view === 'about') { el.textContent = ''; el.style.display = 'none'; return; }
   el.style.display = '';
   el.textContent = `FY ${year} General Appropriations Act`;
 }
@@ -201,15 +201,9 @@ async function navigate(viewArg) {
   const yrSuffix = (view === 'timeline' || view === 'about') ? '' : ` — FY${getCurrentYear()}`;
   document.title = `${meta.title} · Halaga${yrSuffix}`;
   updatePageKicker(view, getCurrentYear());
-  // Dynamic kicker over the page title — varies by view + year.
-  const kicker = document.getElementById('page-kicker');
-  if (kicker) {
-    const yr = getCurrentYear();
-    // 'timeline' (Across Time) intentionally shows no year kicker — the view spans many years.
-    if (view === 'timeline') kicker.textContent = 'General Appropriations Act';
-    else kicker.textContent = `FY ${yr} General Appropriations Act`;
-    kicker.style.visibility = (view === 'timeline') ? 'hidden' : 'visible';
-  }
+  // Show/hide the year selector based on view scope.
+  const yc = document.getElementById('year-controls');
+  if (yc) yc.style.display = (view === 'timeline' || view === 'about') ? 'none' : '';
 
   const newHash = '#' + view + (arg ? '/' + encodeURIComponent(arg) : '');
   if (location.hash !== newHash) history.replaceState(null, '', newHash);

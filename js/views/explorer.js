@@ -167,7 +167,6 @@ export async function renderExplorer(root, arg) {
                   <button type="button" class="ex-clear-all" data-target="ex-f-department">Clear</button>
                 </span>
               </div>
-              <div class="text-xs text-ink-400 mb-1">Includes <span data-term="AAs">AAs</span> and <span data-term="SPFs">SPFs</span></div>
               <select id="ex-f-department" class="select" multiple size="1" data-empty="all">
                 ${departments.map(d => `<option value="${escapeAttr(d)}">${escapeHtml(d)}</option>`).join('')}
               </select>
@@ -194,7 +193,6 @@ export async function renderExplorer(root, arg) {
                   <button type="button" class="ex-clear-all" data-target="ex-f-exp_class">Clear</button>
                 </span>
               </div>
-              <div class="text-xs text-ink-400 mb-1"><span data-term="PS">PS</span> / <span data-term="MOOE">MOOE</span> / <span data-term="CO">CO</span> / <span data-term="FE">FE</span></div>
               <select id="ex-f-exp_class" class="select" multiple size="1" data-empty="all">
                 ${expClasses.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
               </select>
@@ -208,7 +206,6 @@ export async function renderExplorer(root, arg) {
                   <button type="button" class="ex-clear-all" data-target="ex-f-fund_subcat">Clear</button>
                 </span>
               </div>
-              <div class="text-xs text-ink-400 mb-1">e.g. <span data-term="AAs">AAs</span>, <span data-term="SPFs">SPFs</span>, new appropriations</div>
               <select id="ex-f-fund_subcat" class="select" multiple size="1" data-empty="all">
                 ${fundSubcats.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
               </select>
@@ -216,10 +213,6 @@ export async function renderExplorer(root, arg) {
           </div>
         </div>
 
-        <details class="mt-4">
-          <summary class="text-xs text-ink-400 cursor-pointer hover:text-ink-700">View SQL</summary>
-          <pre id="ex-sql" class="mt-2 p-3 text-xs  rounded-lg overflow-auto text-ink-700" style="background:#FAFAF7;border:1px solid #E9E9DF;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"></pre>
-        </details>
       </div>
 
       <!-- Chart -->
@@ -379,10 +372,6 @@ FROM budget
 ${whereSQL}
 `.trim();
 
-  // Show SQL & spinner.
-  document.getElementById('ex-sql').textContent =
-    `-- Grouped query\n${groupedSQL};\n\n-- Totals\n${totalSQL};\n\n-- Parameters: ${JSON.stringify(params)}`;
-
   setLoading(true);
   setStatus('Running…');
 
@@ -412,8 +401,6 @@ ${whereSQL}
     }
 
     // Job 3 + 4: mount export actions on the chart card header.
-    const ICON_SQL = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-
     const chartHeaderEl = document.getElementById('ex-chart-header');
     if (chartHeaderEl) {
       mountChartActions(chartHeaderEl, {
@@ -422,14 +409,6 @@ ${whereSQL}
         csvName:  `explorer-${_lastGroupKey}`,
         chart:    _chart,
         pngName:  `explorer-${_lastGroupKey}`,
-        extra: [{
-          label:   'Copy SQL',
-          icon:    ICON_SQL,
-          onClick: () => {
-            const sqlEl = document.getElementById('ex-sql');
-            if (sqlEl) navigator.clipboard.writeText(sqlEl.textContent).catch(() => {});
-          },
-        }],
       });
     }
 

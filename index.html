@@ -102,13 +102,6 @@
               <a data-view="explorer"    href="#explorer"    class="nav-item"           aria-label="Explorer">Explorer</a>
               <a data-view="about"       href="#about"       class="nav-item"           aria-label="About this dashboard">About</a>
             </nav>
-            <div class="flex items-center gap-2 shrink-0" id="year-controls">
-              <select id="year-select" class="select" style="max-width:108px" aria-label="Select fiscal year"></select>
-              <div class="data-status-pill" id="data-status" role="status" aria-live="polite">
-                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #e8b94a;"></span>
-                <span>Loading data&hellip;</span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -119,9 +112,18 @@
       <div class="max-w-screen-2xl mx-auto">
 
         <header class="px-8 pt-8 pb-2">
-          <div>
-            <div class="page-kicker" id="page-kicker"></div>
-            <h1 class="page-title" id="page-title">Overview</h1>
+          <div class="flex items-start justify-between gap-4">
+            <div class="min-w-0">
+              <div class="page-kicker" id="page-kicker"></div>
+              <h1 class="page-title" id="page-title">Overview</h1>
+            </div>
+            <div class="flex items-center gap-2 shrink-0 mt-1" id="year-controls">
+              <select id="year-select" class="select" style="max-width:108px" aria-label="Select fiscal year"></select>
+              <div class="data-status-pill" id="data-status" role="status" aria-live="polite">
+                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #e8b94a;"></span>
+                <span>Loading data&hellip;</span>
+              </div>
+            </div>
           </div>
         </header>
 
