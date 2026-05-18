@@ -148,10 +148,16 @@ body.riso::before {
   flex-wrap: nowrap;
 }
 .masthead-brand {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: flex-start; gap: 14px;
   flex-shrink: 0;
   min-width: 0;
+  color: inherit;
+  text-decoration: none;
 }
+.masthead-brand:hover .masthead-title,
+.masthead-brand:focus-visible .masthead-title { color: var(--scarlet); }
+.masthead-brand:focus-visible { outline: 2px solid var(--scarlet); outline-offset: 4px; border-radius: 2px; }
+.masthead-brand .riso-logo { margin-top: -2px; }
 .masthead-right {
   display: flex; align-items: center; gap: 10px;
   flex-shrink: 1;
