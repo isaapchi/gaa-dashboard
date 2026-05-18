@@ -580,6 +580,76 @@ export function mountGloss(rootEl) {
 
 // --- Chart export affordance ------------------------------------------------
 
+// Check whether an ECharts instance has rendered data (not just background).
+function chartHasData(chart) {
+  if (!chart || typeof chart.getOption !== 'function') return false;
+  try {
+    const opt = chart.getOption();
+    if (!opt) return false;
+    if (Array.isArray(opt.series)) {
+      for (const s of opt.series) {
+        if (s && Array.isArray(s.data) && s.data.length > 0) return true;
+      }
+    }
+    return false;
+  } catch (_) {
+    return false;
+  }
+}
+
+// Export a chart as a PNG with a 'publikoph.org' watermark in the bottom-right.
+// Forces a render-wait before capture so we don't grab a blank canvas, and
+// composites the watermark via a temporary canvas (so the original chart is
+// untouched).
+async function exportChartPng(chart, filename) {
+  // 1. Make sure the chart has data; if not, give it a moment and re-check.
+  if (!chartHasData(chart)) {
+    await new Promise(r => setTimeout(r, 250));
+    if (!chartHasData(chart)) throw new Error('Chart has no series data yet');
+  }
+  // 2. Force a redraw and wait two frames so the latest render finishes.
+  if (typeof chart.resize === 'function') chart.resize();
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+  // 3. Capture the chart at 2x pixel ratio against the paper background.
+  const baseUrl = chart.getDataURL({ pixelRatio: 2, backgroundColor: '#ece1c3' });
+
+  // 4. Load into an Image to get dimensions, then composite a watermark.
+  const img = new Image();
+  img.src = baseUrl;
+  await new Promise((resolve, reject) => {
+    img.onload = resolve;
+    img.onerror = () => reject(new Error('Failed to load captured chart image'));
+  });
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+
+  // 5. Watermark — small mono caps, muted ink, bottom-right corner.
+  const baseFont = Math.max(10, Math.round(Math.min(canvas.width, canvas.height) / 70));
+  const fontPx = baseFont * 2; // already on a 2x canvas, scale so it reads ~10pt on screen
+  ctx.font = `600 ${fontPx}px 'Space Mono', ui-monospace, monospace`;
+  ctx.fillStyle = 'rgba(26, 22, 17, 0.55)';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'bottom';
+  const pad = Math.max(12, Math.round(canvas.width / 80));
+  ctx.fillText('publikoph.org', canvas.width - pad, canvas.height - pad);
+
+  // 6. Trigger download via a Blob (more reliable than a data: URL for large charts).
+  await new Promise(resolve => {
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+      resolve();
+    }, 'image/png');
+  });
+}
+
 // Inject Copy table / Download CSV / Download PNG actions in the top-right of a chart card.
 // Pass the DOM element of the card body container, plus a getter for the rows
 // and (optionally) the chart instance for PNG export.
@@ -669,12 +739,14 @@ export function mountChartActions(headerEl, opts) {
   wrap.appendChild(csvBtn);
 
   if (opts.chart) {
-    const pngBtn = mkBtn('Download PNG', ICON_PNG, () => {
-      const url = opts.chart.getDataURL({ pixelRatio: 2, backgroundColor: '#ece1c3' });
-      const a   = document.createElement('a');
-      a.href = url; a.download = (opts.pngName || csvName) + '.png';
-      document.body.appendChild(a); a.click(); a.remove();
-      flash(pngBtn, 'Downloaded');
+    const pngBtn = mkBtn('Download PNG', ICON_PNG, async () => {
+      try {
+        await exportChartPng(opts.chart, opts.pngName || csvName);
+        flash(pngBtn, 'Downloaded');
+      } catch (e) {
+        console.error('PNG export failed:', e);
+        flash(pngBtn, 'Not ready — try again');
+      }
     });
     wrap.appendChild(pngBtn);
   }
