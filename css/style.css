@@ -186,8 +186,16 @@ body.riso::before {
   .masthead-subnav .nav-item { padding: 6px 8px; font-size: 9px; letter-spacing: 0.12em; }
 }
 .masthead-sub {
+  margin-top: 2px;
+  color: var(--muted);
+}
+.masthead-parent {
   margin-top: 6px;
   color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  opacity: 0.75;
+  font-weight: 600;
 }
 .masthead-controls-row {
   display: flex; align-items: center; justify-content: space-between;
