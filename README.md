@@ -2,7 +2,9 @@
 
 Interactive visualization of the Philippine General Appropriations Act (GAA), FY2009–FY2026. Source: Department of Budget and Management (DBM) "By Object" releases, harmonized to UACS (Unified Accounts Code Structure).
 
-**Live:** _(URL added once Netlify deploy + custom domain land)_
+**Live:** https://publikoph.org
+
+**Feedback:** [feedback@publikoph.org](mailto:feedback@publikoph.org)
 
 ## What's here
 

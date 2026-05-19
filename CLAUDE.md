@@ -4,6 +4,29 @@ Project-local guidance for Claude Code sessions working in this repository.
 
 ---
 
+## Project status (as of 2026-05-19)
+
+**Live at:** https://publikoph.org (production) + https://resilient-salamander-6cb7eb.netlify.app (Netlify default URL)
+
+**Operational state:**
+- Site deployed and serving FY2009–FY2026 cleaned parquets
+- HTTPS active via Let's Encrypt (auto-renew handled by Netlify)
+- DNSSEC enabled at Cloudflare (status: pending → active)
+- Email Routing live (`feedback@publikoph.org` → user's real inbox)
+- Cloudflare Web Analytics wired (beacon in `index.html`)
+- Mobile responsive, multi-select Explorer filters, watermarked PNG exports
+
+**Repo visibility: PUBLIC, by design.**
+- Aligns with the civic-tech / open-data ethos of the project
+- Code is already viewable via the live site (View Source); going private wouldn't hide much
+- Identifying strings were scrubbed from history via `git filter-repo` (commit `3a7ccce` and rewrites)
+- Don't include real names, WBG identifiers, or any internal info in committed files
+- Git author identity is `isaapchi <04.lambda.soggier@icloud.com>` — pseudonymous personal handles
+
+For the full project taxonomy (Cloudflare ↔ Netlify ↔ GitHub ↔ local ↔ OneDrive zones, sync flows, costs, etc.), see `PROJECT_ARCHITECTURE.md` in the OneDrive working folder.
+
+---
+
 ## Deploy economy — Netlify free tier (Starter plan)
 
 This site is served by Netlify's free tier:

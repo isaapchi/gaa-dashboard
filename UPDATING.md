@@ -2,9 +2,11 @@
 
 This repo holds the served site. Data updates flow from a separate `gaa-etl` repo (private). Dashboard UI tweaks happen directly here.
 
+For the full project taxonomy (what lives where, sync flows, personal-laptop bootstrap), see `PROJECT_ARCHITECTURE.md` in the OneDrive working folder. This file covers the day-to-day **update** operations only.
+
 ## Multi-machine workflow
 
-If you work from more than one machine:
+If you work from more than one machine (e.g., adding a personal laptop for occasional dashboard tweaks), see Section 4 of `PROJECT_ARCHITECTURE.md` for the full bootstrap. Day-to-day:
 
 Before starting work on any machine:
 
