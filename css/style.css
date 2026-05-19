@@ -635,6 +635,15 @@ body.riso::before {
   line-height: 1;
 }
 
+/* Reserve vertical space for SPA view content so late-arriving content
+ * (after data fetch + JS hydration) doesn't shift the footer/below down.
+ * Without this, on slow networks Lighthouse measures CLS = 0.75+ from a
+ * single ~535px shift when #view-root expands from ~23px to ~558px.
+ * The 80vh value is empirical: typical view content height on mobile. */
+#view-root {
+  min-height: 80vh;
+}
+
 /* Card entrance — subtle staggered fade for views as they render. */
 @keyframes cardFadeIn {
   from { opacity: 0; transform: translateY(6px); }
