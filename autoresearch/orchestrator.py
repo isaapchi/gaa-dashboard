@@ -117,10 +117,15 @@ def git_clean_or_snapshot(message: str) -> str | None:
 
 
 def git_restore_all() -> None:
-    """Discard all working-tree changes and reset to the last commit."""
+    """Discard ALL working-tree changes back to HEAD, including new untracked files.
+
+    `git restore .` alone only reverts tracked files. Applier-created files
+    (e.g. css/tailwind.css from H1) are untracked and survive `restore`,
+    polluting the next iteration's snapshot. `git clean -fd` removes them
+    while respecting .gitignore (so state.json, runs/, bin/ are preserved).
+    """
     git("restore", ".")
-    git("clean", "-fd", "autoresearch/runs", "autoresearch/state.json") if False else None
-    # don't `git clean -fd` repo-wide — would nuke unrelated untracked files
+    git("clean", "-fd")
 
 
 def smoke_check(url: str) -> bool:

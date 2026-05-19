@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -50,10 +51,24 @@ def write(state: dict) -> None:
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             json.dump(state, f, indent=2)
-        os.replace(tmp, STATE_FILE)
+        # Windows: the dashboard's http.server reads can briefly hold a
+        # file lock that blocks os.replace. Retry a few times.
+        last_err: Exception | None = None
+        for _ in range(8):
+            try:
+                os.replace(tmp, STATE_FILE)
+                return
+            except PermissionError as e:
+                last_err = e
+                time.sleep(0.15)
+        if last_err is not None:
+            raise last_err
     except Exception:
         if os.path.exists(tmp):
-            os.remove(tmp)
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
         raise
 
 

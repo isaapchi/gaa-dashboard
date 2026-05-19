@@ -111,7 +111,11 @@ def _capture_one(page, full_url: str, out_path: Path) -> None:
     # reveals) finish before we shoot.
     time.sleep(_POST_LOAD_SETTLE_SEC)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    page.screenshot(full_page=True, path=str(out_path))
+    # Viewport-only (not full_page) so screenshots have IDENTICAL dimensions
+    # across runs. full_page heights vary with chart sizing / SPA data and
+    # cause 100% diff (size-mismatch) on visually-equivalent loads.
+    # Above-the-fold is where most layout regressions appear anyway.
+    page.screenshot(full_page=False, path=str(out_path))
 
 
 def _diff_pair(baseline_path: Path, after_path: Path, diff_path: Path) -> dict:

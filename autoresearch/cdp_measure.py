@@ -121,9 +121,20 @@ def _one_run(
 
     try:
         page.goto(url, wait_until="networkidle", timeout=60000)
-        # Late LCP candidates may arrive after networkidle. 2s settle is what
-        # Lighthouse uses internally before snapshotting metrics.
-        page.wait_for_timeout(2000)
+        # Under heavy throttling, PerformanceObserver callbacks (FCP, LCP,
+        # longtask) are async and can lose a race against page.evaluate.
+        # Wait explicitly for both FCP and LCP to land. Fall through if
+        # the page truly never paints.
+        try:
+            page.wait_for_function(
+                "window.__perfRecords && window.__perfRecords.fcp !== null && window.__perfRecords.lcp !== null",
+                timeout=20000,
+            )
+        except Exception:
+            pass
+        # Late LCP candidates + longtasks. Lighthouse waits 5s of quiet
+        # internally before snapshotting; mirror that.
+        page.wait_for_timeout(5000)
         records = page.evaluate("window.__perfRecords")
     finally:
         context.close()
