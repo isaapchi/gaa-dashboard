@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autoresearch &middot; Halaga Perf Loop</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="ar-body">
+
+  <header class="ar-masthead">
+    <div class="ar-masthead-inner">
+      <div class="ar-brand">
+        <div class="ar-brand-title">Autoresearch<span class="ar-period">.</span></div>
+        <div class="ar-brand-sub smallcaps mono">Halaga Performance Loop &middot; Local Only</div>
+      </div>
+      <div class="ar-meta mono smallcaps" id="ar-meta">
+        <span id="ar-last-update">last update: &mdash;</span>
+      </div>
+    </div>
+  </header>
+
+  <div id="ar-status-banner" class="ar-status-banner ar-status-idle">
+    <div class="ar-status-inner">
+      <div class="ar-status-left">
+        <span class="ar-status-dot" aria-hidden="true"></span>
+        <span class="ar-status-label mono smallcaps" id="ar-status-label">IDLE</span>
+        <span class="ar-status-sep">&middot;</span>
+        <span class="ar-status-phase" id="ar-status-phase">phase: &mdash;</span>
+        <span class="ar-status-sep">&middot;</span>
+        <span class="ar-status-iter" id="ar-status-iter">iter &mdash;</span>
+      </div>
+      <div class="ar-status-right" id="ar-status-hyp">&mdash;</div>
+    </div>
+  </div>
+
+  <main class="ar-main">
+
+    <section class="ar-grid">
+
+      <div class="ar-charts">
+        <div class="ar-chart-card">
+          <div class="ar-chart-head">
+            <span class="ar-chart-title display">LCP</span>
+            <span class="ar-chart-unit mono smallcaps">milliseconds &middot; lower is better</span>
+          </div>
+          <div id="ar-chart-lcp" class="ar-chart"></div>
+        </div>
+        <div class="ar-chart-card">
+          <div class="ar-chart-head">
+            <span class="ar-chart-title display">FCP</span>
+            <span class="ar-chart-unit mono smallcaps">milliseconds &middot; lower is better</span>
+          </div>
+          <div id="ar-chart-fcp" class="ar-chart"></div>
+        </div>
+        <div class="ar-chart-card">
+          <div class="ar-chart-head">
+            <span class="ar-chart-title display">TBT</span>
+            <span class="ar-chart-unit mono smallcaps">milliseconds &middot; lower is better</span>
+          </div>
+          <div id="ar-chart-tbt" class="ar-chart"></div>
+        </div>
+        <div class="ar-chart-card">
+          <div class="ar-chart-head">
+            <span class="ar-chart-title display">Perf score</span>
+            <span class="ar-chart-unit mono smallcaps">0&ndash;1 &middot; higher is better</span>
+          </div>
+          <div id="ar-chart-perf" class="ar-chart"></div>
+        </div>
+      </div>
+
+      <aside class="ar-current" id="ar-current">
+        <div class="ar-current-kicker mono smallcaps">Current iteration</div>
+        <div class="ar-current-empty" id="ar-current-empty">Waiting for orchestrator&hellip;</div>
+        <div class="ar-current-body" id="ar-current-body" hidden>
+          <div class="ar-current-id" id="ar-current-id">&mdash;</div>
+          <div class="ar-current-name display" id="ar-current-name">&mdash;</div>
+          <div class="ar-current-phase mono smallcaps" id="ar-current-phase">phase &mdash;</div>
+
+          <div class="ar-current-section">
+            <div class="ar-current-section-label mono smallcaps">Files changed</div>
+            <ul class="ar-current-files" id="ar-current-files"></ul>
+          </div>
+
+          <div class="ar-current-section" id="ar-current-deltas-wrap" hidden>
+            <div class="ar-current-section-label mono smallcaps">Metrics &middot; before &rarr; after</div>
+            <table class="ar-current-deltas mono">
+              <tbody id="ar-current-deltas"></tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+
+    </section>
+
+    <section class="ar-log">
+      <div class="ar-log-head">
+        <span class="display ar-log-title">Iteration log</span>
+        <span class="mono smallcaps ar-log-sub">baseline + applied hypotheses</span>
+      </div>
+      <div class="ar-log-table-wrap">
+        <table class="ar-log-table mono">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Hypothesis</th>
+              <th>Visual &Delta;%</th>
+              <th>LCP</th>
+              <th>FCP</th>
+              <th>TBT</th>
+              <th>Perf</th>
+              <th>Decision</th>
+            </tr>
+          </thead>
+          <tbody id="ar-log-body">
+            <tr><td colspan="8" class="ar-log-empty">No iterations yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="ar-deploy-banner" class="ar-deploy-banner" hidden>
+    <div class="ar-deploy-inner">
+      <div class="ar-deploy-title display">Local optimization complete.</div>
+      <div class="ar-deploy-body">
+        Push to Netlify preview? <strong>Requires explicit user approval</strong> &mdash;
+        do <strong>NOT</strong> push from this dashboard.
+        <span class="mono">Total credits at risk: 0.</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

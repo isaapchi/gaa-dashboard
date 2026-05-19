@@ -1,0 +1,334 @@
+/* Autoresearch live dashboard.
+   Aligned with the main Halaga riso palette: warm paper, scarlet/cobalt accents,
+   DM Serif Text headings, Space Grotesk body, Space Mono numbers.
+   Single accent color (scarlet) per the main site; status colors borrow the
+   site's news-* tokens (forest=ok, cobalt=info, ochre=warn, scarlet=error). */
+
+:root {
+  --paper:        #f1e8d2;
+  --paper-soft:   #ece1c3;
+  --paper-edge:   #d8c8a0;
+  --ink:          #1a1611;
+  --ink-soft:     #2a221a;
+  --muted:        #7a6a4c;
+  --scarlet:      #e25034;
+  --scarlet-deep: #c33d22;
+  --scarlet-soft: #f5d3c9;
+  --cobalt:       #1d3da8;
+  --cobalt-soft:  #cfd6ef;
+  --ochre:        #e8b94a;
+  --ochre-soft:   #f6e3b3;
+  --forest:       #3a5a3a;
+  --forest-soft:  #cdd7c8;
+  --rule:         #1a1611;
+
+  --status-ok:     var(--forest);
+  --status-info:   var(--cobalt);
+  --status-warn:   var(--ochre);
+  --status-error:  var(--scarlet);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.display { font-family: 'DM Serif Text', 'DM Serif Display', Georgia, serif; font-weight: 400; }
+.mono    { font-family: 'Space Mono', 'IBM Plex Mono', ui-monospace, monospace; }
+.smallcaps {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ── Masthead ────────────────────────────────────────────────────── */
+.ar-masthead {
+  background: var(--paper);
+  border-bottom: 1.5px solid var(--rule);
+}
+.ar-masthead-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 14px 24px 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.ar-brand-title {
+  font-family: 'DM Serif Text', serif;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.ar-period {
+  color: var(--scarlet);
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-left: 0.04em;
+}
+.ar-brand-sub {
+  margin-top: 4px;
+  color: var(--muted);
+}
+.ar-meta { color: var(--muted); }
+
+/* ── Status banner ───────────────────────────────────────────────── */
+.ar-status-banner {
+  border-bottom: 1px solid var(--rule);
+  transition: background 120ms ease;
+}
+.ar-status-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ar-status-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+}
+.ar-status-right {
+  font-family: 'DM Serif Text', serif;
+  font-size: 18px;
+  color: var(--ink);
+}
+.ar-status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+.ar-status-label { font-weight: 700; }
+.ar-status-sep { color: var(--muted); }
+.ar-status-phase, .ar-status-iter { color: var(--ink-soft); }
+
+.ar-status-idle      { background: var(--forest-soft); color: var(--forest); }
+.ar-status-complete  { background: var(--forest-soft); color: var(--forest); }
+.ar-status-running   { background: var(--cobalt-soft); color: var(--cobalt); }
+.ar-status-paused    { background: var(--ochre-soft);  color: #6b4f10; }
+.ar-status-error     { background: var(--scarlet-soft);color: var(--scarlet-deep); }
+
+/* Make the right-side hypothesis name pop back to ink regardless of banner color */
+.ar-status-banner .ar-status-right { color: var(--ink); }
+
+/* ── Main grid ───────────────────────────────────────────────────── */
+.ar-main {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 20px 24px 80px;
+}
+.ar-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(280px, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+@media (max-width: 1080px) {
+  .ar-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Charts ──────────────────────────────────────────────────────── */
+.ar-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .ar-charts { grid-template-columns: 1fr; }
+}
+.ar-chart-card {
+  background: var(--paper-soft);
+  border: 1.5px solid var(--rule);
+  padding: 12px 14px 8px;
+}
+.ar-chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ar-chart-title { font-size: 22px; line-height: 1; color: var(--ink); }
+.ar-chart-unit  { color: var(--muted); }
+.ar-chart { width: 100%; height: 200px; }
+
+/* ── Current iteration card ──────────────────────────────────────── */
+.ar-current {
+  background: var(--paper-soft);
+  border: 1.5px solid var(--rule);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+}
+.ar-current-kicker { color: var(--muted); }
+.ar-current-empty {
+  color: var(--muted);
+  font-style: italic;
+  padding: 24px 0;
+}
+.ar-current-body { display: flex; flex-direction: column; gap: 10px; }
+.ar-current-id {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1.5px solid var(--scarlet);
+  color: var(--scarlet);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  align-self: flex-start;
+}
+.ar-current-name { font-size: 22px; line-height: 1.15; color: var(--ink); }
+.ar-current-phase { color: var(--muted); }
+.ar-current-section { display: flex; flex-direction: column; gap: 6px; }
+.ar-current-section-label { color: var(--muted); }
+.ar-current-files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ar-current-files li {
+  padding: 3px 8px;
+  background: var(--paper);
+  border-left: 3px solid var(--scarlet);
+}
+.ar-current-deltas { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ar-current-deltas td { padding: 4px 6px; vertical-align: baseline; }
+.ar-current-deltas td:first-child { color: var(--muted); width: 36px; }
+.ar-current-deltas .ar-delta-pos { color: var(--forest); }
+.ar-current-deltas .ar-delta-neg { color: var(--scarlet); }
+/* For LCP/FCP/TBT a NEGATIVE delta is good (less time). For Perf, positive is good.
+   The JS will assign these classes accordingly. */
+
+/* ── Iteration log table ─────────────────────────────────────────── */
+.ar-log {
+  margin-top: 24px;
+  border: 1.5px solid var(--rule);
+  background: var(--paper-soft);
+}
+.ar-log-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid var(--rule);
+  gap: 8px;
+}
+.ar-log-title { font-size: 22px; color: var(--ink); }
+.ar-log-sub   { color: var(--muted); }
+.ar-log-table-wrap { overflow-x: auto; }
+.ar-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.ar-log-table thead th {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--paper);
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid var(--rule);
+  white-space: nowrap;
+}
+.ar-log-table tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(26,22,17,0.12);
+  vertical-align: top;
+}
+.ar-log-table tbody tr:last-child td { border-bottom: none; }
+.ar-log-table tbody tr.ar-row-baseline { background: var(--paper); }
+.ar-log-table .ar-cell-n { font-weight: 700; color: var(--ink); width: 36px; }
+.ar-log-table .ar-cell-hyp {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  max-width: 280px;
+}
+.ar-log-table .ar-cell-hyp .ar-hyp-id {
+  color: var(--scarlet);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 6px;
+}
+.ar-log-table .ar-cell-metric .ar-metric-val { color: var(--ink); }
+.ar-log-table .ar-cell-metric .ar-metric-delta {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.ar-log-table .ar-cell-metric .ar-metric-delta.ar-delta-pos { color: var(--forest); }
+.ar-log-table .ar-cell-metric .ar-metric-delta.ar-delta-neg { color: var(--scarlet); }
+.ar-log-table .ar-cell-visdiff { color: var(--ink-soft); }
+.ar-log-table .ar-cell-decision .ar-decision-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  border: 1.5px solid currentColor;
+}
+.ar-decision-keep            { color: var(--forest); }
+.ar-decision-revert          { color: var(--scarlet); }
+.ar-decision-blocked_visual  { color: #6b4f10; }
+.ar-decision-baseline        { color: var(--muted); }
+
+.ar-log-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── Deploy-pending banner ───────────────────────────────────────── */
+.ar-deploy-banner {
+  position: sticky;
+  bottom: 0;
+  background: var(--ochre-soft);
+  border-top: 1.5px solid var(--ochre);
+  border-bottom: none;
+  padding: 14px 24px;
+  z-index: 50;
+}
+.ar-deploy-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ar-deploy-title { font-size: 20px; color: #6b4f10; }
+.ar-deploy-body  { color: var(--ink); font-size: 13.5px; }
+.ar-deploy-body .mono { color: var(--ink-soft); margin-left: 8px; }
