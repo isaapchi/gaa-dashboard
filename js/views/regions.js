@@ -16,11 +16,90 @@ export async function renderRegions(root) {
   const s = await loadSummary();
   const allDepts = (s.by_department || []).slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
+  // Inject local mobile + map-toolbar styles once (idempotent).
+  if (!document.getElementById('regions-mobile-css')) {
+    const st = document.createElement('style');
+    st.id = 'regions-mobile-css';
+    st.textContent = `
+      /* KPI strip: 3 cards on desktop (3-col), stack to single column on mobile */
+      #kpi-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      @media (max-width: 640px) {
+        #kpi-strip { grid-template-columns: 1fr; gap: 12px; }
+      }
+      /* Map header zoom toolbar — sits next to title, labelled, accessible */
+      .map-zoom-toolbar {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 6px;
+        border: 1.5px solid var(--ink);
+        background: var(--paper);
+      }
+      .map-zoom-toolbar-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-right: 6px;
+        margin-right: 2px;
+        border-right: 1px solid rgba(26,22,17,0.20);
+      }
+      .map-zoom-btn {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        padding: 4px 8px;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink);
+        cursor: pointer;
+        line-height: 1;
+        min-width: 24px;
+        text-align: center;
+      }
+      .map-zoom-btn:hover { background: rgba(26,22,17,0.08); }
+      .map-zoom-btn:focus-visible { outline: 2px solid var(--scarlet); outline-offset: 2px; }
+      .map-zoom-btn.reset { font-size: 10px; letter-spacing: 0.14em; }
+      /* Legend pill overlaid bottom-left of the map canvas */
+      .map-legend-pill {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        z-index: 5;
+        background: rgba(241,232,210,0.92);
+        backdrop-filter: blur(2px);
+        pointer-events: none;
+      }
+      /* Map header — let title and toolbar wrap independently on narrow screens */
+      .regions-map-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .regions-map-header-tools {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 640px) {
+        .map-legend-pill { left: 8px; bottom: 8px; font-size: 9px; padding: 2px 6px; }
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
   root.innerHTML = `
     <div class="grid grid-cols-12 gap-5">
 
-      <!-- KPI cards -->
-      <div id="kpi-strip" class="col-span-12 grid grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <!-- KPI cards (3 cards, equal split desktop / stacked mobile) -->
+      <div id="kpi-strip" class="col-span-12 grid gap-5"></div>
 
       <!-- Filter row -->
       <div class="col-span-12 flex flex-wrap items-center gap-3">
@@ -36,19 +115,23 @@ export async function renderRegions(root) {
 
       <!-- Map placeholder -->
       <div class="col-span-12 lg:col-span-7 card p-6" style="position:relative">
-        <div class="flex items-center justify-between mb-3" id="map-header">
+        <div class="regions-map-header" id="map-header">
           <div>
             <div class="section-kicker">Geography</div>
             <div class="section-title" id="map-title">Regional map</div>
             <div class="text-xs text-ink-400 mt-0.5" id="map-sub">Allocations by administrative region</div>
           </div>
-          <span class="pill pill-blue">Sequential blue scale</span>
+          <div class="regions-map-header-tools" id="map-header-tools">
+            <!-- Zoom toolbar injected by JS after map init -->
+          </div>
         </div>
-        <div id="chart-map" class="chart chart-lg flex items-center justify-center text-center text-xs text-ink-400"
-             role="img" aria-label="Regional allocations map">
-          Map pending Philippines GeoJSON. Drop site/data/ph_regions.geojson and refresh.
+        <div id="chart-map-wrap" style="position:relative;">
+          <div id="chart-map" class="chart chart-lg flex items-center justify-center text-center text-xs text-ink-400"
+               role="img" aria-label="Regional allocations map">
+            Map pending Philippines GeoJSON. Drop site/data/ph_regions.geojson and refresh.
+          </div>
+          <span class="pill pill-blue map-legend-pill" id="map-legend-pill" aria-label="Color scale legend">Sequential blue scale</span>
         </div>
-        <!-- Zoom controls injected by JS after map init -->
       </div>
 
       <!-- Ranked bar chart -->
@@ -497,7 +580,9 @@ export async function renderRegions(root) {
 
     // --- Export affordance: regional map ---------------------------------
     const mapFy = getCurrentYear();
-    const mapHeaderEl = document.getElementById('map-header');
+    // Anchor export buttons to the tools container so they sit beside the
+    // zoom toolbar rather than fighting the title block for space.
+    const mapHeaderEl = document.getElementById('map-header-tools') || document.getElementById('map-header');
     if (mapHeaderEl) {
       // geographic snapshot captured at map-init time; re-read on each export via getRows closure
       mountChartActions(mapHeaderEl, {
@@ -513,23 +598,32 @@ export async function renderRegions(root) {
       });
     }
 
-    // --- Zoom control buttons -------------------------------------------
-    const mapCard = mapEl.closest('.card');
-    if (mapCard) {
-      const zoomWrap = document.createElement('div');
-      zoomWrap.style.cssText = 'position:absolute;top:14px;right:14px;display:flex;gap:4px;z-index:10';
+    // --- Zoom toolbar (grouped + labelled, lives in map header) ---------
+    const toolsEl = document.getElementById('map-header-tools');
+    // Idempotent guard: don't double-mount the toolbar on re-render.
+    if (toolsEl && !toolsEl.querySelector('.map-zoom-toolbar')) {
+      const toolbar = document.createElement('div');
+      toolbar.className = 'map-zoom-toolbar';
+      toolbar.setAttribute('role', 'toolbar');
+      toolbar.setAttribute('aria-label', 'Map zoom controls');
 
-      function makeZoomBtn(label) {
+      function makeZoomBtn(symbol, title, ariaLabel, extraClass = '') {
         const btn = document.createElement('button');
-        btn.textContent = label;
-        btn.className = 'btn btn-ghost';
-        btn.style.cssText = 'padding:4px 10px;font-size:11px;';
+        btn.type = 'button';
+        btn.className = 'map-zoom-btn ' + extraClass;
+        btn.textContent = symbol;
+        btn.title = title;
+        btn.setAttribute('aria-label', ariaLabel);
         return btn;
       }
 
-      const btnIn    = makeZoomBtn('+');
-      const btnOut   = makeZoomBtn('−');
-      const btnReset = makeZoomBtn('Reset');
+      const label = document.createElement('span');
+      label.className = 'map-zoom-toolbar-label';
+      label.textContent = 'Zoom';
+
+      const btnIn    = makeZoomBtn('+',     'Zoom in',  'Zoom map in');
+      const btnOut   = makeZoomBtn('−','Zoom out', 'Zoom map out');
+      const btnReset = makeZoomBtn('Reset', 'Reset zoom', 'Reset map zoom', 'reset');
 
       btnIn.addEventListener('click', () => {
         const currentZoom = (cMap.getOption().series[0].zoom) || 1;
@@ -543,10 +637,11 @@ export async function renderRegions(root) {
         cMap.setOption({ series: [{ zoom: 1, center: null }] });
       });
 
-      zoomWrap.appendChild(btnIn);
-      zoomWrap.appendChild(btnOut);
-      zoomWrap.appendChild(btnReset);
-      mapCard.appendChild(zoomWrap);
+      toolbar.appendChild(label);
+      toolbar.appendChild(btnIn);
+      toolbar.appendChild(btnOut);
+      toolbar.appendChild(btnReset);
+      toolsEl.appendChild(toolbar);
     }
   } catch (e) {
     console.error('[regions] map init failed:', e);

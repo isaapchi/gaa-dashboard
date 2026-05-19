@@ -125,20 +125,62 @@ export async function renderExplorer(root, arg) {
   const expClasses  = (s.by_exp_class || []).map(x => x.name).filter(Boolean);
   const fundSubcats = (s.by_fund_subcat || []).map(x => x.name).filter(Boolean).sort();
 
+  // Inject mobile-stack styles once (idempotent). On mobile the headline
+  // moves above the controls row so APPLY gets its own line and the status
+  // numbers don't collide with the title.
+  if (!document.getElementById('explorer-mobile-css')) {
+    const st = document.createElement('style');
+    st.id = 'explorer-mobile-css';
+    st.textContent = `
+      .explorer-controls-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .explorer-controls-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .explorer-status-text {
+        font-family: 'Space Mono', monospace;
+        font-size: 10.5px;
+        color: var(--muted);
+        text-align: right;
+      }
+      @media (max-width: 640px) {
+        .explorer-controls-head { flex-direction: column; align-items: stretch; gap: 12px; }
+        .explorer-controls-actions {
+          justify-content: space-between;
+          width: 100%;
+          gap: 8px;
+        }
+        .explorer-status-text { text-align: left; flex: 1; }
+        #explorer-apply { margin-left: auto; min-height: 40px; padding-left: 18px; padding-right: 18px; }
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
   root.innerHTML = `
     <div class="grid grid-cols-12 gap-5">
 
       <!-- Controls -->
       <div class="col-span-12 card p-6">
-        <div class="flex items-center justify-between mb-4">
+        <div class="explorer-controls-head">
           <div>
             <div class="section-kicker">Query</div>
             <div class="section-title">Budget explorer</div>
             <div class="text-xs text-ink-400 mt-0.5">Pivot the FY${s.year} <span data-term="GAA">GAA</span> across any dimension</div>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="explorer-controls-actions">
             <span id="explorer-filter-chip"></span>
-            <span id="explorer-status" class="text-xs text-ink-400"></span>
+            <span id="explorer-status" class="explorer-status-text" aria-live="polite"></span>
             <button id="explorer-apply" class="btn">Apply</button>
           </div>
         </div>
@@ -361,7 +403,7 @@ ${whereSQL}
     _lastGroupKey  = groupKey;
 
     renderResults({ groupSpec, grouped, filteredTotal, nGroups, topN });
-    setStatus(`${grouped.length} rows · ${fmtInt(nGroups)} ${plural(groupSpec.label.toLowerCase(), nGroups)}`);
+    setStatus(`Showing ${grouped.length} of ${fmtInt(nGroups)} ${plural(groupSpec.label.toLowerCase(), nGroups)}`);
 
     // Job 3: brief success flash on the Apply button.
     const applyBtn = document.getElementById('explorer-apply');

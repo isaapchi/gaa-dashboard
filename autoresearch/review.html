@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Visual Review — perf/autoresearch</title>
+<style>
+  :root {
+    --paper: #f1e8d2;
+    --ink: #1a1a1a;
+    --muted: #6b6155;
+    --scarlet: #e25034;
+    --forest: #3a5a3a;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    margin: 0;
+    padding: 24px 32px;
+  }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  .lead { color: var(--muted); margin: 0 0 24px; font-size: 14px; }
+  .summary {
+    background: white; border-left: 4px solid var(--forest);
+    padding: 12px 16px; margin: 0 0 24px; font-size: 14px; line-height: 1.5;
+  }
+  .summary strong { color: var(--forest); }
+  .controls {
+    position: sticky; top: 0; background: var(--paper); padding: 8px 0;
+    z-index: 10; border-bottom: 1px solid #ddd; margin-bottom: 16px;
+  }
+  .controls label { margin-right: 16px; font-size: 13px; cursor: pointer; }
+  section { margin: 0 0 36px; background: white; padding: 16px; border-radius: 4px; }
+  section h2 { margin: 0 0 12px; font-size: 16px; }
+  section .meta { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .cell { display: flex; flex-direction: column; }
+  .cell h3 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+  .cell img {
+    width: 100%; max-height: 600px; object-fit: contain;
+    background: #fafafa; border: 1px solid #eee;
+  }
+  .verdict { font-weight: 600; padding: 4px 8px; border-radius: 3px; font-size: 12px; }
+  .verdict.ok { background: #e6f4e6; color: var(--forest); }
+  .verdict.review { background: #fef3e6; color: #b56500; }
+  .footer {
+    margin-top: 32px; padding: 16px; background: white;
+    border-left: 4px solid var(--scarlet); font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<h1>Visual diff review — <code>perf/autoresearch</code></h1>
+<p class="lead">Compare baseline (before optimizations) against current state (after H1, H3, H4, H8 applied). Scroll all 16 views before deciding.</p>
+
+<div class="summary">
+<strong>Kept this round:</strong> H1 self-host Tailwind, H3 remove cache-bust, H4 font cleanup + preload, H8 cache headers.
+<br><strong>Result:</strong> Perf 0.33 → 0.68 (LCP −50%, FCP −73%, TBT −99%).
+<br><strong>Visual diff range:</strong> 4.8% – 9.4% (most is ECharts canvas anti-aliasing noise, not real layout change).
+</div>
+
+<div class="controls">
+  <label><input type="radio" name="vp" value="all" checked> All viewports</label>
+  <label><input type="radio" name="vp" value="mobile"> Mobile only</label>
+  <label><input type="radio" name="vp" value="desktop"> Desktop only</label>
+</div>
+
+<div id="grid"></div>
+
+<div class="footer">
+After scrolling: if everything looks acceptable, tell Claude "deploy" / "push preview" to send to Netlify (~15 credits, no merge to main yet).
+If you see something broken, tell Claude which hypothesis to revert.
+</div>
+
+<script>
+const VIEWS = ["home", "timeline", "departments", "regions", "expense", "compare", "explorer", "about"];
+const VIEWPORTS = ["mobile", "desktop"];
+
+const grid = document.getElementById("grid");
+const cards = [];
+for (const view of VIEWS) {
+  for (const vp of VIEWPORTS) {
+    const slug = `${view}-${vp}`;
+    const baseline = `visual-baseline/${slug}.png`;
+    const after = `runs/visual-diffs/after_${slug}.png`;
+    const diff = `runs/visual-diffs/diff_${slug}.png`;
+    const card = document.createElement("section");
+    card.dataset.vp = vp;
+    card.innerHTML = `
+      <h2>${view} <span style="color:#999;font-weight:400">— ${vp}</span></h2>
+      <div class="row">
+        <div class="cell"><h3>Baseline (before)</h3><img loading="lazy" src="${baseline}"></div>
+        <div class="cell"><h3>After (H1,H3,H4,H8)</h3><img loading="lazy" src="${after}"></div>
+        <div class="cell"><h3>Diff (pink = changed)</h3><img loading="lazy" src="${diff}"></div>
+      </div>
+    `;
+    grid.appendChild(card);
+    cards.push(card);
+  }
+}
+
+document.querySelectorAll('input[name=vp]').forEach(r => {
+  r.addEventListener('change', e => {
+    const v = e.target.value;
+    cards.forEach(c => c.style.display = (v === 'all' || c.dataset.vp === v) ? '' : 'none');
+  });
+});
+</script>
+</body>
+</html>
