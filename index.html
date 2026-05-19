@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Halaga &middot; Philippine Budget &middot; The Riso Almanac</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/tailwind.css">
   <script>
-    tailwind.config = {
+    // Tailwind CDN runtime removed (H1 self-host); guard the legacy config block.
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
       theme: {
         extend: {
           colors: {
@@ -42,6 +44,7 @@
         },
       },
     };
+    }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
