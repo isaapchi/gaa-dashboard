@@ -1,0 +1,23 @@
+{
+  "_description": "Per-view rendering noise floor in percent pixel-diff. Captured by running visual_check.check() against the baseline with ZERO source changes — any non-zero value here is irreducible canvas anti-aliasing, font-paint timing, or scroll/IntersectionObserver variance. Gate threshold per view is max(0.5%, floor + 0.5%) so the gate still catches real visual changes on noisy views without false-positive-blocking every iteration. Regenerate via `python autoresearch/calibrate_noise.py` after major site/CSS rewrites.",
+  "_captured": "2026-05-22T09:50",
+  "_baseline_commit": "fdd4edb (post UI polish + H4 font preload)",
+  "per_view": {
+    "home-mobile":         0.0000,
+    "timeline-mobile":     0.0000,
+    "departments-mobile":  0.0000,
+    "regions-mobile":      0.0000,
+    "expense-mobile":      0.0000,
+    "compare-mobile":      0.0000,
+    "explorer-mobile":     0.8640,
+    "about-mobile":        0.0000,
+    "home-desktop":        0.0000,
+    "timeline-desktop":    0.0000,
+    "departments-desktop": 0.0000,
+    "regions-desktop":     4.6029,
+    "expense-desktop":     5.8774,
+    "compare-desktop":     0.0000,
+    "explorer-desktop":    0.0000,
+    "about-desktop":       0.0000
+  }
+}

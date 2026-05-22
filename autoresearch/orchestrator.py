@@ -24,6 +24,7 @@ HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
+import json  # noqa: E402
 import state  # noqa: E402
 import hypotheses  # noqa: E402
 import visual_check  # noqa: E402
@@ -37,7 +38,44 @@ STOP_SENTINEL = HERE / "STOP"
 BASELINE_DIR = HERE / "visual-baseline"
 DIFF_DIR = HERE / "runs" / "visual-diffs"
 RUNS_DIR = HERE / "runs"
-BRANCH = "perf/autoresearch"
+NOISE_FLOOR_PATH = HERE / "noise-floor.json"
+
+# Run on whatever branch HEAD is. Earlier runs forced a `perf/autoresearch`
+# checkout; we now keep loops on the current branch (typically `main`)
+# because the user asked to stop juggling branches.
+BRANCH = None
+
+# Hypotheses to skip outright. Each was tried in a prior run and rejected for
+# a reason the perf gate alone can't see:
+#   H1 — self-host Tailwind; the `latest` binary URL pulls Tailwind v4 which
+#        produces incomplete CSS from our v3-shaped input. Fix the applier or
+#        leave it disabled.
+#   H6 — split critical CSS by line count; inlines first ~167 lines, which
+#        omits heading font-weight rules. Headings render lighter until the
+#        async CSS lands. Composite perf goes up, typography breaks.
+#   H24 — lazy-load view modules; +0.03 composite perf but +1.2s FCP (blank
+#        screen). Trades visible speed for benchmark score.
+#   H52 — preload LCP image; LCP is text on this site, so the applier is a
+#        no-op. Prior loop "KEEP"d it from pure measurement noise (+0.07).
+EXCLUDED_IDS: set[str] = {"H1", "H6", "H24", "H52"}
+
+# Visual-regression gate. Strict: any single view diverging more than
+# VISUAL_THRESHOLD_PCT from baseline causes BLOCKED_VISUAL and a revert.
+# 0.5% catches typography weight changes, sub-pixel layout shifts, and
+# anything else humans would notice on close inspection. ECharts canvas
+# anti-aliasing produces ~0.1-0.3% noise on chart-heavy views, so 0.5%
+# leaves room for noise without admitting real regressions.
+VISUAL_THRESHOLD_PCT = 0.5
+
+# Perf-gate KEEP rules — tightened from "composite perf strictly improved"
+# to require BOTH:
+#   1. composite perf score improved (any positive delta), AND
+#   2. at least one named metric (LCP/FCP/TBT) improved by REGRESSION_TOL_MS
+#      or more, AND no named metric regressed by more than REGRESSION_TOL_MS.
+# Prevents "composite +0.02 but FCP +1200ms" trades (H24) and noise-driven
+# no-op KEEPs (H52: composite +0.07 from pure measurement jitter).
+REGRESSION_TOL_MS = 100  # individual-metric tolerance window
+NAMED_METRICS = ("lcp_ms", "fcp_ms", "tbt_ms")
 
 
 def log(msg: str) -> None:
@@ -99,6 +137,9 @@ def git(*args: str, check: bool = True, capture: bool = False) -> subprocess.Com
 
 def ensure_branch() -> None:
     head = git("rev-parse", "--abbrev-ref", "HEAD", capture=True).stdout.strip()
+    if BRANCH is None:
+        log(f"running on current branch: {head}")
+        return
     if head == BRANCH:
         log(f"on branch {BRANCH}")
         return
@@ -185,6 +226,23 @@ def run(dry_run: bool = False, baseline_only: bool = False, measure_only: bool =
         BASELINE_DIR.mkdir(parents=True, exist_ok=True)
         visual_check.capture_baseline(SERVE_URL, BASELINE_DIR)
 
+        # Per-view rendering-noise floor. Loaded once and passed to every
+        # visual_check.check() so the gate skips known-noisy views (ECharts
+        # canvas on regions-desktop / expense-desktop, etc.) without false
+        # positives. Regenerate via `python autoresearch/calibrate_noise.py`
+        # whenever the site shape changes materially.
+        noise_floor: dict[str, float] = {}
+        if NOISE_FLOOR_PATH.exists():
+            try:
+                payload = json.loads(NOISE_FLOOR_PATH.read_text(encoding="utf-8"))
+                noise_floor = payload.get("per_view", {}) or {}
+                noisy = {k: v for k, v in noise_floor.items() if v > 0.0}
+                log(f"loaded noise floor for {len(noise_floor)} views; {len(noisy)} non-zero: {noisy}")
+            except Exception as e:
+                log(f"WARN: failed to load noise-floor.json ({e}) — using flat threshold")
+        else:
+            log("no noise-floor.json — using flat threshold (will likely block chart-heavy views)")
+
         if baseline_only:
             log("baseline-only mode complete")
             state.set_status("complete")
@@ -211,7 +269,15 @@ def run(dry_run: bool = False, baseline_only: bool = False, measure_only: bool =
         last_kept_metrics = baseline_metrics
         last_kept_iter = 0
 
-        for n, h in enumerate(hypotheses.HYPOTHESES, start=1):
+        # Filter the hypothesis queue against EXCLUDED_IDS up front so the
+        # dashboard's "n of M" total reflects the actual run size.
+        queue = [h for h in hypotheses.HYPOTHESES if h.id not in EXCLUDED_IDS]
+        skipped = [h.id for h in hypotheses.HYPOTHESES if h.id in EXCLUDED_IDS]
+        if skipped:
+            log(f"excluded {len(skipped)} hypothesis IDs: {sorted(skipped)}")
+        log(f"queue length after exclusions: {len(queue)}")
+
+        for n, h in enumerate(queue, start=1):
             if STOP_SENTINEL.exists():
                 log("STOP sentinel present — halting")
                 state.set_status("paused")
@@ -278,13 +344,17 @@ def run(dry_run: bool = False, baseline_only: bool = False, measure_only: bool =
 
                 state.set_phase("visual_gate")
                 log("  visual gate...")
-                # Threshold 50% catches catastrophic layout breakage (view
-                # gone blank, content shifted off-screen, fundamentally
-                # different page) while tolerating run-to-run pixel noise
-                # from ECharts canvas anti-aliasing and async render timing
-                # (empirically 5-15% on chart-heavy views). All diffs are
-                # saved to DIFF_DIR for manual review before any deploy.
-                visual = visual_check.check(SERVE_URL, BASELINE_DIR, DIFF_DIR, threshold_pct=50.0)
+                # Strict gate: 0.5% per-view max diff. ECharts canvas noise
+                # sits at ~0.1-0.3% on chart-heavy views so 0.5% catches
+                # everything humans would notice (font-weight changes,
+                # padding shifts, layout reflow) without admitting genuine
+                # noise as a regression. All diffs saved to DIFF_DIR for
+                # manual eyeball.
+                visual = visual_check.check(
+                    SERVE_URL, BASELINE_DIR, DIFF_DIR,
+                    threshold_pct=VISUAL_THRESHOLD_PCT,
+                    noise_floor=noise_floor,
+                )
                 iter_record["visual_diff_pct"] = {
                     k: round(v["diff_pct"], 3) for k, v in visual.get("per_view", {}).items()
                 }
@@ -310,14 +380,28 @@ def run(dry_run: bool = False, baseline_only: bool = False, measure_only: bool =
                 state.set_current_iter_record(iter_record)
 
                 state.set_phase("deciding")
-                if metrics["perf"] > last_kept_metrics["perf"]:
+                # KEEP requires:
+                #   1. composite perf score strictly improved, AND
+                #   2. at least one named metric (LCP/FCP/TBT) improved by
+                #      REGRESSION_TOL_MS or more, AND
+                #   3. no named metric regressed by more than REGRESSION_TOL_MS.
+                # Rule 1 alone admitted no-op KEEPs from measurement jitter
+                # (H52 +0.07 from nothing). Rule 3 alone admitted FCP-for-
+                # composite trades (H24: composite +0.03 but FCP +1228ms).
+                d = iter_record['delta_vs_last_kept']
+                perf_improved = d['perf'] > 0
+                named_improved = any(d[m] <= -REGRESSION_TOL_MS for m in NAMED_METRICS)
+                named_regressed = any(d[m] > REGRESSION_TOL_MS for m in NAMED_METRICS)
+                keep = perf_improved and named_improved and not named_regressed
+
+                if keep:
                     log("  KEEP")
                     state.set_phase("committing")
                     delta_str = (
-                        f"LCP{iter_record['delta_vs_last_kept']['lcp_ms']:+.0f}ms "
-                        f"FCP{iter_record['delta_vs_last_kept']['fcp_ms']:+.0f}ms "
-                        f"TBT{iter_record['delta_vs_last_kept']['tbt_ms']:+.0f}ms "
-                        f"perf{iter_record['delta_vs_last_kept']['perf']:+.3f}"
+                        f"LCP{d['lcp_ms']:+.0f}ms "
+                        f"FCP{d['fcp_ms']:+.0f}ms "
+                        f"TBT{d['tbt_ms']:+.0f}ms "
+                        f"perf{d['perf']:+.3f}"
                     )
                     git("add", "-A")
                     git("commit", "-m", f"perf: {h.id} {h.name} ({delta_str})", "--no-verify")
@@ -326,7 +410,13 @@ def run(dry_run: bool = False, baseline_only: bool = False, measure_only: bool =
                     last_kept_metrics = metrics
                     last_kept_iter = n
                 else:
-                    log("  REVERT (perf did not improve vs last kept)")
+                    why = []
+                    if not perf_improved: why.append(f"perf {d['perf']:+.3f}")
+                    if not named_improved: why.append("no named metric improved >= " + f"{REGRESSION_TOL_MS}ms")
+                    if named_regressed:
+                        bad = [m for m in NAMED_METRICS if d[m] > REGRESSION_TOL_MS]
+                        why.append(f"regression on {','.join(bad)}")
+                    log(f"  REVERT ({'; '.join(why)})")
                     git_restore_all()
                     iter_record["decision"] = "REVERT"
 

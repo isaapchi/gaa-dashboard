@@ -32,6 +32,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 
+from hypotheses_extra import apply_h10, apply_h11, apply_h12, apply_h13, apply_h14
+
 
 # ---------------------------------------------------------------------------
 # Public dataclass + registry
@@ -366,74 +368,114 @@ def apply_h4(repo: Path) -> dict:
 # `ensureBudgetView()` flow fetches `budget_${year}.parquet` only on demand and
 # caches it in `_fetchedYears`. No multi-year prefetch at init time exists.
 #
-# The improvement we can make: after the active year is fetched, schedule an
-# idle-time prefetch of the immediately neighboring years (current-1, current+1)
-# so a year-switch is instant. We inject this in `setCurrentYear` and the
-# initial `ensureBudgetView` path via a small helper.
+# The improvement we can make: after the active year is set, schedule an
+# idle-time HTTP-cache warm of the immediately neighboring years (prev / next
+# in _yearsPayload.years) so a subsequent year-switch is instant. We do NOT
+# register the parquet with DuckDB — that would race with the active year's
+# load and risk shifting render timing past the 0.5% visual-regression gate.
+# Plain `fetch(url)` is enough to seat the bytes in the browser HTTP cache;
+# the real DuckDB registration happens later inside `ensureBudgetView` when
+# the user actually switches.
 #
-# We mark our injection with a sentinel comment so idempotency is trivial.
+# Anchor: the closing brace of `setCurrentYear` — a stable exported function
+# that is the single entry point for changing the active fiscal year. We
+# locate it by regex (tolerant of body edits) rather than matching a brittle
+# string inside `ensureBudgetView` (which has been edited since H5 was first
+# written and broke the old anchor).
 
-H5_SENTINEL = "// H5: idle-time prefetch of neighbor years"
+H5_MARKER = "// H5_IDLE_PREFETCH"
 
-H5_OLD_ENSURE_RETURN = """    _currentViewYear = year;
-}"""
+# Helper appended near the bottom of the file. Defined as a plain function so
+# it's hoisted and can be called from inside the patched setCurrentYear without
+# worrying about temporal-dead-zone for `let _yearsPayload` (we read it lazily
+# inside the idle callback, after getYears has had a chance to populate it).
+H5_HELPER_BLOCK = """
 
-H5_NEW_ENSURE_RETURN = """    _currentViewYear = year;
-
-  // H5: idle-time prefetch of neighbor years (idempotent — guarded by _fetchedYears).
-  _schedulePrefetchNeighbors(year);
-}
-
-function _schedulePrefetchNeighbors(year) {
+// H5_IDLE_PREFETCH — warm the browser HTTP cache for the neighbour years so a
+// subsequent setCurrentYear() switch hits a cached parquet instead of a cold
+// network fetch. We deliberately do NOT register the buffer with DuckDB here;
+// that happens lazily inside ensureBudgetView when the user actually switches.
+// Skipping DuckDB registration keeps this off the critical path for the active
+// year's render and avoids racing with its in-flight parquet fetch.
+const _h5PrefetchedYears = new Set();
+function _h5SchedulePrefetchNeighbors(activeYear) {
   if (typeof window === 'undefined') return;
-  const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
-  idle(async () => {
-    const yp = _yearsPayload || (await getYears().catch(() => null));
-    const years = (yp && yp.years) || [];
-    const i = years.indexOf(year);
-    const candidates = [];
-    if (i > 0) candidates.push(years[i - 1]);
-    if (i !== -1 && i < years.length - 1) candidates.push(years[i + 1]);
-    for (const y of candidates) {
-      if (_fetchedYears.has(y)) continue;
-      try {
-        const { db } = await getDB();
-        const res = await fetch(`data/budget_${y}.parquet`);
-        if (!res.ok) continue;
-        const buf = new Uint8Array(await res.arrayBuffer());
-        await db.registerFileBuffer(`budget_${y}.parquet`, buf);
-        _fetchedYears.add(y);
-      } catch (_) { /* swallow — best-effort prefetch */ }
-    }
-  });
-}"""
+  const yp = _yearsPayload;
+  if (!yp || !Array.isArray(yp.years)) return;
+  const i = yp.years.indexOf(activeYear);
+  if (i === -1) return;
+  const neighbours = [];
+  if (i > 0) neighbours.push(yp.years[i - 1]);
+  if (i < yp.years.length - 1) neighbours.push(yp.years[i + 1]);
+  const idle = window.requestIdleCallback
+    ? (cb) => window.requestIdleCallback(cb, { timeout: 4000 })
+    : (cb) => setTimeout(cb, 1500);
+  for (const y of neighbours) {
+    if (y === activeYear) continue;
+    if (_h5PrefetchedYears.has(y)) continue;
+    if (_fetchedYears && _fetchedYears.has(y)) continue;  // already registered with DuckDB
+    _h5PrefetchedYears.add(y);
+    idle(() => {
+      // Best-effort HTTP-cache warm. No await, no registerFileBuffer.
+      fetch(`data/budget_${y}.parquet`, { cache: 'force-cache' }).catch(() => {
+        _h5PrefetchedYears.delete(y);  // allow retry on next setCurrentYear
+      });
+    });
+  }
+}
+"""
+
+# Regex that locates the body of setCurrentYear. We match the function header
+# and capture the body up to the matching closing brace at column 0. This is
+# tolerant of any internal edits (dispatched events, view re-points, etc.) as
+# long as the function remains a top-level `export async function
+# setCurrentYear(year)` block.
+H5_SET_CURRENT_YEAR_RE = re.compile(
+    r"(export\s+async\s+function\s+setCurrentYear\s*\([^)]*\)\s*\{)(.*?)(\n\})",
+    re.DOTALL,
+)
 
 
 def apply_h5(repo: Path) -> dict:
     data_js = repo / "js" / "data.js"
     src = _read(data_js)
 
-    if H5_SENTINEL in src:
-        _log("H5", "js/data.js", "prefetch already injected, no change")
+    if H5_MARKER in src:
+        _log("H5", "js/data.js", "idle prefetch already injected, no change")
         return {
             "files_changed": [],
-            "notes": "already lazy; prefetch already injected",
+            "notes": "already lazy; idle-time HTTP-cache prefetch already injected",
         }
 
-    if H5_OLD_ENSURE_RETURN not in src:
+    m = H5_SET_CURRENT_YEAR_RE.search(src)
+    if not m:
         raise ValueError(
-            "[H5] couldn't find `_currentViewYear = year;` close of ensureBudgetView in js/data.js. "
+            "[H5] couldn't locate `export async function setCurrentYear(...)` in js/data.js. "
             "data.js may have been edited; needs orchestrator-time handling."
         )
 
-    new_src = src.replace(H5_OLD_ENSURE_RETURN, H5_NEW_ENSURE_RETURN, 1)
+    header, body, closer = m.group(1), m.group(2), m.group(3)
+    # Inject the prefetch call at the very end of the function body — after any
+    # await ensureBudgetView() / event dispatch — so the active year's render
+    # path is never delayed by neighbour bookkeeping.
+    injection = "\n  _h5SchedulePrefetchNeighbors(year);"
+    new_body = body.rstrip() + injection
+    new_block = header + new_body + closer
+    new_src = src[: m.start()] + new_block + src[m.end():]
+
+    # Append the helper function once, at the bottom of the file. Vanilla JS;
+    # no new imports. Hoisting: function declarations are hoisted, so the call
+    # inside setCurrentYear resolves even though the helper lives below.
+    new_src = new_src.rstrip() + "\n" + H5_HELPER_BLOCK
+
     _write(data_js, new_src)
-    _log("H5", "js/data.js", "added requestIdleCallback prefetch for neighbor years")
+    _log("H5", "js/data.js", "added idle-time HTTP-cache prefetch for neighbour years (no DuckDB register)")
     return {
         "files_changed": ["js/data.js"],
         "notes": (
-            "loader is already lazy per-year; added idle-time prefetch of "
-            "neighboring years to keep year-switch snappy"
+            "loader is already lazy per-year; added idle-time HTTP-cache warm for "
+            "neighbour years via setCurrentYear (no DuckDB registration on the prefetch "
+            "path, so no race with the active year's parquet load)"
         ),
     }
 
@@ -699,6 +741,11 @@ HYPOTHESES: list[Hypothesis] = [
     Hypothesis("H7", "defer Cloudflare Insights to requestIdleCallback", "low", apply_h7),
     Hypothesis("H8", "extend netlify.toml cache headers (1y immutable)", "low", apply_h8),
     Hypothesis("H9", "preload LCP element",                         "low",  apply_h9),
+    Hypothesis("H10", "preconnect cdn.jsdelivr.net",                   "low",  apply_h10),
+    Hypothesis("H11", "modulepreload glance.js + data.js (landing)",   "low",  apply_h11),
+    Hypothesis("H12", "Google Fonts display=optional",                 "low",  apply_h12),
+    Hypothesis("H13", "fetchpriority=high on DM Serif Text preload",   "low",  apply_h13),
+    Hypothesis("H14", "prefetch summary_<default-year>.json",          "low",  apply_h14),
 ]
 
 
@@ -707,7 +754,7 @@ HYPOTHESES: list[Hypothesis] = [
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    assert len(HYPOTHESES) == 9, f"expected 9 hypotheses, got {len(HYPOTHESES)}"
+    assert len(HYPOTHESES) == 14, f"expected 14 hypotheses, got {len(HYPOTHESES)}"
     seen_ids = set()
     for h in HYPOTHESES:
         assert h.id and h.id.startswith("H"), f"bad id: {h.id!r}"

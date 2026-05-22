@@ -20,6 +20,7 @@ Thumbs.db
 # Autoresearch loop state & artifacts (committed: baseline PNGs, source code)
 autoresearch/state.json
 autoresearch/runs/
+autoresearch/visual-diff/
 autoresearch/bin/
 autoresearch/STOP
 autoresearch/__pycache__/

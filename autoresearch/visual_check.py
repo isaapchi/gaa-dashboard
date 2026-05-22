@@ -227,11 +227,21 @@ def check(
     diff_dir: Path,
     threshold_pct: float = 0.5,
     chrome_channel: str = "chrome",
+    noise_floor: dict | None = None,
 ) -> dict:
-    """Re-capture, diff vs baseline. See module docstring for return shape."""
+    """Re-capture, diff vs baseline. See module docstring for return shape.
+
+    Per-view threshold = max(threshold_pct, noise_floor[view_key] + threshold_pct)
+    so views with irreducible canvas/font-paint noise (regions-desktop,
+    expense-desktop, explorer-mobile in practice) still get caught when a real
+    visual change pushes them above their personal noise envelope. Without
+    this, ECharts canvas anti-aliasing produces 4-6% false-positive blocks on
+    chart-heavy views and the loop can never KEEP anything on noisy views.
+    """
     baseline_dir = Path(baseline_dir)
     diff_dir = Path(diff_dir)
     diff_dir.mkdir(parents=True, exist_ok=True)
+    noise_floor = noise_floor or {}
 
     # 1. Capture "after" images alongside the diffs.
     after_dir = diff_dir
@@ -279,9 +289,15 @@ def check(
                 continue
             result = _diff_pair(baseline_path, after_path, diff_path)
             per_view[key] = result
+            # Per-view threshold accounts for that view's irreducible noise.
+            # A view's gate fails only when its diff exceeds its own envelope.
+            view_floor = noise_floor.get(key, 0.0)
+            view_threshold = max(threshold_pct, view_floor + threshold_pct)
+            result["threshold_pct"] = view_threshold
+            result["noise_floor_pct"] = view_floor
             if result["diff_pct"] > max_diff_pct:
                 max_diff_pct = result["diff_pct"]
-            if result["diff_pct"] > threshold_pct:
+            if result["diff_pct"] > view_threshold:
                 failing.append(key)
 
     return {

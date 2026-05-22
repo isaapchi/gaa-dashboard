@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visual review &middot; Halaga autoresearch</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Borrow the dashboard's tokens + typography. Anything specific to this
+       page is namespaced .vr-* so we don't fight the dashboard rules. -->
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <style>
+    /* ── Page-specific overrides ───────────────────────────────────── */
+    .vr-main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+    }
+
+    .vr-explainer {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      max-width: 760px;
+      margin: 6px 0 0;
+    }
+    .vr-explainer .vr-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-right: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vr-legend .vr-swatch {
+      width: 12px; height: 12px;
+      border: 1.5px solid var(--rule);
+      display: inline-block;
+    }
+    .vr-legend .vr-swatch.vr-swatch-baseline { background: #fafaf7; }
+    .vr-legend .vr-swatch.vr-swatch-after    { background: #fafaf7; }
+    .vr-legend .vr-swatch.vr-swatch-diff {
+      background: #ffffff;
+      position: relative;
+    }
+    .vr-legend .vr-swatch.vr-swatch-diff::after {
+      content: "";
+      position: absolute; inset: 2px;
+      background: rgba(226,80,52,0.85);
+    }
+
+    /* ── Summary strip ─────────────────────────────────────────────── */
+    .vr-summary {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--paper);
+      border-bottom: 1.5px solid var(--rule);
+      padding: 10px 24px;
+    }
+    .vr-summary-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .vr-summary-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .vr-summary-stat .vr-stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vr-summary-stat .vr-stat-value {
+      font-family: 'DM Serif Text', serif;
+      font-size: 20px;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .vr-summary-stat .vr-stat-value.vr-warn  { color: var(--scarlet-deep); }
+    .vr-summary-stat .vr-stat-value.vr-ok    { color: var(--forest); }
+    .vr-summary-stat .vr-stat-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .vr-summary-right {
+      margin-left: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── Row layout (label | baseline | after | diff) ──────────────── */
+    .vr-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .vr-row {
+      display: grid;
+      /* Label rail + three image cells. 380px gives two viewports + diff
+         comfortably on a 1440px monitor with room for the label. */
+      grid-template-columns: 200px 380px 380px 380px;
+      gap: 12px;
+      align-items: stretch;
+      background: var(--paper-soft);
+      border: 1.5px solid var(--rule);
+      padding: 12px;
+    }
+    .vr-row.vr-row-warn  { border-color: var(--scarlet); }
+    .vr-row.vr-row-watch { border-color: var(--ochre); }
+
+    .vr-row-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 6px;
+    }
+    .vr-row-route {
+      font-family: 'DM Serif Text', serif;
+      font-size: 19px;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .vr-row-vp {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vr-row-pct {
+      margin-top: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .vr-row-pct.vr-warn  { color: var(--scarlet-deep); }
+    .vr-row-pct.vr-watch { color: #6b4f10; }
+    .vr-row-pct.vr-ok    { color: var(--forest); }
+    .vr-row-pct-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .vr-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .vr-cell-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .vr-cell-frame {
+      background: #ffffff;
+      border: 1px solid var(--rule);
+      /* Cap the image cell so very tall mobile screenshots don't push the
+         row off-screen. object-fit keeps proportions. */
+      height: 280px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      cursor: zoom-in;
+    }
+    .vr-cell-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top;
+      display: block;
+    }
+    /* Diff PNGs are pixelmatch red-on-transparent overlays. The white frame
+       below gives the red something to read against; we render at full
+       opacity so faint single-pixel anti-alias changes are still visible. */
+    .vr-cell-frame.vr-cell-diff {
+      background:
+        repeating-conic-gradient(#f3eedf 0% 25%, #ece1c3 0% 50%) 0 / 14px 14px;
+    }
+    .vr-cell-missing {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Empty / waiting state ─────────────────────────────────────── */
+    .vr-empty {
+      margin: 60px auto;
+      max-width: 640px;
+      padding: 28px 32px;
+      background: var(--paper-soft);
+      border: 1.5px solid var(--rule);
+      text-align: center;
+    }
+    .vr-empty h2 {
+      font-family: 'DM Serif Text', serif;
+      font-size: 24px;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+    .vr-empty p { color: var(--ink-soft); margin: 0 0 8px; }
+    .vr-empty code {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      background: var(--paper);
+      padding: 2px 6px;
+      border: 1px solid var(--paper-edge);
+    }
+
+    /* ── Lightbox ──────────────────────────────────────────────────── */
+    .vr-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,22,17,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      cursor: zoom-out;
+      padding: 24px;
+    }
+    .vr-lightbox.vr-lightbox-open { display: flex; }
+    .vr-lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
+    }
+    .vr-lightbox-caption {
+      position: fixed;
+      top: 16px; left: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: rgba(0,0,0,0.5);
+      padding: 6px 10px;
+    }
+    .vr-lightbox-close {
+      position: fixed;
+      top: 16px; right: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: rgba(0,0,0,0.5);
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+    }
+
+    /* ── Narrower monitors: stack diff under the after image ───────── */
+    @media (max-width: 1380px) {
+      .vr-row {
+        grid-template-columns: 180px 1fr 1fr;
+      }
+      .vr-cell.vr-cell-diff-wrap {
+        grid-column: 2 / span 2;
+      }
+      .vr-cell.vr-cell-diff-wrap .vr-cell-frame {
+        height: 360px;
+      }
+    }
+  </style>
+</head>
+<body class="ar-body">
+
+  <header class="ar-masthead">
+    <div class="ar-masthead-inner">
+      <div class="ar-brand">
+        <div class="ar-brand-title">Visual review<span class="ar-period">.</span></div>
+        <div class="ar-brand-sub smallcaps mono">Halaga autoresearch &middot; baseline | after | diff</div>
+      </div>
+      <div class="ar-meta mono smallcaps">
+        <span id="vr-refresh-note">auto-refresh: 5s</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="vr-summary" id="vr-summary" hidden>
+    <div class="vr-summary-inner">
+      <div class="vr-summary-stat">
+        <span class="vr-stat-label">max &Delta;</span>
+        <span class="vr-stat-value" id="vr-stat-max">&mdash;</span>
+        <span class="vr-stat-meta">across 16 views</span>
+      </div>
+      <div class="vr-summary-stat">
+        <span class="vr-stat-label">above 0.5%</span>
+        <span class="vr-stat-value" id="vr-stat-above">&mdash;</span>
+        <span class="vr-stat-meta">views flagged for human eyes</span>
+      </div>
+      <div class="vr-summary-right" id="vr-stat-time">generated &mdash;</div>
+    </div>
+  </div>
+
+  <main class="vr-main">
+
+    <p class="vr-explainer">
+      Three columns per row: <strong>baseline</strong> (committed reference),
+      <strong>after</strong> (current iteration), <strong>diff</strong>
+      (pixelmatch overlay &mdash; opaque red marks every pixel that moved).
+      Rows are sorted highest diff first. Click any image to open it full-size.
+      <br>
+      <span class="vr-legend"><span class="vr-swatch vr-swatch-baseline"></span> baseline</span>
+      <span class="vr-legend"><span class="vr-swatch vr-swatch-after"></span> after</span>
+      <span class="vr-legend"><span class="vr-swatch vr-swatch-diff"></span> changed pixels</span>
+    </p>
+
+    <div class="vr-rows" id="vr-rows"></div>
+
+    <div class="vr-empty" id="vr-empty" hidden>
+      <h2>No diff manifest yet.</h2>
+      <p>
+        Run <code>python autoresearch/build_review_manifest.py</code>
+        after a loop iteration to populate this page.
+      </p>
+      <p class="mono smallcaps" style="margin-top:14px;color:var(--muted)">
+        retrying every 5 seconds&hellip;
+      </p>
+    </div>
+
+  </main>
+
+  <div class="vr-lightbox" id="vr-lightbox" role="dialog" aria-hidden="true">
+    <div class="vr-lightbox-caption" id="vr-lightbox-caption">&mdash;</div>
+    <button type="button" class="vr-lightbox-close" id="vr-lightbox-close">close [esc]</button>
+    <img id="vr-lightbox-img" alt="">
+  </div>
+
+  <script>
+    // ──────────────────────────────────────────────────────────────────
+    // Manifest fetch + render. Vanilla JS, no build step. Path is
+    // relative to this page (served at /autoresearch/visual-review.html).
+    // ──────────────────────────────────────────────────────────────────
+
+    const MANIFEST_URL = "runs/visual-diffs/manifest.json";
+    const REFRESH_MS   = 5000;
+    const WARN_PCT     = 5.0;   // border red above this
+    const WATCH_PCT    = 0.5;   // border ochre above this
+
+    const rowsEl     = document.getElementById("vr-rows");
+    const emptyEl    = document.getElementById("vr-empty");
+    const summaryEl  = document.getElementById("vr-summary");
+    const statMaxEl  = document.getElementById("vr-stat-max");
+    const statAboveEl= document.getElementById("vr-stat-above");
+    const statTimeEl = document.getElementById("vr-stat-time");
+
+    let lastSig = "";  // dedupe re-renders when manifest hasn't changed
+
+    function fmtPct(v) {
+      if (v === null || v === undefined) return "—";
+      if (v < 0.001) return "0.00%";
+      return v.toFixed(2) + "%";
+    }
+
+    function pctClass(v) {
+      if (v === null || v === undefined) return "";
+      if (v >= WARN_PCT)  return "vr-warn";
+      if (v >= WATCH_PCT) return "vr-watch";
+      return "vr-ok";
+    }
+
+    function rowBorderClass(v) {
+      if (v === null || v === undefined) return "";
+      if (v >= WARN_PCT)  return "vr-row-warn";
+      if (v >= WATCH_PCT) return "vr-row-watch";
+      return "";
+    }
+
+    function makeCell(label, src, captionForLightbox, isDiff) {
+      const cell = document.createElement("div");
+      cell.className = "vr-cell" + (isDiff ? " vr-cell-diff-wrap" : "");
+      const lbl = document.createElement("div");
+      lbl.className = "vr-cell-label";
+      lbl.textContent = label;
+      const frame = document.createElement("div");
+      frame.className = "vr-cell-frame" + (isDiff ? " vr-cell-diff" : "");
+      if (src) {
+        const img = document.createElement("img");
+        img.loading = "lazy";
+        img.src = src + cacheBust();
+        img.alt = captionForLightbox;
+        img.addEventListener("click", () => openLightbox(src, captionForLightbox));
+        frame.appendChild(img);
+      } else {
+        const m = document.createElement("div");
+        m.className = "vr-cell-missing";
+        m.textContent = "— not captured —";
+        frame.appendChild(m);
+      }
+      cell.appendChild(lbl);
+      cell.appendChild(frame);
+      return cell;
+    }
+
+    // Cache-bust per render so refreshing the manifest picks up new PNGs
+    // even if their filenames stayed the same.
+    let _cb = Date.now();
+    function bumpCacheBust() { _cb = Date.now(); }
+    function cacheBust() { return "?t=" + _cb; }
+
+    function renderManifest(m) {
+      // Summary strip
+      summaryEl.hidden = false;
+      const maxPct = m.max_diff_pct || 0;
+      statMaxEl.textContent = fmtPct(maxPct);
+      statMaxEl.className = "vr-stat-value " +
+        (maxPct >= WARN_PCT ? "vr-warn" : (maxPct >= WATCH_PCT ? "" : "vr-ok"));
+      statAboveEl.textContent = (m.above_threshold || 0) + " / " + m.rows.length;
+      statAboveEl.className = "vr-stat-value " +
+        (m.above_threshold > 0 ? "vr-warn" : "vr-ok");
+      statTimeEl.textContent = "generated " + (m.generated || "—");
+
+      // Rows
+      rowsEl.innerHTML = "";
+      for (const r of m.rows) {
+        const row = document.createElement("div");
+        row.className = "vr-row " + rowBorderClass(r.diff_pct);
+
+        const meta = document.createElement("div");
+        meta.className = "vr-row-meta";
+        const route = document.createElement("div");
+        route.className = "vr-row-route";
+        route.textContent = r.label || r.route;
+        const vp = document.createElement("div");
+        vp.className = "vr-row-vp";
+        vp.textContent = r.viewport;
+        const pctLabel = document.createElement("div");
+        pctLabel.className = "vr-row-pct-label";
+        pctLabel.textContent = "max diff";
+        const pct = document.createElement("div");
+        pct.className = "vr-row-pct " + pctClass(r.diff_pct);
+        pct.textContent = fmtPct(r.diff_pct);
+        meta.append(route, vp, pctLabel, pct);
+
+        const captionBase = `${r.label || r.route} · ${r.viewport}`;
+        const baseline = makeCell("baseline", r.baseline,
+                                  captionBase + " · baseline", false);
+        const after    = makeCell("after",    r.after,
+                                  captionBase + " · after", false);
+        const diff     = makeCell("diff (red = changed)", r.diff,
+                                  captionBase + " · diff", true);
+
+        row.append(meta, baseline, after, diff);
+        rowsEl.appendChild(row);
+      }
+    }
+
+    async function poll() {
+      try {
+        const resp = await fetch(MANIFEST_URL + "?t=" + Date.now(),
+                                 {cache: "no-store"});
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const m = await resp.json();
+        // Dedupe: if manifest body is identical, skip rerender (avoids
+        // image flicker while polling on a quiet loop).
+        const sig = JSON.stringify({g: m.generated, n: m.rows.length,
+                                    p: m.rows.map(r => [r.route, r.viewport, r.diff_pct])});
+        if (sig !== lastSig) {
+          lastSig = sig;
+          bumpCacheBust();
+          emptyEl.hidden = true;
+          renderManifest(m);
+        }
+      } catch (err) {
+        // Manifest missing or unreadable -> empty state, keep polling.
+        if (!lastSig) {
+          emptyEl.hidden = false;
+          summaryEl.hidden = true;
+          rowsEl.innerHTML = "";
+        }
+      }
+    }
+
+    // ──────────────────────────────────────────────────────────────────
+    // Lightbox
+    // ──────────────────────────────────────────────────────────────────
+    const lbEl     = document.getElementById("vr-lightbox");
+    const lbImg    = document.getElementById("vr-lightbox-img");
+    const lbCap    = document.getElementById("vr-lightbox-caption");
+    const lbClose  = document.getElementById("vr-lightbox-close");
+
+    function openLightbox(src, caption) {
+      lbImg.src = src + cacheBust();
+      lbCap.textContent = caption;
+      lbEl.classList.add("vr-lightbox-open");
+      lbEl.setAttribute("aria-hidden", "false");
+    }
+    function closeLightbox() {
+      lbEl.classList.remove("vr-lightbox-open");
+      lbEl.setAttribute("aria-hidden", "true");
+      lbImg.removeAttribute("src");
+    }
+    lbEl.addEventListener("click", (e) => {
+      // Clicking the image itself shouldn't close; clicking the backdrop should.
+      if (e.target === lbEl) closeLightbox();
+    });
+    lbClose.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    // ──────────────────────────────────────────────────────────────────
+    // Boot
+    // ──────────────────────────────────────────────────────────────────
+    poll();
+    setInterval(poll, REFRESH_MS);
+  </script>
+
+</body>
+</html>
