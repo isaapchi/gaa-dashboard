@@ -8,43 +8,19 @@ export async function renderDepartments(root) {
   const total = s.total_thousands;
   const depts = s.by_department.slice().sort((a, b) => b.amount_thousands - a.amount_thousands);
 
-  // Inject local mobile styles once (idempotent).
-  if (!document.getElementById('dept-mobile-css')) {
-    const st = document.createElement('style');
-    st.id = 'dept-mobile-css';
-    st.textContent = `
-      .dept-header-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-      .dept-header-stats { display:flex; align-items:center; gap:24px; flex-shrink:0; padding-right:8px; }
-      .dept-header-divider { width:1px; height:32px; background:rgba(26,22,17,0.20); flex-shrink:0; }
-      @media (max-width: 640px) {
-        .dept-header-row { flex-direction:column; align-items:stretch; gap:12px; }
-        .dept-header-stats {
-          width:100%;
-          justify-content:space-between;
-          gap:16px;
-          padding-right:0;
-          padding-top:8px;
-          border-top:1px solid rgba(26,22,17,0.15);
-        }
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
   root.innerHTML = `
     <div class="grid grid-cols-12 gap-5">
 
       <!-- Header row -->
-      <div class="col-span-12 card p-4 dept-header-row">
-        <div class="flex-1 min-w-0" style="width:100%">
+      <div class="col-span-12 card p-4 flex items-center gap-4">
+        <div class="flex-1 min-w-0">
           <input id="dept-search" class="input" type="search" placeholder="Search allocations…" autocomplete="off" />
         </div>
-        <div class="dept-header-stats">
+        <div class="flex items-center gap-6 shrink-0 pr-2">
           <div class="text-right">
             <div class="kpi-label" style="justify-content:flex-end">Allocators</div>
             <div class="text-lg font-semibold text-ink-900 tabular-nums" id="dept-count">${fmtInt(depts.length)}</div>
           </div>
-          <div class="dept-header-divider" aria-hidden="true"></div>
           <div class="text-right">
             <div class="kpi-label" style="justify-content:flex-end">Total Budget</div>
             <div class="text-lg font-semibold text-ink-900 tabular-nums">${fmtPHP(total)}</div>
@@ -268,6 +244,13 @@ async function renderDetail(deptName, total) {
       csvName: `dept-${deptSlug}-expense-mix-fy${s.year}`,
       chart: _charts.exp,
       pngName: `dept-${deptSlug}-expense-mix-fy${s.year}`,
+      pngTitle:    `${deptName} · Expense mix · FY${s.year}`,
+      pngSubtitle: `Share of allocation by economic class · ${fmtPHP(deptTotal)} total`,
+      pngForceLabels: true,
+      pngLegend: expRows.map(d => ({
+        label: `${shortExp(d.name)} · ${fmtPHP(d.amount_thousands)}`,
+        color: EXP_CLASS_COLORS[d.name] || '#7a6a4c',
+      })),
     });
   }
 
@@ -361,12 +344,15 @@ async function renderDetail(deptName, total) {
     const deptSlug = slugify(deptName);
     const agencyHdr = agencyEl.closest('.card').querySelector('.section-title');
     const colName = showOperunit ? 'operating_unit' : 'agency';
+    const granularity = showOperunit ? 'operating unit' : 'agency';
     mountChartActions(agencyHdr, {
       getRows: () => barRows.map(d => ({ [colName]: d.name, amount_thousands: d.amount_thousands })),
       columns: [colName, 'amount_thousands'],
       csvName: `dept-${deptSlug}-top-${showOperunit ? 'operunits' : 'agencies'}-fy${s.year}`,
       chart: _charts.agency,
       pngName: `dept-${deptSlug}-top-${showOperunit ? 'operunits' : 'agencies'}-fy${s.year}`,
+      pngTitle:    `${deptName} · Top ${granularity}s · FY${s.year}`,
+      pngSubtitle: `Top ${barRows.length} ${granularity}s by allocation · ${fmtPHP(deptTotal)} dept total`,
     });
   }
 

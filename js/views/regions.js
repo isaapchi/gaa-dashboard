@@ -1,4 +1,9 @@
-import { loadSummary, loadRegions, sql, fmtPHP, fmtInt, fmtPct, PHL_PALETTE, EXP_CLASS_COLORS, mountChartActions, mountGloss, observeChartResize, getCurrentYear, createChart } from '../data.js';
+import {
+  loadSummary, loadRegions, sql, fmtPHP, fmtInt, fmtPct, PHL_PALETTE,
+  EXP_CLASS_COLORS, mountChartActions, mountGloss, observeChartResize,
+  getCurrentYear, createChart, emptyState,
+  REGION_NORMALIZE_SQL, REGION_NAME_OVERRIDES,
+} from '../data.js';
 
 const CENTRAL_CODE = '13';
 const NATIONWIDE_COLOR = '#7a6a4c';
@@ -16,90 +21,15 @@ export async function renderRegions(root) {
   const s = await loadSummary();
   const allDepts = (s.by_department || []).slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
-  // Inject local mobile + map-toolbar styles once (idempotent).
-  if (!document.getElementById('regions-mobile-css')) {
-    const st = document.createElement('style');
-    st.id = 'regions-mobile-css';
-    st.textContent = `
-      /* KPI strip: 3 cards on desktop (3-col), stack to single column on mobile */
-      #kpi-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      @media (max-width: 640px) {
-        #kpi-strip { grid-template-columns: 1fr; gap: 12px; }
-      }
-      /* Map header zoom toolbar — sits next to title, labelled, accessible */
-      .map-zoom-toolbar {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 3px 6px;
-        border: 1.5px solid var(--ink);
-        background: var(--paper);
-      }
-      .map-zoom-toolbar-label {
-        font-family: 'Space Mono', monospace;
-        font-size: 9.5px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--muted);
-        padding-right: 6px;
-        margin-right: 2px;
-        border-right: 1px solid rgba(26,22,17,0.20);
-      }
-      .map-zoom-btn {
-        appearance: none;
-        background: transparent;
-        border: 0;
-        padding: 4px 8px;
-        font-family: 'Space Mono', monospace;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ink);
-        cursor: pointer;
-        line-height: 1;
-        min-width: 24px;
-        text-align: center;
-      }
-      .map-zoom-btn:hover { background: rgba(26,22,17,0.08); }
-      .map-zoom-btn:focus-visible { outline: 2px solid var(--scarlet); outline-offset: 2px; }
-      .map-zoom-btn.reset { font-size: 10px; letter-spacing: 0.14em; }
-      /* Legend pill overlaid bottom-left of the map canvas */
-      .map-legend-pill {
-        position: absolute;
-        left: 14px;
-        bottom: 14px;
-        z-index: 5;
-        background: rgba(241,232,210,0.92);
-        backdrop-filter: blur(2px);
-        pointer-events: none;
-      }
-      /* Map header — let title and toolbar wrap independently on narrow screens */
-      .regions-map-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
-      }
-      .regions-map-header-tools {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-      }
-      @media (max-width: 640px) {
-        .map-legend-pill { left: 8px; bottom: 8px; font-size: 9px; padding: 2px 6px; }
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
   root.innerHTML = `
     <div class="grid grid-cols-12 gap-5">
 
-      <!-- KPI cards (3 cards, equal split desktop / stacked mobile) -->
-      <div id="kpi-strip" class="col-span-12 grid gap-5"></div>
+      <!-- Coverage banner — appears for years where the parquet has no real
+           per-region detail (currently FY2014, OCR-reconstructed). -->
+      <div id="region-coverage-banner" class="col-span-12" style="display:none"></div>
+
+      <!-- KPI cards -->
+      <div id="kpi-strip" class="col-span-12 grid grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
       <!-- Filter row -->
       <div class="col-span-12 flex flex-wrap items-center gap-3">
@@ -115,23 +45,19 @@ export async function renderRegions(root) {
 
       <!-- Map placeholder -->
       <div class="col-span-12 lg:col-span-7 card p-6" style="position:relative">
-        <div class="regions-map-header" id="map-header">
+        <div class="flex items-center justify-between mb-3" id="map-header">
           <div>
             <div class="section-kicker">Geography</div>
             <div class="section-title" id="map-title">Regional map</div>
             <div class="text-xs text-ink-400 mt-0.5" id="map-sub">Allocations by administrative region</div>
           </div>
-          <div class="regions-map-header-tools" id="map-header-tools">
-            <!-- Zoom toolbar injected by JS after map init -->
-          </div>
+          <span class="pill pill-blue">Sequential blue scale</span>
         </div>
-        <div id="chart-map-wrap" style="position:relative;">
-          <div id="chart-map" class="chart chart-lg flex items-center justify-center text-center text-xs text-ink-400"
-               role="img" aria-label="Regional allocations map">
-            Map pending Philippines GeoJSON. Drop site/data/ph_regions.geojson and refresh.
-          </div>
-          <span class="pill pill-blue map-legend-pill" id="map-legend-pill" aria-label="Color scale legend">Sequential blue scale</span>
+        <div id="chart-map" class="chart chart-lg flex items-center justify-center text-center text-xs text-ink-400"
+             role="img" aria-label="Regional allocations map">
+          Map pending Philippines GeoJSON. Drop site/data/ph_regions.geojson and refresh.
         </div>
+        <!-- Zoom controls injected by JS after map init -->
       </div>
 
       <!-- Ranked bar chart -->
@@ -212,6 +138,36 @@ export async function renderRegions(root) {
   });
 
   // =========================================================================
+  // Coverage banner — shown when the underlying parquet has no real per-region
+  // breakdown (currently FY2014 OCR reconstruction stopped at the department
+  // level; everything sits under Central / Unclassified).
+  // =========================================================================
+  function renderCoverageBanner(nGeographicRegions) {
+    const el = document.getElementById('region-coverage-banner');
+    if (!el) return;
+    const yr = getCurrentYear();
+    if (nGeographicRegions >= 5) {
+      el.style.display = 'none';
+      el.innerHTML = '';
+      return;
+    }
+    el.style.display = '';
+    el.innerHTML = `
+      <div class="card p-5" style="border:1.5px solid var(--scarlet); background:transparent;">
+        <div class="flex items-start gap-3">
+          <span class="w-2 h-2 rounded-full mt-2 shrink-0" style="background: var(--scarlet);"></span>
+          <div class="flex-1">
+            <div class="section-kicker" style="color: var(--scarlet);">Limited regional detail</div>
+            <div class="font-display font-bold text-[17px] tracking-[-0.01em] mb-1">FY${yr} does not have per-region budget data in the source.</div>
+            <div class="text-[13px] text-ink-700 leading-[1.55]">
+              This year was reconstructed from DBM's scanned <em>Summary of New Appropriations</em> annex, which lists department-level totals only. The regional split (per-province / per-LGU allocations) lives in the per-department PDFs and has not been transcribed yet. The ranked bar and map below will be sparse or empty — switch to FY2015 or later for full regional detail.
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // =========================================================================
   // Central render function
   // =========================================================================
   async function renderForFilter({ department, agency }) {
@@ -223,21 +179,32 @@ export async function renderRegions(root) {
     const whereClause = conditions.join(' AND ');
 
     // --- Fetch region aggregates for this filter --------------------------
+    // Normalise pre-UACS region_code values via REGION_NORMALIZE_SQL so
+    // FY2009–FY2013 rows that carry full region names instead of 2-digit
+    // codes get folded into the right canonical bucket — otherwise the
+    // ranked bar shows e.g. NCR and "National Capital Region" as two
+    // separate rows ("mushed" appearance reported on FY2011 / FY2013).
     const regionRows = await sql(
-      `SELECT region_code AS code, region_name AS name,
-              SUM(amount_thousands) AS amount_thousands
-       FROM budget
-       WHERE ${whereClause}
-       GROUP BY region_code, region_name
+      `SELECT code, SUM(amount_thousands) AS amount_thousands
+       FROM (
+         SELECT ${REGION_NORMALIZE_SQL} AS code, amount_thousands
+         FROM budget
+         WHERE ${whereClause}
+       )
+       GROUP BY code
        ORDER BY amount_thousands DESC`,
       params
     );
 
-    // Merge geojson_name from loadRegions if available
+    // Merge a display name onto each row using the regions.json lookup,
+    // with overrides for synthetic codes the normaliser may emit
+    // (DFA, LUZ, VIS, MIN, UNK).
     const reg = await loadRegions();
-    const nameMap = (reg && reg.uacs_to_geojson_name) || {};
+    const codeToName     = (reg && reg.uacs_to_name)          || {};
+    const codeToGeoName  = (reg && reg.uacs_to_geojson_name)  || {};
     regionRows.forEach(r => {
-      r.geojson_name = nameMap[r.code] || r.name;
+      r.name = REGION_NAME_OVERRIDES[r.code] || codeToName[r.code] || `Region ${r.code}`;
+      r.geojson_name = codeToGeoName[r.code] || r.name;
     });
 
     const regions     = regionRows;
@@ -245,8 +212,19 @@ export async function renderRegions(root) {
     const centralAmt  = central ? central.amount_thousands : 0;
     const totalAmt    = regions.reduce((a, x) => a + x.amount_thousands, 0);
     const regionalAmt = totalAmt - centralAmt;
-    const geographic  = regions.filter(r => r.code !== CENTRAL_CODE);
-    const defaultRegion = geographic.length ? geographic[0] : regions[0];
+    // Only treat canonical regional buckets as "geographic" for map + default
+    // drill-down. UNK / DFA / LUZ / VIS / MIN appear in the ranked bar (so
+    // the user can see they exist) but are excluded from the geo map and
+    // from the auto-selected default region.
+    const CANONICAL_REGIONAL_CODES = new Set(['00','01','02','03','04','05','06','07','08','09','10','11','12','14','15','16','17','18','19']);
+    const geographic  = regions.filter(r => CANONICAL_REGIONAL_CODES.has(r.code));
+    const defaultRegion = geographic.length ? geographic[0] : (regions.find(r => r.code !== CENTRAL_CODE) || regions[0]);
+
+    // Coverage banner — flagged when the year is missing real regional
+    // detail (e.g. FY2014 OCR reconstruction stopped at department level).
+    // We detect by checking how many canonical regional codes survived the
+    // aggregation. < 5 = effectively no regional breakdown.
+    renderCoverageBanner(geographic.length);
 
     // --- KPI strip --------------------------------------------------------
     document.getElementById('kpi-strip').innerHTML = `
@@ -314,6 +292,11 @@ export async function renderRegions(root) {
 
     // --- Export affordance: ranked bar -----------------------------------
     const _fy = getCurrentYear();
+    const filterCaption = department && agency
+      ? `${department} · ${agency}`
+      : department
+        ? `${department}`
+        : 'All allocators';
     const barHeaderEl = document.getElementById('bar-header');
     if (barHeaderEl) {
       mountChartActions(barHeaderEl, {
@@ -326,6 +309,12 @@ export async function renderRegions(root) {
         csvName:  `regions-fy${_fy}`,
         chart:    cBar,
         pngName:  `regions-ranked-bar-fy${_fy}`,
+        pngTitle:    `Regional allocation · FY${_fy}`,
+        pngSubtitle: `${filterCaption} · ${fmtPHP(totalAmt)} total · ${regions.length} buckets ranked by amount`,
+        pngLegend: [
+          { label: 'Geographic region', color: REGION_COLOR },
+          { label: 'Central Office / Nationwide', color: NATIONWIDE_COLOR },
+        ],
       });
     }
 
@@ -404,14 +393,19 @@ export async function renderRegions(root) {
     cDept.showLoading({ text: '', maskColor: 'rgba(255,255,255,0.6)', textColor: '#7a6a4c' });
     cExp.showLoading({ text: '', maskColor: 'rgba(255,255,255,0.6)', textColor: '#7a6a4c' });
 
-    // Build breakdown query
+    // Build breakdown query.
+    // The WHERE filter on region uses (REGION_NORMALIZE_SQL) = ? so that the
+    // synthetic codes the ranked bar emits (e.g. '00' covers both literal
+    // '00' rows AND legacy "National Capital Region" rows) drill down into
+    // every row that maps to the same bucket.
+    const regionMatch = `(${REGION_NORMALIZE_SQL}) = ?`;
     let breakdownQuery, breakdownParams, breakdownLabelCol;
     if (department && agency) {
       // Both set: top programs
       breakdownQuery = `
         SELECT program, SUM(amount_thousands) AS amount_thousands
         FROM budget
-        WHERE region_code = ? AND department = ? AND agency = ? AND program IS NOT NULL
+        WHERE ${regionMatch} AND department = ? AND agency = ? AND program IS NOT NULL
         GROUP BY program ORDER BY amount_thousands DESC LIMIT 10`;
       breakdownParams = [r.code, department, agency];
       breakdownLabelCol = 'program';
@@ -420,7 +414,7 @@ export async function renderRegions(root) {
       breakdownQuery = `
         SELECT agency, SUM(amount_thousands) AS amount_thousands
         FROM budget
-        WHERE region_code = ? AND department = ? AND agency IS NOT NULL
+        WHERE ${regionMatch} AND department = ? AND agency IS NOT NULL
         GROUP BY agency ORDER BY amount_thousands DESC LIMIT 10`;
       breakdownParams = [r.code, department];
       breakdownLabelCol = 'agency';
@@ -429,14 +423,14 @@ export async function renderRegions(root) {
       breakdownQuery = `
         SELECT department, SUM(amount_thousands) AS amount_thousands
         FROM budget
-        WHERE region_code = ?
+        WHERE ${regionMatch}
         GROUP BY department ORDER BY amount_thousands DESC LIMIT 10`;
       breakdownParams = [r.code];
       breakdownLabelCol = 'department';
     }
 
-    // Expense class WHERE
-    const expConditions = ['region_code = ?'];
+    // Expense class WHERE — same region-normalisation trick.
+    const expConditions = [regionMatch];
     const expParams = [r.code];
     if (department) { expConditions.push('department = ?'); expParams.push(department); }
     if (agency)     { expConditions.push('agency = ?');     expParams.push(agency); }
@@ -580,9 +574,7 @@ export async function renderRegions(root) {
 
     // --- Export affordance: regional map ---------------------------------
     const mapFy = getCurrentYear();
-    // Anchor export buttons to the tools container so they sit beside the
-    // zoom toolbar rather than fighting the title block for space.
-    const mapHeaderEl = document.getElementById('map-header-tools') || document.getElementById('map-header');
+    const mapHeaderEl = document.getElementById('map-header');
     if (mapHeaderEl) {
       // geographic snapshot captured at map-init time; re-read on each export via getRows closure
       mountChartActions(mapHeaderEl, {
@@ -595,35 +587,31 @@ export async function renderRegions(root) {
         csvName:  `regions-map-fy${mapFy}`,
         chart:    cMap,
         pngName:  `regions-map-fy${mapFy}`,
+        pngTitle:    `Regional map · FY${mapFy}`,
+        pngSubtitle: `Allocations by Philippine administrative region · ranked colour ramp · sequential blue scale`,
+        pngLegend: [
+          { label: 'Sequential blue scale · darker = higher allocation', color: '#1d3da8' },
+        ],
       });
     }
 
-    // --- Zoom toolbar (grouped + labelled, lives in map header) ---------
-    const toolsEl = document.getElementById('map-header-tools');
-    // Idempotent guard: don't double-mount the toolbar on re-render.
-    if (toolsEl && !toolsEl.querySelector('.map-zoom-toolbar')) {
-      const toolbar = document.createElement('div');
-      toolbar.className = 'map-zoom-toolbar';
-      toolbar.setAttribute('role', 'toolbar');
-      toolbar.setAttribute('aria-label', 'Map zoom controls');
+    // --- Zoom control buttons -------------------------------------------
+    const mapCard = mapEl.closest('.card');
+    if (mapCard) {
+      const zoomWrap = document.createElement('div');
+      zoomWrap.style.cssText = 'position:absolute;top:14px;right:14px;display:flex;gap:4px;z-index:10';
 
-      function makeZoomBtn(symbol, title, ariaLabel, extraClass = '') {
+      function makeZoomBtn(label) {
         const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'map-zoom-btn ' + extraClass;
-        btn.textContent = symbol;
-        btn.title = title;
-        btn.setAttribute('aria-label', ariaLabel);
+        btn.textContent = label;
+        btn.className = 'btn btn-ghost';
+        btn.style.cssText = 'padding:4px 10px;font-size:11px;';
         return btn;
       }
 
-      const label = document.createElement('span');
-      label.className = 'map-zoom-toolbar-label';
-      label.textContent = 'Zoom';
-
-      const btnIn    = makeZoomBtn('+',     'Zoom in',  'Zoom map in');
-      const btnOut   = makeZoomBtn('−','Zoom out', 'Zoom map out');
-      const btnReset = makeZoomBtn('Reset', 'Reset zoom', 'Reset map zoom', 'reset');
+      const btnIn    = makeZoomBtn('+');
+      const btnOut   = makeZoomBtn('−');
+      const btnReset = makeZoomBtn('Reset');
 
       btnIn.addEventListener('click', () => {
         const currentZoom = (cMap.getOption().series[0].zoom) || 1;
@@ -637,11 +625,10 @@ export async function renderRegions(root) {
         cMap.setOption({ series: [{ zoom: 1, center: null }] });
       });
 
-      toolbar.appendChild(label);
-      toolbar.appendChild(btnIn);
-      toolbar.appendChild(btnOut);
-      toolbar.appendChild(btnReset);
-      toolsEl.appendChild(toolbar);
+      zoomWrap.appendChild(btnIn);
+      zoomWrap.appendChild(btnOut);
+      zoomWrap.appendChild(btnReset);
+      mapCard.appendChild(zoomWrap);
     }
   } catch (e) {
     console.error('[regions] map init failed:', e);

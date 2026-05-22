@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Halaga &middot; Philippine Budget &middot; The Riso Almanac</title>
 
-  <link rel="stylesheet" href="css/tailwind.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind CDN runtime removed (H1 self-host); guard the legacy config block.
-    if (typeof tailwind !== 'undefined') {
-      tailwind.config = {
+    tailwind.config = {
       theme: {
         extend: {
           colors: {
@@ -44,13 +42,11 @@
         },
       },
     };
-    }
   </script>
 
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 
@@ -65,28 +61,39 @@
       <div class="max-w-screen-2xl mx-auto px-8 pt-5 pb-3 relative">
 
         <div class="masthead-title-row">
-          <a href="#overview" data-view="overview" class="masthead-brand" aria-label="Halaga home (Overview)">
-            <div class="riso-logo" aria-hidden="true">
+          <a href="#overview" class="masthead-brand" aria-label="Halaga — Overview">
+            <div class="riso-logo" aria-label="Halaga logo">
+              <!-- Sun centred in its viewBox so no rays clip. Vertical
+                   positioning relative to the Halaga wordmark is handled in
+                   CSS (.masthead-brand uses align-items:flex-start with a
+                   small top offset on the logo), not by shifting the sun
+                   inside the SVG. -->
               <svg width="44" height="44" viewBox="0 0 32 32" aria-hidden="true">
                 <circle cx="16" cy="16" r="6" fill="#e8b94a" stroke="#1a1611" stroke-width="1"/>
                 <g stroke="#1a1611" stroke-width="2.2" stroke-linecap="round">
-                  <line x1="16" y1="1.5" x2="16" y2="5.5"/>
-                  <line x1="16" y1="26.5" x2="16" y2="30.5"/>
-                  <line x1="1.5" y1="16" x2="5.5" y2="16"/>
+                  <line x1="16" y1="1.5"  x2="16"  y2="5.5"/>
+                  <line x1="16" y1="26.5" x2="16"  y2="30.5"/>
+                  <line x1="1.5" y1="16"  x2="5.5" y2="16"/>
                   <line x1="26.5" y1="16" x2="30.5" y2="16"/>
                 </g>
                 <g stroke="#e25034" stroke-width="2.2" stroke-linecap="round">
-                  <line x1="5.5" y1="5.5" x2="8.3" y2="8.3"/>
+                  <line x1="5.5"  y1="5.5"  x2="8.3"  y2="8.3"/>
                   <line x1="23.7" y1="23.7" x2="26.5" y2="26.5"/>
-                  <line x1="26.5" y1="5.5" x2="23.7" y2="8.3"/>
-                  <line x1="5.5" y1="26.5" x2="8.3" y2="23.7"/>
+                  <line x1="26.5" y1="5.5"  x2="23.7" y2="8.3"/>
+                  <line x1="5.5"  y1="26.5" x2="8.3"  y2="23.7"/>
                 </g>
               </svg>
             </div>
-            <div>
+            <div class="masthead-brand-text">
               <div class="masthead-title">Halaga<span class="riso-period">.</span></div>
-              <div class="masthead-parent smallcaps mono">A Publiko Project</div>
-              <div class="masthead-sub smallcaps mono">The People&rsquo;s Budget Almanac</div>
+              <div class="masthead-sub smallcaps mono">
+                The People&rsquo;s Budget Almanac
+              </div>
+              <div class="masthead-sub-line smallcaps mono">
+                <span class="masthead-sub-url">publikoph.org</span>
+                <span class="masthead-sub-sep" aria-hidden="true"> &middot; </span>
+                <span class="masthead-sub-tag">A Publiko Project</span>
+              </div>
             </div>
           </a>
 
@@ -110,6 +117,19 @@
           </div>
         </div>
 
+        <!-- Year controls live on their own row beneath the menu so toggling them
+             between views (hidden on Across Time / About) does not jostle the nav. -->
+        <div class="masthead-controls-row" id="year-controls-row">
+          <div class="flex items-center gap-2 shrink-0" id="year-controls">
+            <span class="mono smallcaps" style="color: var(--muted); font-size: 10px;">Fiscal year</span>
+            <select id="year-select" class="select" style="max-width:108px" aria-label="Select fiscal year"></select>
+            <div class="data-status-pill" id="data-status" role="status" aria-live="polite">
+              <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #e8b94a;"></span>
+              <span>Loading data&hellip;</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </header>
 
@@ -117,18 +137,9 @@
       <div class="max-w-screen-2xl mx-auto">
 
         <header class="px-8 pt-8 pb-2">
-          <div class="flex items-start justify-between gap-4">
-            <div class="min-w-0">
-              <div class="page-kicker" id="page-kicker"></div>
-              <h1 class="page-title" id="page-title">Overview</h1>
-            </div>
-            <div class="flex items-center gap-2 shrink-0 mt-1" id="year-controls">
-              <select id="year-select" class="select" style="max-width:108px" aria-label="Select fiscal year"></select>
-              <div class="data-status-pill" id="data-status" role="status" aria-live="polite">
-                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background: #e8b94a;"></span>
-                <span class="data-status-label">Loading data&hellip;</span>
-              </div>
-            </div>
+          <div>
+            <div class="page-kicker" id="page-kicker"></div>
+            <h1 class="page-title" id="page-title">Overview</h1>
           </div>
         </header>
 

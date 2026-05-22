@@ -570,6 +570,9 @@ export async function renderTimeline(root) {
     csvName:  `timeline-pct-of-gdp-fy${first.year}-fy${latest.year}`,
     chart:    cComp,
     pngName:  `timeline-pct-of-gdp-fy${first.year}-fy${latest.year}`,
+    pngTitle:    `Composition as % of GDP`,
+    pngSubtitle: `GAA components scaled to nominal GDP · FY${first.year}–FY${latest.year}`,
+    pngLegend: COMP_SERIES.map(m => ({ label: m.label, color: m.color })),
   });
 
   // -------------------------------------------------------------------------
@@ -652,6 +655,12 @@ export async function renderTimeline(root) {
     csvName:  `timeline-budget-pct-gdp-fy${first.year}-fy${latest.year}`,
     chart:    cGDP,
     pngName:  `timeline-budget-pct-gdp-fy${first.year}-fy${latest.year}`,
+    pngTitle:    `Budget as % of GDP`,
+    pngSubtitle: `Fiscal size of the national budget · FY${first.year}–FY${latest.year}${gdpPctAvg != null ? ` · period avg ${gdpPctAvg.toFixed(1)}%` : ''}`,
+    pngLegend: [
+      { label: '% of GDP', color: '#e25034' },
+      ...(gdpPctAvg != null ? [{ label: `Average (${gdpPctAvg.toFixed(1)}%)`, color: '#7a6a4c' }] : []),
+    ],
   });
 
   // -------------------------------------------------------------------------
@@ -739,6 +748,9 @@ export async function renderTimeline(root) {
     csvName:  `timeline-functional-amounts-fy${first.year}-fy${latest.year}`,
     chart:    cFnArea,
     pngName:  `timeline-functional-split-fy${first.year}-fy${latest.year}`,
+    pngTitle:    `Functional breakdown over time`,
+    pngSubtitle: `Each bar = 100% · share of total budget by sector · FY${first.year}–FY${latest.year}`,
+    pngLegend: allFnNames.map(name => ({ label: name, color: fnColorMap[name] })),
   });
 
   // Functional legend below the chart. Each chip wraps the function name in a
@@ -814,6 +826,9 @@ export async function renderTimeline(root) {
     csvName:  `timeline-top-agencies-fy${first.year}-fy${latest.year}`,
     chart:    cAgency,
     pngName:  `timeline-top-agencies-fy${first.year}-fy${latest.year}`,
+    pngTitle:    `Top 10 agencies over time`,
+    pngSubtitle: `Based on FY${latest.year} ranking · null = agency not present or renamed · FY${first.year}–FY${latest.year}`,
+    pngLegend: top10names.map((n, i) => ({ label: shortDept(n), color: PHL_PALETTE[i % PHL_PALETTE.length] })),
   });
 
   // Agency legend (below chart)

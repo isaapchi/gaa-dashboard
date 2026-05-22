@@ -505,7 +505,12 @@ export const GLOSS = {
 
   Reshuffle: {
     full: 'Line-item adjustment ratio',
-    desc: 'Share of NEP that Congress changed at the line-item level. Each line item is a unique combination of department × agency × program × region × fund × expense class × object code. For every line item, we take the absolute difference between NEP and GAA, sum across all line items, halve it (because every peso added to one item came from a cut elsewhere — matched pairs), and divide by total NEP. We subtract any net top-line change first, so the figure reports only the within-envelope reshuffling, not the headline movement. Two finer measures are available in the deck: program-level reshuffle (only counts movement between programs, ignoring within-program changes) and department-level (only counts movement between departments).',
+    desc: 'Share of NEP that Congress changed at the line-item level. Each line item is a unique combination of department × agency × program × region × fund × expense class × object code. For every line item, we take the absolute difference between NEP and GAA, sum across all line items, halve it (because every peso added to one item came from a cut elsewhere — matched pairs), and divide by total NEP. We subtract any net top-line change first, so the figure reports only the within-envelope reshuffling, not the headline movement. The finer-grained program-level number is also available in this view.',
+  },
+
+  ReshuffleProgram: {
+    full: 'Program-level adjustment ratio',
+    desc: 'Share of NEP that Congress shifted BETWEEN PREXC programs, ignoring reallocation that stayed inside the same program. We aggregate every line item up to its parent program (so changes that just moved money between regions or object codes within the same program cancel out), then take the absolute NEP-vs-GAA gap, halve it (matched pairs), and divide by total NEP after netting out the headline change. Always lower than the line-item number because some of the line-item reshuffling is intra-program; the gap between the two tells you how much of the action was within-program vs cross-program.',
   },
 };
 
@@ -579,93 +584,6 @@ export function mountGloss(rootEl) {
 }
 
 // --- Chart export affordance ------------------------------------------------
-
-// Check whether an ECharts instance has rendered data (not just background).
-function chartHasData(chart) {
-  if (!chart || typeof chart.getOption !== 'function') return false;
-  try {
-    const opt = chart.getOption();
-    if (!opt) return false;
-    if (Array.isArray(opt.series)) {
-      for (const s of opt.series) {
-        if (s && Array.isArray(s.data) && s.data.length > 0) return true;
-      }
-    }
-    return false;
-  } catch (_) {
-    return false;
-  }
-}
-
-// Export a chart as a PNG with a 'publikoph.org' watermark in the bottom-right.
-// Uses ECharts' 'finished' event so we capture only after the chart's last
-// render completes — fixes blank captures and missing labels on Overview's
-// donut/bar charts where labels paint after the data series.
-async function exportChartPng(chart, filename) {
-  // 1. Make sure the chart has data; if not, give it a moment and re-check.
-  if (!chartHasData(chart)) {
-    await new Promise(r => setTimeout(r, 250));
-    if (!chartHasData(chart)) throw new Error('Chart has no series data yet');
-  }
-  // 2. Wait for ECharts to signal a finished render. We force a resize to
-  //    trigger a fresh render, then resolve on the next 'finished' event.
-  //    Fallback timeout so we never hang if no render is scheduled.
-  await new Promise(resolve => {
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      try { chart.off && chart.off('finished', finish); } catch (_) {}
-      resolve();
-    };
-    try {
-      if (chart.on) chart.on('finished', finish);
-    } catch (_) {}
-    if (typeof chart.resize === 'function') chart.resize();
-    // Belt-and-braces: also wait two animation frames + a 700ms cap
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      setTimeout(finish, 700);
-    }));
-  });
-
-  // 3. Capture the chart at 2x pixel ratio against the paper background.
-  const baseUrl = chart.getDataURL({ pixelRatio: 2, backgroundColor: '#ece1c3' });
-
-  // 4. Load into an Image to get dimensions, then composite a watermark.
-  const img = new Image();
-  img.src = baseUrl;
-  await new Promise((resolve, reject) => {
-    img.onload = resolve;
-    img.onerror = () => reject(new Error('Failed to load captured chart image'));
-  });
-  const canvas = document.createElement('canvas');
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-
-  // 5. Watermark — small mono caps, muted ink, bottom-right corner.
-  const baseFont = Math.max(10, Math.round(Math.min(canvas.width, canvas.height) / 70));
-  const fontPx = baseFont * 2; // already on a 2x canvas, scale so it reads ~10pt on screen
-  ctx.font = `600 ${fontPx}px 'Space Mono', ui-monospace, monospace`;
-  ctx.fillStyle = 'rgba(26, 22, 17, 0.55)';
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'bottom';
-  const pad = Math.max(12, Math.round(canvas.width / 80));
-  ctx.fillText('publikoph.org', canvas.width - pad, canvas.height - pad);
-
-  // 6. Trigger download via a Blob (more reliable than a data: URL for large charts).
-  await new Promise(resolve => {
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename + '.png';
-      document.body.appendChild(a); a.click(); a.remove();
-      URL.revokeObjectURL(url);
-      resolve();
-    }, 'image/png');
-  });
-}
 
 // Inject Copy table / Download CSV / Download PNG actions in the top-right of a chart card.
 // Pass the DOM element of the card body container, plus a getter for the rows
@@ -758,11 +676,24 @@ export function mountChartActions(headerEl, opts) {
   if (opts.chart) {
     const pngBtn = mkBtn('Download PNG', ICON_PNG, async () => {
       try {
-        await exportChartPng(opts.chart, opts.pngName || csvName);
+        await exportComposedPng({
+          chart:      opts.chart,
+          headerEl:   headerEl,
+          title:      opts.pngTitle,
+          subtitle:   opts.pngSubtitle,
+          legend:     opts.pngLegend,
+          forceLabels: opts.pngForceLabels,
+          fileName:   (opts.pngName || csvName) + '.png',
+          rows:       (opts.getRows && opts.getRows()) || [],
+        });
         flash(pngBtn, 'Downloaded');
-      } catch (e) {
-        console.error('PNG export failed:', e);
-        flash(pngBtn, 'Not ready — try again');
+      } catch (err) {
+        console.warn('[PNG export] composed path failed, falling back to raw chart image', err);
+        const url = opts.chart.getDataURL({ pixelRatio: 2, backgroundColor: '#f1e8d2' });
+        const a   = document.createElement('a');
+        a.href = url; a.download = (opts.pngName || csvName) + '.png';
+        document.body.appendChild(a); a.click(); a.remove();
+        flash(pngBtn, 'Downloaded');
       }
     });
     wrap.appendChild(pngBtn);
@@ -776,6 +707,313 @@ export function mountChartActions(headerEl, opts) {
   }
 
   headerEl.appendChild(wrap);
+}
+
+// --- Pre-UACS region-code normalization (shared across views) --------------
+//
+// FY2009-FY2013 parquets predate UACS and the `region_code` column carries a
+// mix of: 2-digit UACS codes ('01'..'17', missing '00' / '14' / '15'); full
+// region NAMES ("National Capital Region", "Cordillera Administrative Region",
+// "Autonomous Region in Muslim Mindanao", legacy "Region IV", "Metro Manila",
+// "Cagayan"); supra-regional buckets ("Luzon" / "Visayas" / "Mindanao"); and
+// ~90 DFA foreign-service posts written as "Country, City" (e.g. "Japan,
+// Tokyo", "U.S.A., Washington, D.C.").
+//
+// Without normalisation every view that touches region data on those years
+// shows the same row twice (once per variant) and surfaces dozens of foreign
+// embassy posts in the region picker. This CASE expression folds everything
+// into the canonical UACS code set plus synthetic codes for the residual
+// buckets. Use it inside SQL queries via:
+//     SELECT ${REGION_NORMALIZE_SQL} AS code FROM budget ...
+//     WHERE (${REGION_NORMALIZE_SQL}) = ?
+//
+// `REGION_NAME_OVERRIDES` carries the display label for each synthetic code
+// (and overrides for canonical codes whose default name in regions.json is
+// too long to fit a chart label).
+export const REGION_NORMALIZE_SQL = `
+  CASE
+    WHEN region_code IS NULL THEN 'UNK'
+    WHEN region_code IN ('National Capital Region', 'Metro Manila') THEN '00'
+    WHEN region_code = 'Cordillera Administrative Region'          THEN '14'
+    WHEN region_code = 'Autonomous Region in Muslim Mindanao'      THEN '15'
+    WHEN region_code = 'Region IV'                                 THEN '04'
+    WHEN region_code = 'Cagayan'                                   THEN '02'
+    WHEN region_code = 'Luzon'                                     THEN 'LUZ'
+    WHEN region_code = 'Visayas'                                   THEN 'VIS'
+    WHEN region_code = 'Mindanao'                                  THEN 'MIN'
+    WHEN region_code LIKE '%, %'                                   THEN 'DFA'
+    WHEN region_code IN ('00','01','02','03','04','05','06','07','08','09',
+                         '10','11','12','13','14','15','16','17','18','19') THEN region_code
+    ELSE 'UNK'
+  END`;
+
+export const REGION_NAME_OVERRIDES = {
+  '00':  'NCR',
+  '13':  'Central Office / Nationwide',
+  '14':  'CAR (Cordillera)',
+  '15':  'ARMM (legacy)',
+  'LUZ': 'Luzon (unallocated)',
+  'VIS': 'Visayas (unallocated)',
+  'MIN': 'Mindanao (unallocated)',
+  'DFA': 'Foreign Service posts',
+  'UNK': 'Unclassified',
+};
+
+// --- Composed PNG export ----------------------------------------------------
+//
+// ECharts' built-in getDataURL() only captures the chart canvas — title text,
+// HTML legend chips, and the publikoph.org watermark sit outside that canvas
+// in the surrounding card markup, so they don't make it into the PNG.
+// `exportComposedPng` rasterises the chart, then paints a paper-backed canvas
+// composed of: title + subtitle (from the section header), the chart image,
+// the legend (auto-extracted from card-level legend chips when not passed
+// explicitly), and a "publikoph.org" watermark in the corner.
+//
+// For pie / donut charts where the slice labels are turned off in the live
+// view, callers can set `forceLabels: true` to temporarily enable percent
+// labels just for the PNG capture and revert afterwards.
+
+export const SITE_WATERMARK = 'publikoph.org';
+const PAPER = '#f1e8d2';
+
+function _loadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('image load failed'));
+    img.src = url;
+  });
+}
+
+// Pull title/subtitle/legend from the chart card header element when callers
+// don't pass them explicitly. Best-effort; missing pieces are skipped.
+function _autoExtractMeta(headerEl, opts) {
+  const meta = { title: opts.title, subtitle: opts.subtitle, legend: opts.legend };
+  if (!headerEl) return meta;
+  const card = headerEl.closest('.card, section') || headerEl.parentElement;
+
+  if (!meta.title) {
+    const titleEl = (card || headerEl).querySelector('.section-title');
+    if (titleEl) meta.title = (titleEl.textContent || '').trim();
+  }
+  if (!meta.subtitle) {
+    // The deck/sub-line typically sits as the first .text-xs after the title.
+    const subEl = (card || headerEl).querySelector('.section-title + .text-xs, .section-kicker + .section-title + .text-xs');
+    if (subEl) meta.subtitle = (subEl.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+  if (!meta.legend && card) {
+    // Look for legend chips or rows in the card. Two common patterns:
+    //   - econ-legend: <span style="background:#color"></span> + label
+    //   - comp-legend: <span class="rounded-full" style="background:#..."></span><span data-term>label</span>
+    const items = [];
+    // Pattern 1: explicit legend container ID convention.
+    const legendIds = ['econ-legend', 'comp-legend', 'fn-legend', 'agency-legend'];
+    for (const id of legendIds) {
+      const el = card.querySelector(`#${id}`);
+      if (!el) continue;
+      el.querySelectorAll('.flex.items-center, span.inline-flex').forEach(row => {
+        const swatch = row.querySelector('[style*="background"]');
+        const label = row.querySelector('.truncate, [data-term], span:last-child');
+        if (swatch && label) {
+          const bg = swatch.style.background || swatch.style.backgroundColor;
+          if (bg) items.push({ label: (label.textContent || '').trim(), color: bg });
+        }
+      });
+      if (items.length) break;
+    }
+    if (items.length) meta.legend = items;
+  }
+  return meta;
+}
+
+async function exportComposedPng(opts) {
+  const dpr = 2;
+  const chart = opts.chart;
+
+  // --- (Optional) temporarily turn on slice labels for pie/donut PNGs ------
+  let revertLabels = null;
+  if (opts.forceLabels && chart && typeof chart.getOption === 'function') {
+    try {
+      const prev = JSON.parse(JSON.stringify(chart.getOption()));
+      const series = prev.series || [];
+      const next = JSON.parse(JSON.stringify(prev));
+      next.series = (next.series || []).map(s => {
+        if (s.type === 'pie') {
+          return {
+            ...s,
+            label: { show: true, formatter: '{b}\n{d}%', color: '#1a1611', fontSize: 12, fontFamily: 'Inter, sans-serif' },
+            labelLine: { show: true, length: 8, length2: 10 },
+            // Shrink radius so labels have room around the donut.
+            radius: ['42%', '64%'],
+          };
+        }
+        return s;
+      });
+      chart.setOption(next, true);
+      revertLabels = () => chart.setOption(prev, true);
+      // Let ECharts paint the new options before capture.
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    } catch (e) { /* non-fatal */ }
+  }
+
+  const chartDataUrl = chart.getDataURL({ pixelRatio: dpr, backgroundColor: PAPER });
+  const chartImg = await _loadImage(chartDataUrl);
+
+  // Restore the live chart's display options as soon as we have the bitmap.
+  if (revertLabels) revertLabels();
+
+  const W = chartImg.width;
+  const meta = _autoExtractMeta(opts.headerEl, opts);
+
+  // Layout math — all values in device pixels (dpr-scaled).
+  const padX = 32 * dpr;
+  const padY = 28 * dpr;
+  const titleSize = 24 * dpr;
+  const subSize   = 13 * dpr;
+  const titleLine = 30 * dpr;
+  const subLine   = 18 * dpr;
+  const legendLabelSize = 12 * dpr;
+  const swatchSize = 12 * dpr;
+  const legendGap = 16 * dpr;
+  const legendRowH = 22 * dpr;
+  const wmSize = 11 * dpr;
+  const wmH = 22 * dpr;
+
+  // Wrap title/subtitle if too long.
+  const measure = document.createElement('canvas').getContext('2d');
+  measure.font = `400 ${titleSize}px 'DM Serif Text', Georgia, serif`;
+  const wrapText = (txt, fontStr, maxW) => {
+    measure.font = fontStr;
+    const words = String(txt || '').split(/\s+/);
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+      const test = cur ? cur + ' ' + w : w;
+      if (measure.measureText(test).width > maxW && cur) {
+        lines.push(cur);
+        cur = w;
+      } else cur = test;
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  };
+  const titleLines = meta.title ? wrapText(meta.title, `400 ${titleSize}px 'DM Serif Text', Georgia, serif`, W - padX * 2) : [];
+  const subLines   = meta.subtitle ? wrapText(meta.subtitle, `500 ${subSize}px 'Space Grotesk', sans-serif`, W - padX * 2) : [];
+
+  // Legend wrap.
+  const legendItems = (meta.legend || []).slice();
+  const legendRows = [];
+  if (legendItems.length) {
+    measure.font = `600 ${legendLabelSize}px 'Space Grotesk', Inter, sans-serif`;
+    let row = [], rowW = 0;
+    const maxRowW = W - padX * 2;
+    for (const item of legendItems) {
+      const w = swatchSize + 6 * dpr + measure.measureText(item.label).width + legendGap;
+      if (rowW + w > maxRowW && row.length) {
+        legendRows.push(row); row = []; rowW = 0;
+      }
+      row.push({ ...item, _w: w });
+      rowW += w;
+    }
+    if (row.length) legendRows.push(row);
+  }
+  const legendBlockH = legendRows.length * legendRowH + (legendRows.length ? 8 * dpr : 0);
+
+  const headerH = padY
+    + titleLines.length * titleLine
+    + (titleLines.length && subLines.length ? 4 * dpr : 0)
+    + subLines.length * subLine
+    + (titleLines.length || subLines.length ? 14 * dpr : 0);
+  const chartY = headerH;
+  const legendY = chartY + chartImg.height + (legendRows.length ? 10 * dpr : 0);
+  const wmY = legendY + legendBlockH + 4 * dpr;
+  const H = wmY + wmH + padY;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Background paper.
+  ctx.fillStyle = PAPER;
+  ctx.fillRect(0, 0, W, H);
+
+  // Title.
+  ctx.textBaseline = 'top';
+  ctx.textAlign = 'left';
+  let yC = padY;
+  if (titleLines.length) {
+    ctx.fillStyle = '#1a1611';
+    ctx.font = `400 ${titleSize}px 'DM Serif Text', Georgia, serif`;
+    for (const ln of titleLines) {
+      ctx.fillText(ln, padX, yC);
+      yC += titleLine;
+    }
+    if (subLines.length) yC += 4 * dpr;
+  }
+  if (subLines.length) {
+    ctx.fillStyle = '#7a6a4c';
+    ctx.font = `500 ${subSize}px 'Space Grotesk', sans-serif`;
+    for (const ln of subLines) {
+      ctx.fillText(ln, padX, yC);
+      yC += subLine;
+    }
+  }
+
+  // Chart image.
+  ctx.drawImage(chartImg, 0, chartY);
+
+  // Legend.
+  if (legendRows.length) {
+    let yL = legendY;
+    for (const row of legendRows) {
+      let xL = padX;
+      for (const item of row) {
+        ctx.fillStyle = item.color || '#1d3da8';
+        ctx.beginPath();
+        ctx.arc(xL + swatchSize / 2, yL + legendRowH / 2, swatchSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1a1611';
+        ctx.font = `600 ${legendLabelSize}px 'Space Grotesk', Inter, sans-serif`;
+        ctx.textBaseline = 'middle';
+        ctx.fillText(item.label, xL + swatchSize + 6 * dpr, yL + legendRowH / 2);
+        xL += item._w;
+      }
+      yL += legendRowH;
+    }
+  }
+
+  // Watermark — small mono-smallcaps line bottom-right. The full byline
+  // ("publikoph.org · HALAGA · The People's Budget Almanac") only fits when
+  // the chart is wider than ~500 device px; below that we drop the byline
+  // and keep just the URL so it never clips off the canvas edge.
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#7a6a4c';
+  ctx.font = `700 ${wmSize}px 'Space Mono', ui-monospace, monospace`;
+  const wmFull = `${SITE_WATERMARK}   ·   HALAGA · The People’s Budget Almanac`;
+  const wmShort = `${SITE_WATERMARK}   ·   HALAGA`;
+  const wmTiny = SITE_WATERMARK;
+  const avail = W - padX * 2;
+  let wmText = wmFull;
+  // ctx already has the watermark font set above, so measureText is sized.
+  if (ctx.measureText(wmText).width > avail) wmText = wmShort;
+  if (ctx.measureText(wmText).width > avail) wmText = wmTiny;
+  ctx.fillText(wmText, W - padX, wmY + wmH / 2);
+
+  // Reset to defaults so the canvas can be reused.
+  ctx.textAlign = 'left';
+
+  // Trigger download.
+  const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = opts.fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 // --- Shared chart resize observer -------------------------------------------

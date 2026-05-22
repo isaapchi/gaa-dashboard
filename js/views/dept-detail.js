@@ -1,5 +1,6 @@
 import { loadSummary, sql, fmtPHP, fmtInt, fmtPct, PHL_PALETTE, EXP_CLASS_COLORS,
-         mountChartActions, mountGloss, observeChartResize, createChart } from '../data.js';
+         mountChartActions, mountGloss, observeChartResize, createChart,
+         REGION_NORMALIZE_SQL, REGION_NAME_OVERRIDES } from '../data.js';
 
 const PROGRAMS_PAGE_SIZE = 50;
 
@@ -148,11 +149,28 @@ export async function renderDeptDetail(root, deptName) {
       FROM budget WHERE department = ? AND exp_class IS NOT NULL
       GROUP BY exp_class ORDER BY amount_thousands DESC
     `, [deptName]),
+    // Region rollup normalised via REGION_NORMALIZE_SQL so pre-UACS years
+    // (FY09-FY13) don't surface "National Capital Region" as a second row
+    // beside '00', and don't list DFA embassy posts as separate regions.
     sql(`
-      SELECT region_code, region_name, SUM(amount_thousands) AS amount_thousands
-      FROM budget WHERE department = ? AND region_name IS NOT NULL
-      GROUP BY region_code, region_name ORDER BY amount_thousands DESC LIMIT 10
-    `, [deptName]),
+      SELECT code,
+             SUM(amount_thousands) AS amount_thousands
+      FROM (
+        SELECT ${REGION_NORMALIZE_SQL} AS code, amount_thousands
+        FROM budget
+        WHERE department = ?
+      )
+      GROUP BY code
+      ORDER BY amount_thousands DESC
+      LIMIT 10
+    `, [deptName]).then(rows => rows.map(r => ({
+      ...r,
+      // Synthesise a region_name from the normalised code so downstream
+      // rendering (chart labels, tooltip, CSV column) continues to read
+      // r.region_name without per-call-site changes.
+      region_code: r.code,
+      region_name: REGION_NAME_OVERRIDES[r.code] || `Region ${r.code}`,
+    }))),
     sql(`SELECT COUNT(DISTINCT agency) AS c FROM budget WHERE department = ?`, [deptName]),
     sql(`SELECT COUNT(DISTINCT object_code) AS c FROM budget WHERE department = ?`, [deptName]),
   ]);
@@ -240,6 +258,8 @@ export async function renderDeptDetail(root, deptName) {
       csvName: `dept-${deptSlug}-top-programs-fy${summary.year}`,
       chart: _charts.tree,
       pngName: `dept-${deptSlug}-top-programs-fy${summary.year}`,
+      pngTitle:    `${deptName} · Top programs · FY${summary.year}`,
+      pngSubtitle: `Top ${topPrograms.length} PREXC programs by allocation · ${fmtInt(programs.length)} total programs · ${fmtPHP(deptTotal)} dept allocation`,
     });
   }
 
@@ -285,6 +305,13 @@ export async function renderDeptDetail(root, deptName) {
       csvName: `dept-${deptSlug}-expense-mix-fy${summary.year}`,
       chart: _charts.exp,
       pngName: `dept-${deptSlug}-expense-mix-fy${summary.year}`,
+      pngTitle:    `${deptName} · Expense mix · FY${summary.year}`,
+      pngSubtitle: `Allocation by economic class · ${fmtPHP(deptTotal)} dept total`,
+      pngForceLabels: true,
+      pngLegend: expRows.map(d => ({
+        label: `${shortExp(d.exp_class)} · ${fmtPHP(d.amount_thousands)}`,
+        color: EXP_CLASS_COLORS[d.exp_class] || '#7a6a4c',
+      })),
     });
   }
 
@@ -334,6 +361,8 @@ export async function renderDeptDetail(root, deptName) {
       csvName: `dept-${deptSlug}-top-regions-fy${summary.year}`,
       chart: _charts.region,
       pngName: `dept-${deptSlug}-top-regions-fy${summary.year}`,
+      pngTitle:    `${deptName} · Top regions · FY${summary.year}`,
+      pngSubtitle: `Top ${regionRows.length} regional buckets by allocation · ${fmtPHP(deptTotal)} dept total`,
     });
   }
 
@@ -444,11 +473,19 @@ export async function renderDeptDetail(root, deptName) {
       ? `department = ? AND program_id = ?`
       : `department = ? AND program = ?`;
 
-    const [exp, region, objects] = await Promise.all([
+    const [exp, regionRaw, objects] = await Promise.all([
       sql(`SELECT exp_class, SUM(amount_thousands) AS amt FROM budget WHERE ${whereClause} AND exp_class IS NOT NULL GROUP BY exp_class ORDER BY amt DESC`, params),
-      sql(`SELECT region_name, SUM(amount_thousands) AS amt FROM budget WHERE ${whereClause} AND region_name IS NOT NULL GROUP BY region_name ORDER BY amt DESC LIMIT 8`, params),
+      // Region rollup normalised so pre-UACS years don't double-count.
+      sql(`SELECT code, SUM(amount_thousands) AS amt
+           FROM (SELECT ${REGION_NORMALIZE_SQL} AS code, amount_thousands
+                 FROM budget WHERE ${whereClause})
+           GROUP BY code ORDER BY amt DESC LIMIT 8`, params),
       sql(`SELECT object_name, SUM(amount_thousands) AS amt FROM budget WHERE ${whereClause} AND object_name IS NOT NULL GROUP BY object_name ORDER BY amt DESC LIMIT 10`, params),
     ]);
+    const region = regionRaw.map(r => ({
+      ...r,
+      region_name: REGION_NAME_OVERRIDES[r.code] || `Region ${r.code}`,
+    }));
 
     wrap.innerHTML = `
       <div class="grid grid-cols-12 gap-4">

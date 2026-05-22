@@ -177,6 +177,9 @@ export async function renderExpense(root) {
     csvName:  `expense-top12-departments-fy${year}`,
     chart:    cStack,
     pngName:  `expense-top12-departments-fy${year}`,
+    pngTitle:    `Top 12 departments · Expense-class mix · FY${year}`,
+    pngSubtitle: `Stacked by PS / MOOE / CO / FE · ${fmtPHP(top12.reduce((a,d)=>a+d.amt,0))} combined`,
+    pngLegend: EXP_CLASSES.map(c => ({ label: c.full, color: EXP_CLASS_COLORS[c.full] || '#94A3B8' })),
   });
 
   observeChartResize(document.getElementById('chart-dept-stack'), cStack);
@@ -310,6 +313,9 @@ export async function renderExpense(root) {
       csvName:  `expense-${c.abbr}-top-departments-fy${year}`,
       chart:    chart,
       pngName:  `expense-${c.abbr}-top-departments-fy${year}`,
+      pngTitle:    `${c.full} · Top departments · FY${year}`,
+      pngSubtitle: `Top 8 departments by ${c.abbr} allocation · ${fmtPHP(classTotal)} class total`,
+      pngLegend: [{ label: c.full, color }],
     });
 
     observeChartResize(chartEl, chart);

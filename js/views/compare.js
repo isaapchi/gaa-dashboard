@@ -242,77 +242,32 @@ export async function renderCompare(root) {
     ? `Congress kept the headline ceiling intact. Every section below is a zero-sum shift inside it.`
     : `Congress changed the headline ceiling by ${tl.diff_pct >= 0 ? '+' : ''}${tl.diff_pct.toFixed(2)}%. Sections below show the redistribution inside that envelope.`;
 
-  // Inject mobile-reorder styles once (idempotent). On mobile we surface the
-  // §1 KPI cards BEFORE the narrative paragraph so the actual comparison data
-  // is the first thing above the fold; the narrative collapses behind a
-  // "Read context" toggle that defaults closed on mobile.
-  if (!document.getElementById('compare-mobile-css')) {
-    const st = document.createElement('style');
-    st.id = 'compare-mobile-css';
-    st.textContent = `
-      .compare-stack { display: flex; flex-direction: column; gap: 24px; }
-      .compare-hero-narrative { display: block; }
-      .compare-hero-toggle {
-        display: none;
-        appearance: none;
-        background: transparent;
-        border: 1.5px solid var(--ink);
-        border-radius: 0;
-        padding: 6px 12px;
-        margin-top: 12px;
-        font-family: 'Space Mono', monospace;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink);
-        cursor: pointer;
-      }
-      .compare-hero-toggle:hover { background: rgba(26,22,17,0.06); }
-      @media (max-width: 640px) {
-        /* Reorder on mobile: §1 KPIs first, then hero, then rest in source order.
-           All siblings need an explicit order so the rest stay below the hero. */
-        .compare-stack > * { order: 3; }
-        .compare-stack > .compare-section-1 { order: 1; }
-        .compare-stack > .compare-hero { order: 2; }
-        /* Collapse the narrative behind a toggle on mobile */
-        .compare-hero-narrative { display: none; }
-        .compare-hero-narrative.is-open { display: block; }
-        .compare-hero-toggle { display: inline-flex; }
-        .compare-hero .font-display { font-size: 22px; }
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
   root.innerHTML = `
-    <div class="compare-stack">
+    <div class="space-y-6">
 
       <!-- Hero lede -->
-      <div class="card p-8 compare-hero" style="background:transparent;">
+      <div class="card p-8" style="background:transparent;">
         <div class="section-kicker" style="color:${IRIS};">NEP FY${year} → GAA FY${year}</div>
         <div class="font-display font-extrabold text-[28px] leading-[1.15] tracking-[-0.02em] text-ink-900 mt-1 max-w-3xl">
           ${hero.headline}
         </div>
-        <div class="mt-3 text-[15px] leading-[1.55] text-ink-700 max-w-3xl compare-hero-narrative" id="compare-hero-narrative">
+        <div class="mt-3 text-[15px] leading-[1.55] text-ink-700 max-w-3xl">
           ${hero.narrative}
         </div>
-        <button type="button" class="compare-hero-toggle" id="compare-hero-toggle" aria-expanded="false" aria-controls="compare-hero-narrative">Read context</button>
         <div class="mt-4 text-[11px] uppercase tracking-[0.16em] font-bold text-ink-400">
           ${data.row_counts.nep_leaf_rows.toLocaleString()} NEP line items · ${data.row_counts.gaa_leaf_rows.toLocaleString()} GAA line items
         </div>
       </div>
 
       <!-- §1 Top-line -->
-      <section class="card p-6 compare-section-1">
+      <section class="card p-6">
         <div class="mb-5">
           <div class="section-kicker">§ 1 · TOTAL</div>
           <div class="section-title">${Math.abs(tl.diff_pct) < 0.001 ? 'Same envelope, very different shape' : 'A different envelope'}</div>
           <div class="text-sm text-ink-500 mt-1">${top1Deck}</div>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          ${kpiTile('NEP', fmtPHP(totalNep), 'Executive proposal', NEUTRAL)}
-          ${kpiTile('GAA', fmtPHP(totalGaa), 'Enacted by Congress', IRIS)}
+          ${nepGaaTile(totalNep, totalGaa)}
           ${kpiTile(
             'Net change',
             Math.abs(tl.diff_pct) < 0.05
@@ -324,13 +279,22 @@ export async function renderCompare(root) {
             Math.abs(tl.diff_pct) < 0.05 ? '#10B981' : (totalDiff > 0 ? ADDED : CUT),
           )}
           ${kpiTile(
-            'Adjusted',
+            'Adjusted · line item',
             tl.reshuffle_pct ? `${tl.reshuffle_pct.leaf_pct.toFixed(1)}%` : '—',
             tl.reshuffle_pct
-              ? `Of NEP changed at line-item level · ${tl.reshuffle_pct.program_pct.toFixed(1)}% at program level`
+              ? `Of NEP changed at the line-item level (department × agency × program × region × fund × expense class × object)`
               : 'Line-item reshuffle',
             '#FFB454',
             'Reshuffle',
+          )}
+          ${kpiTile(
+            'Adjusted · program',
+            tl.reshuffle_pct && tl.reshuffle_pct.program_pct != null ? `${tl.reshuffle_pct.program_pct.toFixed(1)}%` : '—',
+            tl.reshuffle_pct && tl.reshuffle_pct.program_pct != null
+              ? `Of NEP shifted between PREXC programs (ignores within-program reallocation)`
+              : 'Program-level reshuffle',
+            '#e25034',
+            'ReshuffleProgram',
           )}
         </div>
       </section>
@@ -415,7 +379,12 @@ export async function renderCompare(root) {
     document.getElementById('chart-dept'),
     document.getElementById('hdr-dept'),
     data.department.slice(0, 15).map(r => ({ name: r.name, diff: r.diff, nep: r.nep, gaa: r.gaa, pct: r.pct })),
-    { csvName: `nep-vs-gaa-${year}-dept`, pngName: `nep-vs-gaa-${year}-dept` },
+    {
+      csvName: `nep-vs-gaa-${year}-dept`,
+      pngName: `nep-vs-gaa-${year}-dept`,
+      pngTitle:    `NEP → GAA · Department-level reallocations · FY${year}`,
+      pngSubtitle: deptDeck(data).replace(/<[^>]+>/g, ''),
+    },
   );
 
   // §4 Function paired bar
@@ -423,7 +392,12 @@ export async function renderCompare(root) {
     document.getElementById('chart-function'),
     document.getElementById('hdr-function'),
     data.function,
-    { csvName: `nep-vs-gaa-${year}-function`, pngName: `nep-vs-gaa-${year}-function` },
+    {
+      csvName: `nep-vs-gaa-${year}-function`,
+      pngName: `nep-vs-gaa-${year}-function`,
+      pngTitle:    `NEP vs GAA by function (COFOG-lite) · FY${year}`,
+      pngSubtitle: functionDeck(data).replace(/<[^>]+>/g, ''),
+    },
   );
 
   // §5 Economic paired bar
@@ -431,7 +405,12 @@ export async function renderCompare(root) {
     document.getElementById('chart-economic'),
     document.getElementById('hdr-economic'),
     data.economic,
-    { csvName: `nep-vs-gaa-${year}-economic`, pngName: `nep-vs-gaa-${year}-economic` },
+    {
+      csvName: `nep-vs-gaa-${year}-economic`,
+      pngName: `nep-vs-gaa-${year}-economic`,
+      pngTitle:    `NEP vs GAA by economic class · FY${year}`,
+      pngSubtitle: economicDeck(data).replace(/<[^>]+>/g, ''),
+    },
   );
 
   // ---------- Show-all toggles for programs ----------
@@ -454,18 +433,38 @@ export async function renderCompare(root) {
     });
   });
 
-  // Hero narrative toggle (mobile-only — defaults closed; CSS hides the button on desktop).
-  const heroToggle = document.getElementById('compare-hero-toggle');
-  const heroNarrative = document.getElementById('compare-hero-narrative');
-  if (heroToggle && heroNarrative) {
-    heroToggle.addEventListener('click', () => {
-      const open = heroNarrative.classList.toggle('is-open');
-      heroToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      heroToggle.textContent = open ? 'Hide context' : 'Read context';
-    });
-  }
-
   mountGloss(root);
+}
+
+// -------- Combined NEP + GAA tile (used by §1) --------
+// Replaces the two single-value NEP and GAA tiles with a single tile that
+// shows both totals stacked, so the §1 KPI strip can spend its remaining
+// slots on the two reshuffle metrics (line-item and program-level).
+function nepGaaTile(nepThousands, gaaThousands) {
+  return `
+    <div class="rounded-[16px] border border-linen-edge p-5">
+      <div class="flex items-center gap-2">
+        <span class="kpi-dot" style="background:${NEUTRAL};box-shadow:0 0 0 3px ${NEUTRAL}1A"></span>
+        <span class="text-[11px] uppercase tracking-[0.16em] font-bold text-ink-400">NEP &middot; GAA</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-2">
+        <div>
+          <div class="text-[10px] uppercase tracking-[0.14em] font-bold text-ink-400 mb-0.5">NEP</div>
+          <div class="font-display font-extrabold text-ink-900" style="font-size:clamp(18px,2.6vw,26px);line-height:1.05;font-feature-settings:'tnum';letter-spacing:-0.02em;color:${NEUTRAL};">
+            ${fmtPHP(nepThousands)}
+          </div>
+          <div class="text-[10.5px] text-ink-500 mt-0.5">Executive proposal</div>
+        </div>
+        <div>
+          <div class="text-[10px] uppercase tracking-[0.14em] font-bold text-ink-400 mb-0.5">GAA</div>
+          <div class="font-display font-extrabold text-ink-900" style="font-size:clamp(18px,2.6vw,26px);line-height:1.05;font-feature-settings:'tnum';letter-spacing:-0.02em;color:${IRIS};">
+            ${fmtPHP(gaaThousands)}
+          </div>
+          <div class="text-[10.5px] text-ink-500 mt-0.5">Enacted by Congress</div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 // -------- KPI tile (used by §1) --------
@@ -595,6 +594,12 @@ function mountDivergingBar(domEl, headerEl, rows, exportOpts) {
       csvName: exportOpts.csvName,
       chart: chart,
       pngName: exportOpts.pngName,
+      pngTitle:    exportOpts.pngTitle,
+      pngSubtitle: exportOpts.pngSubtitle,
+      pngLegend: [
+        { label: 'Congress added (GAA > NEP)', color: ADDED },
+        { label: 'Congress cut (GAA < NEP)',   color: CUT },
+      ],
     });
   }
 }
@@ -704,6 +709,12 @@ function mountPairedBar(domEl, headerEl, rows, exportOpts) {
       csvName: exportOpts.csvName,
       chart: chart,
       pngName: exportOpts.pngName,
+      pngTitle:    exportOpts.pngTitle,
+      pngSubtitle: exportOpts.pngSubtitle,
+      pngLegend: [
+        { label: 'NEP (executive proposal)', color: '#C4BBF7' },
+        { label: 'GAA (enacted by Congress)', color: IRIS },
+      ],
     });
   }
 }

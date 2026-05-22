@@ -103,17 +103,31 @@ export async function renderAbout(root) {
         </div>
       </div>
 
-      <!-- FEEDBACK -->
-      <div class="col-span-12 card p-6" style="border:1px dashed rgba(26,22,17,0.30); background:transparent;">
-        <div class="section-kicker">Feedback</div>
-        <p class="text-ink-700 text-[13.5px] leading-[1.65] mt-2 mb-3">
-          Spotted a data quirk, broken chart, or a fiscal year that looks off? Tell us &mdash; the easiest way to fix it is to hear about it.
-        </p>
-        <a href="mailto:feedback@publikoph.org?subject=Halaga%20feedback"
-           class="inline-block font-mono text-[12px] font-semibold uppercase tracking-[0.18em]"
-           style="color:var(--scarlet); border-bottom:1.5px solid var(--scarlet); padding-bottom:1px;">
-          feedback@publikoph.org &rarr;
-        </a>
+      <!-- FEEDBACK / CONTACT — sits above the per-FY coverage table because
+           that's where most readers stop. Keep it short and one-click so it
+           gets used: a mailto link, a noted welcome on corrections. -->
+      <div class="col-span-12 card p-6" id="about-feedback" style="background:transparent;border:1.5px solid var(--ink);">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <div class="md:col-span-2">
+            <div class="section-kicker">Feedback</div>
+            <h3 class="font-display font-bold text-[20px] tracking-[-0.01em] mt-1 mb-2">Found a number that looks wrong? Tell us.</h3>
+            <p class="text-ink-700 text-[13.5px] leading-[1.65]">
+              Halaga is a public-interest project. Corrections, dataset gaps, broken charts, and feature requests are all welcome &mdash; especially from
+              <span class="font-semibold">DBM</span>, <span class="font-semibold">COA</span>, <span class="font-semibold">PSA</span>, civil-society researchers, and journalists working the budget beat. Cite the page, the FY, and the figure you're flagging.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 md:items-end">
+            <a class="btn" href="mailto:feedback@publikoph.org?subject=Halaga%20feedback" rel="noopener">
+              Email feedback
+            </a>
+            <a class="btn-ghost btn" href="https://publikoph.org" target="_blank" rel="noopener">
+              Visit publikoph.org
+            </a>
+            <div class="mono smallcaps text-[10px]" style="color: var(--muted);">
+              feedback@publikoph.org
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- DATA section: per-year coverage table + caveats -->
@@ -235,7 +249,7 @@ export async function renderAbout(root) {
           The underlying source documents (GAA, NEP, BESF) are published by the Philippine Department of Budget and Management. The cleaning rules, cross-vintage reconciliations, OCR transcription of scanned years, functional and economic classifications, and per-region apportioning on this site are the author's own work on top of those sources. Where a figure here disagrees with an official DBM release, the DBM release is authoritative.
         </p>
         <p class="text-[13px] text-ink-700 leading-[1.7] max-w-3xl mt-3">
-          A contact channel for corrections and data requests will be added here in a future release. Until then, please raise issues through the working-paper channel you received this link from.
+          Corrections and data requests: <a href="mailto:feedback@publikoph.org?subject=Halaga%20feedback" class="font-semibold" style="color: var(--scarlet);">feedback@publikoph.org</a>. See the feedback card above for full context.
         </p>
       </div>
 

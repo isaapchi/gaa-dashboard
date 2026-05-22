@@ -1,22 +1,29 @@
 import {
   loadSummary, sql, fmtPHP, fmtInt, fmtPct, PHL_PALETTE,
   mountChartActions, mountGloss, observeChartResize, emptyState, createChart,
+  getCurrentYear,
+  REGION_NORMALIZE_SQL, REGION_NAME_OVERRIDES,
 } from '../data.js';
-import MultiSelect from '../multiselect.js';
 
 // Whitelisted columns — never trust user input straight into SQL.
+// `region_name` is special: pre-UACS years store it as either a UACS code or
+// a free-text label, so the GROUP BY column uses REGION_NORMALIZE_SQL via
+// a helper below rather than a raw column name.
 const GROUP_BY_COLS = {
   department:   { col: 'department',   label: 'Allocator' },
   agency:       { col: 'agency',       label: 'Agency' },
-  region_name:  { col: 'region_name',  label: 'Region' },
+  region_name:  { col: `(${REGION_NORMALIZE_SQL})`, label: 'Region', isRegion: true },
   fund_subcat:  { col: 'fund_subcat',  label: 'Fund sub-category' },
   exp_class:    { col: 'exp_class',    label: 'Expense class' },
   object_name:  { col: 'object_name',  label: 'Object of expenditure' },
 };
 
+// FILTER_COLS values are inserted literally into the WHERE clause; the
+// region_code entry uses the normalised expression so filter selections
+// match every variant of the same logical region.
 const FILTER_COLS = {
   department:  'department',
-  region_code: 'region_code',
+  region_code: `(${REGION_NORMALIZE_SQL})`,
   exp_class:   'exp_class',
   fund_subcat: 'fund_subcat',
 };
@@ -121,73 +128,54 @@ export async function renderExplorer(root, arg) {
   const s = await loadSummary();
 
   const departments = s.by_department.map(d => d.name).filter(Boolean).sort();
-  const regions     = (s.by_region || []).map(r => ({ code: r.code, name: r.name })).filter(r => r.code && r.name);
+  // Pull the region list straight from the (normalised) parquet via SQL so
+  // pre-UACS years don't surface "National Capital Region" twice or list 90
+  // DFA embassy posts. Fallback to the summary's by_region if the SQL fails.
+  let regions;
+  try {
+    const rows = await sql(`
+      SELECT ${REGION_NORMALIZE_SQL} AS code, SUM(amount_thousands) AS amt
+      FROM budget
+      GROUP BY code
+      ORDER BY amt DESC
+    `);
+    regions = rows
+      .filter(r => r.code)
+      .map(r => ({
+        code: r.code,
+        name: REGION_NAME_OVERRIDES[r.code] || `Region ${r.code}`,
+      }));
+  } catch (e) {
+    console.warn('[explorer] region SQL failed, falling back to summary', e);
+    regions = (s.by_region || []).map(r => ({ code: r.code, name: r.name })).filter(r => r.code && r.name);
+  }
   const expClasses  = (s.by_exp_class || []).map(x => x.name).filter(Boolean);
   const fundSubcats = (s.by_fund_subcat || []).map(x => x.name).filter(Boolean).sort();
-
-  // Inject mobile-stack styles once (idempotent). On mobile the headline
-  // moves above the controls row so APPLY gets its own line and the status
-  // numbers don't collide with the title.
-  if (!document.getElementById('explorer-mobile-css')) {
-    const st = document.createElement('style');
-    st.id = 'explorer-mobile-css';
-    st.textContent = `
-      .explorer-controls-head {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 16px;
-      }
-      .explorer-controls-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-      .explorer-status-text {
-        font-family: 'Space Mono', monospace;
-        font-size: 10.5px;
-        color: var(--muted);
-        text-align: right;
-      }
-      @media (max-width: 640px) {
-        .explorer-controls-head { flex-direction: column; align-items: stretch; gap: 12px; }
-        .explorer-controls-actions {
-          justify-content: space-between;
-          width: 100%;
-          gap: 8px;
-        }
-        .explorer-status-text { text-align: left; flex: 1; }
-        #explorer-apply { margin-left: auto; min-height: 40px; padding-left: 18px; padding-right: 18px; }
-      }
-    `;
-    document.head.appendChild(st);
-  }
 
   root.innerHTML = `
     <div class="grid grid-cols-12 gap-5">
 
       <!-- Controls -->
       <div class="col-span-12 card p-6">
-        <div class="explorer-controls-head">
+        <div class="flex items-center justify-between mb-4">
           <div>
             <div class="section-kicker">Query</div>
             <div class="section-title">Budget explorer</div>
             <div class="text-xs text-ink-400 mt-0.5">Pivot the FY${s.year} <span data-term="GAA">GAA</span> across any dimension</div>
           </div>
-          <div class="explorer-controls-actions">
+          <div class="flex items-center gap-2">
             <span id="explorer-filter-chip"></span>
-            <span id="explorer-status" class="explorer-status-text" aria-live="polite"></span>
+            <span id="explorer-status" class="text-xs text-ink-400"></span>
             <button id="explorer-apply" class="btn">Apply</button>
           </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-3">
-          <div class="col-span-12 md:col-span-3">
-            <label for="ex-groupby" class="kpi-label mb-1.5 block">Group by</label>
+        <div class="grid grid-cols-12 gap-3 ex-filters">
+          <div class="col-span-12 md:col-span-3 ex-filter-cell">
+            <div class="flex items-center justify-between">
+              <label for="ex-groupby" class="kpi-label">Group by</label>
+            </div>
+            <div class="text-xs text-ink-400">Pivot dimension</div>
             <select id="ex-groupby" class="select">
               ${Object.entries(GROUP_BY_COLS).map(([k, v]) =>
                 `<option value="${k}"${k === 'department' ? ' selected' : ''}>${v.label}</option>`
@@ -195,47 +183,78 @@ export async function renderExplorer(root, arg) {
             </select>
           </div>
 
-          <div class="col-span-12 md:col-span-2">
-            <label for="ex-topn" class="kpi-label mb-1.5 block">Top N</label>
-            <input id="ex-topn" type="number" class="input" value="25" min="5" max="100" step="5" />
+          <div class="col-span-6 md:col-span-2 ex-filter-cell">
+            <div class="flex items-center justify-between">
+              <label for="ex-topn" class="kpi-label">Top N</label>
+            </div>
+            <div class="text-xs text-ink-400">5 – 100 rows</div>
+            <input id="ex-topn" type="number" class="select" value="25" min="5" max="100" step="5" />
           </div>
 
           <div class="col-span-12 md:col-span-7 grid grid-cols-2 lg:grid-cols-4 gap-3 ex-filters">
             <div class="ex-filter-cell">
-              <label for="ex-f-department" class="kpi-label mb-1.5 block">Allocator</label>
-              <div class="ms-wrapper" data-target="ex-f-department">
-                <select id="ex-f-department" multiple data-empty="all">
-                  ${departments.map(d => `<option value="${escapeAttr(d)}">${escapeHtml(d)}</option>`).join('')}
-                </select>
+              <div class="flex items-center justify-between">
+                <label for="ex-f-department" class="kpi-label">Allocator</label>
+                <span class="text-[10px] text-ink-400">
+                  <button type="button" class="ex-select-all" data-target="ex-f-department">Select all</button>
+                  <span class="mx-1 text-ink-400">·</span>
+                  <button type="button" class="ex-clear-all" data-target="ex-f-department">Clear</button>
+                </span>
               </div>
+              <div class="text-xs text-ink-400">Includes <span data-term="AAs">AAs</span> and <span data-term="SPFs">SPFs</span></div>
+              <select id="ex-f-department" class="select" multiple size="1" data-empty="all">
+                ${departments.map(d => `<option value="${escapeAttr(d)}">${escapeHtml(d)}</option>`).join('')}
+              </select>
             </div>
             <div class="ex-filter-cell">
-              <label for="ex-f-region_code" class="kpi-label mb-1.5 block">Region</label>
-              <div class="ms-wrapper" data-target="ex-f-region_code">
-                <select id="ex-f-region_code" multiple data-empty="all">
-                  ${regions.map(r => `<option value="${escapeAttr(r.code)}">${escapeHtml(r.name)}</option>`).join('')}
-                </select>
+              <div class="flex items-center justify-between">
+                <label for="ex-f-region_code" class="kpi-label">Region</label>
+                <span class="text-[10px] text-ink-400">
+                  <button type="button" class="ex-select-all" data-target="ex-f-region_code">Select all</button>
+                  <span class="mx-1 text-ink-400">·</span>
+                  <button type="button" class="ex-clear-all" data-target="ex-f-region_code">Clear</button>
+                </span>
               </div>
+              <div class="text-xs text-ink-400">17 regions plus Nationwide</div>
+              <select id="ex-f-region_code" class="select" multiple size="1" data-empty="all">
+                ${regions.map(r => `<option value="${escapeAttr(r.code)}">${escapeHtml(r.name)}</option>`).join('')}
+              </select>
             </div>
             <div class="ex-filter-cell">
-              <label for="ex-f-exp_class" class="kpi-label mb-1.5 block">Expense class</label>
-              <div class="ms-wrapper" data-target="ex-f-exp_class">
-                <select id="ex-f-exp_class" multiple data-empty="all">
-                  ${expClasses.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
-                </select>
+              <div class="flex items-center justify-between">
+                <label for="ex-f-exp_class" class="kpi-label">Expense class</label>
+                <span class="text-[10px] text-ink-400">
+                  <button type="button" class="ex-select-all" data-target="ex-f-exp_class">Select all</button>
+                  <span class="mx-1 text-ink-400">·</span>
+                  <button type="button" class="ex-clear-all" data-target="ex-f-exp_class">Clear</button>
+                </span>
               </div>
+              <div class="text-xs text-ink-400"><span data-term="PS">PS</span> / <span data-term="MOOE">MOOE</span> / <span data-term="CO">CO</span> / <span data-term="FE">FE</span></div>
+              <select id="ex-f-exp_class" class="select" multiple size="1" data-empty="all">
+                ${expClasses.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
+              </select>
             </div>
             <div class="ex-filter-cell">
-              <label for="ex-f-fund_subcat" class="kpi-label mb-1.5 block">Fund category</label>
-              <div class="ms-wrapper" data-target="ex-f-fund_subcat">
-                <select id="ex-f-fund_subcat" multiple data-empty="all">
-                  ${fundSubcats.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
-                </select>
+              <div class="flex items-center justify-between">
+                <label for="ex-f-fund_subcat" class="kpi-label">Fund category</label>
+                <span class="text-[10px] text-ink-400">
+                  <button type="button" class="ex-select-all" data-target="ex-f-fund_subcat">Select all</button>
+                  <span class="mx-1 text-ink-400">·</span>
+                  <button type="button" class="ex-clear-all" data-target="ex-f-fund_subcat">Clear</button>
+                </span>
               </div>
+              <div class="text-xs text-ink-400">e.g. <span data-term="AAs">AAs</span>, <span data-term="SPFs">SPFs</span>, new appropriations</div>
+              <select id="ex-f-fund_subcat" class="select" multiple size="1" data-empty="all">
+                ${fundSubcats.map(x => `<option value="${escapeAttr(x)}">${escapeHtml(x)}</option>`).join('')}
+              </select>
             </div>
           </div>
         </div>
 
+        <details class="mt-4">
+          <summary class="text-xs text-ink-400 cursor-pointer hover:text-ink-700">View SQL</summary>
+          <pre id="ex-sql" class="mt-2 p-3 text-xs  rounded-lg overflow-auto text-ink-700" style="background:#FAFAF7;border:1px solid #E9E9DF;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"></pre>
+        </details>
       </div>
 
       <!-- Chart -->
@@ -325,12 +344,23 @@ export async function renderExplorer(root, arg) {
   // Job 1: Apply click — run query and update URL.
   _applyBtn.addEventListener('click', () => runQuery({ updateUrl: true }));
 
-  // Mount the custom multi-select dropdowns. They wrap the hidden <select multiple>
-  // elements and provide a usable open/close panel with checkboxes + search +
-  // per-panel Select-all / Clear actions. Selecting items still drives
-  // option.selected on the underlying select and dispatches a 'change' event,
-  // so markStale and currentQueryState() continue to work unchanged.
-  MultiSelect.mountAll(root);
+  // Wire Select all / Clear buttons for each multi-select filter.
+  root.querySelectorAll('.ex-select-all').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sel = document.getElementById(btn.dataset.target);
+      if (!sel) return;
+      for (const opt of sel.options) opt.selected = true;
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  });
+  root.querySelectorAll('.ex-clear-all').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sel = document.getElementById(btn.dataset.target);
+      if (!sel) return;
+      for (const opt of sel.options) opt.selected = false;
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  });
 
   // Initial auto-run (not user-triggered — don't push a URL state here to
   // avoid conflicting with app.js's own replaceState that fires after render).
@@ -384,14 +414,26 @@ FROM budget
 ${whereSQL}
 `.trim();
 
+  // Show SQL & spinner.
+  document.getElementById('ex-sql').textContent =
+    `-- Grouped query\n${groupedSQL};\n\n-- Totals\n${totalSQL};\n\n-- Parameters: ${JSON.stringify(params)}`;
+
   setLoading(true);
   setStatus('Running…');
 
   try {
-    const [grouped, totals] = await Promise.all([
+    const [groupedRaw, totals] = await Promise.all([
       sql(groupedSQL, params),
       sql(totalSQL, params),
     ]);
+
+    // When grouping by Region, the SQL returns the normalised code (e.g.
+    // '00', 'DFA', 'UNK'). Swap in the human-readable label so chart axes,
+    // tooltips, and the ranked table all show "NCR" / "Foreign Service
+    // posts" / "Unclassified" instead of cryptic codes.
+    const grouped = groupSpec.isRegion
+      ? groupedRaw.map(r => ({ ...r, name: REGION_NAME_OVERRIDES[r.name] || `Region ${r.name}` }))
+      : groupedRaw;
 
     const totalRow = totals[0] || { total_thousands: 0, n_groups: 0 };
     const filteredTotal = Number(totalRow.total_thousands || 0);
@@ -403,7 +445,7 @@ ${whereSQL}
     _lastGroupKey  = groupKey;
 
     renderResults({ groupSpec, grouped, filteredTotal, nGroups, topN });
-    setStatus(`Showing ${grouped.length} of ${fmtInt(nGroups)} ${plural(groupSpec.label.toLowerCase(), nGroups)}`);
+    setStatus(`${grouped.length} rows · ${fmtInt(nGroups)} ${plural(groupSpec.label.toLowerCase(), nGroups)}`);
 
     // Job 3: brief success flash on the Apply button.
     const applyBtn = document.getElementById('explorer-apply');
@@ -413,6 +455,8 @@ ${whereSQL}
     }
 
     // Job 3 + 4: mount export actions on the chart card header.
+    const ICON_SQL = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
+
     const chartHeaderEl = document.getElementById('ex-chart-header');
     if (chartHeaderEl) {
       mountChartActions(chartHeaderEl, {
@@ -421,6 +465,19 @@ ${whereSQL}
         csvName:  `explorer-${_lastGroupKey}`,
         chart:    _chart,
         pngName:  `explorer-${_lastGroupKey}`,
+        // Dynamic title/subtitle reflect the current pivot. The legend is
+        // intentionally omitted — the PHL_PALETTE is per-row not per-series
+        // so a colour key would be misleading.
+        pngTitle:    `Top ${groupSpec.label.toLowerCase()} · FY${getCurrentYear()}`,
+        pngSubtitle: `${grouped.length} of ${nGroups.toLocaleString()} · ${fmtPHP(filteredTotal)} filtered total`,
+        extra: [{
+          label:   'Copy SQL',
+          icon:    ICON_SQL,
+          onClick: () => {
+            const sqlEl = document.getElementById('ex-sql');
+            if (sqlEl) navigator.clipboard.writeText(sqlEl.textContent).catch(() => {});
+          },
+        }],
       });
     }
 

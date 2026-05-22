@@ -312,6 +312,12 @@ export async function renderGlance(root) {
     csvName: `glance-economic-fy${s.year}`,
     chart: cBar,
     pngName: `glance-economic-bar-fy${s.year}`,
+    pngTitle:    `Where every ₱100 of FY${s.year} goes`,
+    pngSubtitle: `Economic composition of the National Budget · ${fmtPHP(total)} total`,
+    pngLegend: econ.map((b, i) => ({
+      label: `${b.name} · ${econPct[i].toFixed(1)}%`,
+      color: econColorFor(b.name, b.color),
+    })),
   });
 
   // --- economic donut -------------------------------------------------------
@@ -337,7 +343,10 @@ export async function renderGlance(root) {
     }],
   });
 
-  // export affordances: economic donut
+  // export affordances: economic donut.
+  // pngForceLabels: true temporarily flips the donut's slice labels on for the
+  // PNG capture so the export isn't just an unlabelled circle.
+  // pngLegend bakes a colour-coded category strip into the PNG.
   const econCardHeader = document.getElementById('econ-card-header');
   mountChartActions(econCardHeader, {
     getRows: () => econ.map((b, i) => ({ name: b.name, share_pct: econPct[i].toFixed(2), amount_thousands: b.amount_thousands })),
@@ -345,6 +354,13 @@ export async function renderGlance(root) {
     csvName: `glance-econ-donut-fy${s.year}`,
     chart: cEcon,
     pngName: `glance-econ-donut-fy${s.year}`,
+    pngTitle:    `Economic breakdown · FY${s.year}`,
+    pngSubtitle: `What every peso of the FY${s.year} GAA buys, by economic class · ${fmtPHP(total)} total`,
+    pngForceLabels: true,
+    pngLegend: econ.map((b, i) => ({
+      label: `${b.name} · ${econPct[i].toFixed(1)}% (${fmtPHP(b.amount_thousands)})`,
+      color: econColorFor(b.name, b.color),
+    })),
   });
 
   document.getElementById('econ-legend').innerHTML = econ.map((b, i) => `
@@ -409,6 +425,12 @@ export async function renderGlance(root) {
     csvName: `glance-functional-fy${s.year}`,
     chart: cFn,
     pngName: `glance-functional-fy${s.year}`,
+    pngTitle:    `Functional breakdown · FY${s.year}`,
+    pngSubtitle: `What the FY${s.year} budget does, by sector · ${fns.length} categories · ${fmtPHP(total)} total`,
+    pngLegend: fns.map(f => ({
+      label: `${f.name} · ${fmtPct(f.amount_thousands, total, 1)}`,
+      color: fnColorFor(f.name, f.color),
+    })),
   });
 
   let activeFnIdx = -1;

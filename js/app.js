@@ -44,12 +44,17 @@ const VIEWS = {
 const KBD_VIEW_ORDER = ['overview', 'timeline', 'departments', 'regions', 'expense', 'compare', 'explorer', 'about'];
 
 // Update the kicker that sits above the (visually hidden) page title.
-//   - Across Time spans years; About is year-agnostic. Kicker suppressed on both.
+//   - Across Time spans years and About is data-quality / methodology, so the
+//     kicker is suppressed on those views.
 //   - Every other view shows 'FY <year> General Appropriations Act'.
 function updatePageKicker(view, year) {
   const el = document.getElementById('page-kicker');
   if (!el) return;
-  if (view === 'timeline' || view === 'about') { el.textContent = ''; el.style.display = 'none'; return; }
+  if (view === 'timeline' || view === 'about') {
+    el.textContent = '';
+    el.style.display = 'none';
+    return;
+  }
   el.style.display = '';
   el.textContent = `FY ${year} General Appropriations Act`;
 }
@@ -158,12 +163,15 @@ async function navigate(viewArg) {
   setNavActive(meta.nav);
   document.getElementById('page-title').textContent = meta.title;
 
-  // Year controls only make sense on per-year views — hide on Across Time + About.
-  // Use display:none so the layout collapses cleanly (not visibility:hidden).
+  // Year controls only make sense on per-year views. On Across Time + About we
+  // hide the *content* with visibility:hidden so the row keeps its height —
+  // otherwise the nav above would shift down on those two pages. The row
+  // itself stays in the layout flow.
   const yearControls = document.getElementById('year-controls');
   if (yearControls) {
-    yearControls.style.display = (view === 'timeline' || view === 'about') ? 'none' : '';
-    yearControls.style.visibility = ''; // reset any prior visibility override
+    const hide = (view === 'timeline' || view === 'about');
+    yearControls.style.visibility = hide ? 'hidden' : 'visible';
+    yearControls.style.display = '';   // never collapse the row
   }
 
   // Per-view year scope: views can declare `supportedYears` on their VIEW entry.
@@ -201,9 +209,19 @@ async function navigate(viewArg) {
   const yrSuffix = (view === 'timeline' || view === 'about') ? '' : ` — FY${getCurrentYear()}`;
   document.title = `${meta.title} · Halaga${yrSuffix}`;
   updatePageKicker(view, getCurrentYear());
-  // Show/hide the year selector based on view scope.
-  const yc = document.getElementById('year-controls');
-  if (yc) yc.style.display = (view === 'timeline' || view === 'about') ? 'none' : '';
+  // Dynamic kicker over the page title — varies by view + year.
+  const kicker = document.getElementById('page-kicker');
+  if (kicker) {
+    const yr = getCurrentYear();
+    // 'timeline' (Across Time) and 'about' intentionally show no FY kicker.
+    if (view === 'timeline' || view === 'about') {
+      kicker.textContent = '';
+      kicker.style.visibility = 'hidden';
+    } else {
+      kicker.textContent = `FY ${yr} General Appropriations Act`;
+      kicker.style.visibility = 'visible';
+    }
+  }
 
   const newHash = '#' + view + (arg ? '/' + encodeURIComponent(arg) : '');
   if (location.hash !== newHash) history.replaceState(null, '', newHash);

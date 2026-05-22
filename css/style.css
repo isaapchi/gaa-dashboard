@@ -148,16 +148,19 @@ body.riso::before {
   flex-wrap: nowrap;
 }
 .masthead-brand {
-  display: flex; align-items: flex-start; gap: 14px;
+  display: flex;
+  /* Top-align the logo with the title block so the sun sits across from the
+     Halaga wordmark, not the centre of the three-line text stack. The
+     vertical nudge on .riso-logo fine-tunes the alignment so the sun's
+     centre line matches the cap-height midpoint of "Halaga". */
+  align-items: flex-start;
+  gap: 14px;
   flex-shrink: 0;
   min-width: 0;
-  color: inherit;
-  text-decoration: none;
 }
-.masthead-brand:hover .masthead-title,
-.masthead-brand:focus-visible .masthead-title { color: var(--scarlet); }
-.masthead-brand:focus-visible { outline: 2px solid var(--scarlet); outline-offset: 4px; border-radius: 2px; }
-.masthead-brand .riso-logo { margin-top: 6px; }
+.masthead-brand .riso-logo {
+  margin-top: 2px;
+}
 .masthead-right {
   display: flex; align-items: center; gap: 10px;
   flex-shrink: 1;
@@ -192,28 +195,117 @@ body.riso::before {
   .masthead-subnav .nav-item { padding: 6px 8px; font-size: 9px; letter-spacing: 0.12em; }
 }
 .masthead-sub {
-  margin-top: 2px;
-  color: var(--muted);
-}
-.masthead-parent {
   margin-top: 6px;
   color: var(--muted);
-  font-size: 9.5px;
-  letter-spacing: 0.22em;
-  opacity: 0.75;
-  font-weight: 600;
 }
 .masthead-controls-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 6px 0 12px;
+  display: flex !important;          /* override any legacy display:none */
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 0 4px;
   gap: 18px;
   flex-wrap: wrap;
   border-top: 1px solid rgba(26,22,17,0.18);
-  margin-top: 4px;
+  margin-top: 8px;
+  /* Reserve vertical space even when controls hidden so the nav doesn't shift. */
+  min-height: 52px;
+}
+.masthead-controls-row #year-controls { display: flex !important; align-items: center; gap: 10px; }
+
+/* Force the FY <select> and the "FYxxxx loaded" status pill to share the
+   exact same vertical footprint so the row reads as one unit. Both get a
+   fixed 32px height, identical paddings, 11px font, and 1.5px ink border.
+   `line-height: 1` (NOT `line-height: 32px`) keeps text metrics neutral —
+   the native <select> ignores numeric line-heights but honours unit-less,
+   and flex centring then lines both controls' text on the same baseline. */
+.masthead-controls-row #year-controls > #year-select,
+.masthead-controls-row #year-controls > #data-status {
+  height: 32px;
+  padding: 0 12px;
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+/* Right-align the select's caret area with a touch more padding-right so
+   the year label doesn't crowd the dropdown arrow. */
+.masthead-controls-row #year-controls > #year-select {
+  max-width: 120px;
+  min-width: 96px;
+  padding-right: 8px;
+  appearance: auto;
+}
+.masthead-controls-row #year-controls > #data-status { gap: 8px; }
+.masthead-controls-row #year-controls > #data-status > span {
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+/* The mini "Fiscal year" label sits centred against the same 32px baseline
+   as the controls to its right. */
+.masthead-controls-row #year-controls > .smallcaps {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  line-height: 1;
+}
+/* Narrow-viewport polish — let the year controls wrap below the row
+   instead of overflowing on phones. */
+@media (max-width: 768px) {
+  .masthead-controls-row {
+    justify-content: flex-start;
+    min-height: 0;
+  }
+  .masthead-controls-row #year-controls {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
 }
 .masthead-byline {
   color: var(--muted);
 }
+
+/* Brand block — make the whole logo+title an anchor without anchor chrome. */
+.masthead-brand {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+/* Hover on the brand block: keep the wordmark/URL colours unchanged.
+   The cursor:pointer already signals interactivity; recolouring on hover
+   was distracting and made the logo feel like a CTA. */
+.masthead-brand:hover .masthead-title,
+.masthead-brand:hover .masthead-sub-url { color: inherit; }
+.masthead-brand:focus-visible {
+  outline: 2px solid var(--scarlet);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Sub-line: URL + project tag separated by a middot. Sits BELOW the
+   "The People's Budget Almanac" slogan so the masthead reads:
+     Halaga.
+     The People's Budget Almanac
+     publikoph.org · A Publiko Project   */
+.masthead-sub-line {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+}
+.masthead-sub-url { color: var(--cobalt); font-weight: 700; }
+.masthead-sub-tag { color: var(--muted); }
+.masthead-sub-sep { color: var(--muted); opacity: 0.6; }
 
 /* Two-ink overprint logo discs */
 .riso-logo {
@@ -635,15 +727,6 @@ body.riso::before {
   line-height: 1;
 }
 
-/* Reserve vertical space for SPA view content so late-arriving content
- * (after data fetch + JS hydration) doesn't shift the footer/below down.
- * Without this, on slow networks Lighthouse measures CLS = 0.75+ from a
- * single ~535px shift when #view-root expands from ~23px to ~558px.
- * The 80vh value is empirical: typical view content height on mobile. */
-#view-root {
-  min-height: 80vh;
-}
-
 /* Card entrance — subtle staggered fade for views as they render. */
 @keyframes cardFadeIn {
   from { opacity: 0; transform: translateY(6px); }
@@ -903,11 +986,11 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
 }
 
 
-/* Defensive: hide any legacy broadsheet masthead pieces that may survive */
+/* Defensive: hide any legacy broadsheet masthead pieces that may survive.
+   .masthead-controls-row is re-used (intentionally) as the FY-selector row. */
 .masthead-meta,
 .masthead-tag,
-.masthead-subnav-row,
-.masthead-controls-row { display: none !important; }
+.masthead-subnav-row { display: none !important; }
 
 /* sr-only — visually hide the page-title <h1> while keeping it for AT/views */
 .sr-only {
@@ -1007,150 +1090,38 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
 }
 
 
-/* Explorer filter cells — flex column with the multi-select wrapper pinned
-   to the bottom so all four trigger buttons line up cleanly regardless of
-   label wrapping. Each cell now has: label + .ms-wrapper. */
+/* Explorer filter alignment — every cell uses an identical 3-row grid:
+     row 1: label / flex header  (28px)
+     row 2: sub-text description (20px)
+     row 3: select / input        (1fr)
+   Fixed row heights mean every cell's select sits at the same Y coordinate
+   regardless of how much text the label or sub-line contains. Cells without
+   a sub-text get an invisible filler in row 2 to preserve alignment. */
 .ex-filters > .ex-filter-cell {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 22px 18px 1fr;
+  row-gap: 6px;
   min-width: 0;
-  gap: 0;
+  align-items: start;
 }
-.ex-filters > .ex-filter-cell > .ms-wrapper { margin-top: auto; }
-
-/* ── Multi-select dropdown component ───────────────────────────────────────
-   Replaces native <select multiple> with a real dropdown panel containing
-   a search input, Select-all / Clear actions, and a checkbox list. */
-.ms-wrapper {
-  position: relative;
-  width: 100%;
+.ex-filters > .ex-filter-cell > .text-xs {
+  grid-row: 2;
+  line-height: 1.1;
+  align-self: end;
 }
-.ms-wrapper > select { display: none !important; }
-.ms-trigger {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  width: 100%;
-  background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  padding: 9px 12px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13.5px;
-  color: var(--ink);
-  cursor: pointer;
-  text-align: left;
-  transition: box-shadow .15s, border-color .15s;
+.ex-filters > .ex-filter-cell > .kpi-label {
+  grid-row: 1;
+  align-self: center;
 }
-.ms-trigger:hover { border-color: var(--scarlet); }
-.ms-trigger:focus-visible {
-  outline: none;
-  border-color: var(--scarlet);
-  box-shadow: 0 0 0 2px rgba(226, 80, 52, 0.20);
+.ex-filters > .ex-filter-cell > .flex {
+  grid-row: 1;
+  align-self: center;
 }
-.ms-wrapper.ms-open > .ms-trigger { border-color: var(--scarlet); box-shadow: 0 0 0 2px rgba(226, 80, 52, 0.20); }
-.ms-trigger-label {
-  flex: 1 1 auto;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--muted);
-}
-.ms-trigger-label.ms-has-selection { color: var(--ink); font-weight: 600; }
-.ms-trigger-caret {
-  flex: 0 0 auto;
-  color: var(--muted);
-  display: inline-flex; align-items: center;
-  transition: transform .15s ease;
-}
-.ms-wrapper.ms-open .ms-trigger-caret { transform: rotate(180deg); }
-.ms-panel {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  z-index: 9999;                  /* above the riso grain overlay + any card */
-  isolation: isolate;             /* own stacking context so blend-modes don't bleed */
-  background: #f1e8d2;            /* literal paper hex (avoids any var-resolution edge case) */
-  border: 1.5px solid var(--ink);
-  box-shadow: 0 6px 20px rgba(26,22,17,0.18);
-  display: flex;
-  flex-direction: column;
-  max-height: 360px;
-  min-height: 0;                  /* enable inner flex child to scroll */
-  min-width: 240px;
-}
-.ms-panel[hidden] { display: none; }
-.ms-panel-header {
-  flex-shrink: 0;                 /* don't squeeze the search/actions row */
-  padding: 8px 8px 6px;
-  border-bottom: 1px solid rgba(26,22,17,0.18);
-  display: flex; flex-direction: column; gap: 6px;
-  background: #f1e8d2;
-}
-.ms-search {
-  width: 100%;
-  padding: 6px 8px;
-  border: 1px solid rgba(26,22,17,0.30);
-  border-radius: 0;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 12px;
-  background: var(--paper);
-  color: var(--ink);
-  outline: none;
-}
-.ms-search:focus { border-color: var(--scarlet); }
-.ms-actions {
-  display: flex; align-items: center; gap: 4px;
-  font-size: 10px;
-  font-family: 'Space Mono', monospace;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-}
-.ms-action {
-  background: none; border: 0; padding: 2px 4px;
-  font: inherit; color: var(--scarlet);
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: inherit;
-}
-.ms-action:hover { text-decoration: underline; }
-.ms-action-sep { color: var(--muted); }
-.ms-list {
-  flex: 1 1 auto;
-  min-height: 0;                  /* required so overflow-auto kicks in inside a flex column */
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 4px 0;
-  background: #f1e8d2;
-  -webkit-overflow-scrolling: touch;
-}
-.ms-item {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 10px;
-  font-size: 12.5px;
-  color: var(--ink);
-  cursor: pointer;
-  user-select: none;
-  line-height: 1.25;
-}
-.ms-item:hover { background: rgba(26,22,17,0.06); }
-.ms-item > input[type="checkbox"] {
-  flex: 0 0 auto;
-  width: 14px; height: 14px;
-  accent-color: var(--scarlet);
-  cursor: pointer;
-}
-.ms-item-label {
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.ms-empty {
-  padding: 12px;
-  font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-  font-style: italic;
+/* The actual input control always sits in row 3, flush left/right. */
+.ex-filters > .ex-filter-cell > .select,
+.ex-filters > .ex-filter-cell > .input {
+  grid-row: 3;
+  align-self: stretch;
 }
 
 
@@ -1228,8 +1199,6 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
 .nav-dropdown.nav-active .nav-dropdown-caret { color: var(--paper); }
 
 
-
-
 /* Explorer filter alignment hardening — labels never wrap. */
 .ex-filters > .ex-filter-cell > .flex .kpi-label {
   white-space: nowrap;
@@ -1246,282 +1215,4 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* ── Mobile responsive optimization ──────────────────────────────────────── */
-
-/* Tablet portrait and below: looser page padding, larger touch targets */
-@media (max-width: 768px) {
-  /* Main column padding — give breathing room without losing horizontal space */
-  main > div > section { padding-left: 16px; padding-right: 16px; }
-  header.px-8 { padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 8px; }
-  footer.px-8 { padding-left: 16px; padding-right: 16px; }
-  .max-w-screen-2xl.mx-auto.px-8 { padding-left: 16px; padding-right: 16px; }
-
-  /* Masthead: allow brand and nav to stack */
-  .masthead-title-row { gap: 12px; flex-wrap: wrap; }
-  .masthead-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
-  .masthead-subnav { width: 100%; flex-wrap: wrap; gap: 0; }
-
-  /* Page header: stack the title and year-controls vertically */
-  header.px-8 > .flex.items-start.justify-between { flex-direction: column; align-items: stretch; gap: 12px; }
-  #year-controls { justify-content: flex-start; flex-wrap: wrap; }
-
-  /* Page title smaller on phones */
-  .page-title { font-size: 28px !important; }
-
-  /* Charts: ensure they don't push the page wider than viewport */
-  .chart, .chart-lg, .chart-md, .chart-sm { max-width: 100%; }
-
-  /* Tables in cards: horizontal scroll instead of overflow */
-  .card table, .card .table { display: block; max-width: 100%; overflow-x: auto; }
-
-  /* Multi-select panel: take more vertical room and fit the narrower screen */
-  .ms-panel { max-height: 60vh; }
-
-  /* Touch-friendly tap targets: min 40px for interactive controls */
-  .btn, .btn-ghost, .ms-trigger, .input, .select { min-height: 40px; }
-  .nav-item { padding: 10px 12px; font-size: 10.5px; }
-  .nav-dropdown-menu > a { padding: 12px 16px; font-size: 11px; }
-
-  /* Riso entries: already collapses to 2 cols at 768px; cap large numbers */
-  .riso-entries .entry-kpi { font-size: 30px; }
-
-  /* Body text bump for readability on small screens */
-  body { font-size: 15px; }
-}
-
-/* Phones (narrow): single-column for most grid layouts */
-@media (max-width: 480px) {
-  .page-title { font-size: 24px !important; }
-  .masthead-title { font-size: 30px !important; }
-  .riso-entries { grid-template-columns: 1fr !important; }
-  .riso-entries .entry { border-right: 0 !important; border-bottom: 1.5px solid var(--ink); }
-  .riso-entries .entry:last-child { border-bottom: 0; }
-
-  /* Explorer filters: stack 1-col on small phones */
-  .ex-filters { grid-template-columns: 1fr !important; }
-  .ex-filter-cell { width: 100%; }
-
-  /* Reduce vertical density of cards */
-  .card.p-6, .card.p-5 { padding: 16px; }
-
-  /* Year controls on phones: stack below page title cleanly */
-  #year-controls .select { max-width: 100% !important; }
-  .data-status-pill { font-size: 10px; padding: 4px 8px; }
-}
-
-/* Disable hover effects on touch-only devices to avoid sticky-hover states */
-@media (hover: none) and (pointer: coarse) {
-  .nav-item:hover, .btn:hover, .ms-item:hover, .ms-trigger:hover {
-    background: inherit;
-    color: inherit;
-    border-color: inherit;
-  }
-}
-
-/* ─────────────────────────────────────────────────────────────────────────
-   Mobile layout fixes — backlog items 5, 7, 8, 9, 10, 11
-   ───────────────────────────────────────────────────────────────────────── */
-
-/* Item 11 — Nav bar separator vertical position drifts
-   The page-header containing `#year-controls` collapses height when the
-   year-selector is hidden (on #timeline and #about), causing the visual
-   separator between the header and the view body to land at slightly
-   different y positions across pages. Pin a min-height so the header
-   reserves the same vertical space whether year-controls renders or not. */
-main > div > header.px-8 {
-  min-height: 96px;
-  box-sizing: border-box;
-}
-@media (max-width: 640px) {
-  main > div > header.px-8 {
-    min-height: 84px;
-  }
-}
-
-/* Item 7 — Year selector + status badge stacking is inefficient
-   The badge ("FY2026 LOADED") is wide and on a narrow viewport it can wrap
-   under the year selector, eating vertical space. On mobile, drop the text
-   label inside the badge and keep only the status dot — the selector itself
-   already shows the year, the dot already encodes ready/loading/error. */
-@media (max-width: 640px) {
-  #year-controls {
-    flex-wrap: nowrap;
-    align-items: center;
-  }
-  /* Keep the pill as a compact stamped square — dot only, no label text. */
-  #year-controls .data-status-pill {
-    padding: 6px 8px;
-    gap: 0;
-  }
-  #year-controls .data-status-pill .data-status-label {
-    /* visually hide the text but keep it for screen readers via aria-live */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  /* Slightly fatter dot on mobile so the indicator is legible at a glance. */
-  #year-controls .data-status-pill > span:first-child {
-    width: 8px !important;
-    height: 8px !important;
-  }
-}
-
-/* Item 5 — Overview hero takes the entire above-the-fold viewport on mobile.
-   The hero is rendered inline-styled with `clamp(56px, 7vw, 92px)` which at
-   390px viewport bottoms out at 56px and consumes ~5 lines for "The annual /
-   book of pesos." plus the per-Filipino number. Override at mobile so at
-   least one KPI sits above the fold. Uses `.riso-hero` (which already wraps
-   the hero block in glance.js) so this is scoped only to the Overview hero
-   and not other DM-Serif displays. */
-@media (max-width: 640px) {
-  /* Stack the left + right hero columns into a single column on mobile.
-     The inline grid on the parent is `grid-template-columns: 1.5fr 1fr` — we
-     collapse it to 1fr here. */
-  .riso-hero > div[style*="grid-template-columns"] {
-    grid-template-columns: 1fr !important;
-    gap: 18px !important;
-    align-items: flex-start !important;
-  }
-  /* "The annual book of pesos." headline — shrink and tighten. */
-  .riso-hero h2.display {
-    font-size: clamp(2.25rem, 9vw, 3rem) !important;
-    line-height: 0.95 !important;
-  }
-  /* Tagline body text — slightly smaller line-height/margin to save space. */
-  .riso-hero h2.display + div {
-    font-size: 13.5px !important;
-    margin-top: 10px !important;
-  }
-  /* Per-Filipino column — shrink the doubled DM-Serif overprints. The two
-     stacked .display spans both use clamp(56px, 6.5vw, 96px); cap at ~44px. */
-  .riso-perfil { min-height: 0 !important; }
-  .riso-perfil .display {
-    font-size: clamp(2rem, 9vw, 2.75rem) !important;
-  }
-  /* Tighten the chapter kicker + per-Filipino kicker margins. */
-  .riso-hero { padding: 4px 0 14px !important; }
-}
-
-/* Item 9 — KPI card height/typography varies across pages
-   All views already share `.kpi` / `.kpi-value` / `.kpi-label` / `.kpi-sub`,
-   but `.kpi-value` was using `clamp(32px, 4.6vw, 50px)` which made the
-   value font scale with the viewport, not with the card. Cards in a 3-col
-   grid (#regions) ended up with smaller values than cards in a 4-col grid
-   (#expense) on the same viewport because the viewport-driven clamp doesn't
-   account for column count.
-
-   Tighten to a viewport-clamped but flatter scale so values land at a
-   similar visual weight regardless of column count. */
-.kpi-value {
-  font-size: clamp(28px, 3.4vw, 38px);
-  line-height: 1.05;
-}
-/* Card padding — keep deterministic so card heights match across views. */
-.card.kpi {
-  padding: 18px 18px;
-  min-height: 112px;
-}
-/* On phones, slight density tweak: smaller min-height + tighter typography. */
-@media (max-width: 640px) {
-  .card.kpi {
-    padding: 14px 14px;
-    min-height: 96px;
-  }
-  .kpi-value {
-    font-size: 26px;
-    line-height: 1.05;
-  }
-  .kpi-label {
-    font-size: 9.5px;
-  }
-  .kpi-sub {
-    font-size: 11.5px;
-  }
-}
-
-/* Item 10 — Shared loading skeleton with shimmer animation.
-   View modules will adopt these classes as they add lazy-loading hooks.
-   Default block dims match common chart / card surfaces; consumers can
-   override width/height inline.
-
-   Variants:
-     .skeleton              — generic block (default 100% × 16px line)
-     .skeleton-line         — single-line text placeholder
-     .skeleton-card         — full-card placeholder (KPI / chart bounding box)
-     .skeleton-chart        — chart-height placeholder (matches .chart 320px)
-*/
-@keyframes skeletonShimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.skeleton,
-.skeleton-line,
-.skeleton-card,
-.skeleton-chart {
-  position: relative;
-  display: block;
-  background-color: rgba(26, 22, 17, 0.06);
-  /* Subtle two-tone gradient on the paper palette — warm, not harsh grey.
-     The shimmer rides across the surface left→right at 1.6s cadence. */
-  background-image: linear-gradient(
-    90deg,
-    rgba(26, 22, 17, 0.04) 0%,
-    rgba(26, 22, 17, 0.10) 50%,
-    rgba(26, 22, 17, 0.04) 100%
-  );
-  background-size: 200% 100%;
-  background-repeat: no-repeat;
-  animation: skeletonShimmer 1.6s ease-in-out infinite;
-  border-radius: 0;
-  color: transparent;
-  user-select: none;
-}
-.skeleton-line {
-  height: 14px;
-  margin: 6px 0;
-}
-.skeleton-card {
-  height: 112px;
-  margin: 0;
-}
-.skeleton-chart {
-  height: 320px;
-  width: 100%;
-}
-/* Respect reduced-motion preference — pause the shimmer. */
-@media (prefers-reduced-motion: reduce) {
-  .skeleton, .skeleton-line, .skeleton-card, .skeleton-chart {
-    animation: none;
-    background-image: none;
-  }
-}
-
-/* Item 8 — Source-citation policy
-   POLICY A (selected): one page-level source citation lives in the global
-   footer (`.riso-colophon` in index.html). View modules MUST NOT inject a
-   chart-adjacent "Source · DBM GAA" line; it would duplicate the colophon
-   and on short views the colophon already pulls above the fold, making
-   per-chart citations redundant.
-
-   The rule below tightens the colophon on mobile so it never wraps onto two
-   lines and so the spacing is predictable across views (the "drift" people
-   notice when the colophon lands at different y positions per page is
-   really a view-height issue, not a colophon styling issue — but tightening
-   the colophon padding here helps too). */
-@media (max-width: 640px) {
-  footer.riso-colophon {
-    padding-top: 18px;
-    padding-bottom: 24px;
-  }
-  footer.riso-colophon .mono.smallcaps {
-    font-size: 10px;
-  }
 }
