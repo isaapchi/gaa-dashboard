@@ -110,6 +110,7 @@ export async function setCurrentYear(year) {
     await ensureBudgetView();  // re-point the view immediately
     window.dispatchEvent(new CustomEvent('budgetyearchange', { detail: { year } }));
   }
+  _h5SchedulePrefetchNeighbors(year);
 }
 
 // --- Per-year caches --------------------------------------------------------
@@ -1128,4 +1129,38 @@ export function createChart(domEl, theme, opts) {
     prior.dispose();
   }
   return echarts.init(domEl, theme, opts);
+}
+
+
+// H5_IDLE_PREFETCH — warm the browser HTTP cache for the neighbour years so a
+// subsequent setCurrentYear() switch hits a cached parquet instead of a cold
+// network fetch. We deliberately do NOT register the buffer with DuckDB here;
+// that happens lazily inside ensureBudgetView when the user actually switches.
+// Skipping DuckDB registration keeps this off the critical path for the active
+// year's render and avoids racing with its in-flight parquet fetch.
+const _h5PrefetchedYears = new Set();
+function _h5SchedulePrefetchNeighbors(activeYear) {
+  if (typeof window === 'undefined') return;
+  const yp = _yearsPayload;
+  if (!yp || !Array.isArray(yp.years)) return;
+  const i = yp.years.indexOf(activeYear);
+  if (i === -1) return;
+  const neighbours = [];
+  if (i > 0) neighbours.push(yp.years[i - 1]);
+  if (i < yp.years.length - 1) neighbours.push(yp.years[i + 1]);
+  const idle = window.requestIdleCallback
+    ? (cb) => window.requestIdleCallback(cb, { timeout: 4000 })
+    : (cb) => setTimeout(cb, 1500);
+  for (const y of neighbours) {
+    if (y === activeYear) continue;
+    if (_h5PrefetchedYears.has(y)) continue;
+    if (_fetchedYears && _fetchedYears.has(y)) continue;  // already registered with DuckDB
+    _h5PrefetchedYears.add(y);
+    idle(() => {
+      // Best-effort HTTP-cache warm. No await, no registerFileBuffer.
+      fetch(`data/budget_${y}.parquet`, { cache: 'force-cache' }).catch(() => {
+        _h5PrefetchedYears.delete(y);  // allow retry on next setCurrentYear
+      });
+    });
+  }
 }
