@@ -172,7 +172,25 @@
   </script>
 
   <!-- Cloudflare Web Analytics — privacy-friendly, no cookies, RUM via beacon -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "043e948f53e44c09b64d134900b921ac"}'></script>
+  <script>
+    // H7: idle-time Cloudflare Insights — defer the beacon to requestIdleCallback
+    // so it never competes with LCP/FCP. Falls back to a 2s setTimeout when
+    // requestIdleCallback isn't available (Safari).
+    (function () {
+      var go = function () {
+        var s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "043e948f53e44c09b64d134900b921ac"}');
+        document.head.appendChild(s);
+      };
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(go, { timeout: 4000 });
+      } else {
+        setTimeout(go, 2000);
+      }
+    })();
+  </script>
   <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
