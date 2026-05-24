@@ -162,6 +162,15 @@
 
   <script type="module" src="js/app.js"></script>
 
+  <!-- R0 grain-ready: apply .riso-grain background-image after first paint to
+       demote the grain from the LCP candidate set (see css/style.css note). -->
+  <script>
+    (window.requestIdleCallback || function(cb){ return setTimeout(cb, 1); })(function(){
+      var els = document.querySelectorAll('.riso-grain');
+      for (var i = 0; i < els.length; i++) els[i].classList.add('grain-ready');
+    }, { timeout: 2000 });
+  </script>
+
   <!-- Cloudflare Web Analytics — privacy-friendly, no cookies, RUM via beacon -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "043e948f53e44c09b64d134900b921ac"}'></script>
   <!-- End Cloudflare Web Analytics -->

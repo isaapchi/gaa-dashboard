@@ -66,12 +66,20 @@ body.riso::before {
   background-size: 240px 240px;
 }
 .riso-grain {
+  /* R0 LCP demotion: background-image is applied via JS after requestIdleCallback
+     (see inline script at end of index.html). Before .grain-ready is added the
+     div has no contentful paint, so Chrome picks the next-largest element as
+     LCP candidate (typically the hero/KPI block). Without this gate the grain's
+     feTurbulence-filtered 240x240 data-URL fills the viewport via inset:0 and
+     wins LCP at ~5s on throttled mobile. */
   position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22240%22%20height%3D%22240%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.6%22%20numOctaves%3D%222%22%20seed%3D%225%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200.10%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
   pointer-events: none;
   opacity: 0.35;
   mix-blend-mode: multiply;
   z-index: 0;
+}
+.riso-grain.grain-ready {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22240%22%20height%3D%22240%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.6%22%20numOctaves%3D%222%22%20seed%3D%225%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200.10%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
 }
 
 /* ── Riso typography helpers ───────────────────────────────────── */
