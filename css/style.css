@@ -1243,3 +1243,20 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   .masthead-title-row    { padding: 4px 0 6px; }
   .masthead-controls-row { padding: 6px 0 2px; }
 }
+
+/* Mobile hero compression — added per user request 2026-05-25.
+   Shrinks page-title and forces the Overview hero grid to single-column
+   so the per-Filipino tile slides below the "book of pesos" hero text
+   instead of being squeezed to the right at iPhone SE proportions.
+   !important is needed because glance.js sets the grid + display font
+   sizes via inline style. Mobile-only — desktop unaffected. */
+@media (max-width: 768px) {
+  .page-title { font-size: 34px; }
+
+  .riso-hero > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .riso-hero h2.display { font-size: 44px !important; }
+  .riso-perfil .display { font-size: 48px !important; }
+}
