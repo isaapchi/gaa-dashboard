@@ -1259,4 +1259,15 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   }
   .riso-hero h2.display { font-size: 44px !important; }
   .riso-perfil .display { font-size: 48px !important; }
+
+  /* Across Time year-tick row — 18 years (2009–2026) can't fit at 375 px;
+     hide every other label so only odd-position years remain readable.
+     Always show the last year so the right edge stays anchored. The slider
+     track itself is unchanged — users can still drag to any year. */
+  #range-slider-track + div span[data-year]:nth-of-type(even) {
+    display: none;
+  }
+  #range-slider-track + div span[data-year]:last-of-type {
+    display: inline;
+  }
 }
