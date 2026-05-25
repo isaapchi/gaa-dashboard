@@ -24,3 +24,6 @@ autoresearch/visual-diff/
 autoresearch/bin/
 autoresearch/STOP
 autoresearch/__pycache__/
+
+# Mobile chrome-diet eyeball evidence (local-only screenshots)
+_chrome-diet-evidence/

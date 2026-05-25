@@ -1224,3 +1224,22 @@ input[type="range"]#range-to:focus-visible::-webkit-slider-thumb {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Mobile chrome diet — see GAA dashboard/MOBILE-2026-05-24-DESIGN.md */
+@media (max-width: 768px) {
+  .masthead-sub-line { display: none; }
+  .page-kicker       { display: none; }
+
+  .masthead-controls-row #year-controls {
+    flex-wrap: nowrap !important;
+    gap: 6px;
+  }
+  .masthead-controls-row #year-controls > .smallcaps { display: none; }
+  .masthead-controls-row #year-controls > #data-status {
+    font-size: 10px;
+    padding: 0 8px;
+  }
+
+  .masthead-title-row    { padding: 4px 0 6px; }
+  .masthead-controls-row { padding: 6px 0 2px; }
+}
